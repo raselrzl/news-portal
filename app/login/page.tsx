@@ -1,8 +1,21 @@
+import LoginForm from "@/components/general/LoginForm";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Login() {
-    return (
-      <div className="p-10">
-        Login
+  return (
+    <div className="min-h-screen w-screen flex items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <Link href="/" className="flex items-center gap-2 self-center">
+        <Image
+            src="/3.png"
+            height={100}
+            width={180}
+            alt="logo image"
+        />       
+        </Link>
+        <LoginForm />
       </div>
-    );
-  }
-  
+    </div>
+  );
+}
