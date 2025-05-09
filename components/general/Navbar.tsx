@@ -47,14 +47,21 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export default async function Navbar() {
   return (
-    <nav className=" flex items-center justify-between py-4 border-y-1 shadow-md">
-      <Link href="/" className="flex items-center px-2">
-      <Image 
-        src="/logo.png"      
+    <nav className=" flex items-center justify-between border-y-1 shadow-md">
+      <Link href="/" className="flex items-center py-2 px-2">
+      <div className="w-[182px] h-[46px] bg-[url('/jagarata3.png')] bg-cover bg-center" />
+     {/*  <Image 
+        src="/jagrata3.png"      
         alt="Logo"          
-        width={150}         
+        width={160}         
+        height={30}           
+        /> */}
+    {/*     <Image 
+        src="/barta1.png"      
+        alt="Logo"          
+        width={50}         
         height={40}           
-        />
+        /> */}
      {/*    <h1 className="text-lg font-bold text-green-500 ">
           জাগ্রত{" "}
           <span className="text-primary text-2xl font-extrabold italic">
@@ -95,9 +102,9 @@ export default async function Navbar() {
           <DropdownMenuContent align="end" className="w-60">
             <DropdownMenuLabel>
               <Link href="/" className="flex items-center gap-2">
-                <h1 className="text-md font-bold">
-                  <span className="text-primary">জাগ্রত বার্তা</span>
-                </h1>
+             
+                <div className="w-[100px] h-[30px] bg-[url('/jagrata3.png')] bg-cover bg-center" />
+
               </Link>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
