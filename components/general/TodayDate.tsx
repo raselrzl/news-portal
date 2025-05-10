@@ -21,7 +21,7 @@ const TodayDate: React.FC<TodayDateProps> = ({ locale = 'en-US', withTime = fals
   });
 
   return (
-    <p className='text-accent-foreground text-sm mr-2'>
+    <p className='text-muted-foreground text-sm mr-2'>
       {dateString}
       {withTime && `, ${timeString}`}
     </p>
