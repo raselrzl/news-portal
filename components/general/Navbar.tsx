@@ -1,55 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonVariants } from "../ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
-import {
-  Menu,
-  Search,
-  User,
-  Globe,
-  School,
-  Landmark,
-  BookOpenCheck,
-  Microscope,
-  ShieldAlert,
-  HeartPulse,
-  BrainCircuit,
-  Newspaper,
-  Leaf,
-  BriefcaseBusiness,
-  Gavel,
-  Star,
-  TentTree,
-  Rocket,
-  Coins,
-  Activity,
-  BadgeCheck,
-  Megaphone,
-  Users,
-  Film,
-  ChevronDown,
-  User2,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+
 import { ThemeToggle } from "./ThemeToggle";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/utils/auth";
 import { UserDropdown } from "./UserDropdown";
 import DropDownMenuList from "./dropDownMenuList";
+import { User2 } from "lucide-react";
 
 export default async function Navbar() {
   const user = await auth();
@@ -57,8 +14,8 @@ export default async function Navbar() {
       return redirect("/");
     } */
   return (
-    <nav className=" flex items-center justify-between border-y-1 shadow-md">
-      <Link href="/" className="flex items-center py-2 px-2">
+    <nav className=" flex items-center justify-between">
+      <Link href="/" className="flex items-center py-2">
         <div className="w-[182px] h-[46px] bg-[url('/jagarata3.png')] bg-cover bg-center" />
         {/*  <Image 
         src="/jagrata3.png"      
@@ -82,11 +39,11 @@ export default async function Navbar() {
       {/*  desktop navigation */}
 
       <div className="hidden md:flex items-center gap-5">
-        <ThemeToggle />
+      <ThemeToggle />
        <DropDownMenuList />
         
 
-        {user?.user ? (
+       <div> {user?.user ? (
           <UserDropdown
             email={user.user.email as string}
             name={user.user.name as string}
@@ -95,11 +52,11 @@ export default async function Navbar() {
         ) : (
           <Link
           href="/login"
-          className={`${buttonVariants({ variant: "outline", size: "sm" })} mr-1`}
+          className={`${buttonVariants({ variant: "outline", size: "sm" })}`}
         >
           <User2 />
         </Link>
-        )}
+        )}</div>
       </div>
 
       {/* Mobile Navigation */}
@@ -118,7 +75,7 @@ export default async function Navbar() {
 
           <Link
           href="/login"
-          className={`${buttonVariants({ variant: "outline", size: "sm" })} mr-1`}
+          className={`${buttonVariants({ variant: "outline", size: "sm" })}`}
         >
           <User2 />
         </Link>
