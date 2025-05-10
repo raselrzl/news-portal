@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import UserTypeSelection from "./UserTypeForm";
 import NewsReporterRegisterForm from "./newsReporterRegisterForm";
-
+import Advertiser from "./advertiser";
 
 type UserSelectionType = "newsReporter" | "Advertiser" | null;
 
@@ -21,19 +21,21 @@ export default function OnboardingForm() {
       case 1:
         return <UserTypeSelection onSelect={handleUserTypeSelection} />;
       case 2:
-        return userType === "newsReporter"? (<NewsReporterRegisterForm />):"cudwkjfhdkhd";
+        return userType === "newsReporter" ? (
+          <NewsReporterRegisterForm />
+        ) : (
+          <Advertiser />
+        );
       default:
         return null;
     }
   }
   return (
-    <div className="">
-      <div className="flex items-center justify-center gap-2 mb-10">
-        <Image src="/jagrata3.png" alt="logo image" width={150} height={50} />
-      </div>
-      <Card className="max-w-fit w-full">
-        <CardContent className="p-6">{renderStep()}</CardContent>
-      </Card>
-    </div>
+    <div className="w-full max-w-2xl md:max-w-3xl flex items-center justify-center mx-auto px-4">
+  <div className="p-6 w-full flex flex-col items-center justify-center">
+    {renderStep()}
+  </div>
+</div>
+
   );
 }

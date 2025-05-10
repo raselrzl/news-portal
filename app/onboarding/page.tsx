@@ -21,8 +21,8 @@ export default async function OnboardingPage() {
 
   await checkIfOnboardingCompleted(session.id as string);
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center justify-center py-10">
-        <OnboardingForm />
+    <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+      <OnboardingForm />
     </div>
   );
 }
