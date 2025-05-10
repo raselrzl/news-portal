@@ -1,12 +1,24 @@
 import Navbar from "@/components/general/Navbar";
+import TodayDate from "@/components/general/TodayDate";
 import React, { ReactNode } from "react";
+import Link from "next/link";
+import { Home } from "lucide-react";
 
-export default function MainLayout({children}:{children: ReactNode}) {
-    return (
-      <div className="max-w-7xl mx-auto">
-              <Navbar />
-              {children}
-             </div>
-    );
-  }
-  
+export default function MainLayout({ children }: { children: ReactNode }) {
+  return (
+    <div className="max-w-7xl mx-auto">
+      <Navbar />
+      <div className="flex justify-between items-center py-1 border-b-1">
+       
+        <Link
+          href="/"
+          className="font-extrabold text-primary hover:border-b-2 bg-primary-foreground px-4 py-1 rounded-xl"
+        >
+          তাজা খবর
+        </Link>
+        <TodayDate locale="bn-BD" withTime />
+      </div>
+      {children}
+    </div>
+  );
+}
