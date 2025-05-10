@@ -6,16 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-/* import GeneralSubmitButton from "../general/submitButtons";
-import { auth, signIn } from "@/app/utils/auth"; */
+import { auth, signIn } from "@/app/utils/auth";
 import { redirect } from "next/navigation";
 import ButtonGoogle from "./Button-Google";
-
+ 
 export default async function LoginForm() {
-/*   const session = await auth();
+  const session = await auth();
   if (session?.user) {
     return redirect("/");
-  } */
+  }
   return (
     <div className=" flex flex-col gap-6">
       <Card>
@@ -38,12 +37,12 @@ export default async function LoginForm() {
             </form> */}
 
             <form
-            /*   action={async () => {
+              action={async () => {
                 "use server";
                 await signIn("google", {
                   redirectTo: "/onboarding",
                 });
-              }} */
+              }}
               className="cursor-pointer"
             >
               <ButtonGoogle

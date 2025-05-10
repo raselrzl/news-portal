@@ -44,25 +44,32 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ThemeToggle } from "./ThemeToggle";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/utils/auth";
+import { UserDropdown } from "./UserDropdown";
 
 export default async function Navbar() {
+  const user = await auth();
+  /*     if (session?.user) {
+      return redirect("/");
+    } */
   return (
     <nav className=" flex items-center justify-between border-y-1 shadow-md">
       <Link href="/" className="flex items-center py-2 px-2">
-      <div className="w-[182px] h-[46px] bg-[url('/jagarata3.png')] bg-cover bg-center" />
-     {/*  <Image 
+        <div className="w-[182px] h-[46px] bg-[url('/jagarata3.png')] bg-cover bg-center" />
+        {/*  <Image 
         src="/jagrata3.png"      
         alt="Logo"          
         width={160}         
         height={30}           
         /> */}
-    {/*     <Image 
+        {/*     <Image 
         src="/barta1.png"      
         alt="Logo"          
         width={50}         
         height={40}           
         /> */}
-     {/*    <h1 className="text-lg font-bold text-green-500 ">
+        {/*    <h1 className="text-lg font-bold text-green-500 ">
           জাগ্রত{" "}
           <span className="text-primary text-2xl font-extrabold italic">
           জাগ্রত বার্তা
@@ -70,31 +77,48 @@ export default async function Navbar() {
         </h1> */}
       </Link>
       {/*  desktop navigation */}
-      
+
       <div className="hidden md:flex items-center gap-5">
-      <ThemeToggle />
+        <ThemeToggle />
         <Link
           href="/post-news"
           className={buttonVariants({ variant: "default", size: "sm" })}
         >
           সংবাদ যোগ করুন
         </Link>
-        
-        
-        <Link
-          href="/login"
-          className={buttonVariants({ variant: "outline", size: "sm" })}
-        >
-          লগইন
-        </Link>
+
+        {user?.user ? (
+          <UserDropdown
+            email={user.user.email as string}
+            name={user.user.name as string}
+            image={user.user.image as string}
+          />
+        ) : (
+          <Link
+            href="/login"
+            className={buttonVariants({ variant: "outline", size: "sm" })}
+          >
+            লগইন
+          </Link>
+        )}
       </div>
 
       {/* Mobile Navigation */}
       <div className="md:hidden flex items-center gap-4">
+      <div className="size-sm">
+            <ThemeToggle />
+          </div>
+        {user?.user ? (
+          <UserDropdown
+            email={user.user.email as string}
+            name={user.user.name as string}
+            image={user.user.image as string}
+          />
+        ) : (
+
         <DropdownMenu>
-            <div className="size-sm"><ThemeToggle /></div>
+          
           <DropdownMenuTrigger asChild>
-            
             <Button variant="outline" size="sm" className="mr-2">
               <Menu className="h-6 w-6" />
             </Button>
@@ -102,9 +126,7 @@ export default async function Navbar() {
           <DropdownMenuContent align="end" className="w-60">
             <DropdownMenuLabel>
               <Link href="/" className="flex items-center gap-2">
-             
                 <div className="w-[100px] h-[30px] bg-[url('/jagrata3.png')] bg-cover bg-center" />
-
               </Link>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -236,6 +258,7 @@ export default async function Navbar() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        )}
       </div>
     </nav>
   );
