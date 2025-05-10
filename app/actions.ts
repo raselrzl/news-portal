@@ -4,15 +4,28 @@ import { prisma } from "./utils/db";
 import { requireUser } from "./utils/requireUser";
 import { AdvertiserSchema, newsReporterSchema } from "./utils/zodSchemas";
 import { redirect } from "next/navigation";
-
+import arcjet, { detectBot, shield } from "./utils/arcjet";
+import { request } from "@arcjet/next";
+const aj = arcjet
+  .withRule(
+    shield({
+      mode: "LIVE",
+    })
+  )
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    })
+  );
 export async function createNewsReporter(data: z.infer<typeof newsReporterSchema>) {
     const user = await requireUser();
   
-/*     const req = await request();
-    const dicision = await aj.protect(req);
+    const req = await request();
+    const dicision = await arcjet.protect(req);
     if (dicision.isDenied()) {
       throw new Error("Forbidden");
-    } */
+    }
   
     const validateData = newsReporterSchema.parse(data);
     console.log(validateData);
@@ -39,11 +52,11 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
   export async function createAdvertiser(data: z.infer<typeof AdvertiserSchema>) {
     const user = await requireUser();
   
-   /*  const req = await request();
+    const req = await request();
     const dicision = await aj.protect(req);
     if (dicision.isDenied()) {
       throw new Error("Forbidden");
-    } */
+    }
   
     const validateData = AdvertiserSchema.parse(data);
     console.log(validateData);
