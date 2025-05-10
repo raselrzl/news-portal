@@ -34,6 +34,8 @@ import {
   Megaphone,
   Users,
   Film,
+  ChevronDown,
+  User2,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -47,6 +49,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/utils/auth";
 import { UserDropdown } from "./UserDropdown";
+import DropDownMenuList from "./dropDownMenuList";
 
 export default async function Navbar() {
   const user = await auth();
@@ -80,12 +83,8 @@ export default async function Navbar() {
 
       <div className="hidden md:flex items-center gap-5">
         <ThemeToggle />
-        <Link
-          href="/post-news"
-          className={buttonVariants({ variant: "default", size: "sm" })}
-        >
-          সংবাদ যোগ করুন
-        </Link>
+       <DropDownMenuList />
+        
 
         {user?.user ? (
           <UserDropdown
@@ -95,19 +94,20 @@ export default async function Navbar() {
           />
         ) : (
           <Link
-            href="/login"
-            className={buttonVariants({ variant: "outline", size: "sm" })}
-          >
-            লগইন
-          </Link>
+          href="/login"
+          className={`${buttonVariants({ variant: "outline", size: "sm" })} mr-1`}
+        >
+          <User2 />
+        </Link>
         )}
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden flex items-center gap-4">
+      <div className="md:hidden flex items-center gap-2">
       <div className="size-sm">
             <ThemeToggle />
           </div>
+          <DropDownMenuList />
         {user?.user ? (
           <UserDropdown
             email={user.user.email as string}
@@ -116,149 +116,14 @@ export default async function Navbar() {
           />
         ) : (
 
-        <DropdownMenu>
-          
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="mr-2">
-              <Menu className="h-6 w-6" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-60">
-            <DropdownMenuLabel>
-              <Link href="/" className="flex items-center gap-2">
-                <div className="w-[100px] h-[30px] bg-[url('/jagrata3.png')] bg-cover bg-center" />
-              </Link>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem asChild>
-              <Link href="/latest">
-                <Search size={16} className="opacity-60" />
-                <span>সর্বশেষ (Latest)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/national">
-                <Landmark size={16} className="opacity-60" />
-                <span>জাতীয় (National)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/politics">
-                <Megaphone size={16} className="opacity-60" />
-                <span>রাজনীতি (Politics)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/countrywide">
-                <TentTree size={16} className="opacity-60" />
-                <span>সারাদেশ (All Over the Country)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/international">
-                <Globe size={16} className="opacity-60" />
-                <span>বিশ্ব (International)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/sports">
-                <Activity size={16} className="opacity-60" />
-                <span>খেলা (Sports)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/education">
-                <School size={16} className="opacity-60" />
-                <span>শিক্ষা (Education)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/health">
-                <HeartPulse size={16} className="opacity-60" />
-                <span>স্বাস্থ্য (Health)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/opinion">
-                <BrainCircuit size={16} className="opacity-60" />
-                <span>মতামত (Opinion)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/religion">
-                <Star size={16} className="opacity-60" />
-                <span>ধর্ম (Religion)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/crime">
-                <ShieldAlert size={16} className="opacity-60" />
-                <span>অপরাধ (Crime)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/technology">
-                <Rocket size={16} className="opacity-60" />
-                <span>প্রযুক্তি (Technology)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/entertainment">
-                <Film size={16} className="opacity-60" />
-                <span>বিনোদন (Entertainment)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/economy">
-                <Coins size={16} className="opacity-60" />
-                <span>অর্থনীতি (Economy)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/law-and-justice">
-                <Gavel size={16} className="opacity-60" />
-                <span>আইন ও আদালত (Law & Justice)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/environment">
-                <Leaf size={16} className="opacity-60" />
-                <span>পরিবেশ (Environment)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/science">
-                <Microscope size={16} className="opacity-60" />
-                <span>বিজ্ঞান (Science)</span>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/login">
-                <User size={16} className="opacity-90" />
-                <span>লগইন (Login)</span>
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          <Link
+          href="/login"
+          className={`${buttonVariants({ variant: "outline", size: "sm" })} mr-1`}
+        >
+          <User2 />
+        </Link>
         )}
+        
       </div>
     </nav>
   );

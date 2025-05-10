@@ -2,7 +2,6 @@ import Navbar from "@/components/general/Navbar";
 import TodayDate from "@/components/general/TodayDate";
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import { Home } from "lucide-react";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,7 +11,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
        
         <Link
           href="/"
-          className="font-extrabold text-primary hover:border-b-2  px-4 py-1 rounded-xl"
+          className="font-extrabold text-primary hover:border-b-4 border-primary  px-4 py-1 rounded-xl"
         >
           তাজা খবর
         </Link>
