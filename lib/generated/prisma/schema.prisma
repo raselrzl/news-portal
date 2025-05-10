@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../lib/generated/prisma"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -52,12 +53,13 @@ model newsReporter {
 }
 
 model Advertiser {
-  id             String @id @default(uuid())
+  id             String  @id @default(uuid())
   supervisorName String
   companyName    String
   companyAddress String
   phoneNumber    String
   aboutCompany   String
+  companyWebsite String?
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
