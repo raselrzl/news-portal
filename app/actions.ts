@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { prisma } from "./utils/db";
 import { requireUser } from "./utils/requireUser";
-import { AdvertiserSchema, newsReporterSchema } from "./utils/zodSchemas";
+import { AdvertiserSchema, newsArticleSchema, newsReporterSchema } from "./utils/zodSchemas";
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
@@ -35,7 +35,7 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
       },
       data: {
         onboardingCompleted: true,
-        userType: "NEWSRREPORTER",
+        userType: "NEWSREPORTER",
         newsReporter: {
           create: {
             ...validateData,
@@ -77,3 +77,54 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
   
     return redirect("/");
   }
+
+
+  export async function createAnArticle(data: z.infer<typeof newsArticleSchema>) {
+    const user = await requireUser();
+  
+    const req = await request();
+    const dicision = await aj.protect(req);
+    if (dicision.isDenied()) {
+      throw new Error("Forbidden");
+    }
+  
+    const validateData = newsArticleSchema.parse(data);
+  
+    console.log(validateData);
+    const reporter = await prisma.newsReporter.findUnique({
+      where: {
+        userId: user.id,
+      },
+      select: {
+        id: true,
+      },
+    });
+  
+    if (!reporter?.id) {
+      return redirect("/");
+    }
+  
+    const newsArticle = await prisma.newsArticle.create({
+      data:{
+        newsHeading: validateData.newsHeading,
+        newsDetails: validateData.newsDetails,
+        newsResource: validateData.newsResource,
+        newsLocation: validateData.newsLocation ?? undefined,
+        newsCategory: validateData.newsCategory,
+        newsPicture: validateData.newsPicture,
+        newsPictureHeading: validateData.newsPictureHeading,
+        newsPictureCredit: validateData.newsPictureCredit,
+        isFeatured: validateData.isFeatured ?? false,
+        reporterId: reporter.id,
+        duration: validateData.duration ?? undefined,
+        newsArticleStatus: validateData.newsArticleStatus || "DRAFT",
+        quotes: {
+          create: validateData.quotes
+        }
+
+      }
+      
+    });
+    return redirect("/")
+  }
+  

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react"; // Import the icons
+import { links } from "@/app/utils/linkList";
 
 export default function BanglaNavMenu() {
   const pathname = usePathname();
@@ -11,25 +12,8 @@ export default function BanglaNavMenu() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const links = [
-    { href: "/latest", label: "সর্বশেষ" },
-    { href: "/national", label: "জাতীয়" },
-    { href: "/politics", label: "রাজনীতি" },
-    { href: "/countrywide", label: "সারাদেশ" },
-    { href: "/international", label: "বিশ্ব" },
-    { href: "/sports", label: "খেলা" },
-    { href: "/education", label: "শিক্ষা" },
-    { href: "/health", label: "স্বাস্থ্য" },
-    { href: "/opinion", label: "মতামত" },
-    { href: "/religion", label: "ধর্ম" },
-    { href: "/crime", label: "অপরাধ" },
-    { href: "/technology", label: "প্রযুক্তি" },
-    { href: "/entertainment", label: "বিনোদন" },
-    { href: "/economy", label: "অর্থনীতি" },
-    { href: "/law-and-justice", label: "আইন ও আদালত" },
-    { href: "/environment", label: "পরিবেশ" },
-    { href: "/science", label: "বিজ্ঞান" },
-  ];
+
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,12 +56,12 @@ export default function BanglaNavMenu() {
         ref={containerRef}
         className="flex gap-1 overflow-x-auto whitespace-nowrap no-scrollbar"
       >
-        {links.map(({ href, label }) => {
+        {links.map(({ href, label, id }) => {
           const isActive = pathname === href;
 
           return (
             <Link
-              key={href}
+              key={id}
               href={href}
               className={`px-3 py-2 text-sm font-bold transition-colors rounded-4xl ${
                 isActive

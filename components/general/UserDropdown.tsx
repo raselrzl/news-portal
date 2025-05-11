@@ -19,6 +19,7 @@ import {
 } from "../ui/dropdown-menu";
 import Link from "next/link";
 import { signOut } from "@/app/utils/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 /* import { ime } from "@/app/utils/ime"; */
 
 interface iAppProps {
@@ -41,7 +42,13 @@ export function UserDropdown({ email, name, image }: iAppProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48" align="end">
         <DropdownMenuLabel className="flex flex-col">
-          <span className="text-sm font-medium text-foreground">{name}</span>
+          {/* <div className="flex justify-between"> */}
+            <span className="text-sm font-medium text-foreground">{name}</span>
+        {/*     <Avatar>
+            <AvatarImage src={image} alt="Profile Image" />
+            <AvatarFallback className="font-bold">{name.charAt(0)}</AvatarFallback>            
+          </Avatar> */}
+          {/* </div> */}
           <span className="text-xs font-medium text-foreground">{email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

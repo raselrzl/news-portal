@@ -30,18 +30,20 @@ model User {
 }
 
 enum UserType {
-  NEWSRREPORTER
+  NEWSREPORTER
   ADVERTISER
+  SUPERADMIN
 }
 
 model newsReporter {
   id       String  @id @default(uuid())
-  name     String
   location String
   bio    String
   profilePicture     String
   phoneNumber  String
   facebookProfileAddress String?
+
+  newsArticle newsArticle[]
 
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique
@@ -71,6 +73,62 @@ model Advertiser {
   updatedAt DateTime @updatedAt
 }
 
+model newsArticle {
+  id     String @id @default(uuid())
+  newsHeading String
+  newsResource String
+  newsLocation String?
+  newsCategory newsCategory
+  newsPicture String
+  newsPictureHeading String
+  newsPictureCredit String
+  isFeatured  Boolean       @default(false)
+  newsDetails String
+  quotes          quote[]
+
+  newsReporter   newsReporter  @relation(fields: [reporterId], references: [id])
+  reporterId String
+
+  duration Int?
+  newsArticleStatus  newsArticleStatus@default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum newsArticleStatus {
+  ACTIVE
+  DRAFT
+  EXPIRED
+}
+
+model quote {
+  id          String       @id @default(uuid())
+  text        String
+  speakerInfo String
+  article     newsArticle  @relation(fields: [articleId], references: [id])
+  articleId   String
+  createdAt   DateTime     @default(now())
+}
+
+enum newsCategory {
+  LATEST
+  NATIONAL
+  POLITICS
+  COUNTRYWIDE
+  INTERNATIONAL
+  SPORTS
+  EDUCATION
+  HEALTH
+  OPINION
+  RELIGION
+  CRIME
+  TECHNOLOGY
+  ENTERTAINMENT
+  ECONOMY
+  LAW_AND_JUSTICE
+  ENVIRONMENT
+  SCIENCE
+}
 
 
 

@@ -34,7 +34,6 @@ export default function NewsReporterRegisterForm() {
   const form = useForm<z.infer<typeof newsReporterSchema>>({
     resolver: zodResolver(newsReporterSchema),
     defaultValues: {
-      name: "",
       location: "",
       bio: "",
       profilePicture: "",
@@ -65,9 +64,9 @@ export default function NewsReporterRegisterForm() {
 
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
+{/*           <FormField
             control={form.control}
-            name="name"
+            name="reporterName"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>নাম</FormLabel>
@@ -77,7 +76,8 @@ export default function NewsReporterRegisterForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
+          
           <FormField
             control={form.control}
             name="phoneNumber"

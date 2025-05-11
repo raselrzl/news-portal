@@ -29,6 +29,16 @@ export type newsReporter = $Result.DefaultSelection<Prisma.$newsReporterPayload>
  */
 export type Advertiser = $Result.DefaultSelection<Prisma.$AdvertiserPayload>
 /**
+ * Model newsArticle
+ * 
+ */
+export type newsArticle = $Result.DefaultSelection<Prisma.$newsArticlePayload>
+/**
+ * Model quote
+ * 
+ */
+export type quote = $Result.DefaultSelection<Prisma.$quotePayload>
+/**
  * Model Account
  * 
  */
@@ -49,17 +59,58 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export namespace $Enums {
   export const UserType: {
-  NEWSRREPORTER: 'NEWSRREPORTER',
-  ADVERTISER: 'ADVERTISER'
+  NEWSREPORTER: 'NEWSREPORTER',
+  ADVERTISER: 'ADVERTISER',
+  SUPERADMIN: 'SUPERADMIN'
 };
 
 export type UserType = (typeof UserType)[keyof typeof UserType]
+
+
+export const newsArticleStatus: {
+  ACTIVE: 'ACTIVE',
+  DRAFT: 'DRAFT',
+  EXPIRED: 'EXPIRED'
+};
+
+export type newsArticleStatus = (typeof newsArticleStatus)[keyof typeof newsArticleStatus]
+
+
+export const newsCategory: {
+  LATEST: 'LATEST',
+  NATIONAL: 'NATIONAL',
+  POLITICS: 'POLITICS',
+  COUNTRYWIDE: 'COUNTRYWIDE',
+  INTERNATIONAL: 'INTERNATIONAL',
+  SPORTS: 'SPORTS',
+  EDUCATION: 'EDUCATION',
+  HEALTH: 'HEALTH',
+  OPINION: 'OPINION',
+  RELIGION: 'RELIGION',
+  CRIME: 'CRIME',
+  TECHNOLOGY: 'TECHNOLOGY',
+  ENTERTAINMENT: 'ENTERTAINMENT',
+  ECONOMY: 'ECONOMY',
+  LAW_AND_JUSTICE: 'LAW_AND_JUSTICE',
+  ENVIRONMENT: 'ENVIRONMENT',
+  SCIENCE: 'SCIENCE'
+};
+
+export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]
 
 }
 
 export type UserType = $Enums.UserType
 
 export const UserType: typeof $Enums.UserType
+
+export type newsArticleStatus = $Enums.newsArticleStatus
+
+export const newsArticleStatus: typeof $Enums.newsArticleStatus
+
+export type newsCategory = $Enums.newsCategory
+
+export const newsCategory: typeof $Enums.newsCategory
 
 /**
  * ##  Prisma Client ʲˢ
@@ -215,6 +266,26 @@ export class PrismaClient<
     * ```
     */
   get advertiser(): Prisma.AdvertiserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newsArticle`: Exposes CRUD operations for the **newsArticle** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewsArticles
+    * const newsArticles = await prisma.newsArticle.findMany()
+    * ```
+    */
+  get newsArticle(): Prisma.newsArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quote`: Exposes CRUD operations for the **quote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Quotes
+    * const quotes = await prisma.quote.findMany()
+    * ```
+    */
+  get quote(): Prisma.quoteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -688,6 +759,8 @@ export namespace Prisma {
     User: 'User',
     newsReporter: 'newsReporter',
     Advertiser: 'Advertiser',
+    newsArticle: 'newsArticle',
+    quote: 'quote',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken'
@@ -709,7 +782,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "account" | "session" | "verificationToken"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "account" | "session" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -932,6 +1005,154 @@ export namespace Prisma {
           count: {
             args: Prisma.AdvertiserCountArgs<ExtArgs>
             result: $Utils.Optional<AdvertiserCountAggregateOutputType> | number
+          }
+        }
+      }
+      newsArticle: {
+        payload: Prisma.$newsArticlePayload<ExtArgs>
+        fields: Prisma.newsArticleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.newsArticleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.newsArticleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          findFirst: {
+            args: Prisma.newsArticleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.newsArticleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          findMany: {
+            args: Prisma.newsArticleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>[]
+          }
+          create: {
+            args: Prisma.newsArticleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          createMany: {
+            args: Prisma.newsArticleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.newsArticleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>[]
+          }
+          delete: {
+            args: Prisma.newsArticleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          update: {
+            args: Prisma.newsArticleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          deleteMany: {
+            args: Prisma.newsArticleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.newsArticleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.newsArticleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>[]
+          }
+          upsert: {
+            args: Prisma.newsArticleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsArticlePayload>
+          }
+          aggregate: {
+            args: Prisma.NewsArticleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewsArticle>
+          }
+          groupBy: {
+            args: Prisma.newsArticleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsArticleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.newsArticleCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsArticleCountAggregateOutputType> | number
+          }
+        }
+      }
+      quote: {
+        payload: Prisma.$quotePayload<ExtArgs>
+        fields: Prisma.quoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.quoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.quoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          findFirst: {
+            args: Prisma.quoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.quoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          findMany: {
+            args: Prisma.quoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>[]
+          }
+          create: {
+            args: Prisma.quoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          createMany: {
+            args: Prisma.quoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.quoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>[]
+          }
+          delete: {
+            args: Prisma.quoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          update: {
+            args: Prisma.quoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          deleteMany: {
+            args: Prisma.quoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.quoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.quoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>[]
+          }
+          upsert: {
+            args: Prisma.quoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$quotePayload>
+          }
+          aggregate: {
+            args: Prisma.QuoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuote>
+          }
+          groupBy: {
+            args: Prisma.quoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.quoteCountArgs<ExtArgs>
+            result: $Utils.Optional<QuoteCountAggregateOutputType> | number
           }
         }
       }
@@ -1244,6 +1465,8 @@ export namespace Prisma {
     user?: UserOmit
     newsReporter?: newsReporterOmit
     advertiser?: AdvertiserOmit
+    newsArticle?: newsArticleOmit
+    quote?: quoteOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -1373,6 +1596,68 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+
+  /**
+   * Count Type NewsReporterCountOutputType
+   */
+
+  export type NewsReporterCountOutputType = {
+    newsArticle: number
+  }
+
+  export type NewsReporterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsArticle?: boolean | NewsReporterCountOutputTypeCountNewsArticleArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NewsReporterCountOutputType without action
+   */
+  export type NewsReporterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsReporterCountOutputType
+     */
+    select?: NewsReporterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NewsReporterCountOutputType without action
+   */
+  export type NewsReporterCountOutputTypeCountNewsArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: newsArticleWhereInput
+  }
+
+
+  /**
+   * Count Type NewsArticleCountOutputType
+   */
+
+  export type NewsArticleCountOutputType = {
+    quotes: number
+  }
+
+  export type NewsArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quotes?: boolean | NewsArticleCountOutputTypeCountQuotesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NewsArticleCountOutputType without action
+   */
+  export type NewsArticleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCountOutputType
+     */
+    select?: NewsArticleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NewsArticleCountOutputType without action
+   */
+  export type NewsArticleCountOutputTypeCountQuotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: quoteWhereInput
   }
 
 
@@ -2588,7 +2873,6 @@ export namespace Prisma {
 
   export type NewsReporterMinAggregateOutputType = {
     id: string | null
-    name: string | null
     location: string | null
     bio: string | null
     profilePicture: string | null
@@ -2602,7 +2886,6 @@ export namespace Prisma {
 
   export type NewsReporterMaxAggregateOutputType = {
     id: string | null
-    name: string | null
     location: string | null
     bio: string | null
     profilePicture: string | null
@@ -2616,7 +2899,6 @@ export namespace Prisma {
 
   export type NewsReporterCountAggregateOutputType = {
     id: number
-    name: number
     location: number
     bio: number
     profilePicture: number
@@ -2632,7 +2914,6 @@ export namespace Prisma {
 
   export type NewsReporterMinAggregateInputType = {
     id?: true
-    name?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -2646,7 +2927,6 @@ export namespace Prisma {
 
   export type NewsReporterMaxAggregateInputType = {
     id?: true
-    name?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -2660,7 +2940,6 @@ export namespace Prisma {
 
   export type NewsReporterCountAggregateInputType = {
     id?: true
-    name?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -2747,7 +3026,6 @@ export namespace Prisma {
 
   export type NewsReporterGroupByOutputType = {
     id: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -2778,7 +3056,6 @@ export namespace Prisma {
 
   export type newsReporterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -2788,12 +3065,13 @@ export namespace Prisma {
     registered?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    newsArticle?: boolean | newsReporter$newsArticleArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | NewsReporterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsReporter"]>
 
   export type newsReporterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -2808,7 +3086,6 @@ export namespace Prisma {
 
   export type newsReporterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -2823,7 +3100,6 @@ export namespace Prisma {
 
   export type newsReporterSelectScalar = {
     id?: boolean
-    name?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -2835,9 +3111,11 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type newsReporterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "bio" | "profilePicture" | "phoneNumber" | "facebookProfileAddress" | "userId" | "registered" | "createdAt" | "updatedAt", ExtArgs["result"]["newsReporter"]>
+  export type newsReporterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "location" | "bio" | "profilePicture" | "phoneNumber" | "facebookProfileAddress" | "userId" | "registered" | "createdAt" | "updatedAt", ExtArgs["result"]["newsReporter"]>
   export type newsReporterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsArticle?: boolean | newsReporter$newsArticleArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | NewsReporterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type newsReporterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2849,11 +3127,11 @@ export namespace Prisma {
   export type $newsReporterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "newsReporter"
     objects: {
+      newsArticle: Prisma.$newsArticlePayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
       location: string
       bio: string
       profilePicture: string
@@ -3257,6 +3535,7 @@ export namespace Prisma {
    */
   export interface Prisma__newsReporterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    newsArticle<T extends newsReporter$newsArticleArgs<ExtArgs> = {}>(args?: Subset<T, newsReporter$newsArticleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3288,7 +3567,6 @@ export namespace Prisma {
    */
   interface newsReporterFieldRefs {
     readonly id: FieldRef<"newsReporter", 'String'>
-    readonly name: FieldRef<"newsReporter", 'String'>
     readonly location: FieldRef<"newsReporter", 'String'>
     readonly bio: FieldRef<"newsReporter", 'String'>
     readonly profilePicture: FieldRef<"newsReporter", 'String'>
@@ -3691,6 +3969,30 @@ export namespace Prisma {
      * Limit how many newsReporters to delete.
      */
     limit?: number
+  }
+
+  /**
+   * newsReporter.newsArticle
+   */
+  export type newsReporter$newsArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    where?: newsArticleWhereInput
+    orderBy?: newsArticleOrderByWithRelationInput | newsArticleOrderByWithRelationInput[]
+    cursor?: newsArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
   }
 
   /**
@@ -4845,6 +5147,2316 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AdvertiserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model newsArticle
+   */
+
+  export type AggregateNewsArticle = {
+    _count: NewsArticleCountAggregateOutputType | null
+    _avg: NewsArticleAvgAggregateOutputType | null
+    _sum: NewsArticleSumAggregateOutputType | null
+    _min: NewsArticleMinAggregateOutputType | null
+    _max: NewsArticleMaxAggregateOutputType | null
+  }
+
+  export type NewsArticleAvgAggregateOutputType = {
+    duration: number | null
+  }
+
+  export type NewsArticleSumAggregateOutputType = {
+    duration: number | null
+  }
+
+  export type NewsArticleMinAggregateOutputType = {
+    id: string | null
+    newsHeading: string | null
+    newsResource: string | null
+    newsLocation: string | null
+    newsCategory: $Enums.newsCategory | null
+    newsPicture: string | null
+    newsPictureHeading: string | null
+    newsPictureCredit: string | null
+    isFeatured: boolean | null
+    newsDetails: string | null
+    reporterId: string | null
+    duration: number | null
+    newsArticleStatus: $Enums.newsArticleStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NewsArticleMaxAggregateOutputType = {
+    id: string | null
+    newsHeading: string | null
+    newsResource: string | null
+    newsLocation: string | null
+    newsCategory: $Enums.newsCategory | null
+    newsPicture: string | null
+    newsPictureHeading: string | null
+    newsPictureCredit: string | null
+    isFeatured: boolean | null
+    newsDetails: string | null
+    reporterId: string | null
+    duration: number | null
+    newsArticleStatus: $Enums.newsArticleStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NewsArticleCountAggregateOutputType = {
+    id: number
+    newsHeading: number
+    newsResource: number
+    newsLocation: number
+    newsCategory: number
+    newsPicture: number
+    newsPictureHeading: number
+    newsPictureCredit: number
+    isFeatured: number
+    newsDetails: number
+    reporterId: number
+    duration: number
+    newsArticleStatus: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NewsArticleAvgAggregateInputType = {
+    duration?: true
+  }
+
+  export type NewsArticleSumAggregateInputType = {
+    duration?: true
+  }
+
+  export type NewsArticleMinAggregateInputType = {
+    id?: true
+    newsHeading?: true
+    newsResource?: true
+    newsLocation?: true
+    newsCategory?: true
+    newsPicture?: true
+    newsPictureHeading?: true
+    newsPictureCredit?: true
+    isFeatured?: true
+    newsDetails?: true
+    reporterId?: true
+    duration?: true
+    newsArticleStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NewsArticleMaxAggregateInputType = {
+    id?: true
+    newsHeading?: true
+    newsResource?: true
+    newsLocation?: true
+    newsCategory?: true
+    newsPicture?: true
+    newsPictureHeading?: true
+    newsPictureCredit?: true
+    isFeatured?: true
+    newsDetails?: true
+    reporterId?: true
+    duration?: true
+    newsArticleStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NewsArticleCountAggregateInputType = {
+    id?: true
+    newsHeading?: true
+    newsResource?: true
+    newsLocation?: true
+    newsCategory?: true
+    newsPicture?: true
+    newsPictureHeading?: true
+    newsPictureCredit?: true
+    isFeatured?: true
+    newsDetails?: true
+    reporterId?: true
+    duration?: true
+    newsArticleStatus?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NewsArticleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newsArticle to aggregate.
+     */
+    where?: newsArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsArticles to fetch.
+     */
+    orderBy?: newsArticleOrderByWithRelationInput | newsArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: newsArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned newsArticles
+    **/
+    _count?: true | NewsArticleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewsArticleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewsArticleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsArticleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsArticleMaxAggregateInputType
+  }
+
+  export type GetNewsArticleAggregateType<T extends NewsArticleAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsArticle]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsArticle[P]>
+      : GetScalarType<T[P], AggregateNewsArticle[P]>
+  }
+
+
+
+
+  export type newsArticleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: newsArticleWhereInput
+    orderBy?: newsArticleOrderByWithAggregationInput | newsArticleOrderByWithAggregationInput[]
+    by: NewsArticleScalarFieldEnum[] | NewsArticleScalarFieldEnum
+    having?: newsArticleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsArticleCountAggregateInputType | true
+    _avg?: NewsArticleAvgAggregateInputType
+    _sum?: NewsArticleSumAggregateInputType
+    _min?: NewsArticleMinAggregateInputType
+    _max?: NewsArticleMaxAggregateInputType
+  }
+
+  export type NewsArticleGroupByOutputType = {
+    id: string
+    newsHeading: string
+    newsResource: string
+    newsLocation: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured: boolean
+    newsDetails: string
+    reporterId: string
+    duration: number | null
+    newsArticleStatus: $Enums.newsArticleStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: NewsArticleCountAggregateOutputType | null
+    _avg: NewsArticleAvgAggregateOutputType | null
+    _sum: NewsArticleSumAggregateOutputType | null
+    _min: NewsArticleMinAggregateOutputType | null
+    _max: NewsArticleMaxAggregateOutputType | null
+  }
+
+  type GetNewsArticleGroupByPayload<T extends newsArticleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsArticleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsArticleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsArticleGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsArticleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type newsArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    newsHeading?: boolean
+    newsResource?: boolean
+    newsLocation?: boolean
+    newsCategory?: boolean
+    newsPicture?: boolean
+    newsPictureHeading?: boolean
+    newsPictureCredit?: boolean
+    isFeatured?: boolean
+    newsDetails?: boolean
+    reporterId?: boolean
+    duration?: boolean
+    newsArticleStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    quotes?: boolean | newsArticle$quotesArgs<ExtArgs>
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+    _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsArticle"]>
+
+  export type newsArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    newsHeading?: boolean
+    newsResource?: boolean
+    newsLocation?: boolean
+    newsCategory?: boolean
+    newsPicture?: boolean
+    newsPictureHeading?: boolean
+    newsPictureCredit?: boolean
+    isFeatured?: boolean
+    newsDetails?: boolean
+    reporterId?: boolean
+    duration?: boolean
+    newsArticleStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsArticle"]>
+
+  export type newsArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    newsHeading?: boolean
+    newsResource?: boolean
+    newsLocation?: boolean
+    newsCategory?: boolean
+    newsPicture?: boolean
+    newsPictureHeading?: boolean
+    newsPictureCredit?: boolean
+    isFeatured?: boolean
+    newsDetails?: boolean
+    reporterId?: boolean
+    duration?: boolean
+    newsArticleStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsArticle"]>
+
+  export type newsArticleSelectScalar = {
+    id?: boolean
+    newsHeading?: boolean
+    newsResource?: boolean
+    newsLocation?: boolean
+    newsCategory?: boolean
+    newsPicture?: boolean
+    newsPictureHeading?: boolean
+    newsPictureCredit?: boolean
+    isFeatured?: boolean
+    newsDetails?: boolean
+    reporterId?: boolean
+    duration?: boolean
+    newsArticleStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type newsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "newsHeading" | "newsResource" | "newsLocation" | "newsCategory" | "newsPicture" | "newsPictureHeading" | "newsPictureCredit" | "isFeatured" | "newsDetails" | "reporterId" | "duration" | "newsArticleStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
+  export type newsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quotes?: boolean | newsArticle$quotesArgs<ExtArgs>
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+    _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type newsArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+  }
+  export type newsArticleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
+  }
+
+  export type $newsArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "newsArticle"
+    objects: {
+      quotes: Prisma.$quotePayload<ExtArgs>[]
+      newsReporter: Prisma.$newsReporterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      newsHeading: string
+      newsResource: string
+      newsLocation: string | null
+      newsCategory: $Enums.newsCategory
+      newsPicture: string
+      newsPictureHeading: string
+      newsPictureCredit: string
+      isFeatured: boolean
+      newsDetails: string
+      reporterId: string
+      duration: number | null
+      newsArticleStatus: $Enums.newsArticleStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["newsArticle"]>
+    composites: {}
+  }
+
+  type newsArticleGetPayload<S extends boolean | null | undefined | newsArticleDefaultArgs> = $Result.GetResult<Prisma.$newsArticlePayload, S>
+
+  type newsArticleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<newsArticleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsArticleCountAggregateInputType | true
+    }
+
+  export interface newsArticleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['newsArticle'], meta: { name: 'newsArticle' } }
+    /**
+     * Find zero or one NewsArticle that matches the filter.
+     * @param {newsArticleFindUniqueArgs} args - Arguments to find a NewsArticle
+     * @example
+     * // Get one NewsArticle
+     * const newsArticle = await prisma.newsArticle.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends newsArticleFindUniqueArgs>(args: SelectSubset<T, newsArticleFindUniqueArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewsArticle that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {newsArticleFindUniqueOrThrowArgs} args - Arguments to find a NewsArticle
+     * @example
+     * // Get one NewsArticle
+     * const newsArticle = await prisma.newsArticle.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends newsArticleFindUniqueOrThrowArgs>(args: SelectSubset<T, newsArticleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArticle that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleFindFirstArgs} args - Arguments to find a NewsArticle
+     * @example
+     * // Get one NewsArticle
+     * const newsArticle = await prisma.newsArticle.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends newsArticleFindFirstArgs>(args?: SelectSubset<T, newsArticleFindFirstArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArticle that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleFindFirstOrThrowArgs} args - Arguments to find a NewsArticle
+     * @example
+     * // Get one NewsArticle
+     * const newsArticle = await prisma.newsArticle.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends newsArticleFindFirstOrThrowArgs>(args?: SelectSubset<T, newsArticleFindFirstOrThrowArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewsArticles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewsArticles
+     * const newsArticles = await prisma.newsArticle.findMany()
+     * 
+     * // Get first 10 NewsArticles
+     * const newsArticles = await prisma.newsArticle.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsArticleWithIdOnly = await prisma.newsArticle.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends newsArticleFindManyArgs>(args?: SelectSubset<T, newsArticleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewsArticle.
+     * @param {newsArticleCreateArgs} args - Arguments to create a NewsArticle.
+     * @example
+     * // Create one NewsArticle
+     * const NewsArticle = await prisma.newsArticle.create({
+     *   data: {
+     *     // ... data to create a NewsArticle
+     *   }
+     * })
+     * 
+     */
+    create<T extends newsArticleCreateArgs>(args: SelectSubset<T, newsArticleCreateArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewsArticles.
+     * @param {newsArticleCreateManyArgs} args - Arguments to create many NewsArticles.
+     * @example
+     * // Create many NewsArticles
+     * const newsArticle = await prisma.newsArticle.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends newsArticleCreateManyArgs>(args?: SelectSubset<T, newsArticleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NewsArticles and returns the data saved in the database.
+     * @param {newsArticleCreateManyAndReturnArgs} args - Arguments to create many NewsArticles.
+     * @example
+     * // Create many NewsArticles
+     * const newsArticle = await prisma.newsArticle.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NewsArticles and only return the `id`
+     * const newsArticleWithIdOnly = await prisma.newsArticle.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends newsArticleCreateManyAndReturnArgs>(args?: SelectSubset<T, newsArticleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NewsArticle.
+     * @param {newsArticleDeleteArgs} args - Arguments to delete one NewsArticle.
+     * @example
+     * // Delete one NewsArticle
+     * const NewsArticle = await prisma.newsArticle.delete({
+     *   where: {
+     *     // ... filter to delete one NewsArticle
+     *   }
+     * })
+     * 
+     */
+    delete<T extends newsArticleDeleteArgs>(args: SelectSubset<T, newsArticleDeleteArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewsArticle.
+     * @param {newsArticleUpdateArgs} args - Arguments to update one NewsArticle.
+     * @example
+     * // Update one NewsArticle
+     * const newsArticle = await prisma.newsArticle.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends newsArticleUpdateArgs>(args: SelectSubset<T, newsArticleUpdateArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewsArticles.
+     * @param {newsArticleDeleteManyArgs} args - Arguments to filter NewsArticles to delete.
+     * @example
+     * // Delete a few NewsArticles
+     * const { count } = await prisma.newsArticle.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends newsArticleDeleteManyArgs>(args?: SelectSubset<T, newsArticleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewsArticles
+     * const newsArticle = await prisma.newsArticle.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends newsArticleUpdateManyArgs>(args: SelectSubset<T, newsArticleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsArticles and returns the data updated in the database.
+     * @param {newsArticleUpdateManyAndReturnArgs} args - Arguments to update many NewsArticles.
+     * @example
+     * // Update many NewsArticles
+     * const newsArticle = await prisma.newsArticle.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NewsArticles and only return the `id`
+     * const newsArticleWithIdOnly = await prisma.newsArticle.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends newsArticleUpdateManyAndReturnArgs>(args: SelectSubset<T, newsArticleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NewsArticle.
+     * @param {newsArticleUpsertArgs} args - Arguments to update or create a NewsArticle.
+     * @example
+     * // Update or create a NewsArticle
+     * const newsArticle = await prisma.newsArticle.upsert({
+     *   create: {
+     *     // ... data to create a NewsArticle
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewsArticle we want to update
+     *   }
+     * })
+     */
+    upsert<T extends newsArticleUpsertArgs>(args: SelectSubset<T, newsArticleUpsertArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewsArticles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleCountArgs} args - Arguments to filter NewsArticles to count.
+     * @example
+     * // Count the number of NewsArticles
+     * const count = await prisma.newsArticle.count({
+     *   where: {
+     *     // ... the filter for the NewsArticles we want to count
+     *   }
+     * })
+    **/
+    count<T extends newsArticleCountArgs>(
+      args?: Subset<T, newsArticleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsArticleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewsArticle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsArticleAggregateArgs>(args: Subset<T, NewsArticleAggregateArgs>): Prisma.PrismaPromise<GetNewsArticleAggregateType<T>>
+
+    /**
+     * Group by NewsArticle.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsArticleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends newsArticleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: newsArticleGroupByArgs['orderBy'] }
+        : { orderBy?: newsArticleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, newsArticleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsArticleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the newsArticle model
+   */
+  readonly fields: newsArticleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for newsArticle.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__newsArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quotes<T extends newsArticle$quotesArgs<ExtArgs> = {}>(args?: Subset<T, newsArticle$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    newsReporter<T extends newsReporterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, newsReporterDefaultArgs<ExtArgs>>): Prisma__newsReporterClient<$Result.GetResult<Prisma.$newsReporterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the newsArticle model
+   */
+  interface newsArticleFieldRefs {
+    readonly id: FieldRef<"newsArticle", 'String'>
+    readonly newsHeading: FieldRef<"newsArticle", 'String'>
+    readonly newsResource: FieldRef<"newsArticle", 'String'>
+    readonly newsLocation: FieldRef<"newsArticle", 'String'>
+    readonly newsCategory: FieldRef<"newsArticle", 'newsCategory'>
+    readonly newsPicture: FieldRef<"newsArticle", 'String'>
+    readonly newsPictureHeading: FieldRef<"newsArticle", 'String'>
+    readonly newsPictureCredit: FieldRef<"newsArticle", 'String'>
+    readonly isFeatured: FieldRef<"newsArticle", 'Boolean'>
+    readonly newsDetails: FieldRef<"newsArticle", 'String'>
+    readonly reporterId: FieldRef<"newsArticle", 'String'>
+    readonly duration: FieldRef<"newsArticle", 'Int'>
+    readonly newsArticleStatus: FieldRef<"newsArticle", 'newsArticleStatus'>
+    readonly createdAt: FieldRef<"newsArticle", 'DateTime'>
+    readonly updatedAt: FieldRef<"newsArticle", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * newsArticle findUnique
+   */
+  export type newsArticleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which newsArticle to fetch.
+     */
+    where: newsArticleWhereUniqueInput
+  }
+
+  /**
+   * newsArticle findUniqueOrThrow
+   */
+  export type newsArticleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which newsArticle to fetch.
+     */
+    where: newsArticleWhereUniqueInput
+  }
+
+  /**
+   * newsArticle findFirst
+   */
+  export type newsArticleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which newsArticle to fetch.
+     */
+    where?: newsArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsArticles to fetch.
+     */
+    orderBy?: newsArticleOrderByWithRelationInput | newsArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newsArticles.
+     */
+    cursor?: newsArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newsArticles.
+     */
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * newsArticle findFirstOrThrow
+   */
+  export type newsArticleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which newsArticle to fetch.
+     */
+    where?: newsArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsArticles to fetch.
+     */
+    orderBy?: newsArticleOrderByWithRelationInput | newsArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newsArticles.
+     */
+    cursor?: newsArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsArticles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newsArticles.
+     */
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * newsArticle findMany
+   */
+  export type newsArticleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter, which newsArticles to fetch.
+     */
+    where?: newsArticleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsArticles to fetch.
+     */
+    orderBy?: newsArticleOrderByWithRelationInput | newsArticleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing newsArticles.
+     */
+    cursor?: newsArticleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsArticles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsArticles.
+     */
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * newsArticle create
+   */
+  export type newsArticleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a newsArticle.
+     */
+    data: XOR<newsArticleCreateInput, newsArticleUncheckedCreateInput>
+  }
+
+  /**
+   * newsArticle createMany
+   */
+  export type newsArticleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many newsArticles.
+     */
+    data: newsArticleCreateManyInput | newsArticleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * newsArticle createManyAndReturn
+   */
+  export type newsArticleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * The data used to create many newsArticles.
+     */
+    data: newsArticleCreateManyInput | newsArticleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * newsArticle update
+   */
+  export type newsArticleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a newsArticle.
+     */
+    data: XOR<newsArticleUpdateInput, newsArticleUncheckedUpdateInput>
+    /**
+     * Choose, which newsArticle to update.
+     */
+    where: newsArticleWhereUniqueInput
+  }
+
+  /**
+   * newsArticle updateMany
+   */
+  export type newsArticleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update newsArticles.
+     */
+    data: XOR<newsArticleUpdateManyMutationInput, newsArticleUncheckedUpdateManyInput>
+    /**
+     * Filter which newsArticles to update
+     */
+    where?: newsArticleWhereInput
+    /**
+     * Limit how many newsArticles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * newsArticle updateManyAndReturn
+   */
+  export type newsArticleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * The data used to update newsArticles.
+     */
+    data: XOR<newsArticleUpdateManyMutationInput, newsArticleUncheckedUpdateManyInput>
+    /**
+     * Filter which newsArticles to update
+     */
+    where?: newsArticleWhereInput
+    /**
+     * Limit how many newsArticles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * newsArticle upsert
+   */
+  export type newsArticleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the newsArticle to update in case it exists.
+     */
+    where: newsArticleWhereUniqueInput
+    /**
+     * In case the newsArticle found by the `where` argument doesn't exist, create a new newsArticle with this data.
+     */
+    create: XOR<newsArticleCreateInput, newsArticleUncheckedCreateInput>
+    /**
+     * In case the newsArticle was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<newsArticleUpdateInput, newsArticleUncheckedUpdateInput>
+  }
+
+  /**
+   * newsArticle delete
+   */
+  export type newsArticleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+    /**
+     * Filter which newsArticle to delete.
+     */
+    where: newsArticleWhereUniqueInput
+  }
+
+  /**
+   * newsArticle deleteMany
+   */
+  export type newsArticleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newsArticles to delete
+     */
+    where?: newsArticleWhereInput
+    /**
+     * Limit how many newsArticles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * newsArticle.quotes
+   */
+  export type newsArticle$quotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    where?: quoteWhereInput
+    orderBy?: quoteOrderByWithRelationInput | quoteOrderByWithRelationInput[]
+    cursor?: quoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * newsArticle without action
+   */
+  export type newsArticleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsArticle
+     */
+    select?: newsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsArticle
+     */
+    omit?: newsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: newsArticleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model quote
+   */
+
+  export type AggregateQuote = {
+    _count: QuoteCountAggregateOutputType | null
+    _min: QuoteMinAggregateOutputType | null
+    _max: QuoteMaxAggregateOutputType | null
+  }
+
+  export type QuoteMinAggregateOutputType = {
+    id: string | null
+    text: string | null
+    speakerInfo: string | null
+    articleId: string | null
+    createdAt: Date | null
+  }
+
+  export type QuoteMaxAggregateOutputType = {
+    id: string | null
+    text: string | null
+    speakerInfo: string | null
+    articleId: string | null
+    createdAt: Date | null
+  }
+
+  export type QuoteCountAggregateOutputType = {
+    id: number
+    text: number
+    speakerInfo: number
+    articleId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type QuoteMinAggregateInputType = {
+    id?: true
+    text?: true
+    speakerInfo?: true
+    articleId?: true
+    createdAt?: true
+  }
+
+  export type QuoteMaxAggregateInputType = {
+    id?: true
+    text?: true
+    speakerInfo?: true
+    articleId?: true
+    createdAt?: true
+  }
+
+  export type QuoteCountAggregateInputType = {
+    id?: true
+    text?: true
+    speakerInfo?: true
+    articleId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type QuoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which quote to aggregate.
+     */
+    where?: quoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quotes to fetch.
+     */
+    orderBy?: quoteOrderByWithRelationInput | quoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: quoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned quotes
+    **/
+    _count?: true | QuoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuoteMaxAggregateInputType
+  }
+
+  export type GetQuoteAggregateType<T extends QuoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuote[P]>
+      : GetScalarType<T[P], AggregateQuote[P]>
+  }
+
+
+
+
+  export type quoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: quoteWhereInput
+    orderBy?: quoteOrderByWithAggregationInput | quoteOrderByWithAggregationInput[]
+    by: QuoteScalarFieldEnum[] | QuoteScalarFieldEnum
+    having?: quoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuoteCountAggregateInputType | true
+    _min?: QuoteMinAggregateInputType
+    _max?: QuoteMaxAggregateInputType
+  }
+
+  export type QuoteGroupByOutputType = {
+    id: string
+    text: string
+    speakerInfo: string
+    articleId: string
+    createdAt: Date
+    _count: QuoteCountAggregateOutputType | null
+    _min: QuoteMinAggregateOutputType | null
+    _max: QuoteMaxAggregateOutputType | null
+  }
+
+  type GetQuoteGroupByPayload<T extends quoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuoteGroupByOutputType[P]>
+            : GetScalarType<T[P], QuoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type quoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    speakerInfo?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quote"]>
+
+  export type quoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    speakerInfo?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quote"]>
+
+  export type quoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    speakerInfo?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quote"]>
+
+  export type quoteSelectScalar = {
+    id?: boolean
+    text?: boolean
+    speakerInfo?: boolean
+    articleId?: boolean
+    createdAt?: boolean
+  }
+
+  export type quoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "speakerInfo" | "articleId" | "createdAt", ExtArgs["result"]["quote"]>
+  export type quoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }
+  export type quoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }
+  export type quoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    article?: boolean | newsArticleDefaultArgs<ExtArgs>
+  }
+
+  export type $quotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "quote"
+    objects: {
+      article: Prisma.$newsArticlePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      text: string
+      speakerInfo: string
+      articleId: string
+      createdAt: Date
+    }, ExtArgs["result"]["quote"]>
+    composites: {}
+  }
+
+  type quoteGetPayload<S extends boolean | null | undefined | quoteDefaultArgs> = $Result.GetResult<Prisma.$quotePayload, S>
+
+  type quoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<quoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuoteCountAggregateInputType | true
+    }
+
+  export interface quoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['quote'], meta: { name: 'quote' } }
+    /**
+     * Find zero or one Quote that matches the filter.
+     * @param {quoteFindUniqueArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends quoteFindUniqueArgs>(args: SelectSubset<T, quoteFindUniqueArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Quote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {quoteFindUniqueOrThrowArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends quoteFindUniqueOrThrowArgs>(args: SelectSubset<T, quoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteFindFirstArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends quoteFindFirstArgs>(args?: SelectSubset<T, quoteFindFirstArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteFindFirstOrThrowArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends quoteFindFirstOrThrowArgs>(args?: SelectSubset<T, quoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Quotes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Quotes
+     * const quotes = await prisma.quote.findMany()
+     * 
+     * // Get first 10 Quotes
+     * const quotes = await prisma.quote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const quoteWithIdOnly = await prisma.quote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends quoteFindManyArgs>(args?: SelectSubset<T, quoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Quote.
+     * @param {quoteCreateArgs} args - Arguments to create a Quote.
+     * @example
+     * // Create one Quote
+     * const Quote = await prisma.quote.create({
+     *   data: {
+     *     // ... data to create a Quote
+     *   }
+     * })
+     * 
+     */
+    create<T extends quoteCreateArgs>(args: SelectSubset<T, quoteCreateArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Quotes.
+     * @param {quoteCreateManyArgs} args - Arguments to create many Quotes.
+     * @example
+     * // Create many Quotes
+     * const quote = await prisma.quote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends quoteCreateManyArgs>(args?: SelectSubset<T, quoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Quotes and returns the data saved in the database.
+     * @param {quoteCreateManyAndReturnArgs} args - Arguments to create many Quotes.
+     * @example
+     * // Create many Quotes
+     * const quote = await prisma.quote.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Quotes and only return the `id`
+     * const quoteWithIdOnly = await prisma.quote.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends quoteCreateManyAndReturnArgs>(args?: SelectSubset<T, quoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Quote.
+     * @param {quoteDeleteArgs} args - Arguments to delete one Quote.
+     * @example
+     * // Delete one Quote
+     * const Quote = await prisma.quote.delete({
+     *   where: {
+     *     // ... filter to delete one Quote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends quoteDeleteArgs>(args: SelectSubset<T, quoteDeleteArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Quote.
+     * @param {quoteUpdateArgs} args - Arguments to update one Quote.
+     * @example
+     * // Update one Quote
+     * const quote = await prisma.quote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends quoteUpdateArgs>(args: SelectSubset<T, quoteUpdateArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Quotes.
+     * @param {quoteDeleteManyArgs} args - Arguments to filter Quotes to delete.
+     * @example
+     * // Delete a few Quotes
+     * const { count } = await prisma.quote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends quoteDeleteManyArgs>(args?: SelectSubset<T, quoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Quotes
+     * const quote = await prisma.quote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends quoteUpdateManyArgs>(args: SelectSubset<T, quoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quotes and returns the data updated in the database.
+     * @param {quoteUpdateManyAndReturnArgs} args - Arguments to update many Quotes.
+     * @example
+     * // Update many Quotes
+     * const quote = await prisma.quote.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Quotes and only return the `id`
+     * const quoteWithIdOnly = await prisma.quote.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends quoteUpdateManyAndReturnArgs>(args: SelectSubset<T, quoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Quote.
+     * @param {quoteUpsertArgs} args - Arguments to update or create a Quote.
+     * @example
+     * // Update or create a Quote
+     * const quote = await prisma.quote.upsert({
+     *   create: {
+     *     // ... data to create a Quote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Quote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends quoteUpsertArgs>(args: SelectSubset<T, quoteUpsertArgs<ExtArgs>>): Prisma__quoteClient<$Result.GetResult<Prisma.$quotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Quotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteCountArgs} args - Arguments to filter Quotes to count.
+     * @example
+     * // Count the number of Quotes
+     * const count = await prisma.quote.count({
+     *   where: {
+     *     // ... the filter for the Quotes we want to count
+     *   }
+     * })
+    **/
+    count<T extends quoteCountArgs>(
+      args?: Subset<T, quoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Quote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuoteAggregateArgs>(args: Subset<T, QuoteAggregateArgs>): Prisma.PrismaPromise<GetQuoteAggregateType<T>>
+
+    /**
+     * Group by Quote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {quoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends quoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: quoteGroupByArgs['orderBy'] }
+        : { orderBy?: quoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, quoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the quote model
+   */
+  readonly fields: quoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for quote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__quoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    article<T extends newsArticleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, newsArticleDefaultArgs<ExtArgs>>): Prisma__newsArticleClient<$Result.GetResult<Prisma.$newsArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the quote model
+   */
+  interface quoteFieldRefs {
+    readonly id: FieldRef<"quote", 'String'>
+    readonly text: FieldRef<"quote", 'String'>
+    readonly speakerInfo: FieldRef<"quote", 'String'>
+    readonly articleId: FieldRef<"quote", 'String'>
+    readonly createdAt: FieldRef<"quote", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * quote findUnique
+   */
+  export type quoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter, which quote to fetch.
+     */
+    where: quoteWhereUniqueInput
+  }
+
+  /**
+   * quote findUniqueOrThrow
+   */
+  export type quoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter, which quote to fetch.
+     */
+    where: quoteWhereUniqueInput
+  }
+
+  /**
+   * quote findFirst
+   */
+  export type quoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter, which quote to fetch.
+     */
+    where?: quoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quotes to fetch.
+     */
+    orderBy?: quoteOrderByWithRelationInput | quoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for quotes.
+     */
+    cursor?: quoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of quotes.
+     */
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * quote findFirstOrThrow
+   */
+  export type quoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter, which quote to fetch.
+     */
+    where?: quoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quotes to fetch.
+     */
+    orderBy?: quoteOrderByWithRelationInput | quoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for quotes.
+     */
+    cursor?: quoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of quotes.
+     */
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * quote findMany
+   */
+  export type quoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter, which quotes to fetch.
+     */
+    where?: quoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of quotes to fetch.
+     */
+    orderBy?: quoteOrderByWithRelationInput | quoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing quotes.
+     */
+    cursor?: quoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` quotes.
+     */
+    skip?: number
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * quote create
+   */
+  export type quoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a quote.
+     */
+    data: XOR<quoteCreateInput, quoteUncheckedCreateInput>
+  }
+
+  /**
+   * quote createMany
+   */
+  export type quoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many quotes.
+     */
+    data: quoteCreateManyInput | quoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * quote createManyAndReturn
+   */
+  export type quoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * The data used to create many quotes.
+     */
+    data: quoteCreateManyInput | quoteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * quote update
+   */
+  export type quoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a quote.
+     */
+    data: XOR<quoteUpdateInput, quoteUncheckedUpdateInput>
+    /**
+     * Choose, which quote to update.
+     */
+    where: quoteWhereUniqueInput
+  }
+
+  /**
+   * quote updateMany
+   */
+  export type quoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update quotes.
+     */
+    data: XOR<quoteUpdateManyMutationInput, quoteUncheckedUpdateManyInput>
+    /**
+     * Filter which quotes to update
+     */
+    where?: quoteWhereInput
+    /**
+     * Limit how many quotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * quote updateManyAndReturn
+   */
+  export type quoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * The data used to update quotes.
+     */
+    data: XOR<quoteUpdateManyMutationInput, quoteUncheckedUpdateManyInput>
+    /**
+     * Filter which quotes to update
+     */
+    where?: quoteWhereInput
+    /**
+     * Limit how many quotes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * quote upsert
+   */
+  export type quoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the quote to update in case it exists.
+     */
+    where: quoteWhereUniqueInput
+    /**
+     * In case the quote found by the `where` argument doesn't exist, create a new quote with this data.
+     */
+    create: XOR<quoteCreateInput, quoteUncheckedCreateInput>
+    /**
+     * In case the quote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<quoteUpdateInput, quoteUncheckedUpdateInput>
+  }
+
+  /**
+   * quote delete
+   */
+  export type quoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
+    /**
+     * Filter which quote to delete.
+     */
+    where: quoteWhereUniqueInput
+  }
+
+  /**
+   * quote deleteMany
+   */
+  export type quoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which quotes to delete
+     */
+    where?: quoteWhereInput
+    /**
+     * Limit how many quotes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * quote without action
+   */
+  export type quoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the quote
+     */
+    select?: quoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the quote
+     */
+    omit?: quoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: quoteInclude<ExtArgs> | null
   }
 
 
@@ -8102,7 +10714,6 @@ export namespace Prisma {
 
   export const NewsReporterScalarFieldEnum: {
     id: 'id',
-    name: 'name',
     location: 'location',
     bio: 'bio',
     profilePicture: 'profilePicture',
@@ -8132,6 +10743,38 @@ export namespace Prisma {
   };
 
   export type AdvertiserScalarFieldEnum = (typeof AdvertiserScalarFieldEnum)[keyof typeof AdvertiserScalarFieldEnum]
+
+
+  export const NewsArticleScalarFieldEnum: {
+    id: 'id',
+    newsHeading: 'newsHeading',
+    newsResource: 'newsResource',
+    newsLocation: 'newsLocation',
+    newsCategory: 'newsCategory',
+    newsPicture: 'newsPicture',
+    newsPictureHeading: 'newsPictureHeading',
+    newsPictureCredit: 'newsPictureCredit',
+    isFeatured: 'isFeatured',
+    newsDetails: 'newsDetails',
+    reporterId: 'reporterId',
+    duration: 'duration',
+    newsArticleStatus: 'newsArticleStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NewsArticleScalarFieldEnum = (typeof NewsArticleScalarFieldEnum)[keyof typeof NewsArticleScalarFieldEnum]
+
+
+  export const QuoteScalarFieldEnum: {
+    id: 'id',
+    text: 'text',
+    speakerInfo: 'speakerInfo',
+    articleId: 'articleId',
+    createdAt: 'createdAt'
+  };
+
+  export type QuoteScalarFieldEnum = (typeof QuoteScalarFieldEnum)[keyof typeof QuoteScalarFieldEnum]
 
 
   export const AccountScalarFieldEnum: {
@@ -8252,6 +10895,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'newsCategory'
+   */
+  export type EnumnewsCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'newsCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'newsCategory[]'
+   */
+  export type ListEnumnewsCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'newsCategory[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -8262,6 +10919,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'newsArticleStatus'
+   */
+  export type EnumnewsArticleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'newsArticleStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'newsArticleStatus[]'
+   */
+  export type ListEnumnewsArticleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'newsArticleStatus[]'>
     
 
 
@@ -8371,7 +11042,6 @@ export namespace Prisma {
     OR?: newsReporterWhereInput[]
     NOT?: newsReporterWhereInput | newsReporterWhereInput[]
     id?: StringFilter<"newsReporter"> | string
-    name?: StringFilter<"newsReporter"> | string
     location?: StringFilter<"newsReporter"> | string
     bio?: StringFilter<"newsReporter"> | string
     profilePicture?: StringFilter<"newsReporter"> | string
@@ -8381,12 +11051,12 @@ export namespace Prisma {
     registered?: BoolFilter<"newsReporter"> | boolean
     createdAt?: DateTimeFilter<"newsReporter"> | Date | string
     updatedAt?: DateTimeFilter<"newsReporter"> | Date | string
+    newsArticle?: NewsArticleListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type newsReporterOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -8396,6 +11066,7 @@ export namespace Prisma {
     registered?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsArticle?: newsArticleOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
   }
 
@@ -8405,7 +11076,6 @@ export namespace Prisma {
     AND?: newsReporterWhereInput | newsReporterWhereInput[]
     OR?: newsReporterWhereInput[]
     NOT?: newsReporterWhereInput | newsReporterWhereInput[]
-    name?: StringFilter<"newsReporter"> | string
     location?: StringFilter<"newsReporter"> | string
     bio?: StringFilter<"newsReporter"> | string
     profilePicture?: StringFilter<"newsReporter"> | string
@@ -8414,12 +11084,12 @@ export namespace Prisma {
     registered?: BoolFilter<"newsReporter"> | boolean
     createdAt?: DateTimeFilter<"newsReporter"> | Date | string
     updatedAt?: DateTimeFilter<"newsReporter"> | Date | string
+    newsArticle?: NewsArticleListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
   export type newsReporterOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -8439,7 +11109,6 @@ export namespace Prisma {
     OR?: newsReporterScalarWhereWithAggregatesInput[]
     NOT?: newsReporterScalarWhereWithAggregatesInput | newsReporterScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"newsReporter"> | string
-    name?: StringWithAggregatesFilter<"newsReporter"> | string
     location?: StringWithAggregatesFilter<"newsReporter"> | string
     bio?: StringWithAggregatesFilter<"newsReporter"> | string
     profilePicture?: StringWithAggregatesFilter<"newsReporter"> | string
@@ -8534,6 +11203,171 @@ export namespace Prisma {
     registered?: BoolWithAggregatesFilter<"Advertiser"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Advertiser"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Advertiser"> | Date | string
+  }
+
+  export type newsArticleWhereInput = {
+    AND?: newsArticleWhereInput | newsArticleWhereInput[]
+    OR?: newsArticleWhereInput[]
+    NOT?: newsArticleWhereInput | newsArticleWhereInput[]
+    id?: StringFilter<"newsArticle"> | string
+    newsHeading?: StringFilter<"newsArticle"> | string
+    newsResource?: StringFilter<"newsArticle"> | string
+    newsLocation?: StringNullableFilter<"newsArticle"> | string | null
+    newsCategory?: EnumnewsCategoryFilter<"newsArticle"> | $Enums.newsCategory
+    newsPicture?: StringFilter<"newsArticle"> | string
+    newsPictureHeading?: StringFilter<"newsArticle"> | string
+    newsPictureCredit?: StringFilter<"newsArticle"> | string
+    isFeatured?: BoolFilter<"newsArticle"> | boolean
+    newsDetails?: StringFilter<"newsArticle"> | string
+    reporterId?: StringFilter<"newsArticle"> | string
+    duration?: IntNullableFilter<"newsArticle"> | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
+    createdAt?: DateTimeFilter<"newsArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
+    quotes?: QuoteListRelationFilter
+    newsReporter?: XOR<NewsReporterScalarRelationFilter, newsReporterWhereInput>
+  }
+
+  export type newsArticleOrderByWithRelationInput = {
+    id?: SortOrder
+    newsHeading?: SortOrder
+    newsResource?: SortOrder
+    newsLocation?: SortOrderInput | SortOrder
+    newsCategory?: SortOrder
+    newsPicture?: SortOrder
+    newsPictureHeading?: SortOrder
+    newsPictureCredit?: SortOrder
+    isFeatured?: SortOrder
+    newsDetails?: SortOrder
+    reporterId?: SortOrder
+    duration?: SortOrderInput | SortOrder
+    newsArticleStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    quotes?: quoteOrderByRelationAggregateInput
+    newsReporter?: newsReporterOrderByWithRelationInput
+  }
+
+  export type newsArticleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: newsArticleWhereInput | newsArticleWhereInput[]
+    OR?: newsArticleWhereInput[]
+    NOT?: newsArticleWhereInput | newsArticleWhereInput[]
+    newsHeading?: StringFilter<"newsArticle"> | string
+    newsResource?: StringFilter<"newsArticle"> | string
+    newsLocation?: StringNullableFilter<"newsArticle"> | string | null
+    newsCategory?: EnumnewsCategoryFilter<"newsArticle"> | $Enums.newsCategory
+    newsPicture?: StringFilter<"newsArticle"> | string
+    newsPictureHeading?: StringFilter<"newsArticle"> | string
+    newsPictureCredit?: StringFilter<"newsArticle"> | string
+    isFeatured?: BoolFilter<"newsArticle"> | boolean
+    newsDetails?: StringFilter<"newsArticle"> | string
+    reporterId?: StringFilter<"newsArticle"> | string
+    duration?: IntNullableFilter<"newsArticle"> | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
+    createdAt?: DateTimeFilter<"newsArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
+    quotes?: QuoteListRelationFilter
+    newsReporter?: XOR<NewsReporterScalarRelationFilter, newsReporterWhereInput>
+  }, "id">
+
+  export type newsArticleOrderByWithAggregationInput = {
+    id?: SortOrder
+    newsHeading?: SortOrder
+    newsResource?: SortOrder
+    newsLocation?: SortOrderInput | SortOrder
+    newsCategory?: SortOrder
+    newsPicture?: SortOrder
+    newsPictureHeading?: SortOrder
+    newsPictureCredit?: SortOrder
+    isFeatured?: SortOrder
+    newsDetails?: SortOrder
+    reporterId?: SortOrder
+    duration?: SortOrderInput | SortOrder
+    newsArticleStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: newsArticleCountOrderByAggregateInput
+    _avg?: newsArticleAvgOrderByAggregateInput
+    _max?: newsArticleMaxOrderByAggregateInput
+    _min?: newsArticleMinOrderByAggregateInput
+    _sum?: newsArticleSumOrderByAggregateInput
+  }
+
+  export type newsArticleScalarWhereWithAggregatesInput = {
+    AND?: newsArticleScalarWhereWithAggregatesInput | newsArticleScalarWhereWithAggregatesInput[]
+    OR?: newsArticleScalarWhereWithAggregatesInput[]
+    NOT?: newsArticleScalarWhereWithAggregatesInput | newsArticleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"newsArticle"> | string
+    newsHeading?: StringWithAggregatesFilter<"newsArticle"> | string
+    newsResource?: StringWithAggregatesFilter<"newsArticle"> | string
+    newsLocation?: StringNullableWithAggregatesFilter<"newsArticle"> | string | null
+    newsCategory?: EnumnewsCategoryWithAggregatesFilter<"newsArticle"> | $Enums.newsCategory
+    newsPicture?: StringWithAggregatesFilter<"newsArticle"> | string
+    newsPictureHeading?: StringWithAggregatesFilter<"newsArticle"> | string
+    newsPictureCredit?: StringWithAggregatesFilter<"newsArticle"> | string
+    isFeatured?: BoolWithAggregatesFilter<"newsArticle"> | boolean
+    newsDetails?: StringWithAggregatesFilter<"newsArticle"> | string
+    reporterId?: StringWithAggregatesFilter<"newsArticle"> | string
+    duration?: IntNullableWithAggregatesFilter<"newsArticle"> | number | null
+    newsArticleStatus?: EnumnewsArticleStatusWithAggregatesFilter<"newsArticle"> | $Enums.newsArticleStatus
+    createdAt?: DateTimeWithAggregatesFilter<"newsArticle"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"newsArticle"> | Date | string
+  }
+
+  export type quoteWhereInput = {
+    AND?: quoteWhereInput | quoteWhereInput[]
+    OR?: quoteWhereInput[]
+    NOT?: quoteWhereInput | quoteWhereInput[]
+    id?: StringFilter<"quote"> | string
+    text?: StringFilter<"quote"> | string
+    speakerInfo?: StringFilter<"quote"> | string
+    articleId?: StringFilter<"quote"> | string
+    createdAt?: DateTimeFilter<"quote"> | Date | string
+    article?: XOR<NewsArticleScalarRelationFilter, newsArticleWhereInput>
+  }
+
+  export type quoteOrderByWithRelationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    speakerInfo?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+    article?: newsArticleOrderByWithRelationInput
+  }
+
+  export type quoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: quoteWhereInput | quoteWhereInput[]
+    OR?: quoteWhereInput[]
+    NOT?: quoteWhereInput | quoteWhereInput[]
+    text?: StringFilter<"quote"> | string
+    speakerInfo?: StringFilter<"quote"> | string
+    articleId?: StringFilter<"quote"> | string
+    createdAt?: DateTimeFilter<"quote"> | Date | string
+    article?: XOR<NewsArticleScalarRelationFilter, newsArticleWhereInput>
+  }, "id">
+
+  export type quoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    text?: SortOrder
+    speakerInfo?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+    _count?: quoteCountOrderByAggregateInput
+    _max?: quoteMaxOrderByAggregateInput
+    _min?: quoteMinOrderByAggregateInput
+  }
+
+  export type quoteScalarWhereWithAggregatesInput = {
+    AND?: quoteScalarWhereWithAggregatesInput | quoteScalarWhereWithAggregatesInput[]
+    OR?: quoteScalarWhereWithAggregatesInput[]
+    NOT?: quoteScalarWhereWithAggregatesInput | quoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"quote"> | string
+    text?: StringWithAggregatesFilter<"quote"> | string
+    speakerInfo?: StringWithAggregatesFilter<"quote"> | string
+    articleId?: StringWithAggregatesFilter<"quote"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"quote"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -8834,7 +11668,6 @@ export namespace Prisma {
 
   export type newsReporterCreateInput = {
     id?: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -8843,12 +11676,12 @@ export namespace Prisma {
     registered?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsArticle?: newsArticleCreateNestedManyWithoutNewsReporterInput
     user: UserCreateNestedOneWithoutNewsReporterInput
   }
 
   export type newsReporterUncheckedCreateInput = {
     id?: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -8858,11 +11691,11 @@ export namespace Prisma {
     registered?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsArticle?: newsArticleUncheckedCreateNestedManyWithoutNewsReporterInput
   }
 
   export type newsReporterUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -8871,12 +11704,12 @@ export namespace Prisma {
     registered?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: newsArticleUpdateManyWithoutNewsReporterNestedInput
     user?: UserUpdateOneRequiredWithoutNewsReporterNestedInput
   }
 
   export type newsReporterUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -8886,11 +11719,11 @@ export namespace Prisma {
     registered?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: newsArticleUncheckedUpdateManyWithoutNewsReporterNestedInput
   }
 
   export type newsReporterCreateManyInput = {
     id?: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -8904,7 +11737,6 @@ export namespace Prisma {
 
   export type newsReporterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -8917,7 +11749,6 @@ export namespace Prisma {
 
   export type newsReporterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -9024,6 +11855,190 @@ export namespace Prisma {
     registered?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsArticleCreateInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quotes?: quoteCreateNestedManyWithoutArticleInput
+    newsReporter: newsReporterCreateNestedOneWithoutNewsArticleInput
+  }
+
+  export type newsArticleUncheckedCreateInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    reporterId: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quotes?: quoteUncheckedCreateNestedManyWithoutArticleInput
+  }
+
+  export type newsArticleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quotes?: quoteUpdateManyWithoutArticleNestedInput
+    newsReporter?: newsReporterUpdateOneRequiredWithoutNewsArticleNestedInput
+  }
+
+  export type newsArticleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quotes?: quoteUncheckedUpdateManyWithoutArticleNestedInput
+  }
+
+  export type newsArticleCreateManyInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    reporterId: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type newsArticleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsArticleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteCreateInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    createdAt?: Date | string
+    article: newsArticleCreateNestedOneWithoutQuotesInput
+  }
+
+  export type quoteUncheckedCreateInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    articleId: string
+    createdAt?: Date | string
+  }
+
+  export type quoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    article?: newsArticleUpdateOneRequiredWithoutQuotesNestedInput
+  }
+
+  export type quoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteCreateManyInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    articleId: string
+    createdAt?: Date | string
+  }
+
+  export type quoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    articleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateInput = {
@@ -9451,14 +12466,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NewsArticleListRelationFilter = {
+    every?: newsArticleWhereInput
+    some?: newsArticleWhereInput
+    none?: newsArticleWhereInput
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
+  export type newsArticleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type newsReporterCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -9472,7 +12496,6 @@ export namespace Prisma {
 
   export type newsReporterMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -9486,7 +12509,6 @@ export namespace Prisma {
 
   export type newsReporterMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -9540,6 +12562,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumnewsCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsCategory | EnumnewsCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsCategoryFilter<$PrismaModel> | $Enums.newsCategory
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9549,6 +12578,155 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumnewsArticleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsArticleStatus | EnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsArticleStatusFilter<$PrismaModel> | $Enums.newsArticleStatus
+  }
+
+  export type QuoteListRelationFilter = {
+    every?: quoteWhereInput
+    some?: quoteWhereInput
+    none?: quoteWhereInput
+  }
+
+  export type NewsReporterScalarRelationFilter = {
+    is?: newsReporterWhereInput
+    isNot?: newsReporterWhereInput
+  }
+
+  export type quoteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type newsArticleCountOrderByAggregateInput = {
+    id?: SortOrder
+    newsHeading?: SortOrder
+    newsResource?: SortOrder
+    newsLocation?: SortOrder
+    newsCategory?: SortOrder
+    newsPicture?: SortOrder
+    newsPictureHeading?: SortOrder
+    newsPictureCredit?: SortOrder
+    isFeatured?: SortOrder
+    newsDetails?: SortOrder
+    reporterId?: SortOrder
+    duration?: SortOrder
+    newsArticleStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type newsArticleAvgOrderByAggregateInput = {
+    duration?: SortOrder
+  }
+
+  export type newsArticleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    newsHeading?: SortOrder
+    newsResource?: SortOrder
+    newsLocation?: SortOrder
+    newsCategory?: SortOrder
+    newsPicture?: SortOrder
+    newsPictureHeading?: SortOrder
+    newsPictureCredit?: SortOrder
+    isFeatured?: SortOrder
+    newsDetails?: SortOrder
+    reporterId?: SortOrder
+    duration?: SortOrder
+    newsArticleStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type newsArticleMinOrderByAggregateInput = {
+    id?: SortOrder
+    newsHeading?: SortOrder
+    newsResource?: SortOrder
+    newsLocation?: SortOrder
+    newsCategory?: SortOrder
+    newsPicture?: SortOrder
+    newsPictureHeading?: SortOrder
+    newsPictureCredit?: SortOrder
+    isFeatured?: SortOrder
+    newsDetails?: SortOrder
+    reporterId?: SortOrder
+    duration?: SortOrder
+    newsArticleStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type newsArticleSumOrderByAggregateInput = {
+    duration?: SortOrder
+  }
+
+  export type EnumnewsCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsCategory | EnumnewsCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsCategoryWithAggregatesFilter<$PrismaModel> | $Enums.newsCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnewsCategoryFilter<$PrismaModel>
+    _max?: NestedEnumnewsCategoryFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumnewsArticleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsArticleStatus | EnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsArticleStatusWithAggregatesFilter<$PrismaModel> | $Enums.newsArticleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
+    _max?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
+  }
+
+  export type NewsArticleScalarRelationFilter = {
+    is?: newsArticleWhereInput
+    isNot?: newsArticleWhereInput
+  }
+
+  export type quoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    speakerInfo?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type quoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    speakerInfo?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type quoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    text?: SortOrder
+    speakerInfo?: SortOrder
+    articleId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -9610,22 +12788,6 @@ export namespace Prisma {
 
   export type AccountSumOrderByAggregateInput = {
     expires_at?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -9847,10 +13009,38 @@ export namespace Prisma {
     update?: XOR<XOR<AdvertiserUpdateToOneWithWhereWithoutUserInput, AdvertiserUpdateWithoutUserInput>, AdvertiserUncheckedUpdateWithoutUserInput>
   }
 
+  export type newsArticleCreateNestedManyWithoutNewsReporterInput = {
+    create?: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput> | newsArticleCreateWithoutNewsReporterInput[] | newsArticleUncheckedCreateWithoutNewsReporterInput[]
+    connectOrCreate?: newsArticleCreateOrConnectWithoutNewsReporterInput | newsArticleCreateOrConnectWithoutNewsReporterInput[]
+    createMany?: newsArticleCreateManyNewsReporterInputEnvelope
+    connect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutNewsReporterInput = {
     create?: XOR<UserCreateWithoutNewsReporterInput, UserUncheckedCreateWithoutNewsReporterInput>
     connectOrCreate?: UserCreateOrConnectWithoutNewsReporterInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type newsArticleUncheckedCreateNestedManyWithoutNewsReporterInput = {
+    create?: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput> | newsArticleCreateWithoutNewsReporterInput[] | newsArticleUncheckedCreateWithoutNewsReporterInput[]
+    connectOrCreate?: newsArticleCreateOrConnectWithoutNewsReporterInput | newsArticleCreateOrConnectWithoutNewsReporterInput[]
+    createMany?: newsArticleCreateManyNewsReporterInputEnvelope
+    connect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+  }
+
+  export type newsArticleUpdateManyWithoutNewsReporterNestedInput = {
+    create?: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput> | newsArticleCreateWithoutNewsReporterInput[] | newsArticleUncheckedCreateWithoutNewsReporterInput[]
+    connectOrCreate?: newsArticleCreateOrConnectWithoutNewsReporterInput | newsArticleCreateOrConnectWithoutNewsReporterInput[]
+    upsert?: newsArticleUpsertWithWhereUniqueWithoutNewsReporterInput | newsArticleUpsertWithWhereUniqueWithoutNewsReporterInput[]
+    createMany?: newsArticleCreateManyNewsReporterInputEnvelope
+    set?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    disconnect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    delete?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    connect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    update?: newsArticleUpdateWithWhereUniqueWithoutNewsReporterInput | newsArticleUpdateWithWhereUniqueWithoutNewsReporterInput[]
+    updateMany?: newsArticleUpdateManyWithWhereWithoutNewsReporterInput | newsArticleUpdateManyWithWhereWithoutNewsReporterInput[]
+    deleteMany?: newsArticleScalarWhereInput | newsArticleScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutNewsReporterNestedInput = {
@@ -9859,6 +13049,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutNewsReporterInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsReporterInput, UserUpdateWithoutNewsReporterInput>, UserUncheckedUpdateWithoutNewsReporterInput>
+  }
+
+  export type newsArticleUncheckedUpdateManyWithoutNewsReporterNestedInput = {
+    create?: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput> | newsArticleCreateWithoutNewsReporterInput[] | newsArticleUncheckedCreateWithoutNewsReporterInput[]
+    connectOrCreate?: newsArticleCreateOrConnectWithoutNewsReporterInput | newsArticleCreateOrConnectWithoutNewsReporterInput[]
+    upsert?: newsArticleUpsertWithWhereUniqueWithoutNewsReporterInput | newsArticleUpsertWithWhereUniqueWithoutNewsReporterInput[]
+    createMany?: newsArticleCreateManyNewsReporterInputEnvelope
+    set?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    disconnect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    delete?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    connect?: newsArticleWhereUniqueInput | newsArticleWhereUniqueInput[]
+    update?: newsArticleUpdateWithWhereUniqueWithoutNewsReporterInput | newsArticleUpdateWithWhereUniqueWithoutNewsReporterInput[]
+    updateMany?: newsArticleUpdateManyWithWhereWithoutNewsReporterInput | newsArticleUpdateManyWithWhereWithoutNewsReporterInput[]
+    deleteMany?: newsArticleScalarWhereInput | newsArticleScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAdvertiserInput = {
@@ -9875,10 +13079,28 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdvertiserInput, UserUpdateWithoutAdvertiserInput>, UserUncheckedUpdateWithoutAdvertiserInput>
   }
 
-  export type UserCreateNestedOneWithoutAccountsInput = {
-    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
-    connect?: UserWhereUniqueInput
+  export type quoteCreateNestedManyWithoutArticleInput = {
+    create?: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput> | quoteCreateWithoutArticleInput[] | quoteUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: quoteCreateOrConnectWithoutArticleInput | quoteCreateOrConnectWithoutArticleInput[]
+    createMany?: quoteCreateManyArticleInputEnvelope
+    connect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+  }
+
+  export type newsReporterCreateNestedOneWithoutNewsArticleInput = {
+    create?: XOR<newsReporterCreateWithoutNewsArticleInput, newsReporterUncheckedCreateWithoutNewsArticleInput>
+    connectOrCreate?: newsReporterCreateOrConnectWithoutNewsArticleInput
+    connect?: newsReporterWhereUniqueInput
+  }
+
+  export type quoteUncheckedCreateNestedManyWithoutArticleInput = {
+    create?: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput> | quoteCreateWithoutArticleInput[] | quoteUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: quoteCreateOrConnectWithoutArticleInput | quoteCreateOrConnectWithoutArticleInput[]
+    createMany?: quoteCreateManyArticleInputEnvelope
+    connect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+  }
+
+  export type EnumnewsCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.newsCategory
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -9887,6 +13109,66 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type EnumnewsArticleStatusFieldUpdateOperationsInput = {
+    set?: $Enums.newsArticleStatus
+  }
+
+  export type quoteUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput> | quoteCreateWithoutArticleInput[] | quoteUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: quoteCreateOrConnectWithoutArticleInput | quoteCreateOrConnectWithoutArticleInput[]
+    upsert?: quoteUpsertWithWhereUniqueWithoutArticleInput | quoteUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: quoteCreateManyArticleInputEnvelope
+    set?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    disconnect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    delete?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    connect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    update?: quoteUpdateWithWhereUniqueWithoutArticleInput | quoteUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: quoteUpdateManyWithWhereWithoutArticleInput | quoteUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: quoteScalarWhereInput | quoteScalarWhereInput[]
+  }
+
+  export type newsReporterUpdateOneRequiredWithoutNewsArticleNestedInput = {
+    create?: XOR<newsReporterCreateWithoutNewsArticleInput, newsReporterUncheckedCreateWithoutNewsArticleInput>
+    connectOrCreate?: newsReporterCreateOrConnectWithoutNewsArticleInput
+    upsert?: newsReporterUpsertWithoutNewsArticleInput
+    connect?: newsReporterWhereUniqueInput
+    update?: XOR<XOR<newsReporterUpdateToOneWithWhereWithoutNewsArticleInput, newsReporterUpdateWithoutNewsArticleInput>, newsReporterUncheckedUpdateWithoutNewsArticleInput>
+  }
+
+  export type quoteUncheckedUpdateManyWithoutArticleNestedInput = {
+    create?: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput> | quoteCreateWithoutArticleInput[] | quoteUncheckedCreateWithoutArticleInput[]
+    connectOrCreate?: quoteCreateOrConnectWithoutArticleInput | quoteCreateOrConnectWithoutArticleInput[]
+    upsert?: quoteUpsertWithWhereUniqueWithoutArticleInput | quoteUpsertWithWhereUniqueWithoutArticleInput[]
+    createMany?: quoteCreateManyArticleInputEnvelope
+    set?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    disconnect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    delete?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    connect?: quoteWhereUniqueInput | quoteWhereUniqueInput[]
+    update?: quoteUpdateWithWhereUniqueWithoutArticleInput | quoteUpdateWithWhereUniqueWithoutArticleInput[]
+    updateMany?: quoteUpdateManyWithWhereWithoutArticleInput | quoteUpdateManyWithWhereWithoutArticleInput[]
+    deleteMany?: quoteScalarWhereInput | quoteScalarWhereInput[]
+  }
+
+  export type newsArticleCreateNestedOneWithoutQuotesInput = {
+    create?: XOR<newsArticleCreateWithoutQuotesInput, newsArticleUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: newsArticleCreateOrConnectWithoutQuotesInput
+    connect?: newsArticleWhereUniqueInput
+  }
+
+  export type newsArticleUpdateOneRequiredWithoutQuotesNestedInput = {
+    create?: XOR<newsArticleCreateWithoutQuotesInput, newsArticleUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: newsArticleCreateOrConnectWithoutQuotesInput
+    upsert?: newsArticleUpsertWithoutQuotesInput
+    connect?: newsArticleWhereUniqueInput
+    update?: XOR<XOR<newsArticleUpdateToOneWithWhereWithoutQuotesInput, newsArticleUpdateWithoutQuotesInput>, newsArticleUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAccountsInput = {
+    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
@@ -10075,6 +13357,30 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumnewsCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsCategory | EnumnewsCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsCategoryFilter<$PrismaModel> | $Enums.newsCategory
+  }
+
+  export type NestedEnumnewsArticleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsArticleStatus | EnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsArticleStatusFilter<$PrismaModel> | $Enums.newsArticleStatus
+  }
+
+  export type NestedEnumnewsCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsCategory | EnumnewsCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsCategory[] | ListEnumnewsCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsCategoryWithAggregatesFilter<$PrismaModel> | $Enums.newsCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnewsCategoryFilter<$PrismaModel>
+    _max?: NestedEnumnewsCategoryFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -10100,6 +13406,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumnewsArticleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.newsArticleStatus | EnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.newsArticleStatus[] | ListEnumnewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumnewsArticleStatusWithAggregatesFilter<$PrismaModel> | $Enums.newsArticleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
+    _max?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -10168,7 +13484,6 @@ export namespace Prisma {
 
   export type newsReporterCreateWithoutUserInput = {
     id?: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -10177,11 +13492,11 @@ export namespace Prisma {
     registered?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsArticle?: newsArticleCreateNestedManyWithoutNewsReporterInput
   }
 
   export type newsReporterUncheckedCreateWithoutUserInput = {
     id?: string
-    name: string
     location: string
     bio: string
     profilePicture: string
@@ -10190,6 +13505,7 @@ export namespace Prisma {
     registered?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsArticle?: newsArticleUncheckedCreateNestedManyWithoutNewsReporterInput
   }
 
   export type newsReporterCreateOrConnectWithoutUserInput = {
@@ -10303,7 +13619,6 @@ export namespace Prisma {
 
   export type newsReporterUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -10312,11 +13627,11 @@ export namespace Prisma {
     registered?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: newsArticleUpdateManyWithoutNewsReporterNestedInput
   }
 
   export type newsReporterUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -10325,6 +13640,7 @@ export namespace Prisma {
     registered?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: newsArticleUncheckedUpdateManyWithoutNewsReporterNestedInput
   }
 
   export type AdvertiserUpsertWithoutUserInput = {
@@ -10364,6 +13680,52 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type newsArticleCreateWithoutNewsReporterInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quotes?: quoteCreateNestedManyWithoutArticleInput
+  }
+
+  export type newsArticleUncheckedCreateWithoutNewsReporterInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quotes?: quoteUncheckedCreateNestedManyWithoutArticleInput
+  }
+
+  export type newsArticleCreateOrConnectWithoutNewsReporterInput = {
+    where: newsArticleWhereUniqueInput
+    create: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput>
+  }
+
+  export type newsArticleCreateManyNewsReporterInputEnvelope = {
+    data: newsArticleCreateManyNewsReporterInput | newsArticleCreateManyNewsReporterInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutNewsReporterInput = {
     id?: string
     name?: string | null
@@ -10397,6 +13759,43 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutNewsReporterInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutNewsReporterInput, UserUncheckedCreateWithoutNewsReporterInput>
+  }
+
+  export type newsArticleUpsertWithWhereUniqueWithoutNewsReporterInput = {
+    where: newsArticleWhereUniqueInput
+    update: XOR<newsArticleUpdateWithoutNewsReporterInput, newsArticleUncheckedUpdateWithoutNewsReporterInput>
+    create: XOR<newsArticleCreateWithoutNewsReporterInput, newsArticleUncheckedCreateWithoutNewsReporterInput>
+  }
+
+  export type newsArticleUpdateWithWhereUniqueWithoutNewsReporterInput = {
+    where: newsArticleWhereUniqueInput
+    data: XOR<newsArticleUpdateWithoutNewsReporterInput, newsArticleUncheckedUpdateWithoutNewsReporterInput>
+  }
+
+  export type newsArticleUpdateManyWithWhereWithoutNewsReporterInput = {
+    where: newsArticleScalarWhereInput
+    data: XOR<newsArticleUpdateManyMutationInput, newsArticleUncheckedUpdateManyWithoutNewsReporterInput>
+  }
+
+  export type newsArticleScalarWhereInput = {
+    AND?: newsArticleScalarWhereInput | newsArticleScalarWhereInput[]
+    OR?: newsArticleScalarWhereInput[]
+    NOT?: newsArticleScalarWhereInput | newsArticleScalarWhereInput[]
+    id?: StringFilter<"newsArticle"> | string
+    newsHeading?: StringFilter<"newsArticle"> | string
+    newsResource?: StringFilter<"newsArticle"> | string
+    newsLocation?: StringNullableFilter<"newsArticle"> | string | null
+    newsCategory?: EnumnewsCategoryFilter<"newsArticle"> | $Enums.newsCategory
+    newsPicture?: StringFilter<"newsArticle"> | string
+    newsPictureHeading?: StringFilter<"newsArticle"> | string
+    newsPictureCredit?: StringFilter<"newsArticle"> | string
+    isFeatured?: BoolFilter<"newsArticle"> | boolean
+    newsDetails?: StringFilter<"newsArticle"> | string
+    reporterId?: StringFilter<"newsArticle"> | string
+    duration?: IntNullableFilter<"newsArticle"> | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
+    createdAt?: DateTimeFilter<"newsArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
   }
 
   export type UserUpsertWithoutNewsReporterInput = {
@@ -10514,6 +13913,213 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     newsReporter?: newsReporterUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type quoteCreateWithoutArticleInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    createdAt?: Date | string
+  }
+
+  export type quoteUncheckedCreateWithoutArticleInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    createdAt?: Date | string
+  }
+
+  export type quoteCreateOrConnectWithoutArticleInput = {
+    where: quoteWhereUniqueInput
+    create: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput>
+  }
+
+  export type quoteCreateManyArticleInputEnvelope = {
+    data: quoteCreateManyArticleInput | quoteCreateManyArticleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type newsReporterCreateWithoutNewsArticleInput = {
+    id?: string
+    location: string
+    bio: string
+    profilePicture: string
+    phoneNumber: string
+    facebookProfileAddress?: string | null
+    registered?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutNewsReporterInput
+  }
+
+  export type newsReporterUncheckedCreateWithoutNewsArticleInput = {
+    id?: string
+    location: string
+    bio: string
+    profilePicture: string
+    phoneNumber: string
+    facebookProfileAddress?: string | null
+    userId: string
+    registered?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type newsReporterCreateOrConnectWithoutNewsArticleInput = {
+    where: newsReporterWhereUniqueInput
+    create: XOR<newsReporterCreateWithoutNewsArticleInput, newsReporterUncheckedCreateWithoutNewsArticleInput>
+  }
+
+  export type quoteUpsertWithWhereUniqueWithoutArticleInput = {
+    where: quoteWhereUniqueInput
+    update: XOR<quoteUpdateWithoutArticleInput, quoteUncheckedUpdateWithoutArticleInput>
+    create: XOR<quoteCreateWithoutArticleInput, quoteUncheckedCreateWithoutArticleInput>
+  }
+
+  export type quoteUpdateWithWhereUniqueWithoutArticleInput = {
+    where: quoteWhereUniqueInput
+    data: XOR<quoteUpdateWithoutArticleInput, quoteUncheckedUpdateWithoutArticleInput>
+  }
+
+  export type quoteUpdateManyWithWhereWithoutArticleInput = {
+    where: quoteScalarWhereInput
+    data: XOR<quoteUpdateManyMutationInput, quoteUncheckedUpdateManyWithoutArticleInput>
+  }
+
+  export type quoteScalarWhereInput = {
+    AND?: quoteScalarWhereInput | quoteScalarWhereInput[]
+    OR?: quoteScalarWhereInput[]
+    NOT?: quoteScalarWhereInput | quoteScalarWhereInput[]
+    id?: StringFilter<"quote"> | string
+    text?: StringFilter<"quote"> | string
+    speakerInfo?: StringFilter<"quote"> | string
+    articleId?: StringFilter<"quote"> | string
+    createdAt?: DateTimeFilter<"quote"> | Date | string
+  }
+
+  export type newsReporterUpsertWithoutNewsArticleInput = {
+    update: XOR<newsReporterUpdateWithoutNewsArticleInput, newsReporterUncheckedUpdateWithoutNewsArticleInput>
+    create: XOR<newsReporterCreateWithoutNewsArticleInput, newsReporterUncheckedCreateWithoutNewsArticleInput>
+    where?: newsReporterWhereInput
+  }
+
+  export type newsReporterUpdateToOneWithWhereWithoutNewsArticleInput = {
+    where?: newsReporterWhereInput
+    data: XOR<newsReporterUpdateWithoutNewsArticleInput, newsReporterUncheckedUpdateWithoutNewsArticleInput>
+  }
+
+  export type newsReporterUpdateWithoutNewsArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profilePicture?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    facebookProfileAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    registered?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNewsReporterNestedInput
+  }
+
+  export type newsReporterUncheckedUpdateWithoutNewsArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profilePicture?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    facebookProfileAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    registered?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsArticleCreateWithoutQuotesInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    newsReporter: newsReporterCreateNestedOneWithoutNewsArticleInput
+  }
+
+  export type newsArticleUncheckedCreateWithoutQuotesInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    reporterId: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type newsArticleCreateOrConnectWithoutQuotesInput = {
+    where: newsArticleWhereUniqueInput
+    create: XOR<newsArticleCreateWithoutQuotesInput, newsArticleUncheckedCreateWithoutQuotesInput>
+  }
+
+  export type newsArticleUpsertWithoutQuotesInput = {
+    update: XOR<newsArticleUpdateWithoutQuotesInput, newsArticleUncheckedUpdateWithoutQuotesInput>
+    create: XOR<newsArticleCreateWithoutQuotesInput, newsArticleUncheckedCreateWithoutQuotesInput>
+    where?: newsArticleWhereInput
+  }
+
+  export type newsArticleUpdateToOneWithWhereWithoutQuotesInput = {
+    where?: newsArticleWhereInput
+    data: XOR<newsArticleUpdateWithoutQuotesInput, newsArticleUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type newsArticleUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsReporter?: newsReporterUpdateOneRequiredWithoutNewsArticleNestedInput
+  }
+
+  export type newsArticleUncheckedUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -10754,6 +14360,104 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsArticleCreateManyNewsReporterInput = {
+    id?: string
+    newsHeading: string
+    newsResource: string
+    newsLocation?: string | null
+    newsCategory: $Enums.newsCategory
+    newsPicture: string
+    newsPictureHeading: string
+    newsPictureCredit: string
+    isFeatured?: boolean
+    newsDetails: string
+    duration?: number | null
+    newsArticleStatus?: $Enums.newsArticleStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type newsArticleUpdateWithoutNewsReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quotes?: quoteUpdateManyWithoutArticleNestedInput
+  }
+
+  export type newsArticleUncheckedUpdateWithoutNewsReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quotes?: quoteUncheckedUpdateManyWithoutArticleNestedInput
+  }
+
+  export type newsArticleUncheckedUpdateManyWithoutNewsReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    newsHeading?: StringFieldUpdateOperationsInput | string
+    newsResource?: StringFieldUpdateOperationsInput | string
+    newsLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    newsCategory?: EnumnewsCategoryFieldUpdateOperationsInput | $Enums.newsCategory
+    newsPicture?: StringFieldUpdateOperationsInput | string
+    newsPictureHeading?: StringFieldUpdateOperationsInput | string
+    newsPictureCredit?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    newsDetails?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteCreateManyArticleInput = {
+    id?: string
+    text: string
+    speakerInfo: string
+    createdAt?: Date | string
+  }
+
+  export type quoteUpdateWithoutArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteUncheckedUpdateWithoutArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type quoteUncheckedUpdateManyWithoutArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    speakerInfo?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
