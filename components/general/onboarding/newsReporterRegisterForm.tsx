@@ -34,6 +34,7 @@ export default function NewsReporterRegisterForm() {
   const form = useForm<z.infer<typeof newsReporterSchema>>({
     resolver: zodResolver(newsReporterSchema),
     defaultValues: {
+      reporterName:"",
       location: "",
       bio: "",
       profilePicture: "",
@@ -64,19 +65,19 @@ export default function NewsReporterRegisterForm() {
 
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-{/*           <FormField
+          <FormField
             control={form.control}
             name="reporterName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>নাম</FormLabel>
+                <FormLabel>সাংবাদিকের নাম</FormLabel>
                 <FormControl>
                   <Input placeholder="করিম মিয়া" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
           
           <FormField
             control={form.control}
@@ -208,7 +209,7 @@ export default function NewsReporterRegisterForm() {
 
           {/* Submit Button */}
           <Button type="submit" className="w-full" disabled={pending}>
-            {pending ? "Submitting..." : "Continue"}
+            {pending ? "শুরু হয়েছে..." : "শুরু করি"}
           </Button>
         </form>
       </Form>

@@ -42,9 +42,11 @@ interface iAppProps {
   reporterProfilePicture: string;
   reporterPhoneNumber: string;
   reporterFacebookProfileAddress?: string | undefined;
+  reporterName?:string | undefined;
 }
 
 export function CreateNewsArticleForm({
+  reporterName,
   reporterLocation,
   reporterBio,
   reporterProfilePicture,
@@ -425,10 +427,10 @@ export function CreateNewsArticleForm({
                       <FormItem>
                         <FormLabel>মন্তব্য</FormLabel>
                         <FormControl>
-                          <Input
+                          <Textarea
                             placeholder="বিশ্ববিদ্যালয়ের শিক্ষা আমাদের ভবিষ্যতের জন্য এক অমূল্য রত্ন।"
                             {...field}
-                            className="placeholder:text-xs"
+                            className="placeholder:text-xs min-h-[120px]"
                           />
                         </FormControl>
                         <FormMessage />
@@ -479,7 +481,7 @@ export function CreateNewsArticleForm({
                     <FormLabel>এই সংবাদটির সাংবাদিকের নাম...</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="করিম মিয়া"
+                        placeholder={reporterName}
                         {...field}
                         className="placeholder:text-xs"
                       />
@@ -622,7 +624,7 @@ export function CreateNewsArticleForm({
         </div>
 
         <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "প্রকাশিত হয়েছে..." : "প্রকাশ করুন"}
+          {pending ? "প্রকাশিত হচ্ছে..." : "প্রকাশ করুন"}
         </Button>
       </form>
     </Form>

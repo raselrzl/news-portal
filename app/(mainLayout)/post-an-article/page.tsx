@@ -12,6 +12,7 @@ async function getNewsReporterInfo(userId: string) {
       userId: userId,
     },
     select: {
+      reporterName:true,
       location: true,
       bio: true,
       profilePicture: true,
@@ -28,11 +29,13 @@ async function getNewsReporterInfo(userId: string) {
 export default async function PostAnArticle() {
   const session = await requireUser();
   const data = await getNewsReporterInfo(session.id as string);
+  console.log("Reportername",data.reporterName)
   return (
     <div className="max-w-7xl mx-auto px-2 mb-10">
         <div className="py-10">
           {" "}
           <CreateNewsArticleForm
+           reporterName={data.reporterName ?? undefined}
            reporterLocation={data.location}
            reporterBio={data.bio}
            reporterProfilePicture={data.profilePicture}

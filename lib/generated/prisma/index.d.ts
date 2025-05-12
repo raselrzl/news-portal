@@ -2873,6 +2873,7 @@ export namespace Prisma {
 
   export type NewsReporterMinAggregateOutputType = {
     id: string | null
+    reporterName: string | null
     location: string | null
     bio: string | null
     profilePicture: string | null
@@ -2886,6 +2887,7 @@ export namespace Prisma {
 
   export type NewsReporterMaxAggregateOutputType = {
     id: string | null
+    reporterName: string | null
     location: string | null
     bio: string | null
     profilePicture: string | null
@@ -2899,6 +2901,7 @@ export namespace Prisma {
 
   export type NewsReporterCountAggregateOutputType = {
     id: number
+    reporterName: number
     location: number
     bio: number
     profilePicture: number
@@ -2914,6 +2917,7 @@ export namespace Prisma {
 
   export type NewsReporterMinAggregateInputType = {
     id?: true
+    reporterName?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -2927,6 +2931,7 @@ export namespace Prisma {
 
   export type NewsReporterMaxAggregateInputType = {
     id?: true
+    reporterName?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -2940,6 +2945,7 @@ export namespace Prisma {
 
   export type NewsReporterCountAggregateInputType = {
     id?: true
+    reporterName?: true
     location?: true
     bio?: true
     profilePicture?: true
@@ -3026,6 +3032,7 @@ export namespace Prisma {
 
   export type NewsReporterGroupByOutputType = {
     id: string
+    reporterName: string | null
     location: string
     bio: string
     profilePicture: string
@@ -3056,6 +3063,7 @@ export namespace Prisma {
 
   export type newsReporterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    reporterName?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -3072,6 +3080,7 @@ export namespace Prisma {
 
   export type newsReporterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    reporterName?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -3086,6 +3095,7 @@ export namespace Prisma {
 
   export type newsReporterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    reporterName?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -3100,6 +3110,7 @@ export namespace Prisma {
 
   export type newsReporterSelectScalar = {
     id?: boolean
+    reporterName?: boolean
     location?: boolean
     bio?: boolean
     profilePicture?: boolean
@@ -3111,7 +3122,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type newsReporterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "location" | "bio" | "profilePicture" | "phoneNumber" | "facebookProfileAddress" | "userId" | "registered" | "createdAt" | "updatedAt", ExtArgs["result"]["newsReporter"]>
+  export type newsReporterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reporterName" | "location" | "bio" | "profilePicture" | "phoneNumber" | "facebookProfileAddress" | "userId" | "registered" | "createdAt" | "updatedAt", ExtArgs["result"]["newsReporter"]>
   export type newsReporterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     newsArticle?: boolean | newsReporter$newsArticleArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3132,6 +3143,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      reporterName: string | null
       location: string
       bio: string
       profilePicture: string
@@ -3567,6 +3579,7 @@ export namespace Prisma {
    */
   interface newsReporterFieldRefs {
     readonly id: FieldRef<"newsReporter", 'String'>
+    readonly reporterName: FieldRef<"newsReporter", 'String'>
     readonly location: FieldRef<"newsReporter", 'String'>
     readonly bio: FieldRef<"newsReporter", 'String'>
     readonly profilePicture: FieldRef<"newsReporter", 'String'>
@@ -10714,6 +10727,7 @@ export namespace Prisma {
 
   export const NewsReporterScalarFieldEnum: {
     id: 'id',
+    reporterName: 'reporterName',
     location: 'location',
     bio: 'bio',
     profilePicture: 'profilePicture',
@@ -11042,6 +11056,7 @@ export namespace Prisma {
     OR?: newsReporterWhereInput[]
     NOT?: newsReporterWhereInput | newsReporterWhereInput[]
     id?: StringFilter<"newsReporter"> | string
+    reporterName?: StringNullableFilter<"newsReporter"> | string | null
     location?: StringFilter<"newsReporter"> | string
     bio?: StringFilter<"newsReporter"> | string
     profilePicture?: StringFilter<"newsReporter"> | string
@@ -11057,6 +11072,7 @@ export namespace Prisma {
 
   export type newsReporterOrderByWithRelationInput = {
     id?: SortOrder
+    reporterName?: SortOrderInput | SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -11076,6 +11092,7 @@ export namespace Prisma {
     AND?: newsReporterWhereInput | newsReporterWhereInput[]
     OR?: newsReporterWhereInput[]
     NOT?: newsReporterWhereInput | newsReporterWhereInput[]
+    reporterName?: StringNullableFilter<"newsReporter"> | string | null
     location?: StringFilter<"newsReporter"> | string
     bio?: StringFilter<"newsReporter"> | string
     profilePicture?: StringFilter<"newsReporter"> | string
@@ -11090,6 +11107,7 @@ export namespace Prisma {
 
   export type newsReporterOrderByWithAggregationInput = {
     id?: SortOrder
+    reporterName?: SortOrderInput | SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -11109,6 +11127,7 @@ export namespace Prisma {
     OR?: newsReporterScalarWhereWithAggregatesInput[]
     NOT?: newsReporterScalarWhereWithAggregatesInput | newsReporterScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"newsReporter"> | string
+    reporterName?: StringNullableWithAggregatesFilter<"newsReporter"> | string | null
     location?: StringWithAggregatesFilter<"newsReporter"> | string
     bio?: StringWithAggregatesFilter<"newsReporter"> | string
     profilePicture?: StringWithAggregatesFilter<"newsReporter"> | string
@@ -11668,6 +11687,7 @@ export namespace Prisma {
 
   export type newsReporterCreateInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -11682,6 +11702,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedCreateInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -11696,6 +11717,7 @@ export namespace Prisma {
 
   export type newsReporterUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -11710,6 +11732,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -11724,6 +11747,7 @@ export namespace Prisma {
 
   export type newsReporterCreateManyInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -11737,6 +11761,7 @@ export namespace Prisma {
 
   export type newsReporterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -11749,6 +11774,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -12483,6 +12509,7 @@ export namespace Prisma {
 
   export type newsReporterCountOrderByAggregateInput = {
     id?: SortOrder
+    reporterName?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -12496,6 +12523,7 @@ export namespace Prisma {
 
   export type newsReporterMaxOrderByAggregateInput = {
     id?: SortOrder
+    reporterName?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -12509,6 +12537,7 @@ export namespace Prisma {
 
   export type newsReporterMinOrderByAggregateInput = {
     id?: SortOrder
+    reporterName?: SortOrder
     location?: SortOrder
     bio?: SortOrder
     profilePicture?: SortOrder
@@ -13484,6 +13513,7 @@ export namespace Prisma {
 
   export type newsReporterCreateWithoutUserInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -13497,6 +13527,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedCreateWithoutUserInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -13619,6 +13650,7 @@ export namespace Prisma {
 
   export type newsReporterUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -13632,6 +13664,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -13941,6 +13974,7 @@ export namespace Prisma {
 
   export type newsReporterCreateWithoutNewsArticleInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -13954,6 +13988,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedCreateWithoutNewsArticleInput = {
     id?: string
+    reporterName?: string | null
     location: string
     bio: string
     profilePicture: string
@@ -14010,6 +14045,7 @@ export namespace Prisma {
 
   export type newsReporterUpdateWithoutNewsArticleInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string
@@ -14023,6 +14059,7 @@ export namespace Prisma {
 
   export type newsReporterUncheckedUpdateWithoutNewsArticleInput = {
     id?: StringFieldUpdateOperationsInput | string
+    reporterName?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profilePicture?: StringFieldUpdateOperationsInput | string

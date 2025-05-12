@@ -37,6 +37,7 @@ enum UserType {
 
 model newsReporter {
   id                     String  @id @default(uuid())
+  reporterName           String?
   location               String
   bio                    String
   profilePicture         String

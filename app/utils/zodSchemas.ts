@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const newsReporterSchema = z.object({
+  reporterName:z.string().min(2, "আপনার নাম কমপক্ষে ২ অক্ষরের হতে হবে"),
   location: z.string().min(1, "অবস্থান উল্লেখ করা আবশ্যক"),
   bio: z.string().min(10, "আপনার নিজের সম্পর্কে কিছু তথ্য লিখুন"),
   profilePicture: z.string().min(1, "অনুগ্রহ করে একটি ছবি আপলোড করুন"),
@@ -51,7 +52,7 @@ export const newsArticleSchema = z.object({
   duration: z.number().optional(),
   isFeatured: z.boolean().optional(),
   newsArticleStatus: z.enum(["EXPIRED", "ACTIVE", "DRAFT"]),
-  reporterName: z.string().min(1, "সংবাদদাতার নাম আবশ্যক"),
+  reporterName: z.string().optional(),
   phoneNumber: z.string(),
   location: z.string(),
   facebookProfileAddress: z.string().optional(),
