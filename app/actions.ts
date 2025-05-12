@@ -125,18 +125,6 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
       }
       
     });
-
-/*     try {
-      await inngest.send({
-        name: "article/cancel",
-        data: {
-          newsArticleId: newsArticle.id,
-          expirationDays: validateData.duration,
-        },
-      });
-    } catch (err) {
-      console.error("Inngest failed:", err);
-    } */
     return redirect("/")
     
   }
