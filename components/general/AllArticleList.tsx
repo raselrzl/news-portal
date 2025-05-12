@@ -89,17 +89,17 @@ export default async function AllArticleList() {
             key={article.id}
             className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg"
           >
-            <div className="w-auto h-[140px] md:h-[170px] border-1 rounded-xl overflow-hidden">
+            <div className="w-auto h-[110px] md:h-[150px] border-1 rounded-xl overflow-hidden">
               <Image
                 src={article.newsPicture}
                 alt="picture"
                 width={190}
-                height={150}
-                className="w-full h-full object-fit"
+                height={140}
+                className="w-full h-full md:h-[150px] object-fit"
               />
             </div>
 
-            <div className="pt-2">
+            <div className="pt-4">
               <h2 className="text-[17px] font-semibold text-foreground/80 leading-[1.5] px-1 font-stretch-extra-condensed">
                 {article.newsPictureHeading}নিশুতি রাতের নিস্তব্ধতায় হঠাৎ এক
                 পশুপাখির ডাক শোনা গেল।
