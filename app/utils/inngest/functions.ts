@@ -1,4 +1,4 @@
-import { prisma } from "../db";
+/* import { prisma } from "../db";
 import { inngest } from "./client";
 
 export const handleNewsArticleExpiration = inngest.createFunction(
@@ -25,7 +25,7 @@ export const handleNewsArticleExpiration = inngest.createFunction(
 
     return { newsArticleId, message: "News Article Status marked as expired" };
   }
-);
+); */
 
 
 /* export const sendPeriodicJobListing = inngest.createFunction(
