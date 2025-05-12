@@ -30,8 +30,7 @@ export default async function PostAnArticle() {
   const data = await getNewsReporterInfo(session.id as string);
   return (
     <div className="max-w-7xl mx-auto px-2 mb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
-        <div className="">
+        <div className="py-10">
           {" "}
           <CreateNewsArticleForm
            reporterLocation={data.location}
@@ -42,8 +41,6 @@ export default async function PostAnArticle() {
           
           />
         </div>
-
-      </div>
     </div>
   );
 }

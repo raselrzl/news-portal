@@ -3,6 +3,7 @@ import TodayDate from "@/components/general/TodayDate";
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import BanglaNavMenu from "@/components/general/BanglaNavMenu";
+import { Toaster } from "sonner";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -20,6 +21,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       </div>
       <BanglaNavMenu />
       {children}
+      <Toaster closeButton richColors />
     </div>
   );
 }
