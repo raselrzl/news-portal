@@ -130,9 +130,8 @@ export function CreateNewsArticleForm({
                     <FormLabel>সংবাদের বিস্তারিত</FormLabel>
                     <FormControl>
                       <Textarea
-                        rows={4}
                         placeholder="উদাহরণ: মঙ্গলবার সকালে ঢাকার শাহবাগ এলাকায়..."
-                        className="min-h-[160px] md:min-h-[350px] placeholder:text-xs overflow: hidden"
+                        className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
                         {...field}
                       />
                     </FormControl>
