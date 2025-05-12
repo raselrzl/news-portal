@@ -40,35 +40,28 @@ export default async function AllArticleList() {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {data.map((article) => (
-          <Card
+          <div
             key={article.id}
-            className="max-w-md w-full shadow-md mx-auto my-2"
+            className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg"
           >
-            <CardHeader>
-              <CardTitle className="text-lg">
-                {article.newsPictureHeading}
-              </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                {article.newsPictureCredit}
-              </p>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
+            <div className="w-auto h-[140px] md:h-[170px] border-1 rounded-xl overflow-hidden">
               <Image
                 src={article.newsPicture}
-                alt="news image"
-                width={400}
-                height={250}
-                className="rounded object-cover"
+                alt="picture"
+                width={190}
+                height={150}
+                className="w-full h-full object-fit"
               />
-              <p className="text-sm text-muted-foreground">
-                {article.newsLocation}
-              </p>
-              <p>{article.newsDetails}</p>
-            </CardContent>
-          </Card>
+            </div>
+
+            <div className="pt-2">
+              <h2 className="text-[17px] font-semibold text-foreground/80 leading-[1.5] px-1 font-stretch-extra-condensed">
+                {article.newsPictureHeading}নিশুতি রাতের নিস্তব্ধতায় হঠাৎ এক পশুপাখির ডাক শোনা গেল। 
+              </h2>
+            </div>
+          </div>
         ))}
       </div>
     </>

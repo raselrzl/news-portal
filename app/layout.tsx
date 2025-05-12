@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Noto_Sans_Bengali,
+  Tiro_Bangla,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/general/theme-provider";
 
@@ -11,6 +16,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const notoBengali = Noto_Sans_Bengali({
+  weight: ["400", "700"],
+  subsets: ["bengali"],
+  variable: "--font-noto-bengali",
+});
+
+const tiroBangla = Tiro_Bangla({
+  weight: ["400"],
+  subsets: ["bengali"],
+  variable: "--font-tiro-bangla",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +42,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="bn" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Tiro+Bangla&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoBengali.variable} ${tiroBangla.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

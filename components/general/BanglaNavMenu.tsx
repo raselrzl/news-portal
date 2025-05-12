@@ -63,7 +63,7 @@ export default function BanglaNavMenu() {
             <Link
               key={id}
               href={href}
-              className={`px-3 py-2 text-sm font-bold transition-colors rounded-4xl ${
+              className={`px-3 py-2 text-md font-bold transition-colors rounded-4xl ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "text-gray-800 dark:text-white hover:bg-accent hover:text-accent-foreground"

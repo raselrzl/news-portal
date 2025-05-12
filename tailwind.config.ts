@@ -6,7 +6,13 @@ export default {
       './components/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
-      extend: {},
+      theme: {
+        extend: {
+          fontFamily: {
+            serifbangla: ['"Noto Serif Bengali"', '"Times New Roman"', 'serif'],
+          },
+        },
+      },
     },
     plugins: [],
   };

@@ -14,7 +14,7 @@ export default async function Navbar() {
       return redirect("/");
     } */
   return (
-    <nav className=" flex items-center justify-between">
+    <nav className="flex items-center justify-between ">
       <Link href="/" className="flex items-center py-2">
         <div className="w-[182px] h-[46px] bg-[url('/jagarata3.png')] bg-cover bg-center" />
         {/*  <Image 
