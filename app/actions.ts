@@ -6,6 +6,7 @@ import { AdvertiserSchema, newsArticleSchema, newsReporterSchema } from "./utils
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
+import { inngest } from "./utils/inngest/client";
 const aj = arcjet
   .withRule(
     shield({
@@ -121,9 +122,16 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
         quotes: {
           create: validateData.quotes
         }
-
       }
       
+    });
+
+    await inngest.send({
+      name: "article/cancel",
+      data: {
+        newsArticleId: newsArticle.id,
+        expirationDays: validateData.duration,
+      },
     });
     return redirect("/")
   }
