@@ -25,7 +25,7 @@ const quoteSchema = z.object({
 });
 
 export const newsArticleSchema = z.object({
-  newsHeading: z.string().min(1, "সংবাদের শিরোনাম আবশ্যক"),
+  newsHeading: z.string().min(6, "সংবাদের শিরোনাম আবশ্যক"),
   newsResource: z.string(),
   newsLocation: z.string().optional(),
   newsCategory: z.enum([ "LATEST",
@@ -45,7 +45,7 @@ export const newsArticleSchema = z.object({
     "LAW_AND_JUSTICE",
     "ENVIRONMENT",
     "SCIENCE",]),
-  newsPicture: z.string().url("বৈধ ছবি লিংক প্রদান করুন"),
+  newsPicture: z.string().url("অনুগ্রহ করে একটি ছবি আপলোড করুন"),
   newsPictureHeading: z.string(),
   newsPictureCredit: z.string(),
   newsDetails: z.string().min(10, "পূর্ণ সংবাদ লিখুন"),

@@ -1,4 +1,5 @@
 import AllArticleList from "@/components/general/AllArticleList";
+import SocialLinks from "@/components/general/socialLink";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import React from "react";
@@ -54,16 +55,16 @@ export default function Home() {
           </div>
         ))}
 
-        <img
-          src="/giffb.gif"
-          alt="gif image"
-          className="w-full h-[100px] rounded-xl"
-        />
+        
         <img
           src="/shoe.gif"
           alt="gif image"
           className="w-full h-[100px] rounded-xl mt-2"
         />
+        <div className="mt-10 text-left flex-col hidden sm:block">
+        <p className="text-sm font-semibold text-primary text-justify">সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল মিডিয়া একাউন্টে ফলো করুন।</p>
+          <SocialLinks />
+        </div>
       </div>
       <div className="order-2 md:order-2 md:col-span-1">
         <div className=" grid grid-cols-1">

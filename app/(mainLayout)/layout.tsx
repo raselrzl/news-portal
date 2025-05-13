@@ -13,7 +13,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       <div className="flex justify-between items-center py-1 bg-primary-foreground">
         <Link
           href="/"
-          className="font-extrabold text-primary hover:border-b-4 border-primary border-r-2  px-2"
+          className="font-extrabold text-primary border-b-4 hover:text-primary/75 border-primary border-r-2  px-2"
         >
           এখন
         </Link>
