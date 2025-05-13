@@ -45,7 +45,7 @@ export default function Home() {
               <img
                 src={item.image}
                 alt="Card Image"
-                className="w-32 h-16 object-cover border-1 rounded-xl"
+                className="w-32 h-16 object-cover border-1"
               />
             </div>
             <div className="col-span-2">
