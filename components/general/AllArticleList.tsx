@@ -27,7 +27,7 @@ async function getData() {
         newsArticleStatus: true,
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       take: 6,
     }),
@@ -47,7 +47,7 @@ async function getData() {
       },
 
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     }),
   ]);
