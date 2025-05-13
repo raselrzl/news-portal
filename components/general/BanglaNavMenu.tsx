@@ -47,7 +47,7 @@ export default function BanglaNavMenu() {
     <div className="flex items-center gap-2 py-2 border-b-1 border-primary light:bg-primary-foreground">
       {canScrollLeft && (
         <ArrowLeft
-          className="text-gray-800 dark:text-white cursor-pointer"
+          className="text-primary dark:text-white cursor-pointer"
           size={24}
         />
       )}
@@ -66,7 +66,7 @@ export default function BanglaNavMenu() {
               className={`px-3 py-2 text-md font-bold transition-colors rounded-4xl ${
                 isActive
                   ? "bg-primary text-primary-foreground"
-                  : "text-gray-800 dark:text-white hover:bg-accent hover:text-accent-foreground"
+                  : "text-accent-foreground dark:text-white hover:bg-accent hover:text-accent-foreground"
               }`}
             >
               {label}
@@ -77,7 +77,7 @@ export default function BanglaNavMenu() {
 
       {canScrollRight && (
         <ArrowRight
-          className="text-gray-800 dark:text-white cursor-pointer"
+          className="text-primary dark:text-white cursor-pointer"
           size={24}
         />
       )}
