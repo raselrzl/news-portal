@@ -30,7 +30,7 @@ async function getData() {
       orderBy: {
         createdAt: "desc",
       },
-      take: 6,
+      take: 7,
     }),
 
     prisma.newsArticle.findFirst({
@@ -58,6 +58,7 @@ async function getData() {
 
 export default async function AllArticleList() {
   const { allArticles, lastFeaturedArticle } = await getData();
+
   return (
     <>
       {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
@@ -97,7 +98,7 @@ export default async function AllArticleList() {
 
        {allArticles && Object.keys(allArticles).length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1">
-          {allArticles.map((article) => (
+          {allArticles.slice(1, 7).map((article) => (
             <div
               key={article.id}
               className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg"
