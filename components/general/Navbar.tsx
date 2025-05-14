@@ -10,9 +10,7 @@ import { User2 } from "lucide-react";
 
 export default async function Navbar() {
   const user = await auth();
-  /*     if (session?.user) {
-      return redirect("/");
-    } */
+
   return (
     <nav className="flex items-center justify-between ">
       <Link href="/" className="flex items-center py-2">
