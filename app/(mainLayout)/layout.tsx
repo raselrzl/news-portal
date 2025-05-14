@@ -8,8 +8,10 @@ import { Toaster } from "sonner";
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="max-w-7xl mx-auto">
-      <Navbar />
-
+       <div className="fixed top-0 left-0 right-0 z-50 px-2 md:px-20 bg-background shadow-md">
+              <Navbar />
+            </div>
+            <div className="mt-16">
       <div className="flex justify-between items-center py-1 bg-primary-foreground">
         <Link
           href="/"
@@ -19,7 +21,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </Link>
         <TodayDate locale="bn-BD" withTime />
       </div>
-      <BanglaNavMenu />
+      <BanglaNavMenu /></div>
       {children}
       <Toaster closeButton richColors />
     </div>

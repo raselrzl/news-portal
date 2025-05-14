@@ -1,6 +1,9 @@
-import AllArticleList, { CrimeHEadings, ShirShoNewsHeadings, SirshoNewsList } from "@/components/general/AllArticleList";
+import AllArticleList, {
+  CrimeHEadings,
+  ShirShoNewsHeadings,
+  SirshoNewsList,
+} from "@/components/general/AllArticleList";
 import React from "react";
-
 
 export default function Home() {
   return (
