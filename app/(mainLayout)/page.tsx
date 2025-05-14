@@ -49,7 +49,7 @@ export default function Home() {
         </div>
         <div className="flex justify-center items-center pt-4 border-t-1">
           <img
-            src="/save1.gif"
+            src="/save1.gif" 
             alt="gif image"
             className="w-[300px] h-[100px] md:h-[150px] rounded-xl"
           />

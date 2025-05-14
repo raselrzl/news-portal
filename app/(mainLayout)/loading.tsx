@@ -83,9 +83,41 @@ export default function HomeSkeleton() {
 
       {/* Main Content Area */}
       <div className="order-1 md:order-3 md:col-span-3 space-y-4">
-        {[...Array(5)].map((_, i) => (
-          <Skeleton key={i} className="w-full h-32 rounded-lg" />
+      <div className="mb-6 max-h-[290px] md:border p-2">
+        <div className="grid grid-cols-5 gap-2">
+          <div className="col-span-5 md:col-span-3 w-full h-[240px] md:h-[270px] overflow-hidden rounded-xl">
+            <Skeleton className="w-full h-full" />
+          </div>
+
+          <div className="col-span-5 md:col-span-2 pl-1 md:pl-4 flex flex-col justify-between">
+            <Skeleton className="h-6 w-3/4 mt-2" />
+            <div className="space-y-2 mt-4">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid Articles Skeleton */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={i}
+            className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg"
+          >
+            <div className="w-auto h-[110px] md:h-[150px] rounded-xl overflow-hidden">
+              <Skeleton className="w-full h-full" />
+            </div>
+
+            <div className="pt-4 space-y-2">
+              <Skeleton className="h-4 w-11/12" />
+              <Skeleton className="h-4 w-3/4" />
+            </div>
+          </div>
         ))}
+      </div>
       </div>
     </div>
   );
