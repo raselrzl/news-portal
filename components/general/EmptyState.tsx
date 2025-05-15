@@ -16,17 +16,21 @@ export function EmptyState({
   title,
 }: iAppProps) {
   return (
-    <div className="px-8 lg:px-30">
-      <div className="flex flex-col flex-1 h-full items-center justify-center rounded-md border border-dashed p-8 text-center animate-in fade-in-50">
-        <div className="flex size-20 items-center justify-center rounded-full bg-primary/10">
-          <Ban className="size-10 text-primary" />
+    <div className="px-4 sm:px-6 lg:px-8 py-8 flex justify-center">
+      <div className="flex flex-col items-center text-center border border-dashed rounded-md p-6 sm:p-8 w-full max-w-md animate-in fade-in-50">
+        <div className="flex size-16 sm:size-20 items-center justify-center rounded-full bg-primary/10">
+          <Ban className="size-8 sm:size-10 text-primary" />
         </div>
-        <h2 className="mt-6 text-xl font-semibold">{title}</h2>
-        <p className="mb-8 mt-2 text-center text-sm leading-tight text-muted-foreground max-w-sm mx-auto">
+
+        <h2 className="mt-4 sm:mt-6 text-lg sm:text-xl font-semibold">
+          {title}
+        </h2>
+
+        <p className="mt-2 mb-6 sm:mb-8 text-sm sm:text-base text-muted-foreground max-w-xs sm:max-w-sm mx-auto leading-tight">
           {description}
         </p>
 
-        <Link href={href} className={buttonVariants()}>
+        <Link href={href} className={buttonVariants({ className: "flex items-center gap-2" })}>
           <PlusCircle className="size-4" /> {buttonText}
         </Link>
       </div>
