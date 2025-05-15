@@ -56,19 +56,19 @@ export function UserDropdown({ email, name, image }: iAppProps) {
           <DropdownMenuItem asChild>
             <Link href="/saved">
               <Heart size={16} strokeWidth={2} className="opacity-60" />
-              <span>Saved</span>
+              <span>সংরক্ষিত সংবাদ</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/post-an-article">
               <BookPlus size={16} strokeWidth={2} className="opacity-60" />
-              Post an Article
+              একটি সংবাদ লিখুন
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/my-article">
               <Layers2 size={16} strokeWidth={2} className="opacity-60" />
-              <span>My Article List</span>
+              <span>আমার প্রকাশিত সংবাদের তালিকা</span>
             </Link>
           </DropdownMenuItem>
           {/*       {ime(email) && (
@@ -92,7 +92,7 @@ export function UserDropdown({ email, name, image }: iAppProps) {
             >
               <button className="flex w-full items-center justify-center gap-2">
                 <LogOut size={16} strokeWidth={2} className="opacity-60" />
-                <span>Logout</span>
+                <span> লগআউট </span>
               </button>
             </form>
           </DropdownMenuItem>
