@@ -212,11 +212,8 @@ export default async function AllArticleList() {
       {allArticles && Object.keys(allArticles).length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1">
           {allArticles.slice(1, 7).map((article) => (
-            <Link href={`/newsDetails/${article.id}`} 
-            key={article.id}>
-              <div
-                className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg"
-              >
+            <Link href={`/newsDetails/${article.id}`} key={article.id}>
+              <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
                 <div className="w-auto h-[110px] md:h-[150px] border-1 rounded-xl overflow-hidden">
                   <Image
                     src={article.newsPicture}
@@ -255,24 +252,33 @@ export async function SirshoNewsList() {
   return (
     <>
       <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
-        {latestNews.map((item) => (
-          <Link key={item.id} href={`/newsDetails/${item.id}`}>
-            <div className="grid grid-cols-3 border-b-1 py-2">
-              <div className="col-span-1">
-                <img
-                  src={item.newsPicture}
-                  alt="Card Image"
-                  className="w-32 h-16 object-cover border-1"
-                />
+        {latestNews && latestNews.length > 0 ? (
+          latestNews.map((item) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="grid grid-cols-3 border-b py-2">
+                <div className="col-span-1">
+                  <img
+                    src={item.newsPicture}
+                    alt="Card Image"
+                    className="w-32 h-16 object-cover border"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <h3 className="text-lg font-semibold ml-2">
+                    {item.newsHeading}
+                  </h3>
+                </div>
               </div>
-              <div className="col-span-2">
-                <h3 className="text-lg font-semibold ml-2">
-                  {item.newsHeading}
-                </h3>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+        )}
 
         <img
           src="/shoe.gif"
@@ -331,11 +337,8 @@ export async function ShirShoNewsHeadings() {
       {Politics && Object.keys(Politics).length > 0 ? (
         <div className="rounded-xl">
           {Politics.map((article) => (
-            <Link href={`/newsDetails/${article.id}`} 
-            key={article.id}>
-              <div
-                className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2"
-              >
+            <Link href={`/newsDetails/${article.id}`} key={article.id}>
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2">
                 <div className="p-1">
                   <h2 className="text-lg text-primary/70 font-semibold line-clamp-1">
                     {article.newsHeading}
