@@ -25,7 +25,7 @@ const TodayDate: React.FC<TodayDateProps> = ({ locale = 'en-US', withTime = fals
 
     // Optional: Replace AM/PM with Bangla equivalents manually
     if (locale === 'bn-BD') {
-      timeString = timeString.replace('AM', 'এ:এম').replace('PM', 'পি:এম');
+      timeString = timeString.replace('AM', 'এএম').replace('PM', 'পিএম');
     }
   }
 
