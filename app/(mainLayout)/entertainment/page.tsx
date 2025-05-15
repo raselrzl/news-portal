@@ -1,7 +1,12 @@
+import AllNewsArticleList from "@/app/(mainLayout)/latest/AllNewsArticleList";
+import AllEntertainmentArticles from "./AllEntertainmentArticles";
+
 export default function Entertainment() {
     return (
-      <div className="p-10">
-        entertaiment
+      <div className="grid grid-cols-3 mt-10">
+        <div className="col-span-3 md:col-span-1"><AllEntertainmentArticles /></div>
+        <div className="col-span-3 md:col-span-1">three</div>
+        <div className="col-span-3 md:col-span-1">one</div>
       </div>
     );
   }

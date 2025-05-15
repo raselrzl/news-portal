@@ -1,11 +1,11 @@
 import { prisma } from "@/app/utils/db";
-import { EmptyState } from "./EmptyState";
-import { NewsArticleCard } from "./NewsArticleCard";
+import { EmptyState } from "../../../components/general/EmptyState";
+import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
 
-async function getAllnewsArticles() {
+async function getAllHealthArticles() {
   const [data] = await Promise.all([
     prisma.newsArticle.findMany({
-      where: { newsArticleStatus: "ACTIVE" },
+      where: { newsCategory: "HEALTH" },
       select: {
         id: true,
         createdAt: true,
@@ -38,8 +38,8 @@ async function getAllnewsArticles() {
   };
 }
 
-export default async function AllNewsArticleList() {
-  const { articles } = await getAllnewsArticles();
+export default async function AllHealthArticles() {
+  const { articles } = await getAllHealthArticles();
 
   return (
     <>
