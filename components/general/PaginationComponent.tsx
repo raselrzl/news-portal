@@ -1,19 +1,27 @@
-"use client";
-
+"use client"
 import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationComponentProps {
   totalPages: number;
   currentPage: number;
+}
+
+// ✅ Helper to convert English numbers to Bangla
+function convertToBengaliNumber(num: number): string {
+  const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return num
+    .toString()
+    .split("")
+    .map((digit) => bengaliDigits[parseInt(digit, 10)])
+    .join("");
 }
 
 export function PaginationComponent({
@@ -41,21 +49,21 @@ export function PaginationComponent({
         for (let i = 1; i <= 3; i++) {
           items.push(i);
         }
-        items.push(null); // Ellipsis
+        items.push(null);
         items.push(totalPages);
       } else if (currentPage >= totalPages - 2) {
         items.push(1);
-        items.push(null); // Ellipsis
+        items.push(null);
         for (let i = totalPages - 2; i <= totalPages; i++) {
           items.push(i);
         }
       } else {
         items.push(1);
-        items.push(null); // Ellipsis
+        items.push(null);
         items.push(currentPage - 1);
         items.push(currentPage);
         items.push(currentPage + 1);
-        items.push(null); // Ellipsis
+        items.push(null);
         items.push(totalPages);
       }
     }
@@ -64,10 +72,10 @@ export function PaginationComponent({
   };
 
   return (
-    <Pagination>
+    <Pagination className="mt-4">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious
+          <Link
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -76,7 +84,9 @@ export function PaginationComponent({
             className={
               currentPage === 1 ? "pointer-events-none opacity-50" : ""
             }
-          />
+          >
+            আগের
+          </Link>
         </PaginationItem>
 
         {generatePaginationItems().map((page, index) =>
@@ -94,14 +104,14 @@ export function PaginationComponent({
                 }}
                 isActive={page === currentPage}
               >
-                {page}
+                {convertToBengaliNumber(page)}
               </PaginationLink>
             </PaginationItem>
           )
         )}
 
         <PaginationItem>
-          <PaginationNext
+          <Link
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -110,7 +120,9 @@ export function PaginationComponent({
             className={
               currentPage === totalPages ? "pointer-events-none opacity-50" : ""
             }
-          />
+          >
+            পরের
+          </Link>
         </PaginationItem>
       </PaginationContent>
     </Pagination>

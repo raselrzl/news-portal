@@ -5,7 +5,7 @@ import { PaginationComponent } from "@/components/general/PaginationComponent";
 
 async function getAllnewsArticles(
   page:number=1,
-  pageSize:number=6,
+  pageSize:number=8,
 ) {
   const skip=(page-1)*pageSize
   const [data, totalCount] = await Promise.all([
