@@ -1,4 +1,4 @@
-import { prisma } from "@/app/utils/db";
+/* import { prisma } from "@/app/utils/db";
 import Image from "next/image";
 import { EmptyState } from "./EmptyState";
 import SocialLinks from "./socialLink";
@@ -273,11 +273,11 @@ export async function SirshoNewsList() {
           ))
         ) : (
           <EmptyState
-          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-          href="/"
-        />
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+            href="/"
+          />
         )}
 
         <img
@@ -359,3 +359,4 @@ export async function ShirShoNewsHeadings() {
     </>
   );
 }
+ */
