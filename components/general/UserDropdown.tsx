@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { signOut } from "@/app/utils/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ime } from "@/app/utils/ime";
 /* import { ime } from "@/app/utils/ime"; */
 
 interface iAppProps {
@@ -71,14 +72,14 @@ export function UserDropdown({ email, name, image }: iAppProps) {
               <span>আমার প্রকাশিত সংবাদের তালিকা</span>
             </Link>
           </DropdownMenuItem>
-          {/*       {ime(email) && (
+                {ime(email) && (
               <DropdownMenuItem asChild>
-                <Link href="/user">
+                <Link href="/post-an-article/alaarticles">
                   <Lock size={16} strokeWidth={2} className="opacity-60" />
-                  <span>Users</span>
+                  <span>AllArticleList</span>
                 </Link>
               </DropdownMenuItem>
-            )} */}
+            )}
 
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="w-full">

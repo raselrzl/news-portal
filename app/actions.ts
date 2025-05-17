@@ -144,3 +144,32 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
     redirect("/post-an-article/alaarticles"); 
     
   }
+
+
+
+
+
+
+
+  export async function deleteArticleById(articleId: string) {
+    try {
+      // Step 1: Delete associated quotes first
+      await prisma.quote.deleteMany({
+        where: {
+          articleId: articleId,  // Find all quotes related to the article
+        },
+      });
+  
+      // Step 2: Now delete the article itself
+      await prisma.newsArticle.delete({
+        where: {
+          id: articleId,  // Delete the article by its ID
+        },
+      });
+  
+      return { success: true };  // Return success after deletion
+    } catch (error) {
+      console.error('Error deleting article:', error);
+      throw new Error('Failed to delete article');
+    }
+  }

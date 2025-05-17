@@ -142,8 +142,8 @@ export default async function AllNewsArticleList() {
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
-                            <Link href={`/news/${article.id}/delete`}>
-                              <XCircle className="w-4 h-4 mr-2" />
+                          <Link href={`/post-an-article/alaarticles/${article.id}/deletearticle`}>
+                              <XCircle className="w-4 h-4 mr-2 text-red-600" />
                               Delete
                             </Link>
                           </DropdownMenuItem>
