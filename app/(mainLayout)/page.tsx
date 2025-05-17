@@ -363,8 +363,7 @@ export default async function Home() {
 
                   <div className="pt-4">
                     <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed">
-                      {article.newsPictureHeading}নিশুতি রাতের নিস্তব্ধতায় হঠাৎ
-                      এক পশুপাখির ডাক শোনা গেল।
+                      {article.newsHeading}
                     </h2>
                   </div>
                 </div>
