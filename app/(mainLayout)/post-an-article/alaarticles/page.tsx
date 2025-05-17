@@ -135,7 +135,7 @@ export default async function AllNewsArticleList() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuItem asChild>
-                            <Link href={`/news/${article.id}/edit`}>
+                            <Link href={`/post-an-article/alaarticles/${article.id}/editarticle`}>
                               <PenBoxIcon className="w-4 h-4 mr-2" />
                               Edit
                             </Link>
@@ -146,7 +146,7 @@ export default async function AllNewsArticleList() {
                               href={`/post-an-article/alaarticles/${article.id}/deletearticle`}
                             >
                               <XCircle className="w-4 h-4 mr-2 text-red-600" />
-                              Delete
+                              ধ্বংস করুন
                             </Link>
                           </DropdownMenuItem>
                           {article.newsArticleStatus === "ACTIVE" ? (
