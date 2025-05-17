@@ -142,21 +142,29 @@ export default async function AllNewsArticleList() {
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
-                          <Link href={`/post-an-article/alaarticles/${article.id}/deletearticle`}>
+                            <Link
+                              href={`/post-an-article/alaarticles/${article.id}/deletearticle`}
+                            >
                               <XCircle className="w-4 h-4 mr-2 text-red-600" />
                               Delete
                             </Link>
                           </DropdownMenuItem>
                           {article.newsArticleStatus === "ACTIVE" ? (
-                            <DropdownMenuItem disabled>
-                              <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                              Published
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/post-an-article/alaarticles/${article.id}/updatestatustodraft`}
+                              >
+                                <CheckCircle className="w-4 h-4 mr-2 text-yellow-500" />
+                                ড্রাফট করুন
+                              </Link>
                             </DropdownMenuItem>
                           ) : (
                             <DropdownMenuItem asChild>
-                              <Link href={`/post-an-article/alaarticles/${article.id}/updatestatus`}>
-                                <CheckCircle className="w-4 h-4 mr-2" />
-                                Publish
+                              <Link
+                                href={`/post-an-article/alaarticles/${article.id}/updatestatustoactive`}
+                              >
+                                <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                                প্রকাশ করুন
                               </Link>
                             </DropdownMenuItem>
                           )}

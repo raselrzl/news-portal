@@ -146,6 +146,21 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
   }
 
 
+  export async function updateArticleStatusToDraft(articleId: string) {
+    const user = await requireUser();
+  
+    const article = await prisma.newsArticle.update({
+      where: {
+        id: articleId,
+      },
+      data: {
+        newsArticleStatus: "DRAFT",
+      },
+    });
+    redirect("/post-an-article/alaarticles"); 
+  }
+
+
 
 
 
@@ -153,21 +168,18 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
 
   export async function deleteArticleById(articleId: string) {
     try {
-      // Step 1: Delete associated quotes first
       await prisma.quote.deleteMany({
         where: {
-          articleId: articleId,  // Find all quotes related to the article
+          articleId: articleId, 
         },
       });
-  
-      // Step 2: Now delete the article itself
       await prisma.newsArticle.delete({
         where: {
-          id: articleId,  // Delete the article by its ID
+          id: articleId, 
         },
       });
   
-      return { success: true };  // Return success after deletion
+      return { success: true }; 
     } catch (error) {
       console.error('Error deleting article:', error);
       throw new Error('Failed to delete article');

@@ -76,7 +76,7 @@ export function UserDropdown({ email, name, image }: iAppProps) {
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
                   <Lock size={16} strokeWidth={2} className="opacity-60" />
-                  <span>AllArticleList</span>
+                  <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
             )}
