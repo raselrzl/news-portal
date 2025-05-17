@@ -129,3 +129,18 @@ export async function createNewsReporter(data: z.infer<typeof newsReporterSchema
     
   }
   
+  export async function updateArticleStatusToActive(articleId: string) {
+    const user = await requireUser();
+  
+    const article = await prisma.newsArticle.update({
+      where: {
+        id: articleId,
+      },
+      data: {
+        newsArticleStatus: "ACTIVE",
+      },
+    });
+  
+    redirect("/post-an-article/alaarticles"); 
+    
+  }
