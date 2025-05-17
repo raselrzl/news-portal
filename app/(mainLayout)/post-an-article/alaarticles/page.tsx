@@ -137,7 +137,7 @@ export default async function AllNewsArticleList() {
                           <DropdownMenuItem asChild>
                             <Link href={`/post-an-article/alaarticles/${article.id}/editarticle`}>
                               <PenBoxIcon className="w-4 h-4 mr-2" />
-                              Edit
+                              এডিট করুন
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
