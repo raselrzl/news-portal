@@ -29,6 +29,9 @@ export default function ConfirmDeletePage({ params }: { params: Promise<{ articl
         <p className="mt-2 text-sm text-accent-foreground/70">এই কাজটি একবার করলে আর ফিরিয়ে আনা যাবে না।</p>
 
         <div className="mt-6 flex justify-center space-x-4">
+        <Button variant="outline" onClick={() => router.back()} className="cursor-pointer">
+            আগের পাতায় ফিরে যান
+          </Button>
           <Button variant="link" onClick={handleCancel} className='cursor-pointer'>বাতিল করুন</Button>
           <Button variant="destructive" onClick={handleConfirm} className='cursor-pointer'>হ্যাঁ, মুছে ফেলুন</Button>
         </div>
