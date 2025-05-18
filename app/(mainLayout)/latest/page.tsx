@@ -17,7 +17,7 @@ export default async function Latest({searchParams}:SearchParamsProps) {
 
   return (
     <div className="grid grid-cols-3 mt-10">
-      <div className="col-span-3 md:col-span-1">
+      <div className="col-span-3 md:col-span-2">
         
 
         <Suspense key={currentPage} fallback={<LoadingSpinner />}>
@@ -25,8 +25,10 @@ export default async function Latest({searchParams}:SearchParamsProps) {
           </Suspense>
         
       </div>
-      <div className="col-span-3 md:col-span-1">three</div>
-      <div className="col-span-3 md:col-span-1">one</div>
+      <div className="col-span-3 md:col-span-1">
+
+          
+      </div>
     </div>
   );
 }
