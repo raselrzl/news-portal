@@ -48,12 +48,7 @@ export function UserDropdown({ email, name, image }: iAppProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link href="/post-an-article/allusers">
-              <Heart size={16} strokeWidth={2} className="opacity-60" />
-              <span>অ্যাপের সকল ব্যবহারকারী</span>
-            </Link>
-          </DropdownMenuItem>
+         
           <DropdownMenuItem asChild>
             <Link href="/post-an-article">
               <BookPlus size={16} strokeWidth={2} className="opacity-60" />
@@ -66,13 +61,19 @@ export function UserDropdown({ email, name, image }: iAppProps) {
               <span>আমার প্রকাশিত সংবাদের তালিকা</span>
             </Link>
           </DropdownMenuItem>
-                {ime(email) && (
+                {ime(email) && (<>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
                   <Lock size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
+               <DropdownMenuItem asChild>
+               <Link href="/post-an-article/allusers">
+                 <Heart size={16} strokeWidth={2} className="opacity-60" />
+                 <span>অ্যাপের সকল ব্যবহারকারী</span>
+               </Link>
+             </DropdownMenuItem></>
             )}
 
           <DropdownMenuSeparator />
