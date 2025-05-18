@@ -1,9 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { use, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { use } from "react";
 import { updateUserApprovalStatus } from "@/app/actions";
+import { Loader2 } from "lucide-react";
 
 export default function ConfirmApprovalPage({
   params,
@@ -12,13 +13,17 @@ export default function ConfirmApprovalPage({
 }) {
   const router = useRouter();
   const { userId } = use(params);
+  const [loadingStatus, setLoadingStatus] = useState<null | "APPROVED" | "REJECT">(null);
 
-  const handleConfirm = async (status: 'APPROVED' | 'REJECT') => {
+  const handleConfirm = async (status: "APPROVED" | "REJECT") => {
     try {
+      setLoadingStatus(status);
       await updateUserApprovalStatus(userId, status);
-      router.push("/post-an-article/allusers"); 
+      router.push("/post-an-article/allusers");
     } catch (error) {
       console.error("Error updating user approval status:", error);
+    } finally {
+      setLoadingStatus(null);
     }
   };
 
@@ -33,30 +38,46 @@ export default function ConfirmApprovalPage({
           আপনি কি নিশ্চিতভাবে এই ব্যবহারকারীকে অনুমোদন করতে চান?
         </h2>
         <p className="mt-2 text-sm text-gray-600">
-          এই পদক্ষেপের ফলে ব্যবহারকারীর অনুমোদন স্ট্যাটাস <strong>"অনুমোদিত"</strong> এ
-          পরিবর্তিত হবে।
+          এই পদক্ষেপের ফলে ব্যবহারকারীর অনুমোদন স্ট্যাটাস <strong>"অনুমোদিত"</strong> এ পরিবর্তিত হবে।
         </p>
 
         <div className="mt-6 flex justify-center gap-4 flex-wrap">
-          <Button variant="outline" onClick={() => router.back()} className="cursor-pointer">
+          <Button variant="outline" onClick={() => router.back()}>
             আগের পাতায় ফিরে যান
           </Button>
-          <Button variant="link" onClick={handleCancel} className="cursor-pointer">
-          কিছু করতে চাই না
+
+          <Button variant="link" onClick={handleCancel}>
+            কিছু করতে চাই না
           </Button>
+
           <Button
             variant="secondary"
-            onClick={() => handleConfirm('APPROVED')}
-            className="cursor-pointer"
+            onClick={() => handleConfirm("APPROVED")}
+            disabled={loadingStatus === "APPROVED"}
           >
-            সাংবাদিকতা অনুমোদন করুন
+            {loadingStatus === "APPROVED" ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                অনুমোদন হচ্ছে...
+              </>
+            ) : (
+              "সাংবাদিকতা অনুমোদন করুন"
+            )}
           </Button>
+
           <Button
             variant="secondary"
-            onClick={() => handleConfirm('REJECT')}
-            className="cursor-pointer"
+            onClick={() => handleConfirm("REJECT")}
+            disabled={loadingStatus === "REJECT"}
           >
-            সাংবাদিকতা প্রত্যাখ্যান করুন
+            {loadingStatus === "REJECT" ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                প্রত্যাখান হচ্ছে...
+              </>
+            ) : (
+              "সাংবাদিকতা প্রত্যাখ্যান করুন"
+            )}
           </Button>
         </div>
       </div>
