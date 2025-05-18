@@ -1,6 +1,6 @@
 
 import React from "react";
-import { requireUser } from "@/app/utils/requireUser";
+import { requireNewsReporter, requireUser } from "@/app/utils/requireUser";
 import { CreateNewsArticleForm } from "./postArticleForm";
 import { prisma } from "@/app/utils/db";
 import { redirect } from "next/navigation";
@@ -28,6 +28,7 @@ async function getNewsReporterInfo(userId: string) {
 }
 export default async function PostAnArticle() {
   const session = await requireUser();
+  const approvednewsreporter=await requireNewsReporter()
   const data = await getNewsReporterInfo(session.id as string);
   console.log("Reportername",data.reporterName)
   return (

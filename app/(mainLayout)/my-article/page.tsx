@@ -47,7 +47,7 @@ async function getNewses(userId: string) {
 export default async function MyArticle() {
   const session = await requireUser();
   const data = await getNewses(session.id as string);
-  const newsreporter = await requireNewsReporter();
+  const approvednewsreporter = await requireNewsReporter();
 
   return (
     <>
