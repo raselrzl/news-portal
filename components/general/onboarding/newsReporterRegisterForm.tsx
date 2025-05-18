@@ -58,7 +58,7 @@ export default function NewsReporterRegisterForm() {
     }
   }
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 my-1 py-2 border-1">
+    <div className="w-full max-w-4xl mx-auto px-4 my-14 pb-8 border-1">
       <div className="flex justify-center mb-6">
         <Image src="/jagrata3.png" alt="logo image" width={150} height={50} />
       </div>

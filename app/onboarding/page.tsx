@@ -21,7 +21,7 @@ export default async function OnboardingPage() {
 
   await checkIfOnboardingCompleted(session.id as string);
   return (
-    <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+    <div className="flex flex-col items-center justify-center overflow-hidden my-20">
       <OnboardingForm />
     </div>
   );
