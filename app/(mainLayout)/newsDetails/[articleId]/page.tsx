@@ -63,16 +63,16 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           <div className="flex flex-row font-bold mb-1">
             <div className="flex flex-row pl-4">
               {" "}
-              <Notebook className="size-5 " />
+              <Notebook className="size-4 pt-1" />
               <p className=" font-bold">পূর্ণ খবর</p>
             </div>
             <div className="flex flex-row pl-2">
               {" "}
-              <User2 className="pb-1" />
-              <p className=" font-bold "> অনলাইন প্রতিবেদক</p>
+              <User2 className="size-4 pt-1" />
+              <p className="font-bold"> অনলাইন প্রতিবেদক</p>
             </div>
             <div className="flex flex-row pl-2">
-              <Clock className="size-6 pb-1" />
+              <Clock className="size-4 pt-1" />
               <p className=" font-bold ">
               {data.createdAt
                 ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
