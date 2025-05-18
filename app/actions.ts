@@ -212,3 +212,61 @@ export async function updateNewsArticle(data: any, articleId: string) {
 
   return redirect("/post-an-article/alaarticles");
 }
+
+
+
+export async function deleteUserById(userId: string) {
+  try {
+    await prisma.session.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    await prisma.account.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    await prisma.newsReporter.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+    await prisma.advertiser.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+  }
+  return redirect("/post-an-article/alaarticles");
+}
+
+
+
+export async function updateUserApprovalStatus(userId: string, status: 'PENDING' | 'APPROVED' | 'REJECT') {
+  try {
+    // Update the approval status of the user
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { approvalStatus: status },
+    });
+
+    return { success: true, updatedUser };
+  } catch (error) {
+    console.error('Error updating user approval status:', error);
+    throw new Error('Failed to update approval status');
+  }
+}
+

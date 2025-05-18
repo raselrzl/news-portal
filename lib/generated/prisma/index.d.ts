@@ -67,6 +67,15 @@ export namespace $Enums {
 export type UserType = (typeof UserType)[keyof typeof UserType]
 
 
+export const ApprovalStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECT: 'REJECT'
+};
+
+export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus]
+
+
 export const newsArticleStatus: {
   ACTIVE: 'ACTIVE',
   DRAFT: 'DRAFT',
@@ -103,6 +112,10 @@ export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]
 export type UserType = $Enums.UserType
 
 export const UserType: typeof $Enums.UserType
+
+export type ApprovalStatus = $Enums.ApprovalStatus
+
+export const ApprovalStatus: typeof $Enums.ApprovalStatus
 
 export type newsArticleStatus = $Enums.newsArticleStatus
 
@@ -374,8 +387,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -1682,6 +1695,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     userType: $Enums.UserType | null
+    approvalStatus: $Enums.ApprovalStatus | null
     onboardingCompleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1694,6 +1708,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     userType: $Enums.UserType | null
+    approvalStatus: $Enums.ApprovalStatus | null
     onboardingCompleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1706,6 +1721,7 @@ export namespace Prisma {
     emailVerified: number
     image: number
     userType: number
+    approvalStatus: number
     onboardingCompleted: number
     createdAt: number
     updatedAt: number
@@ -1720,6 +1736,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     userType?: true
+    approvalStatus?: true
     onboardingCompleted?: true
     createdAt?: true
     updatedAt?: true
@@ -1732,6 +1749,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     userType?: true
+    approvalStatus?: true
     onboardingCompleted?: true
     createdAt?: true
     updatedAt?: true
@@ -1744,6 +1762,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     userType?: true
+    approvalStatus?: true
     onboardingCompleted?: true
     createdAt?: true
     updatedAt?: true
@@ -1829,6 +1848,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     userType: $Enums.UserType | null
+    approvalStatus: $Enums.ApprovalStatus | null
     onboardingCompleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -1858,6 +1878,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     userType?: boolean
+    approvalStatus?: boolean
     onboardingCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1875,6 +1896,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     userType?: boolean
+    approvalStatus?: boolean
     onboardingCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1887,6 +1909,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     userType?: boolean
+    approvalStatus?: boolean
     onboardingCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -1899,12 +1922,13 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     userType?: boolean
+    approvalStatus?: boolean
     onboardingCompleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "userType" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "userType" | "approvalStatus" | "onboardingCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -1930,6 +1954,7 @@ export namespace Prisma {
       emailVerified: Date | null
       image: string | null
       userType: $Enums.UserType | null
+      approvalStatus: $Enums.ApprovalStatus | null
       onboardingCompleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -2366,6 +2391,7 @@ export namespace Prisma {
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
     readonly userType: FieldRef<"User", 'UserType'>
+    readonly approvalStatus: FieldRef<"User", 'ApprovalStatus'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -10717,6 +10743,7 @@ export namespace Prisma {
     emailVerified: 'emailVerified',
     image: 'image',
     userType: 'userType',
+    approvalStatus: 'approvalStatus',
     onboardingCompleted: 'onboardingCompleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -10902,6 +10929,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ApprovalStatus'
+   */
+  export type EnumApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ApprovalStatus[]'
+   */
+  export type ListEnumApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -10977,6 +11018,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     userType?: EnumUserTypeNullableFilter<"User"> | $Enums.UserType | null
+    approvalStatus?: EnumApprovalStatusNullableFilter<"User"> | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -10993,6 +11035,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     userType?: SortOrderInput | SortOrder
+    approvalStatus?: SortOrderInput | SortOrder
     onboardingCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11012,6 +11055,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     userType?: EnumUserTypeNullableFilter<"User"> | $Enums.UserType | null
+    approvalStatus?: EnumApprovalStatusNullableFilter<"User"> | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -11028,6 +11072,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     userType?: SortOrderInput | SortOrder
+    approvalStatus?: SortOrderInput | SortOrder
     onboardingCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11046,6 +11091,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     userType?: EnumUserTypeNullableWithAggregatesFilter<"User"> | $Enums.UserType | null
+    approvalStatus?: EnumApprovalStatusNullableWithAggregatesFilter<"User"> | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -11592,6 +11638,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11608,6 +11655,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11624,6 +11672,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11640,6 +11689,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11656,6 +11706,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11668,6 +11719,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11680,6 +11732,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12323,6 +12376,13 @@ export namespace Prisma {
     not?: NestedEnumUserTypeNullableFilter<$PrismaModel> | $Enums.UserType | null
   }
 
+  export type EnumApprovalStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApprovalStatus | EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -12381,6 +12441,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     userType?: SortOrder
+    approvalStatus?: SortOrder
     onboardingCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12393,6 +12454,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     userType?: SortOrder
+    approvalStatus?: SortOrder
     onboardingCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12405,6 +12467,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     userType?: SortOrder
+    approvalStatus?: SortOrder
     onboardingCompleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12468,6 +12531,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumUserTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumUserTypeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApprovalStatus | EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumApprovalStatusNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -12934,6 +13007,10 @@ export namespace Prisma {
     set?: $Enums.UserType | null
   }
 
+  export type NullableEnumApprovalStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ApprovalStatus | null
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -13268,6 +13345,13 @@ export namespace Prisma {
     not?: NestedEnumUserTypeNullableFilter<$PrismaModel> | $Enums.UserType | null
   }
 
+  export type NestedEnumApprovalStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApprovalStatus | EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -13362,6 +13446,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumUserTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumUserTypeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ApprovalStatus | EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ApprovalStatus[] | ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumApprovalStatusNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13766,6 +13860,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13781,6 +13876,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13849,6 +13945,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13864,6 +13961,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13879,6 +13977,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13894,6 +13993,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13925,6 +14025,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13940,6 +14041,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14166,6 +14268,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14181,6 +14284,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14212,6 +14316,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14227,6 +14332,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14242,6 +14348,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14257,6 +14364,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     userType?: $Enums.UserType | null
+    approvalStatus?: $Enums.ApprovalStatus | null
     onboardingCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14288,6 +14396,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14303,6 +14412,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     userType?: NullableEnumUserTypeFieldUpdateOperationsInput | $Enums.UserType | null
+    approvalStatus?: NullableEnumApprovalStatusFieldUpdateOperationsInput | $Enums.ApprovalStatus | null
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

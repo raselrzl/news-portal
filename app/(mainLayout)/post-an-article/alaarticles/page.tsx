@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CheckCircle, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
+import { requireSuperAdmin } from "@/app/utils/requireUser";
 
 async function getAllnewsArticles() {
   const data = await prisma.newsArticle.findMany({
@@ -66,6 +67,7 @@ async function getAllnewsArticles() {
 
 export default async function AllNewsArticleList() {
   const articles = await getAllnewsArticles();
+  const superadmin=await requireSuperAdmin()
 
   return (
     <>
