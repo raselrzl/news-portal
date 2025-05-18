@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { prisma } from "./utils/db";
-import { requireUser } from "./utils/requireUser";
+import { requireSuperAdmin, requireUser } from "./utils/requireUser";
 import {
   AdvertiserSchema,
   newsArticleSchema,
@@ -131,8 +131,14 @@ export async function createAnArticle(data: z.infer<typeof newsArticleSchema>) {
 }
 
 export async function updateArticleStatusToActive(articleId: string) {
+  
   const user = await requireUser();
 
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
   const article = await prisma.newsArticle.update({
     where: {
       id: articleId,
@@ -148,6 +154,11 @@ export async function updateArticleStatusToActive(articleId: string) {
 export async function updateArticleStatusToDraft(articleId: string) {
   const user = await requireUser();
 
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
   const article = await prisma.newsArticle.update({
     where: {
       id: articleId,
@@ -160,6 +171,14 @@ export async function updateArticleStatusToDraft(articleId: string) {
 }
 
 export async function deleteArticleById(articleId: string) {
+  const user = await requireUser();
+
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
   try {
     await prisma.quote.deleteMany({
       where: {
@@ -216,6 +235,15 @@ export async function updateNewsArticle(data: any, articleId: string) {
 
 
 export async function deleteUserById(userId: string) {
+  const superuser = await requireSuperAdmin();
+  const user = await requireUser();
+
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
   try {
     await prisma.session.deleteMany({
       where: {
@@ -256,6 +284,15 @@ export async function deleteUserById(userId: string) {
 
 
 export async function updateUserApprovalStatus(userId: string, status: 'PENDING' | 'APPROVED' | 'REJECT') {
+
+  const superuser = await requireSuperAdmin();
+  const user = await requireUser();
+
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
   try {
     // Update the approval status of the user
     const updatedUser = await prisma.user.update({
