@@ -34,7 +34,7 @@ export async function requireNewsReporter() {
     user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED";
 
   if (!user || (!isSuperAdmin && !isApprovedNewsReporter)) {
-    return redirect("/");
+    return redirect("/restricted");
   }
 
   return session.user;
@@ -55,7 +55,7 @@ export async function requireSuperAdmin() {
     select: { userType: true },
   });
   if (!user || user.userType !== "SUPERADMIN") {
-    return redirect("/");
+    return redirect("/restricted");
   }
   return session.user;
 }
