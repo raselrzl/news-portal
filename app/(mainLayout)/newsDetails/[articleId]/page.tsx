@@ -1,6 +1,14 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
-import { Clock, LocateIcon, Notebook, SquarePlay, User, User2 } from "lucide-react";
+import {
+  Clock,
+  LocateIcon,
+  Notebook,
+  SquarePlay,
+  User,
+  User2,
+} from "lucide-react";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getNewsArticle(articleId: string) {
@@ -53,10 +61,18 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
     );
 
   return (
-    <div className="grid grid-cols-5 gap-4 mt-10 items-center">
-      <div className="col-span-5 md:col-span-4 grid grid-cols-4 gap-4">
-        <div className="col-span-4 md:col-span-1 flex items-center justify-center">
-          <p className="text-center">Left sidebar</p>
+    <div className="grid grid-cols-5 gap-4 my-10 items-center">
+      <div className="col-span-5 md:col-span-4 grid grid-cols-4 gap-2">
+        <div className="col-span-4 md:col-span-1 flex">
+          <div className="relative w-full h-[100px] md:h-[200px] px-10">
+            <Image
+              src="/gif111.gif"
+              alt="image"
+              fill
+              className="object-cover" // or "object-cover" if you want it to fill the box
+              priority // Optional: loads the image faster
+            />
+          </div>
         </div>
         <div className="col-span-4 md:col-span-3">
           <h1 className="text-3xl font-bold mb-4 pl-4">{data?.newsHeading}</h1>
@@ -64,23 +80,23 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             <div className="flex flex-row pl-4">
               {" "}
               <Notebook className="size-4 pt-1" />
-              <p className=" font-bold">পূর্ণ খবর</p>
+              <p className="">পূর্ণ খবর</p>
             </div>
             <div className="flex flex-row pl-2">
               {" "}
               <User2 className="size-4 pt-1" />
-              <p className="font-bold"> অনলাইন প্রতিবেদক</p>
+              <p className="">জাগ্রত প্রতিবেদক</p>
             </div>
             <div className="flex flex-row pl-2">
               <Clock className="size-4 pt-1" />
               <p className=" font-bold ">
-              {data.createdAt
-                ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })
-                : "তারিখ পাওয়া যায়নি"}
+                {data.createdAt
+                  ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : "তারিখ পাওয়া যায়নি"}
               </p>
             </div>
           </div>
@@ -99,10 +115,9 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             <div className="whitespace-pre-line text-md mg:text-lg">
               <div className="flex flex-row ml-6">
                 <SquarePlay />
-                <h1 className="text-xl font-bold pl-2 mr-4">
-                  পূর্ণ বিবরণ 
-                </h1>
-                <LocateIcon /><p className=" text-xl font-bold">{data?.newsLocation}</p>
+                <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
+                <LocateIcon />
+                <p className=" text-xl font-bold">{data?.newsLocation}</p>
               </div>
               <p className="p-6 text-justify">{data?.newsDetails}</p>
             </div>
@@ -131,8 +146,19 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           )}
         </div>
       </div>
-      <div className="col-span-5 md:col-span-1 flex justify-center items-center">
-        <p className="text-center">Right side bar</p>
+      <div className="col-span-5 md:col-span-1 grid-cols-1">
+        <div className="w-[350px] h-[100px] md:w-full md:h-[200px] flex items-start justify-center rounded-2xl mx-auto">
+          {" "}
+          <Image
+            src="/gif111.gif"
+            alt="image"
+            width={300}
+            height={100}
+            className="object-fill w-[350px] h-[100px] md:h-[200px] rounded-xl"
+            priority
+          />
+        </div>
+        
       </div>
     </div>
   );
