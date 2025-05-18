@@ -1,5 +1,4 @@
 import { prisma } from "@/app/utils/db";
-import { PaginationComponent } from "@/components/general/PaginationComponent";
 import {
   Table,
   TableBody,
@@ -28,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CheckCircle, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
+import { requireSuperAdmin } from "@/app/utils/requireUser";
 
 async function getAllUsers() {
   const users = await prisma.user.findMany({
@@ -49,6 +49,7 @@ async function getAllUsers() {
 
 export default async function AllUsersTable() {
   const users = await getAllUsers();
+  const superadmin=await requireSuperAdmin()
 
   return (
     <>

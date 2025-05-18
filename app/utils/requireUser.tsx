@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "./auth";
 import { prisma } from "./db";
+import { ime } from "./ime";
 
 export async function requireUser() {
   const session = await auth();

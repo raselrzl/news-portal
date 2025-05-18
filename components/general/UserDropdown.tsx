@@ -43,21 +43,15 @@ export function UserDropdown({ email, name, image }: iAppProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48" align="end">
         <DropdownMenuLabel className="flex flex-col">
-          {/* <div className="flex justify-between"> */}
             <span className="text-sm font-medium text-foreground">{name}</span>
-        {/*     <Avatar>
-            <AvatarImage src={image} alt="Profile Image" />
-            <AvatarFallback className="font-bold">{name.charAt(0)}</AvatarFallback>            
-          </Avatar> */}
-          {/* </div> */}
           <span className="text-xs font-medium text-foreground">{email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/saved">
+            <Link href="/post-an-article/allusers">
               <Heart size={16} strokeWidth={2} className="opacity-60" />
-              <span>সংরক্ষিত সংবাদ</span>
+              <span>অ্যাপের সকল ব্যবহারকারী</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
