@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { use } from "react";
 import { deleteArticleById } from '@/app/actions';
-import { requireSuperAdmin } from '@/app/utils/requireUser';
 
 export default function ConfirmDeletePage({ params }: { params: Promise<{ articleId: string }> }) {
+  
   const router = useRouter();
   const { articleId } = use(params);
 

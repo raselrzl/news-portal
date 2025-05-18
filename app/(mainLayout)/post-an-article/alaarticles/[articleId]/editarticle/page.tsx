@@ -1,6 +1,7 @@
 import { prisma } from "@/app/utils/db";
 import { notFound } from "next/navigation";
 import { EditNewsArticleForm } from "./editArticleForm";
+import { requireNewsReporter } from "@/app/utils/requireUser";
 
 async function getData (articleId:string){
     const data = await prisma.newsArticle.findUnique({
@@ -72,6 +73,7 @@ interface iAppProps {
 type Params= Promise<{ articleId: string }>
 
 export default async function EditNewsArticleFormPage({params}:{ params:Params }) {
+    const approvednewsreporter=await requireNewsReporter()
     const {articleId}=await params
     const data =await getData(articleId)
 

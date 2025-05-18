@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { prisma } from "./utils/db";
-import { requireSuperAdmin, requireUser } from "./utils/requireUser";
+import { requireNewsReporter, requireSuperAdmin, requireUser } from "./utils/requireUser";
 import {
   AdvertiserSchema,
   newsArticleSchema,
@@ -84,8 +84,11 @@ export async function createAdvertiser(data: z.infer<typeof AdvertiserSchema>) {
 }
 
 export async function createAnArticle(data: z.infer<typeof newsArticleSchema>) {
+  const approvedreporter =await requireNewsReporter()
+  if (!approvedreporter) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
-
   const req = await request();
   const dicision = await aj.protect(req);
   if (dicision.isDenied()) {
@@ -131,7 +134,10 @@ export async function createAnArticle(data: z.infer<typeof newsArticleSchema>) {
 }
 
 export async function updateArticleStatusToActive(articleId: string) {
-  
+  const superadmin =await requireSuperAdmin()
+  if (!superadmin) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
 
   const req = await request();
@@ -152,6 +158,10 @@ export async function updateArticleStatusToActive(articleId: string) {
 }
 
 export async function updateArticleStatusToDraft(articleId: string) {
+  const superadmin =await requireSuperAdmin()
+  if (!superadmin) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
 
   const req = await request();
@@ -171,6 +181,10 @@ export async function updateArticleStatusToDraft(articleId: string) {
 }
 
 export async function deleteArticleById(articleId: string) {
+  const superadmin =await requireSuperAdmin()
+  if (!superadmin) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
 
   const req = await request();
@@ -199,6 +213,10 @@ export async function deleteArticleById(articleId: string) {
 }
 
 export async function updateNewsArticle(data: any, articleId: string) {
+  const approvednewsreporter =await requireNewsReporter()
+  if (!approvednewsreporter) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
 
   const req = await request();
@@ -236,6 +254,9 @@ export async function updateNewsArticle(data: any, articleId: string) {
 
 export async function deleteUserById(userId: string) {
   const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
   const user = await requireUser();
 
   const req = await request();
@@ -286,6 +307,10 @@ export async function deleteUserById(userId: string) {
 export async function updateUserApprovalStatus(userId: string, status: 'PENDING' | 'APPROVED' | 'REJECT') {
 
   const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
+
   const user = await requireUser();
 
   const req = await request();
