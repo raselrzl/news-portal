@@ -215,7 +215,7 @@ export default async function Home() {
           className="w-full h-[100px] rounded-xl mt-2"
         />
         <div className="mt-10 text-left flex-col hidden sm:block">
-          <p className="text-sm font-semibold text-primary text-justify">
+          <p className="text-sm font-semibold text-justify">
             সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল মিডিয়া
             একাউন্টে ফলো করুন।
           </p>
@@ -255,7 +255,7 @@ export default async function Home() {
               href="/"
             />
           )}
-          <div className="bg-primary-foreground mt-4 pt-2 border-1">
+          <div className="bg-primary-foreground dark:bg-accent-foreground/5 mt-4 pt-2 border-1">
             <h1 className="font-bold text-center text-2xl">
               "শীর্ষ খবর"
             </h1>

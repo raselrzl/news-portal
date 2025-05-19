@@ -506,7 +506,7 @@ export async function ShirShoNewsHeadings() {
   return (
     <>
       {Politics && Object.keys(Politics).length > 0 ? ( 
-        <div className="bg-primary-foreground py-2">
+        <div className="bg-primary-foreground dark:bg-accent-foreground/5 py-2">
         <h1 className="font-extrabold mb-2 pl-4 text-2xl"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
         <div className="rounded-xl py-2">
           {Politics.map((article) => (
