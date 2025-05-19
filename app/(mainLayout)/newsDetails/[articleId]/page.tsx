@@ -1,6 +1,10 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
 import {
+  ShirShoNewsHeadings,
+  SirshoNewsList,
+} from "@/components/general/homepageArticleList";
+import {
   Clock,
   LocateIcon,
   Notebook,
@@ -61,19 +65,22 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
     );
 
   return (
-    <div className="grid grid-cols-5 gap-4 my-10 items-center">
-      <div className="col-span-5 md:col-span-4 grid grid-cols-4 gap-2">
-        <div className="col-span-4 md:col-span-1 flex">
-          <div className="relative w-full h-[100px] md:h-[200px] px-10">
-            <Image
-              src="/gif111.gif"
-              alt="image"
-              fill
-              className="object-cover" // or "object-cover" if you want it to fill the box
-              priority // Optional: loads the image faster
-            />
-          </div>
+    <div className="grid grid-cols-5 gap-4 my-10">
+      <div className="col-span-5 md:col-span-1">
+        <div className="relative w-full h-[100px] md:h-[200px] px-10">
+          <Image
+            src="/gif111.gif"
+            alt="image"
+            fill
+            className="object-cover" // or "object-cover" if you want it to fill the box
+            priority // Optional: loads the image faster
+          />
         </div>
+        <div className="hidden md:block mt-10">
+          <ShirShoNewsHeadings />
+        </div>
+      </div>
+      <div className="col-span-5 md:col-span-3">
         <div className="col-span-4 md:col-span-3">
           <h1 className="text-3xl font-bold mb-4 pl-4">{data?.newsHeading}</h1>
           <div className="flex flex-row font-bold mb-1">
@@ -146,19 +153,19 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           )}
         </div>
       </div>
-      <div className="col-span-5 md:col-span-1 grid-cols-1">
-        <div className="w-[350px] h-[100px] md:w-full md:h-[200px] flex items-start justify-center rounded-2xl mx-auto">
-          {" "}
+      <div className="col-span-5 md:col-span-1">
+        <div className=" flex flex-col items-center rounded-2xl mx-auto">
           <Image
             src="/gif111.gif"
             alt="image"
             width={300}
             height={100}
-            className="object-fill w-[350px] h-[100px] md:h-[200px] rounded-xl"
+            className="object-fill w-[350px] h-[100px] md:h-[200px] rounded-xl mb-10"
             priority
           />
+         <div className="border-t-1 p-2"> <h1 className="font-extrabold mb-2 ml-6">{`>>>`}সাম্প্রতিক সংবাদ</h1>
+         <SirshoNewsList /></div>
         </div>
-        
       </div>
     </div>
   );
