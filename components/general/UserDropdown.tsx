@@ -73,7 +73,14 @@ export function UserDropdown({ email, name, image }: iAppProps) {
                  <Heart size={16} strokeWidth={2} className="opacity-60" />
                  <span>অ্যাপের সকল ব্যবহারকারী</span>
                </Link>
-             </DropdownMenuItem></>
+             </DropdownMenuItem>
+             <DropdownMenuItem asChild>
+               <Link href="/post-an-article/post-advertisement">
+                 <Heart size={16} strokeWidth={2} className="opacity-60" />
+                 <span>বিজ্ঞাপন পোস্ট করুন</span>
+               </Link>
+             </DropdownMenuItem>
+             </>
             )}
 
           <DropdownMenuSeparator />
