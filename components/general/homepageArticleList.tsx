@@ -174,9 +174,9 @@ export default async function AllArticleList() {
   return (
     <>
       {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
-        <div className="mb-6 max-h-[290px] md:border-1 md:p-2">
+        <div className="mb-6 max-h-[320px] md:border-1 md:p-2 ">
           {lastFeaturedArticle && (
-            <Link href={`/newsDetails/${lastFeaturedArticle.id}`}>
+            <Link href={`/newsDetails/${lastFeaturedArticle.id}`} className="mb-10">
               <div className="grid grid-cols-5">
                 <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3 mt-10 md:mt-0">
                   <Image
@@ -208,17 +208,17 @@ export default async function AllArticleList() {
           href="/"
         />
       )}
-     <div className="flex justify-center items-center mt-16 md:mt-0">
+     <div className="flex justify-center items-center my-16 md:mt-0">
        <img
           src="/shoe.gif"
           alt="gif image"
-          className="w-[350px] h-[100px] md:h-[150px] rounded-xl md:pt-0 pt-6 mt-5"
+          className="w-[350px] h-[100px] md:h-[150px] rounded-xl md:pt-0 py-2 mt-5"
         />
 
      </div>
 
       {allArticles && Object.keys(allArticles).length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-6 border-y-1 md:border-1 mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-6 border-y-1 md:border-1 my-10">
           {allArticles.slice(1, 7).map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
               <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
