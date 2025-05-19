@@ -112,7 +112,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             <img
               src={data?.newsPicture}
               alt="Description"
-              className="w-full h-[300px] md:h-[400px] block md:rounded-3xl"
+              className="w-full h-[300px] md:h-[400px] block md:px-6"
             />
             <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
               <p className="mr-4">বিবরণ: {data?.newsPictureHeading}</p>
@@ -163,8 +163,16 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             className="object-fill w-[350px] h-[100px] md:h-[200px] rounded-xl mb-10"
             priority
           />
-         <div className="border-t-1 p-2"> <h1 className="font-extrabold mb-2 ml-6">{`>>>`}সাম্প্রতিক সংবাদ</h1>
-         <SirshoNewsList /></div>
+          <div className="border-t-1 p-2">
+            <h1 className="font-extrabold mb-2 ml-6">
+              {`>>>`}সাম্প্রতিক সংবাদ
+            </h1>
+            <SirshoNewsList />
+            
+          </div>
+          <div className="block md:hidden mt-10 border-t-1 p-2">
+              <ShirShoNewsHeadings />
+            </div>
         </div>
       </div>
     </div>

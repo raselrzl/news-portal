@@ -343,7 +343,7 @@ export async function ShirShoNewsHeadings() {
     <>
       {Politics && Object.keys(Politics).length > 0 ? (
         <>
-        <h1 className="font-extrabold pl-2 mb-2"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
+        <h1 className="font-extrabold mb-2 pl-4"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
         <div className="rounded-xl">
           {Politics.map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
