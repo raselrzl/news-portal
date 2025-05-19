@@ -4,7 +4,7 @@ import { EmptyState } from "./EmptyState";
 import SocialLinks from "./socialLink";
 import Link from "next/link";
 
-async function getData() {
+/* async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
     await Promise.all([
       prisma.newsArticle.findMany({
@@ -166,10 +166,175 @@ async function getData() {
     Environment,
     Politics,
   };
+} */
+// getAllArticles.ts
+export async function getAllArticles() {
+  return await prisma.newsArticle.findMany({
+    where: { newsArticleStatus: "ACTIVE" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 7,
+  });
 }
 
+// getLastFeaturedArticle.ts
+export async function getLastFeaturedArticle() {
+  return await prisma.newsArticle.findFirst({
+    where: {
+      newsArticleStatus: "ACTIVE",
+      isFeatured: true,
+    },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+// getLatestNews.ts
+export async function getLatestNews() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "EDUCATION" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 7,
+  });
+}
+
+// getEnvironmentNews.ts
+export async function getEnvironmentNews() {
+  return await prisma.newsArticle.findFirst({
+    where: {
+      newsCategory: "EDUCATION",
+      isFeatured: true,
+    },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+// getPoliticsNews.ts
+export async function getPoliticsNews() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "EDUCATION" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+}
+
+
 export default async function AllArticleList() {
-  const { allArticles, lastFeaturedArticle } = await getData();
+  const allArticles=await getAllArticles()
+  const lastFeaturedArticle = await getLastFeaturedArticle();
 
   return (
     <>
@@ -254,7 +419,7 @@ export default async function AllArticleList() {
 }
 
 export async function SirshoNewsList() {
-  const { latestNews } = await getData();
+  const latestNews = await getLatestNews();
 
   return (
     <>
@@ -305,8 +470,7 @@ export async function SirshoNewsList() {
 }
 
 export async function CrimeHEadings() {
-  const { Environment } = await getData();
-
+  const Environment = await getEnvironmentNews();
   return (
     <>
       {Environment && Object.keys(Environment).length > 0 ? (
@@ -337,7 +501,7 @@ export async function CrimeHEadings() {
 }
 
 export async function ShirShoNewsHeadings() {
-  const { Politics } = await getData();
+  const Politics = await getPoliticsNews();
 
   return (
     <>

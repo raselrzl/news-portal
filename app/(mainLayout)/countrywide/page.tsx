@@ -1,3 +1,5 @@
+"use client"
+import { useState } from "react";
 import AllCountryNewsArticleList from "./countryNewsArticleList";
 import AllArticleList from "@/components/general/homepageArticleList";
 
