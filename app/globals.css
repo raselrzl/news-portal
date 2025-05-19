@@ -132,3 +132,8 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+a {
+  @apply hover:text-primary transition-colors duration-500 ease-in-out;
+}
