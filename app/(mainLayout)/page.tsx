@@ -234,9 +234,9 @@ export default async function Home() {
 
           {Environment && Object.keys(Environment).length > 0 ? (
             <Link href={`/newsDetails/${Environment.id}`}>
-              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2">
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2 p-2">
                 <div className="p-1">
-                  <h2 className="text-lg font-semibold ">
+                  <h2 className="text-lg font-semibold text-center">
                     {Environment.newsHeading}
                   </h2>
                 </div>
@@ -256,7 +256,7 @@ export default async function Home() {
             />
           )}
           <div className="bg-primary-foreground mt-4 pt-2 border-1">
-            <h1 className="font-bold text-primary text-center text-2xl">
+            <h1 className="font-bold text-center text-2xl">
               "শীর্ষ খবর"
             </h1>
             <div className="relative h-56 overflow-y-scroll mx-4 md:mx-0 md:px-1  mb-6 px-4">
@@ -266,7 +266,7 @@ export default async function Home() {
                     <Link href={`/newsDetails/${article.id}`} key={article.id}>
                       <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2">
                         <div className="p-1">
-                          <h2 className="text-lg text-primary/70 font-semibold line-clamp-1">
+                          <h2 className="text-lg  font-semibold line-clamp-1 pl-1">
                             {article.newsHeading}
                           </h2>
                         </div>
