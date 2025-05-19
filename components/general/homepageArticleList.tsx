@@ -1,4 +1,4 @@
-/* import { prisma } from "@/app/utils/db";
+import { prisma } from "@/app/utils/db";
 import Image from "next/image";
 import { EmptyState } from "./EmptyState";
 import SocialLinks from "./socialLink";
@@ -178,7 +178,7 @@ export default async function AllArticleList() {
           {lastFeaturedArticle && (
             <Link href={`/newsDetails/${lastFeaturedArticle.id}`}>
               <div className="grid grid-cols-5">
-                <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
+                <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3 mt-10 md:mt-0">
                   <Image
                     src={lastFeaturedArticle.newsPicture}
                     alt="picture"
@@ -208,9 +208,17 @@ export default async function AllArticleList() {
           href="/"
         />
       )}
+     <div className="flex justify-center items-center mt-16 md:mt-0">
+       <img
+          src="/shoe.gif"
+          alt="gif image"
+          className="w-[350px] h-[100px] md:h-[150px] rounded-xl md:pt-0 pt-6 mt-5"
+        />
+
+     </div>
 
       {allArticles && Object.keys(allArticles).length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-6 border-y-1 md:border-1 mt-10">
           {allArticles.slice(1, 7).map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
               <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
@@ -226,8 +234,7 @@ export default async function AllArticleList() {
 
                 <div className="pt-4">
                   <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed">
-                    {article.newsPictureHeading}নিশুতি রাতের নিস্তব্ধতায় হঠাৎ এক
-                    পশুপাখির ডাক শোনা গেল।
+                    {article.newsHeading}
                   </h2>
                 </div>
               </div>
@@ -335,12 +342,14 @@ export async function ShirShoNewsHeadings() {
   return (
     <>
       {Politics && Object.keys(Politics).length > 0 ? (
+        <>
+        <h1 className="font-extrabold pl-2 mb-2"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
         <div className="rounded-xl">
           {Politics.map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
-              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2">
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
                 <div className="p-1">
-                  <h2 className="text-lg text-primary/70 font-semibold line-clamp-1">
+                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
                     {article.newsHeading}
                   </h2>
                 </div>
@@ -348,7 +357,7 @@ export async function ShirShoNewsHeadings() {
             </Link>
           ))}
         </div>
-      ) : (
+        </>) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
           description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
@@ -359,4 +368,3 @@ export async function ShirShoNewsHeadings() {
     </>
   );
 }
- */

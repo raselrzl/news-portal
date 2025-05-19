@@ -180,7 +180,7 @@ export default async function Home() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-10">
       <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
-        <div className="flex flex-row gap-2 justify-center"><Clock /><h1 className="text-2xl font-bold">সাম্প্রতিক</h1></div>
+        <div className="flex flex-row gap-2"><Clock /><h1 className="text-2xl font-bold">সাম্প্রতিক</h1></div>
         {latestNews && latestNews.length > 0 ? (
           latestNews.map((item) => (
             <Link key={item.id} href={`/newsDetails/${item.id}`}>
