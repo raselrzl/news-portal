@@ -26,7 +26,7 @@ export default async function Latest({ searchParams }: SearchParamsProps) {
       <img
           src="/shoe.gif"
           alt="gif image"
-          className="w-full h-[170px] rounded-xl px-8 md:pt-0"
+          className="w-full h-[170px] rounded-xl px-6 md:pt-0"
         />
         <div className="p-6"><ShirShoNewsHeadings /></div>
       </div>

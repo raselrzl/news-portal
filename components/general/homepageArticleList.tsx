@@ -377,7 +377,7 @@ export default async function AllArticleList() {
        <img
           src="/shoe.gif"
           alt="gif image"
-          className="w-[350px] h-[100px] md:h-[150px] rounded-xl md:pt-0 py-2 mt-5"
+          className="w-[360px] md:w-full h-[170px] md:h-[170px] rounded-xl md:pt-0 py-2 mt-5 object-fill md:object-cover"
         />
 
      </div>
@@ -505,10 +505,10 @@ export async function ShirShoNewsHeadings() {
 
   return (
     <>
-      {Politics && Object.keys(Politics).length > 0 ? (
-        <>
-        <h1 className="font-extrabold mb-2 pl-4"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
-        <div className="rounded-xl">
+      {Politics && Object.keys(Politics).length > 0 ? ( 
+        <div className="bg-primary-foreground py-2">
+        <h1 className="font-extrabold mb-2 pl-4 text-2xl"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
+        <div className="rounded-xl py-2">
           {Politics.map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
               <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
@@ -521,7 +521,7 @@ export async function ShirShoNewsHeadings() {
             </Link>
           ))}
         </div>
-        </>) : (
+        </div>) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
           description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
