@@ -21,6 +21,7 @@ import Link from "next/link";
 import { signOut } from "@/app/utils/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ime } from "@/app/utils/ime";
+import { requireSuperAdmin } from "@/app/utils/requireUser";
 /* import { ime } from "@/app/utils/ime"; */
 
 interface iAppProps {
@@ -28,6 +29,7 @@ interface iAppProps {
   name: string;
   image: string;
 }
+
 export function UserDropdown({ email, name, image }: iAppProps) {
   return (
     <DropdownMenu>

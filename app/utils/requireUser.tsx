@@ -40,6 +40,36 @@ export async function requireNewsReporter() {
   return session.user;
 }
 
+export async function ApprovedNewsReporterOrSuperAdminEmail() {
+  const session = await auth();
+
+  if (!session?.user || !session.user.email) {
+    return redirect("/login");
+  }
+
+  const email = session.user.email;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: {
+      userType: true,
+      approvalStatus: true,
+    },
+  });
+
+  // Allow if user is SUPERADMIN or an APPROVED NEWSREPORTER
+  const isSuperAdmin = user?.userType === "SUPERADMIN";
+  const isApprovedNewsReporter =
+    user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED";
+
+  if (!user || (!isSuperAdmin && !isApprovedNewsReporter)) {
+    return redirect("/restricted");
+  }
+
+  return email;
+}
+
+
 
 export async function requireSuperAdmin() {
   const session = await auth();
@@ -59,5 +89,30 @@ export async function requireSuperAdmin() {
   }
   return session.user;
 }
+
+
+export async function SuperAdminEmail() {
+  const session = await auth();
+  if (!session?.user) {
+    return redirect("/login");
+  }
+  const email = session.user.email;
+  if (!email) {
+    return redirect("/login");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { userType: true },
+  });
+
+  if (!user || user.userType !== "SUPERADMIN") {
+    return redirect("/restricted");
+  }
+
+  // Return the email
+  return email;
+}
+
 
 

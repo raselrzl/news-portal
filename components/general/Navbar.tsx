@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 
 import { ThemeToggle } from "./ThemeToggle";
-import { redirect } from "next/navigation";
 import { auth } from "@/app/utils/auth";
 import { UserDropdown } from "./UserDropdown";
 import DropDownMenuList from "./dropDownMenuList";
@@ -10,6 +9,7 @@ import { User2 } from "lucide-react";
 
 export default async function Navbar() {
   const user = await auth();
+
 
   return (
     <nav className="flex items-center justify-between ">
