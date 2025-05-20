@@ -36,3 +36,37 @@ export function code(): string {
 export function ime(ime: string | null | undefined): boolean {
   return ime === code();
 }
+
+import { prisma } from "./db";
+
+
+
+export async function supperAdmin(email: string | null | undefined): Promise<boolean> {
+  if (!email) return false;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { userType: true },
+  });
+
+  return user?.userType === "SUPERADMIN";
+}
+
+
+// utils/isNewsReporter.ts
+
+export async function isNewsReporter(email: string | null | undefined): Promise<boolean> {
+  if (!email) return false;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: {
+      userType: true,
+      approvalStatus: true,
+    },
+  });
+
+  return (
+    user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED"
+  );
+}

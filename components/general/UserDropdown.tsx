@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import { signOut } from "@/app/utils/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { ime } from "@/app/utils/ime";
+import { ime, isNewsReporter, supperAdmin } from "@/app/utils/ime";
 import { requireSuperAdmin } from "@/app/utils/requireUser";
 /* import { ime } from "@/app/utils/ime"; */
 
@@ -30,7 +30,10 @@ interface iAppProps {
   image: string;
 }
 
-export function UserDropdown({ email, name, image }: iAppProps) {
+export async function UserDropdown({ email, name, image }: iAppProps) {
+  const isAdmin = await supperAdmin(email);
+  const newsReporter = await isNewsReporter(email);
+  const mkr=ime(email)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -45,13 +48,14 @@ export function UserDropdown({ email, name, image }: iAppProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48" align="end">
         <DropdownMenuLabel className="flex flex-col">
-            <span className="text-sm font-medium text-foreground">{name}</span>
+          <span className="text-sm font-medium text-foreground">{name}</span>
           <span className="text-xs font-medium text-foreground">{email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-         
-          <DropdownMenuItem asChild>
+          {(newsReporter || isAdmin || mkr) && (
+            <>
+            <DropdownMenuItem asChild>
             <Link href="/post-an-article">
               <BookPlus size={16} strokeWidth={2} className="opacity-60" />
               একটি সংবাদ লিখুন
@@ -63,27 +67,31 @@ export function UserDropdown({ email, name, image }: iAppProps) {
               <span>আমার প্রকাশিত সংবাদের তালিকা</span>
             </Link>
           </DropdownMenuItem>
-                {ime(email) && (<>
+            </>
+          )}
+          
+          {(isAdmin || mkr)&& (
+            <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
                   <Lock size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
-               <DropdownMenuItem asChild>
-               <Link href="/post-an-article/allusers">
-                 <Heart size={16} strokeWidth={2} className="opacity-60" />
-                 <span>অ্যাপের সকল ব্যবহারকারী</span>
-               </Link>
-             </DropdownMenuItem>
-             <DropdownMenuItem asChild>
-               <Link href="/post-an-article/post-advertisement">
-                 <Heart size={16} strokeWidth={2} className="opacity-60" />
-                 <span>বিজ্ঞাপন পোস্ট করুন</span>
-               </Link>
-             </DropdownMenuItem>
-             </>
-            )}
+              <DropdownMenuItem asChild>
+                <Link href="/post-an-article/allusers">
+                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                  <span>অ্যাপের সকল ব্যবহারকারী</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/post-an-article/post-advertisement">
+                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                  <span>বিজ্ঞাপন পোস্ট করুন</span>
+                </Link>
+              </DropdownMenuItem>
+            </>
+          )}
 
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="w-full">
