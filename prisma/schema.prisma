@@ -101,7 +101,9 @@ model newsArticle {
   newsArticleStatus  newsArticleStatus@default(DRAFT)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
 }
+
 
 enum newsArticleStatus {
   ACTIVE
@@ -138,6 +140,55 @@ enum newsCategory {
   SCIENCE
 }
 
+
+model Advertisement {
+  id     String @id @default(uuid())
+  companyName String
+  companyaddress String
+  supervisedName String
+  advertisedCategory AdvertisedCategory
+  websiteLink String
+  additionalInfo String
+  advertiseBanner String
+  isFeatured  Boolean       @default(false)
+
+  endDate String
+  startDate String
+  supervisedPhonenumber String
+  advertiseduration Int?
+  advertiseStatus  advertiseStatus@default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum advertiseStatus {
+  ACTIVE
+  DRAFT
+  EXPIRED
+}
+
+enum AdvertisedCategory {
+  PREMIER_1
+  PREMIER_2
+  SIZE_1
+  SIZE_2
+  SUPER_1
+  SUPER_2
+  PREMIUM_1
+  PREMIUM_2
+  STANDARD_1
+  STANDARD_2
+  DELUXE_1
+  DELUXE_2
+  ULTIMATE_1
+  ULTIMATE_2
+  BASIC_1
+  BASIC_2
+  PRO_1
+  PRO_2
+  ENTERPRISE_1
+  ENTERPRISE_2
+}
 
 
 model Account {

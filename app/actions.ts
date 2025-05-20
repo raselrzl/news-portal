@@ -10,6 +10,7 @@ import {
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
+import { AdvertisedCategory, advertiseStatus } from "@/lib/generated/prisma";
 /* import { inngest } from "./utils/inngest/client"; */
 const aj = arcjet
   .withRule(
@@ -332,3 +333,46 @@ export async function updateUserApprovalStatus(userId: string, status: 'PENDING'
   }
 }
 
+
+export async function createAnAdvertisement(data: {
+  companyName: string;
+  companyaddress: string;
+  supervisedName: string;
+  supervisedPhonenumber: string;
+  advertisedCategory: AdvertisedCategory;
+  isFeatured?: boolean;
+  advertiseStatus?: advertiseStatus;
+  advertiseduration?: number;
+  advertiseBanner: string;
+  websiteLink: string;
+  additionalInfo?: string;
+  startDate: string;
+  endDate: string;
+}) {
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  await prisma.advertisement.create({
+    data: {
+      companyName: data.companyName,
+      companyaddress: data.companyaddress,
+      supervisedName: data.supervisedName,
+      supervisedPhonenumber: data.supervisedPhonenumber,
+      advertisedCategory: data.advertisedCategory,
+      isFeatured: data.isFeatured ?? false,
+      advertiseStatus: data.advertiseStatus ?? "DRAFT",
+      advertiseduration: data.advertiseduration ?? 365,
+      advertiseBanner: data.advertiseBanner,
+      websiteLink: data.websiteLink,
+      additionalInfo: data.additionalInfo ?? "",
+      startDate: data.startDate,
+      endDate: data.endDate,
+    },
+  });
+
+  return redirect("/post-an-article/post-advertisement/alladvertise");
+}

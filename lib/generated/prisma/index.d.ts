@@ -39,6 +39,11 @@ export type newsArticle = $Result.DefaultSelection<Prisma.$newsArticlePayload>
  */
 export type quote = $Result.DefaultSelection<Prisma.$quotePayload>
 /**
+ * Model Advertisement
+ * 
+ */
+export type Advertisement = $Result.DefaultSelection<Prisma.$AdvertisementPayload>
+/**
  * Model Account
  * 
  */
@@ -107,6 +112,41 @@ export const newsCategory: {
 
 export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]
 
+
+export const advertiseStatus: {
+  ACTIVE: 'ACTIVE',
+  DRAFT: 'DRAFT',
+  EXPIRED: 'EXPIRED'
+};
+
+export type advertiseStatus = (typeof advertiseStatus)[keyof typeof advertiseStatus]
+
+
+export const AdvertisedCategory: {
+  PREMIER_1: 'PREMIER_1',
+  PREMIER_2: 'PREMIER_2',
+  SIZE_1: 'SIZE_1',
+  SIZE_2: 'SIZE_2',
+  SUPER_1: 'SUPER_1',
+  SUPER_2: 'SUPER_2',
+  PREMIUM_1: 'PREMIUM_1',
+  PREMIUM_2: 'PREMIUM_2',
+  STANDARD_1: 'STANDARD_1',
+  STANDARD_2: 'STANDARD_2',
+  DELUXE_1: 'DELUXE_1',
+  DELUXE_2: 'DELUXE_2',
+  ULTIMATE_1: 'ULTIMATE_1',
+  ULTIMATE_2: 'ULTIMATE_2',
+  BASIC_1: 'BASIC_1',
+  BASIC_2: 'BASIC_2',
+  PRO_1: 'PRO_1',
+  PRO_2: 'PRO_2',
+  ENTERPRISE_1: 'ENTERPRISE_1',
+  ENTERPRISE_2: 'ENTERPRISE_2'
+};
+
+export type AdvertisedCategory = (typeof AdvertisedCategory)[keyof typeof AdvertisedCategory]
+
 }
 
 export type UserType = $Enums.UserType
@@ -124,6 +164,14 @@ export const newsArticleStatus: typeof $Enums.newsArticleStatus
 export type newsCategory = $Enums.newsCategory
 
 export const newsCategory: typeof $Enums.newsCategory
+
+export type advertiseStatus = $Enums.advertiseStatus
+
+export const advertiseStatus: typeof $Enums.advertiseStatus
+
+export type AdvertisedCategory = $Enums.AdvertisedCategory
+
+export const AdvertisedCategory: typeof $Enums.AdvertisedCategory
 
 /**
  * ##  Prisma Client ʲˢ
@@ -299,6 +347,16 @@ export class PrismaClient<
     * ```
     */
   get quote(): Prisma.quoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.advertisement`: Exposes CRUD operations for the **Advertisement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Advertisements
+    * const advertisements = await prisma.advertisement.findMany()
+    * ```
+    */
+  get advertisement(): Prisma.AdvertisementDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -774,6 +832,7 @@ export namespace Prisma {
     Advertiser: 'Advertiser',
     newsArticle: 'newsArticle',
     quote: 'quote',
+    Advertisement: 'Advertisement',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken'
@@ -795,7 +854,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "account" | "session" | "verificationToken"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "account" | "session" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1169,6 +1228,80 @@ export namespace Prisma {
           }
         }
       }
+      Advertisement: {
+        payload: Prisma.$AdvertisementPayload<ExtArgs>
+        fields: Prisma.AdvertisementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdvertisementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdvertisementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          findFirst: {
+            args: Prisma.AdvertisementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdvertisementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          findMany: {
+            args: Prisma.AdvertisementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>[]
+          }
+          create: {
+            args: Prisma.AdvertisementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          createMany: {
+            args: Prisma.AdvertisementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdvertisementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>[]
+          }
+          delete: {
+            args: Prisma.AdvertisementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          update: {
+            args: Prisma.AdvertisementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdvertisementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdvertisementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdvertisementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdvertisementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdvertisementPayload>
+          }
+          aggregate: {
+            args: Prisma.AdvertisementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdvertisement>
+          }
+          groupBy: {
+            args: Prisma.AdvertisementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdvertisementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdvertisementCountArgs<ExtArgs>
+            result: $Utils.Optional<AdvertisementCountAggregateOutputType> | number
+          }
+        }
+      }
       Account: {
         payload: Prisma.$AccountPayload<ExtArgs>
         fields: Prisma.AccountFieldRefs
@@ -1480,6 +1613,7 @@ export namespace Prisma {
     advertiser?: AdvertiserOmit
     newsArticle?: newsArticleOmit
     quote?: quoteOmit
+    advertisement?: AdvertisementOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -7500,6 +7634,1178 @@ export namespace Prisma {
 
 
   /**
+   * Model Advertisement
+   */
+
+  export type AggregateAdvertisement = {
+    _count: AdvertisementCountAggregateOutputType | null
+    _avg: AdvertisementAvgAggregateOutputType | null
+    _sum: AdvertisementSumAggregateOutputType | null
+    _min: AdvertisementMinAggregateOutputType | null
+    _max: AdvertisementMaxAggregateOutputType | null
+  }
+
+  export type AdvertisementAvgAggregateOutputType = {
+    advertiseduration: number | null
+  }
+
+  export type AdvertisementSumAggregateOutputType = {
+    advertiseduration: number | null
+  }
+
+  export type AdvertisementMinAggregateOutputType = {
+    id: string | null
+    companyName: string | null
+    companyaddress: string | null
+    supervisedName: string | null
+    advertisedCategory: $Enums.AdvertisedCategory | null
+    websiteLink: string | null
+    additionalInfo: string | null
+    advertiseBanner: string | null
+    isFeatured: boolean | null
+    endDate: string | null
+    startDate: string | null
+    supervisedPhonenumber: string | null
+    advertiseduration: number | null
+    advertiseStatus: $Enums.advertiseStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdvertisementMaxAggregateOutputType = {
+    id: string | null
+    companyName: string | null
+    companyaddress: string | null
+    supervisedName: string | null
+    advertisedCategory: $Enums.AdvertisedCategory | null
+    websiteLink: string | null
+    additionalInfo: string | null
+    advertiseBanner: string | null
+    isFeatured: boolean | null
+    endDate: string | null
+    startDate: string | null
+    supervisedPhonenumber: string | null
+    advertiseduration: number | null
+    advertiseStatus: $Enums.advertiseStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdvertisementCountAggregateOutputType = {
+    id: number
+    companyName: number
+    companyaddress: number
+    supervisedName: number
+    advertisedCategory: number
+    websiteLink: number
+    additionalInfo: number
+    advertiseBanner: number
+    isFeatured: number
+    endDate: number
+    startDate: number
+    supervisedPhonenumber: number
+    advertiseduration: number
+    advertiseStatus: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdvertisementAvgAggregateInputType = {
+    advertiseduration?: true
+  }
+
+  export type AdvertisementSumAggregateInputType = {
+    advertiseduration?: true
+  }
+
+  export type AdvertisementMinAggregateInputType = {
+    id?: true
+    companyName?: true
+    companyaddress?: true
+    supervisedName?: true
+    advertisedCategory?: true
+    websiteLink?: true
+    additionalInfo?: true
+    advertiseBanner?: true
+    isFeatured?: true
+    endDate?: true
+    startDate?: true
+    supervisedPhonenumber?: true
+    advertiseduration?: true
+    advertiseStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdvertisementMaxAggregateInputType = {
+    id?: true
+    companyName?: true
+    companyaddress?: true
+    supervisedName?: true
+    advertisedCategory?: true
+    websiteLink?: true
+    additionalInfo?: true
+    advertiseBanner?: true
+    isFeatured?: true
+    endDate?: true
+    startDate?: true
+    supervisedPhonenumber?: true
+    advertiseduration?: true
+    advertiseStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdvertisementCountAggregateInputType = {
+    id?: true
+    companyName?: true
+    companyaddress?: true
+    supervisedName?: true
+    advertisedCategory?: true
+    websiteLink?: true
+    additionalInfo?: true
+    advertiseBanner?: true
+    isFeatured?: true
+    endDate?: true
+    startDate?: true
+    supervisedPhonenumber?: true
+    advertiseduration?: true
+    advertiseStatus?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdvertisementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Advertisement to aggregate.
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Advertisements to fetch.
+     */
+    orderBy?: AdvertisementOrderByWithRelationInput | AdvertisementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdvertisementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Advertisements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Advertisements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Advertisements
+    **/
+    _count?: true | AdvertisementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdvertisementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdvertisementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdvertisementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdvertisementMaxAggregateInputType
+  }
+
+  export type GetAdvertisementAggregateType<T extends AdvertisementAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdvertisement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdvertisement[P]>
+      : GetScalarType<T[P], AggregateAdvertisement[P]>
+  }
+
+
+
+
+  export type AdvertisementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdvertisementWhereInput
+    orderBy?: AdvertisementOrderByWithAggregationInput | AdvertisementOrderByWithAggregationInput[]
+    by: AdvertisementScalarFieldEnum[] | AdvertisementScalarFieldEnum
+    having?: AdvertisementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdvertisementCountAggregateInputType | true
+    _avg?: AdvertisementAvgAggregateInputType
+    _sum?: AdvertisementSumAggregateInputType
+    _min?: AdvertisementMinAggregateInputType
+    _max?: AdvertisementMaxAggregateInputType
+  }
+
+  export type AdvertisementGroupByOutputType = {
+    id: string
+    companyName: string
+    companyaddress: string
+    supervisedName: string
+    advertisedCategory: $Enums.AdvertisedCategory
+    websiteLink: string
+    additionalInfo: string
+    advertiseBanner: string
+    isFeatured: boolean
+    endDate: string
+    startDate: string
+    supervisedPhonenumber: string
+    advertiseduration: number | null
+    advertiseStatus: $Enums.advertiseStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: AdvertisementCountAggregateOutputType | null
+    _avg: AdvertisementAvgAggregateOutputType | null
+    _sum: AdvertisementSumAggregateOutputType | null
+    _min: AdvertisementMinAggregateOutputType | null
+    _max: AdvertisementMaxAggregateOutputType | null
+  }
+
+  type GetAdvertisementGroupByPayload<T extends AdvertisementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdvertisementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdvertisementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdvertisementGroupByOutputType[P]>
+            : GetScalarType<T[P], AdvertisementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdvertisementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyName?: boolean
+    companyaddress?: boolean
+    supervisedName?: boolean
+    advertisedCategory?: boolean
+    websiteLink?: boolean
+    additionalInfo?: boolean
+    advertiseBanner?: boolean
+    isFeatured?: boolean
+    endDate?: boolean
+    startDate?: boolean
+    supervisedPhonenumber?: boolean
+    advertiseduration?: boolean
+    advertiseStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["advertisement"]>
+
+  export type AdvertisementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyName?: boolean
+    companyaddress?: boolean
+    supervisedName?: boolean
+    advertisedCategory?: boolean
+    websiteLink?: boolean
+    additionalInfo?: boolean
+    advertiseBanner?: boolean
+    isFeatured?: boolean
+    endDate?: boolean
+    startDate?: boolean
+    supervisedPhonenumber?: boolean
+    advertiseduration?: boolean
+    advertiseStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["advertisement"]>
+
+  export type AdvertisementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyName?: boolean
+    companyaddress?: boolean
+    supervisedName?: boolean
+    advertisedCategory?: boolean
+    websiteLink?: boolean
+    additionalInfo?: boolean
+    advertiseBanner?: boolean
+    isFeatured?: boolean
+    endDate?: boolean
+    startDate?: boolean
+    supervisedPhonenumber?: boolean
+    advertiseduration?: boolean
+    advertiseStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["advertisement"]>
+
+  export type AdvertisementSelectScalar = {
+    id?: boolean
+    companyName?: boolean
+    companyaddress?: boolean
+    supervisedName?: boolean
+    advertisedCategory?: boolean
+    websiteLink?: boolean
+    additionalInfo?: boolean
+    advertiseBanner?: boolean
+    isFeatured?: boolean
+    endDate?: boolean
+    startDate?: boolean
+    supervisedPhonenumber?: boolean
+    advertiseduration?: boolean
+    advertiseStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdvertisementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyName" | "companyaddress" | "supervisedName" | "advertisedCategory" | "websiteLink" | "additionalInfo" | "advertiseBanner" | "isFeatured" | "endDate" | "startDate" | "supervisedPhonenumber" | "advertiseduration" | "advertiseStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["advertisement"]>
+
+  export type $AdvertisementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Advertisement"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      companyName: string
+      companyaddress: string
+      supervisedName: string
+      advertisedCategory: $Enums.AdvertisedCategory
+      websiteLink: string
+      additionalInfo: string
+      advertiseBanner: string
+      isFeatured: boolean
+      endDate: string
+      startDate: string
+      supervisedPhonenumber: string
+      advertiseduration: number | null
+      advertiseStatus: $Enums.advertiseStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["advertisement"]>
+    composites: {}
+  }
+
+  type AdvertisementGetPayload<S extends boolean | null | undefined | AdvertisementDefaultArgs> = $Result.GetResult<Prisma.$AdvertisementPayload, S>
+
+  type AdvertisementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdvertisementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdvertisementCountAggregateInputType | true
+    }
+
+  export interface AdvertisementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Advertisement'], meta: { name: 'Advertisement' } }
+    /**
+     * Find zero or one Advertisement that matches the filter.
+     * @param {AdvertisementFindUniqueArgs} args - Arguments to find a Advertisement
+     * @example
+     * // Get one Advertisement
+     * const advertisement = await prisma.advertisement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdvertisementFindUniqueArgs>(args: SelectSubset<T, AdvertisementFindUniqueArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Advertisement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdvertisementFindUniqueOrThrowArgs} args - Arguments to find a Advertisement
+     * @example
+     * // Get one Advertisement
+     * const advertisement = await prisma.advertisement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdvertisementFindUniqueOrThrowArgs>(args: SelectSubset<T, AdvertisementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Advertisement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementFindFirstArgs} args - Arguments to find a Advertisement
+     * @example
+     * // Get one Advertisement
+     * const advertisement = await prisma.advertisement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdvertisementFindFirstArgs>(args?: SelectSubset<T, AdvertisementFindFirstArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Advertisement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementFindFirstOrThrowArgs} args - Arguments to find a Advertisement
+     * @example
+     * // Get one Advertisement
+     * const advertisement = await prisma.advertisement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdvertisementFindFirstOrThrowArgs>(args?: SelectSubset<T, AdvertisementFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Advertisements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Advertisements
+     * const advertisements = await prisma.advertisement.findMany()
+     * 
+     * // Get first 10 Advertisements
+     * const advertisements = await prisma.advertisement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const advertisementWithIdOnly = await prisma.advertisement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdvertisementFindManyArgs>(args?: SelectSubset<T, AdvertisementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Advertisement.
+     * @param {AdvertisementCreateArgs} args - Arguments to create a Advertisement.
+     * @example
+     * // Create one Advertisement
+     * const Advertisement = await prisma.advertisement.create({
+     *   data: {
+     *     // ... data to create a Advertisement
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdvertisementCreateArgs>(args: SelectSubset<T, AdvertisementCreateArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Advertisements.
+     * @param {AdvertisementCreateManyArgs} args - Arguments to create many Advertisements.
+     * @example
+     * // Create many Advertisements
+     * const advertisement = await prisma.advertisement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdvertisementCreateManyArgs>(args?: SelectSubset<T, AdvertisementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Advertisements and returns the data saved in the database.
+     * @param {AdvertisementCreateManyAndReturnArgs} args - Arguments to create many Advertisements.
+     * @example
+     * // Create many Advertisements
+     * const advertisement = await prisma.advertisement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Advertisements and only return the `id`
+     * const advertisementWithIdOnly = await prisma.advertisement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdvertisementCreateManyAndReturnArgs>(args?: SelectSubset<T, AdvertisementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Advertisement.
+     * @param {AdvertisementDeleteArgs} args - Arguments to delete one Advertisement.
+     * @example
+     * // Delete one Advertisement
+     * const Advertisement = await prisma.advertisement.delete({
+     *   where: {
+     *     // ... filter to delete one Advertisement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdvertisementDeleteArgs>(args: SelectSubset<T, AdvertisementDeleteArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Advertisement.
+     * @param {AdvertisementUpdateArgs} args - Arguments to update one Advertisement.
+     * @example
+     * // Update one Advertisement
+     * const advertisement = await prisma.advertisement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdvertisementUpdateArgs>(args: SelectSubset<T, AdvertisementUpdateArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Advertisements.
+     * @param {AdvertisementDeleteManyArgs} args - Arguments to filter Advertisements to delete.
+     * @example
+     * // Delete a few Advertisements
+     * const { count } = await prisma.advertisement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdvertisementDeleteManyArgs>(args?: SelectSubset<T, AdvertisementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Advertisements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Advertisements
+     * const advertisement = await prisma.advertisement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdvertisementUpdateManyArgs>(args: SelectSubset<T, AdvertisementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Advertisements and returns the data updated in the database.
+     * @param {AdvertisementUpdateManyAndReturnArgs} args - Arguments to update many Advertisements.
+     * @example
+     * // Update many Advertisements
+     * const advertisement = await prisma.advertisement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Advertisements and only return the `id`
+     * const advertisementWithIdOnly = await prisma.advertisement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdvertisementUpdateManyAndReturnArgs>(args: SelectSubset<T, AdvertisementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Advertisement.
+     * @param {AdvertisementUpsertArgs} args - Arguments to update or create a Advertisement.
+     * @example
+     * // Update or create a Advertisement
+     * const advertisement = await prisma.advertisement.upsert({
+     *   create: {
+     *     // ... data to create a Advertisement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Advertisement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdvertisementUpsertArgs>(args: SelectSubset<T, AdvertisementUpsertArgs<ExtArgs>>): Prisma__AdvertisementClient<$Result.GetResult<Prisma.$AdvertisementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Advertisements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementCountArgs} args - Arguments to filter Advertisements to count.
+     * @example
+     * // Count the number of Advertisements
+     * const count = await prisma.advertisement.count({
+     *   where: {
+     *     // ... the filter for the Advertisements we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdvertisementCountArgs>(
+      args?: Subset<T, AdvertisementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdvertisementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Advertisement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdvertisementAggregateArgs>(args: Subset<T, AdvertisementAggregateArgs>): Prisma.PrismaPromise<GetAdvertisementAggregateType<T>>
+
+    /**
+     * Group by Advertisement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdvertisementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdvertisementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdvertisementGroupByArgs['orderBy'] }
+        : { orderBy?: AdvertisementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdvertisementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdvertisementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Advertisement model
+   */
+  readonly fields: AdvertisementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Advertisement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdvertisementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Advertisement model
+   */
+  interface AdvertisementFieldRefs {
+    readonly id: FieldRef<"Advertisement", 'String'>
+    readonly companyName: FieldRef<"Advertisement", 'String'>
+    readonly companyaddress: FieldRef<"Advertisement", 'String'>
+    readonly supervisedName: FieldRef<"Advertisement", 'String'>
+    readonly advertisedCategory: FieldRef<"Advertisement", 'AdvertisedCategory'>
+    readonly websiteLink: FieldRef<"Advertisement", 'String'>
+    readonly additionalInfo: FieldRef<"Advertisement", 'String'>
+    readonly advertiseBanner: FieldRef<"Advertisement", 'String'>
+    readonly isFeatured: FieldRef<"Advertisement", 'Boolean'>
+    readonly endDate: FieldRef<"Advertisement", 'String'>
+    readonly startDate: FieldRef<"Advertisement", 'String'>
+    readonly supervisedPhonenumber: FieldRef<"Advertisement", 'String'>
+    readonly advertiseduration: FieldRef<"Advertisement", 'Int'>
+    readonly advertiseStatus: FieldRef<"Advertisement", 'advertiseStatus'>
+    readonly createdAt: FieldRef<"Advertisement", 'DateTime'>
+    readonly updatedAt: FieldRef<"Advertisement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Advertisement findUnique
+   */
+  export type AdvertisementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter, which Advertisement to fetch.
+     */
+    where: AdvertisementWhereUniqueInput
+  }
+
+  /**
+   * Advertisement findUniqueOrThrow
+   */
+  export type AdvertisementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter, which Advertisement to fetch.
+     */
+    where: AdvertisementWhereUniqueInput
+  }
+
+  /**
+   * Advertisement findFirst
+   */
+  export type AdvertisementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter, which Advertisement to fetch.
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Advertisements to fetch.
+     */
+    orderBy?: AdvertisementOrderByWithRelationInput | AdvertisementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Advertisements.
+     */
+    cursor?: AdvertisementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Advertisements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Advertisements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Advertisements.
+     */
+    distinct?: AdvertisementScalarFieldEnum | AdvertisementScalarFieldEnum[]
+  }
+
+  /**
+   * Advertisement findFirstOrThrow
+   */
+  export type AdvertisementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter, which Advertisement to fetch.
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Advertisements to fetch.
+     */
+    orderBy?: AdvertisementOrderByWithRelationInput | AdvertisementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Advertisements.
+     */
+    cursor?: AdvertisementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Advertisements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Advertisements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Advertisements.
+     */
+    distinct?: AdvertisementScalarFieldEnum | AdvertisementScalarFieldEnum[]
+  }
+
+  /**
+   * Advertisement findMany
+   */
+  export type AdvertisementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter, which Advertisements to fetch.
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Advertisements to fetch.
+     */
+    orderBy?: AdvertisementOrderByWithRelationInput | AdvertisementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Advertisements.
+     */
+    cursor?: AdvertisementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Advertisements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Advertisements.
+     */
+    skip?: number
+    distinct?: AdvertisementScalarFieldEnum | AdvertisementScalarFieldEnum[]
+  }
+
+  /**
+   * Advertisement create
+   */
+  export type AdvertisementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Advertisement.
+     */
+    data: XOR<AdvertisementCreateInput, AdvertisementUncheckedCreateInput>
+  }
+
+  /**
+   * Advertisement createMany
+   */
+  export type AdvertisementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Advertisements.
+     */
+    data: AdvertisementCreateManyInput | AdvertisementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Advertisement createManyAndReturn
+   */
+  export type AdvertisementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * The data used to create many Advertisements.
+     */
+    data: AdvertisementCreateManyInput | AdvertisementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Advertisement update
+   */
+  export type AdvertisementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Advertisement.
+     */
+    data: XOR<AdvertisementUpdateInput, AdvertisementUncheckedUpdateInput>
+    /**
+     * Choose, which Advertisement to update.
+     */
+    where: AdvertisementWhereUniqueInput
+  }
+
+  /**
+   * Advertisement updateMany
+   */
+  export type AdvertisementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Advertisements.
+     */
+    data: XOR<AdvertisementUpdateManyMutationInput, AdvertisementUncheckedUpdateManyInput>
+    /**
+     * Filter which Advertisements to update
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * Limit how many Advertisements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Advertisement updateManyAndReturn
+   */
+  export type AdvertisementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * The data used to update Advertisements.
+     */
+    data: XOR<AdvertisementUpdateManyMutationInput, AdvertisementUncheckedUpdateManyInput>
+    /**
+     * Filter which Advertisements to update
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * Limit how many Advertisements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Advertisement upsert
+   */
+  export type AdvertisementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Advertisement to update in case it exists.
+     */
+    where: AdvertisementWhereUniqueInput
+    /**
+     * In case the Advertisement found by the `where` argument doesn't exist, create a new Advertisement with this data.
+     */
+    create: XOR<AdvertisementCreateInput, AdvertisementUncheckedCreateInput>
+    /**
+     * In case the Advertisement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdvertisementUpdateInput, AdvertisementUncheckedUpdateInput>
+  }
+
+  /**
+   * Advertisement delete
+   */
+  export type AdvertisementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+    /**
+     * Filter which Advertisement to delete.
+     */
+    where: AdvertisementWhereUniqueInput
+  }
+
+  /**
+   * Advertisement deleteMany
+   */
+  export type AdvertisementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Advertisements to delete
+     */
+    where?: AdvertisementWhereInput
+    /**
+     * Limit how many Advertisements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Advertisement without action
+   */
+  export type AdvertisementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Advertisement
+     */
+    select?: AdvertisementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Advertisement
+     */
+    omit?: AdvertisementOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Account
    */
 
@@ -10818,6 +12124,28 @@ export namespace Prisma {
   export type QuoteScalarFieldEnum = (typeof QuoteScalarFieldEnum)[keyof typeof QuoteScalarFieldEnum]
 
 
+  export const AdvertisementScalarFieldEnum: {
+    id: 'id',
+    companyName: 'companyName',
+    companyaddress: 'companyaddress',
+    supervisedName: 'supervisedName',
+    advertisedCategory: 'advertisedCategory',
+    websiteLink: 'websiteLink',
+    additionalInfo: 'additionalInfo',
+    advertiseBanner: 'advertiseBanner',
+    isFeatured: 'isFeatured',
+    endDate: 'endDate',
+    startDate: 'startDate',
+    supervisedPhonenumber: 'supervisedPhonenumber',
+    advertiseduration: 'advertiseduration',
+    advertiseStatus: 'advertiseStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdvertisementScalarFieldEnum = (typeof AdvertisementScalarFieldEnum)[keyof typeof AdvertisementScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     userId: 'userId',
     type: 'type',
@@ -10988,6 +12316,34 @@ export namespace Prisma {
    * Reference to a field of type 'newsArticleStatus[]'
    */
   export type ListEnumnewsArticleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'newsArticleStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'AdvertisedCategory'
+   */
+  export type EnumAdvertisedCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvertisedCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'AdvertisedCategory[]'
+   */
+  export type ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvertisedCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'advertiseStatus'
+   */
+  export type EnumadvertiseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'advertiseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'advertiseStatus[]'
+   */
+  export type ListEnumadvertiseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'advertiseStatus[]'>
     
 
 
@@ -11433,6 +12789,115 @@ export namespace Prisma {
     speakerInfo?: StringWithAggregatesFilter<"quote"> | string
     articleId?: StringWithAggregatesFilter<"quote"> | string
     createdAt?: DateTimeWithAggregatesFilter<"quote"> | Date | string
+  }
+
+  export type AdvertisementWhereInput = {
+    AND?: AdvertisementWhereInput | AdvertisementWhereInput[]
+    OR?: AdvertisementWhereInput[]
+    NOT?: AdvertisementWhereInput | AdvertisementWhereInput[]
+    id?: StringFilter<"Advertisement"> | string
+    companyName?: StringFilter<"Advertisement"> | string
+    companyaddress?: StringFilter<"Advertisement"> | string
+    supervisedName?: StringFilter<"Advertisement"> | string
+    advertisedCategory?: EnumAdvertisedCategoryFilter<"Advertisement"> | $Enums.AdvertisedCategory
+    websiteLink?: StringFilter<"Advertisement"> | string
+    additionalInfo?: StringFilter<"Advertisement"> | string
+    advertiseBanner?: StringFilter<"Advertisement"> | string
+    isFeatured?: BoolFilter<"Advertisement"> | boolean
+    endDate?: StringFilter<"Advertisement"> | string
+    startDate?: StringFilter<"Advertisement"> | string
+    supervisedPhonenumber?: StringFilter<"Advertisement"> | string
+    advertiseduration?: IntNullableFilter<"Advertisement"> | number | null
+    advertiseStatus?: EnumadvertiseStatusFilter<"Advertisement"> | $Enums.advertiseStatus
+    createdAt?: DateTimeFilter<"Advertisement"> | Date | string
+    updatedAt?: DateTimeFilter<"Advertisement"> | Date | string
+  }
+
+  export type AdvertisementOrderByWithRelationInput = {
+    id?: SortOrder
+    companyName?: SortOrder
+    companyaddress?: SortOrder
+    supervisedName?: SortOrder
+    advertisedCategory?: SortOrder
+    websiteLink?: SortOrder
+    additionalInfo?: SortOrder
+    advertiseBanner?: SortOrder
+    isFeatured?: SortOrder
+    endDate?: SortOrder
+    startDate?: SortOrder
+    supervisedPhonenumber?: SortOrder
+    advertiseduration?: SortOrderInput | SortOrder
+    advertiseStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdvertisementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdvertisementWhereInput | AdvertisementWhereInput[]
+    OR?: AdvertisementWhereInput[]
+    NOT?: AdvertisementWhereInput | AdvertisementWhereInput[]
+    companyName?: StringFilter<"Advertisement"> | string
+    companyaddress?: StringFilter<"Advertisement"> | string
+    supervisedName?: StringFilter<"Advertisement"> | string
+    advertisedCategory?: EnumAdvertisedCategoryFilter<"Advertisement"> | $Enums.AdvertisedCategory
+    websiteLink?: StringFilter<"Advertisement"> | string
+    additionalInfo?: StringFilter<"Advertisement"> | string
+    advertiseBanner?: StringFilter<"Advertisement"> | string
+    isFeatured?: BoolFilter<"Advertisement"> | boolean
+    endDate?: StringFilter<"Advertisement"> | string
+    startDate?: StringFilter<"Advertisement"> | string
+    supervisedPhonenumber?: StringFilter<"Advertisement"> | string
+    advertiseduration?: IntNullableFilter<"Advertisement"> | number | null
+    advertiseStatus?: EnumadvertiseStatusFilter<"Advertisement"> | $Enums.advertiseStatus
+    createdAt?: DateTimeFilter<"Advertisement"> | Date | string
+    updatedAt?: DateTimeFilter<"Advertisement"> | Date | string
+  }, "id">
+
+  export type AdvertisementOrderByWithAggregationInput = {
+    id?: SortOrder
+    companyName?: SortOrder
+    companyaddress?: SortOrder
+    supervisedName?: SortOrder
+    advertisedCategory?: SortOrder
+    websiteLink?: SortOrder
+    additionalInfo?: SortOrder
+    advertiseBanner?: SortOrder
+    isFeatured?: SortOrder
+    endDate?: SortOrder
+    startDate?: SortOrder
+    supervisedPhonenumber?: SortOrder
+    advertiseduration?: SortOrderInput | SortOrder
+    advertiseStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdvertisementCountOrderByAggregateInput
+    _avg?: AdvertisementAvgOrderByAggregateInput
+    _max?: AdvertisementMaxOrderByAggregateInput
+    _min?: AdvertisementMinOrderByAggregateInput
+    _sum?: AdvertisementSumOrderByAggregateInput
+  }
+
+  export type AdvertisementScalarWhereWithAggregatesInput = {
+    AND?: AdvertisementScalarWhereWithAggregatesInput | AdvertisementScalarWhereWithAggregatesInput[]
+    OR?: AdvertisementScalarWhereWithAggregatesInput[]
+    NOT?: AdvertisementScalarWhereWithAggregatesInput | AdvertisementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Advertisement"> | string
+    companyName?: StringWithAggregatesFilter<"Advertisement"> | string
+    companyaddress?: StringWithAggregatesFilter<"Advertisement"> | string
+    supervisedName?: StringWithAggregatesFilter<"Advertisement"> | string
+    advertisedCategory?: EnumAdvertisedCategoryWithAggregatesFilter<"Advertisement"> | $Enums.AdvertisedCategory
+    websiteLink?: StringWithAggregatesFilter<"Advertisement"> | string
+    additionalInfo?: StringWithAggregatesFilter<"Advertisement"> | string
+    advertiseBanner?: StringWithAggregatesFilter<"Advertisement"> | string
+    isFeatured?: BoolWithAggregatesFilter<"Advertisement"> | boolean
+    endDate?: StringWithAggregatesFilter<"Advertisement"> | string
+    startDate?: StringWithAggregatesFilter<"Advertisement"> | string
+    supervisedPhonenumber?: StringWithAggregatesFilter<"Advertisement"> | string
+    advertiseduration?: IntNullableWithAggregatesFilter<"Advertisement"> | number | null
+    advertiseStatus?: EnumadvertiseStatusWithAggregatesFilter<"Advertisement"> | $Enums.advertiseStatus
+    createdAt?: DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -12118,6 +13583,139 @@ export namespace Prisma {
     speakerInfo?: StringFieldUpdateOperationsInput | string
     articleId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdvertisementCreateInput = {
+    id?: string
+    companyName: string
+    companyaddress: string
+    supervisedName: string
+    advertisedCategory: $Enums.AdvertisedCategory
+    websiteLink: string
+    additionalInfo: string
+    advertiseBanner: string
+    isFeatured?: boolean
+    endDate: string
+    startDate: string
+    supervisedPhonenumber: string
+    advertiseduration?: number | null
+    advertiseStatus?: $Enums.advertiseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdvertisementUncheckedCreateInput = {
+    id?: string
+    companyName: string
+    companyaddress: string
+    supervisedName: string
+    advertisedCategory: $Enums.AdvertisedCategory
+    websiteLink: string
+    additionalInfo: string
+    advertiseBanner: string
+    isFeatured?: boolean
+    endDate: string
+    startDate: string
+    supervisedPhonenumber: string
+    advertiseduration?: number | null
+    advertiseStatus?: $Enums.advertiseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdvertisementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyaddress?: StringFieldUpdateOperationsInput | string
+    supervisedName?: StringFieldUpdateOperationsInput | string
+    advertisedCategory?: EnumAdvertisedCategoryFieldUpdateOperationsInput | $Enums.AdvertisedCategory
+    websiteLink?: StringFieldUpdateOperationsInput | string
+    additionalInfo?: StringFieldUpdateOperationsInput | string
+    advertiseBanner?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    endDate?: StringFieldUpdateOperationsInput | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    supervisedPhonenumber?: StringFieldUpdateOperationsInput | string
+    advertiseduration?: NullableIntFieldUpdateOperationsInput | number | null
+    advertiseStatus?: EnumadvertiseStatusFieldUpdateOperationsInput | $Enums.advertiseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdvertisementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyaddress?: StringFieldUpdateOperationsInput | string
+    supervisedName?: StringFieldUpdateOperationsInput | string
+    advertisedCategory?: EnumAdvertisedCategoryFieldUpdateOperationsInput | $Enums.AdvertisedCategory
+    websiteLink?: StringFieldUpdateOperationsInput | string
+    additionalInfo?: StringFieldUpdateOperationsInput | string
+    advertiseBanner?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    endDate?: StringFieldUpdateOperationsInput | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    supervisedPhonenumber?: StringFieldUpdateOperationsInput | string
+    advertiseduration?: NullableIntFieldUpdateOperationsInput | number | null
+    advertiseStatus?: EnumadvertiseStatusFieldUpdateOperationsInput | $Enums.advertiseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdvertisementCreateManyInput = {
+    id?: string
+    companyName: string
+    companyaddress: string
+    supervisedName: string
+    advertisedCategory: $Enums.AdvertisedCategory
+    websiteLink: string
+    additionalInfo: string
+    advertiseBanner: string
+    isFeatured?: boolean
+    endDate: string
+    startDate: string
+    supervisedPhonenumber: string
+    advertiseduration?: number | null
+    advertiseStatus?: $Enums.advertiseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdvertisementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyaddress?: StringFieldUpdateOperationsInput | string
+    supervisedName?: StringFieldUpdateOperationsInput | string
+    advertisedCategory?: EnumAdvertisedCategoryFieldUpdateOperationsInput | $Enums.AdvertisedCategory
+    websiteLink?: StringFieldUpdateOperationsInput | string
+    additionalInfo?: StringFieldUpdateOperationsInput | string
+    advertiseBanner?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    endDate?: StringFieldUpdateOperationsInput | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    supervisedPhonenumber?: StringFieldUpdateOperationsInput | string
+    advertiseduration?: NullableIntFieldUpdateOperationsInput | number | null
+    advertiseStatus?: EnumadvertiseStatusFieldUpdateOperationsInput | $Enums.advertiseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdvertisementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyaddress?: StringFieldUpdateOperationsInput | string
+    supervisedName?: StringFieldUpdateOperationsInput | string
+    advertisedCategory?: EnumAdvertisedCategoryFieldUpdateOperationsInput | $Enums.AdvertisedCategory
+    websiteLink?: StringFieldUpdateOperationsInput | string
+    additionalInfo?: StringFieldUpdateOperationsInput | string
+    advertiseBanner?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    endDate?: StringFieldUpdateOperationsInput | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    supervisedPhonenumber?: StringFieldUpdateOperationsInput | string
+    advertiseduration?: NullableIntFieldUpdateOperationsInput | number | null
+    advertiseStatus?: EnumadvertiseStatusFieldUpdateOperationsInput | $Enums.advertiseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateInput = {
@@ -12831,6 +14429,105 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumAdvertisedCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.AdvertisedCategory | EnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumAdvertisedCategoryFilter<$PrismaModel> | $Enums.AdvertisedCategory
+  }
+
+  export type EnumadvertiseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.advertiseStatus | EnumadvertiseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumadvertiseStatusFilter<$PrismaModel> | $Enums.advertiseStatus
+  }
+
+  export type AdvertisementCountOrderByAggregateInput = {
+    id?: SortOrder
+    companyName?: SortOrder
+    companyaddress?: SortOrder
+    supervisedName?: SortOrder
+    advertisedCategory?: SortOrder
+    websiteLink?: SortOrder
+    additionalInfo?: SortOrder
+    advertiseBanner?: SortOrder
+    isFeatured?: SortOrder
+    endDate?: SortOrder
+    startDate?: SortOrder
+    supervisedPhonenumber?: SortOrder
+    advertiseduration?: SortOrder
+    advertiseStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdvertisementAvgOrderByAggregateInput = {
+    advertiseduration?: SortOrder
+  }
+
+  export type AdvertisementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    companyName?: SortOrder
+    companyaddress?: SortOrder
+    supervisedName?: SortOrder
+    advertisedCategory?: SortOrder
+    websiteLink?: SortOrder
+    additionalInfo?: SortOrder
+    advertiseBanner?: SortOrder
+    isFeatured?: SortOrder
+    endDate?: SortOrder
+    startDate?: SortOrder
+    supervisedPhonenumber?: SortOrder
+    advertiseduration?: SortOrder
+    advertiseStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdvertisementMinOrderByAggregateInput = {
+    id?: SortOrder
+    companyName?: SortOrder
+    companyaddress?: SortOrder
+    supervisedName?: SortOrder
+    advertisedCategory?: SortOrder
+    websiteLink?: SortOrder
+    additionalInfo?: SortOrder
+    advertiseBanner?: SortOrder
+    isFeatured?: SortOrder
+    endDate?: SortOrder
+    startDate?: SortOrder
+    supervisedPhonenumber?: SortOrder
+    advertiseduration?: SortOrder
+    advertiseStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdvertisementSumOrderByAggregateInput = {
+    advertiseduration?: SortOrder
+  }
+
+  export type EnumAdvertisedCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AdvertisedCategory | EnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumAdvertisedCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AdvertisedCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAdvertisedCategoryFilter<$PrismaModel>
+    _max?: NestedEnumAdvertisedCategoryFilter<$PrismaModel>
+  }
+
+  export type EnumadvertiseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.advertiseStatus | EnumadvertiseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumadvertiseStatusWithAggregatesFilter<$PrismaModel> | $Enums.advertiseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumadvertiseStatusFilter<$PrismaModel>
+    _max?: NestedEnumadvertiseStatusFilter<$PrismaModel>
+  }
+
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
     provider: string
     providerAccountId: string
@@ -13271,6 +14968,14 @@ export namespace Prisma {
     update?: XOR<XOR<newsArticleUpdateToOneWithWhereWithoutQuotesInput, newsArticleUpdateWithoutQuotesInput>, newsArticleUncheckedUpdateWithoutQuotesInput>
   }
 
+  export type EnumAdvertisedCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.AdvertisedCategory
+  }
+
+  export type EnumadvertiseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.advertiseStatus
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -13539,6 +15244,40 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
     _max?: NestedEnumnewsArticleStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAdvertisedCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.AdvertisedCategory | EnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumAdvertisedCategoryFilter<$PrismaModel> | $Enums.AdvertisedCategory
+  }
+
+  export type NestedEnumadvertiseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.advertiseStatus | EnumadvertiseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumadvertiseStatusFilter<$PrismaModel> | $Enums.advertiseStatus
+  }
+
+  export type NestedEnumAdvertisedCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AdvertisedCategory | EnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AdvertisedCategory[] | ListEnumAdvertisedCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumAdvertisedCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AdvertisedCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAdvertisedCategoryFilter<$PrismaModel>
+    _max?: NestedEnumAdvertisedCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumadvertiseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.advertiseStatus | EnumadvertiseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.advertiseStatus[] | ListEnumadvertiseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumadvertiseStatusWithAggregatesFilter<$PrismaModel> | $Enums.advertiseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumadvertiseStatusFilter<$PrismaModel>
+    _max?: NestedEnumadvertiseStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {

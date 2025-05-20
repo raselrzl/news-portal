@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { UploadDropzone } from "@/components/general/UploadThingReexported";
+import { createAnAdvertisement } from "@/app/actions";
 
 const advertisementPackages = [
   { id: "PREMIER_1", name: "প্রিমিয়ার ১" },
@@ -62,7 +63,7 @@ export function CreateAdvertisementForm() {
       advertiseduration: 365,
       advertiseBanner: "",
       websiteLink: "",
-      pictureinfo: "",
+      additionalInfo: "",
       startDate: "",
       endDate: "",
     },
@@ -70,11 +71,20 @@ export function CreateAdvertisementForm() {
 
   const { control, handleSubmit, reset } = form;
 
-  const onSubmit = async (data: any) => {
-    console.log("Submitted form data:", data);
-    toast.success("Form submitted!");
-    reset();
-  };
+   async function onSubmit(data: any) {
+     try {
+       setPending(true);
+       await createAnAdvertisement(data);
+       console.log("📝 Submitted data:", data);
+       toast.success("News article submitted!");
+     } catch (error) {
+       if (error instanceof Error && error.message !== "NEXT_REDIRECT") {
+         toast.error("Something went wrong (NEXT_REDIRECT). Please try again.");
+       }
+     } finally {
+       setPending(false);
+     }
+   }
 
   return (
     <Form {...form}>
@@ -361,7 +371,7 @@ export function CreateAdvertisementForm() {
 
               <FormField
                 control={control}
-                name="pictureinfo"
+                name="additionalInfo"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>সংক্ষিপ্ত বর্ণনা</FormLabel>
