@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SocialLinks from "@/components/general/socialLink";
 import { Clock, Notebook } from "lucide-react";
+import { aauth } from "../actions";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -177,6 +178,8 @@ export default async function Home() {
     Environment,
     Politics,
   } = await getData();
+
+  const session = await aauth();
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-10">
       <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">

@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
 import { AdvertisedCategory, advertiseStatus } from "@/lib/generated/prisma";
+import { auth } from "./utils/auth";
 /* import { inngest } from "./utils/inngest/client"; */
 const aj = arcjet
   .withRule(
@@ -24,7 +25,7 @@ const aj = arcjet
       allow: [],
     })
   );
-/* export async function createNewsReporter(
+export async function createNewsReporter(
   data: z.infer<typeof newsReporterSchema>
 ) {
   const user = await requireUser();
@@ -53,52 +54,28 @@ const aj = arcjet
   });
 
   return redirect("/");
-} */
+}
 
+export async function aauth() {
+  const session = await auth(); // however you're getting the session
 
-  export async function createNewsReporter(
-    data: z.infer<typeof newsReporterSchema>
-  ) {
-    const user = await requireUser();
-  
-    const req = await request();
-    const dicision = await arcjet.protect(req);
-    if (dicision.isDenied()) {
-      throw new Error("Forbidden");
-    }
-  
-    const validateData = newsReporterSchema.parse(data);
-  
-    // ✅ Special rule for Rasel
-    const isRasel = user.email === "rasel6041@gmail.com";
-  
-    if (isRasel) {
-      // 👑 Rasel doesn't need onboarding, just promote
+  if (!session?.user?.email) return null;
+
+  const email = session.user.email;
+
+  if (email === "rasel6041@gmail.com") {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (user && user.userType !== "SUPERADMIN") {
       await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          userType: "SUPERADMIN",
-        },
-      });
-    } else {
-      // 📰 Everyone else becomes NEWSREPORTER with onboarding
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          onboardingCompleted: true,
-          userType: "NEWSREPORTER",
-          newsReporter: {
-            create: {
-              ...validateData,
-            },
-          },
-        },
+        where: { email },
+        data: { userType: "SUPERADMIN" },
       });
     }
-  
-    return redirect("/");
   }
-  
+
+  return session;
+}
 
 export async function createAdvertiser(data: z.infer<typeof AdvertiserSchema>) {
   const user = await requireUser();
