@@ -12,7 +12,7 @@ async function checkIfOnboardingCompleted(userId: string) {
   });
 
   if (user?.onboardingCompleted === true) {
-    redirect("/post-an-article");
+    redirect("/");
   }
 }
 
