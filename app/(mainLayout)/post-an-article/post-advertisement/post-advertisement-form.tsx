@@ -1,7 +1,5 @@
 "use client";
-import { useForm, useFieldArray } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Loader2, XIcon } from "lucide-react";
@@ -23,11 +21,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { UploadDropzone } from "@/components/general/UploadThingReexported";
-import { districts } from "@/app/utils/locationList";
-import { links } from "@/app/utils/linkList";
+
 const advertisementPackages = [
   { id: "PREMIER_1", name: "প্রিমিয়ার ১" },
   { id: "PREMIER_2", name: "প্রিমিয়ার ২" },
@@ -51,37 +47,9 @@ const advertisementPackages = [
   { id: "ENTERPRISE_2", name: "এন্টারপ্রাইজ ২" },
 ];
 
-// Schema
-const formSchema = z.object({
-  companyName: z.string().min(1, "Required"),
-  companyaddress: z.string().min(1, "Required"),
-  supervisedName: z.string().min(1, "Required"),
-  supervisedPhonenumber: z.string().min(1, "Required"),
-  advertisedCategory: z.string().min(1, "Required"),
-  isFeatured: z.boolean(),
-  advertiseStatus: z.enum(["DRAFT", "ACTIVE"]),
-  pageToview: z.string().min(1, "Required"),
-  advertiseduration: z.number(),
-  advertiseBanner: z.string().optional(),
-  websiteLink: z.string().optional(),
-  pictureinfo: z.string().optional(),
-  startDate: z.string().min(1, "Start date is required"),
-  endDate: z.string().min(1, "End date is required"),
-  textAdvertisement: z
-    .array(
-      z.object({
-        text: z.string(),
-        speakerInfo: z.string(),
-      })
-    )
-    .optional(),
-});
-
 export function CreateAdvertisementForm() {
   const [pending, setPending] = useState(false);
-
   const form = useForm({
-    resolver: zodResolver(formSchema),
     defaultValues: {
       companyName: "",
       companyaddress: "",
@@ -90,31 +58,22 @@ export function CreateAdvertisementForm() {
       advertisedCategory: "",
       isFeatured: false,
       advertiseStatus: "DRAFT",
-      pageToview: "",
+/*       pageToview: "", */
       advertiseduration: 365,
       advertiseBanner: "",
       websiteLink: "",
       pictureinfo: "",
-      textAdvertisement: [],
       startDate: "",
       endDate: "",
     },
   });
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { control, handleSubmit, reset } = form;
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "textAdvertisement",
-  });
-
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: any) => {
     console.log("Submitted form data:", data);
     toast.success("Form submitted!");
+    reset();
   };
 
   return (
@@ -124,7 +83,7 @@ export function CreateAdvertisementForm() {
           <Card>
             <CardHeader>
               <CardTitle>
-                আপনার বিজ্ঞাপন এ যা কিছু আছে, সবকিছু এখানে পূরণ করুন।
+              বিজ্ঞাপন এ যা কিছু আছে, সবকিছু এখানে পূরণ করুন।
               </CardTitle>
             </CardHeader>
 
@@ -136,9 +95,8 @@ export function CreateAdvertisementForm() {
                   <FormItem>
                     <FormLabel>বিজ্ঞাপন কোম্পানির নাম</FormLabel>
                     <FormControl>
-                      <Input placeholder="কোম্পানির নাম লিখুন..." {...field} />
+                      <Input placeholder="কোম্পানির নাম লিখুন..." {...field} className="placeholder:text-sm"/>
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -152,9 +110,9 @@ export function CreateAdvertisementForm() {
                       <Input
                         placeholder="কোম্পানির ঠিকানা লিখুন..."
                         {...field}
+                        className="placeholder:text-sm"
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -168,9 +126,9 @@ export function CreateAdvertisementForm() {
                       <Input
                         placeholder="পর্যবেক্ষকের নাম লিখুন..."
                         {...field}
+                        className="placeholder:text-sm"
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -181,15 +139,14 @@ export function CreateAdvertisementForm() {
                   <FormItem>
                     <FormLabel>সুপারভাইজারের ফোন নম্বর</FormLabel>
                     <FormControl>
-                      <Input placeholder="ফোন নম্বর লিখুন..." {...field} />
+                      <Input placeholder="ফোন নম্বর লিখুন..." {...field} className="placeholder:text-sm"/>
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
-              {/* startDate field */}
-              <FormField
-                control={form.control}
+            <div className="grid grid-cols-2 gap-4">
+            <FormField
+                control={control}
                 name="startDate"
                 render={({ field }) => (
                   <FormItem>
@@ -197,14 +154,11 @@ export function CreateAdvertisementForm() {
                     <FormControl>
                       <Input type="date" {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
-
-              {/* endDate field */}
               <FormField
-                control={form.control}
+                control={control}
                 name="endDate"
                 render={({ field }) => (
                   <FormItem>
@@ -212,14 +166,13 @@ export function CreateAdvertisementForm() {
                     <FormControl>
                       <Input type="date" {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
+            </div>
             </CardContent>
           </Card>
 
-          {/* Advertisement Info */}
           <Card>
             <CardContent className="space-y-6">
               <FormField
@@ -260,13 +213,37 @@ export function CreateAdvertisementForm() {
                         <SelectItem value="ACTIVE">প্রকাশিত</SelectItem>
                       </SelectContent>
                     </Select>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="advertisedCategory"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>বিজ্ঞাপনের প্যাকেজ নির্বাচন করুন</FormLabel>
+                    <div className="grid grid-cols-4 md:grid-cols-5 gap-1">
+                      {advertisementPackages.map((pkg) => (
+                        <Button
+                        className="p-2 text-xs md:text-md"
+                          key={pkg.id}
+                          type="button"
+                          variant={
+                            field.value === pkg.id ? "default" : "outline"
+                          }
+                          onClick={() => field.onChange(pkg.id)}
+                        >
+                          {pkg.name}
+                        </Button>
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                control={form.control}
+              {/*    <FormField
+                control={control}
                 name="advertisedCategory"
                 render={({ field }) => (
                   <FormItem>
@@ -288,33 +265,9 @@ export function CreateAdvertisementForm() {
                         </label>
                       ))}
                     </div>
-                    <FormMessage />
                   </FormItem>
                 )}
-              />
-
-              {/* <FormField
-  control={form.control}
-  name="advertisedCategory"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>বিজ্ঞাপনের প্যাকেজ নির্বাচন করুন</FormLabel>
-      <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
-        {advertisementPackages.map((pkg) => (
-          <Button
-            key={pkg.id}
-            type="button"
-            variant={field.value === pkg.id ? "default" : "outline"}
-            onClick={() => field.onChange(pkg.id)}
-          >
-            {pkg.name}
-          </Button>
-        ))}
-      </div>
-      <FormMessage />
-    </FormItem>
-  )}
-/> */}
+              /> */}
 
               <FormField
                 control={control}
@@ -339,14 +292,12 @@ export function CreateAdvertisementForm() {
                         );
                       })}
                     </div>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
             </CardContent>
           </Card>
 
-          {/* Media Uploads */}
           <Card>
             <CardContent className="space-y-6 pt-6">
               <FormField
@@ -389,7 +340,6 @@ export function CreateAdvertisementForm() {
                         />
                       )}
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -403,7 +353,7 @@ export function CreateAdvertisementForm() {
                       ছবি ক্লিক করলে সেটি নির্দিষ্ট লিঙ্কে নিয়ে যেতে চান
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="https://..." {...field} />
+                      <Input placeholder="https://..." {...field} className="placeholder:text-sm"/>
                     </FormControl>
                   </FormItem>
                 )}
@@ -416,64 +366,11 @@ export function CreateAdvertisementForm() {
                   <FormItem>
                     <FormLabel>সংক্ষিপ্ত বর্ণনা</FormLabel>
                     <FormControl>
-                      <Input placeholder="সংক্ষিপ্ত বর্ণনা..." {...field} />
+                      <Input placeholder="সংক্ষিপ্ত বর্ণনা..." {...field} className="placeholder:text-sm"/>
                     </FormControl>
                   </FormItem>
                 )}
               />
-            </CardContent>
-          </Card>
-
-          {/* Text Comments */}
-          <Card>
-            <CardHeader>
-              <CardTitle>যদি টেক্সট বিজ্ঞাপন হয়, তাহলে এখানে লিখুন।</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {fields.map((fieldItem, index) => (
-                <div
-                  key={fieldItem.id}
-                  className="space-y-2 border p-4 rounded"
-                >
-                  <FormField
-                    control={control}
-                    name={`textAdvertisement.${index}.text`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>টেক্সট</FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="টেক্সট..." {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={control}
-                    name={`textAdvertisement.${index}.speakerInfo`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>টেক্সট লিখক</FormLabel>
-                        <FormControl>
-                          <Input placeholder="নাম..." {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={() => remove(index)}
-                  >
-                    <XIcon className="w-4 h-4" />
-                  </Button>
-                </div>
-              ))}
-              <Button
-                type="button"
-                onClick={() => append({ text: "", speakerInfo: "" })}
-              >
-                + আরও লিখুন
-              </Button>
             </CardContent>
           </Card>
         </div>
@@ -481,7 +378,7 @@ export function CreateAdvertisementForm() {
         <Button type="submit" className="w-full" disabled={pending}>
           {pending ? (
             <>
-              <Loader2 className="animate-spin w-4 h-4 mr-2 text-white" />
+              <Loader2 className="animate-spin w-4 h-4 mr-2" />
               প্রকাশ করা হচ্ছে...
             </>
           ) : (
