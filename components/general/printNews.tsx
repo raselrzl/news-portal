@@ -151,7 +151,7 @@ export default function PrintNews({
         <div
           id="printable-content"
           ref={contentRef}
-          className="w-full bg-white p-4 rounded shadow"
+          className="w-full bg-white rounded shadow"
         >
           {newsPicture && (
             <img
