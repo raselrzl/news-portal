@@ -50,6 +50,12 @@ async function getNewsArticle(articleId: string) {
 
 type Params = Promise<{ articleId: string }>;
 
+
+
+import PrintNews from "@/components/general/printNews";
+
+
+
 export default async function NewsDetailsPage({ params }: { params: Params }) {
   const { articleId } = await params;
   const data = await getNewsArticle(articleId);
@@ -63,6 +69,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         href="/"
       />
     );
+
 
   return (
     <div className="grid grid-cols-5 gap-4 my-10">
@@ -108,7 +115,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             </div>
           </div>
 
-          <div className="w-full">
+         {/*  <div className="w-full">
             <img
               src={data?.newsPicture}
               alt="Description"
@@ -133,7 +140,19 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
               {">>>"}
               {data?.newsResource}
             </p>
-          </div>
+          </div> */}
+
+          <PrintNews 
+                newsDetails={data?.newsDetails} 
+                newsResource={data?.newsResource}
+                newsPicture={data?.newsPicture}
+                newsLocation={data?.newsLocation}
+                newsPictureHeading={data?.newsPictureHeading}
+                newsPictureCredit={data?.newsPictureCredit}
+
+          />
+
+          
           <div className="relative w-full h-[100px] md:h-[200px] px-10">
             <Image
               src="/gif111.gif"
