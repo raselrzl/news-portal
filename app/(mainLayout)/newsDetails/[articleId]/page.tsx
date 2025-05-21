@@ -115,7 +115,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
               className="w-full h-[300px] md:h-[400px] block md:px-6"
             />
             <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
-              <p className="mr-4">বিবরণ: {data?.newsPictureHeading}</p>
+              <p className="mr-4">{data?.newsPictureHeading}</p>
 
               <p>কৃতিত্ব: {data?.newsPictureCredit}</p>
             </div>
@@ -126,13 +126,22 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
                 <LocateIcon />
                 <p className=" text-xl font-bold">{data?.newsLocation}</p>
               </div>
-              <p className="p-6 text-justify">{data?.newsDetails}</p>
+              <p className="py-6 px-2 text-justify">{data?.newsDetails}</p>
             </div>
 
             <p className="ml-6 font-extrabold">
               {">>>"}
               {data?.newsResource}
             </p>
+          </div>
+          <div className="relative w-full h-[100px] md:h-[200px] px-10">
+            <Image
+              src="/gif111.gif"
+              alt="image"
+              fill
+              className="object-cover" // or "object-cover" if you want it to fill the box
+              priority // Optional: loads the image faster
+            />
           </div>
           {data.quotes && data.quotes.length > 0 && (
             <div className="mt-6 px-4">
@@ -168,11 +177,10 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
               {`>>>`}সাম্প্রতিক সংবাদ
             </h1>
             <SirshoNewsList />
-            
           </div>
           <div className="block md:hidden mt-10 border-t-1 p-2">
-              <ShirShoNewsHeadings />
-            </div>
+            <ShirShoNewsHeadings />
+          </div>
         </div>
       </div>
     </div>
