@@ -10,7 +10,7 @@ import {
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
-import { AdvertisedCategory, advertiseStatus } from "@/lib/generated/prisma";
+import { AdvertisedCategory, advertiseStatus, UserType } from "@/lib/generated/prisma";
 import { auth } from "./utils/auth";
 /* import { inngest } from "./utils/inngest/client"; */
 const aj = arcjet
@@ -397,4 +397,15 @@ export async function createAnAdvertisement(data: {
   });
 
   return redirect("/post-an-article/post-advertisement/alladvertise");
+}
+
+export async function promoteToUserType(userId: string, userType: UserType): Promise<void> {
+  await requireSuperAdmin();
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { userType },
+  });
+
+  redirect("/post-an-article/allusers");
 }

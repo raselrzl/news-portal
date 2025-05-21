@@ -27,7 +27,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CheckCircle, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
-import { requireSuperAdmin } from "@/app/utils/requireUser";
+import { requireNewsReporter, requireSuperAdmin } from "@/app/utils/requireUser";
+import { isNewsReporter, isNewsReporterOrSuperAdmin, supperAdmin } from "@/app/utils/ime";
+import { auth } from "@/app/utils/auth";
 
 async function getAllUsers() {
   const users = await prisma.user.findMany({
@@ -38,7 +40,7 @@ async function getAllUsers() {
       userType: true,
       onboardingCompleted: true,
       createdAt: true,
-      approvalStatus: true, // Add approvalStatus to the select fields
+      approvalStatus: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -49,7 +51,12 @@ async function getAllUsers() {
 
 export default async function AllUsersTable() {
   const users = await getAllUsers();
-  const superadmin=await requireSuperAdmin()
+  const superadmin = await requireNewsReporter();
+  let user = await auth();
+  let email = user?.user?.email;
+
+  const isSuperAdmin = await supperAdmin(email);
+  const newsReporterOrSuperAdmin = await isNewsReporterOrSuperAdmin(email);
 
   return (
     <>
@@ -106,25 +113,47 @@ export default async function AllUsersTable() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                         {/*  <DropdownMenuItem asChild>
+                          {/*  <DropdownMenuItem asChild>
                             <Link href={`/post-an-article/alaarticles/editarticle`}>
                               <PenBoxIcon className="w-4 h-4 mr-2" />
                               Edit
                             </Link>
                           </DropdownMenuItem> */}
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem asChild>
-                            <Link href={`/post-an-article/allusers/${user.id}/deleteuser`}>
-                              <XCircle className="w-4 h-4 mr-2 text-red-600" />
-                              ডিলিট করুন
-                            </Link>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem asChild>
-                            <Link href={`/post-an-article/allusers/${user.id}/approvalstatus`}>
-                              <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                              ইউজার স্ট্যাটাস
-                            </Link>
-                          </DropdownMenuItem>
+
+                          {isSuperAdmin && (
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/post-an-article/allusers/${user.id}/deleteuser`}
+                              >
+                                <XCircle className="w-4 h-4 mr-2 text-red-600" />
+                                ডিলিট করুন
+                              </Link>
+                            </DropdownMenuItem>
+                          )}
+
+                          {newsReporterOrSuperAdmin &&(
+                              <DropdownMenuItem asChild>
+                              <Link
+                                href={`/post-an-article/allusers/${user.id}/approvalstatus`}
+                              >
+                                <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                                ইউজার স্ট্যাটাস
+                              </Link>
+                              </DropdownMenuItem>
+                          )}
+
+                         
+                          {isSuperAdmin && (
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/post-an-article/allusers/${user.id}/approvalstatus/createsompadok`}
+                              >
+                                <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                                সম্পাদক হিসেবে আপডেট করুন
+                              </Link>
+                            </DropdownMenuItem>
+                          )}
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>

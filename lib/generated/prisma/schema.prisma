@@ -34,6 +34,7 @@ enum UserType {
   NEWSREPORTER
   ADVERTISER
   SUPERADMIN
+  SOMPANDOK
 }
 
 enum ApprovalStatus {

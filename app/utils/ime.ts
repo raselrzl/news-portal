@@ -70,3 +70,21 @@ export async function isNewsReporter(email: string | null | undefined): Promise<
     user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED"
   );
 }
+
+
+export async function isNewsReporterOrSuperAdmin(email: string | null | undefined): Promise<boolean> {
+  if (!email) return false;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: {
+      userType: true,
+      approvalStatus: true,
+    },
+  });
+
+  return (
+    user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED" || 
+    user?.userType === "SUPERADMIN"
+  );
+}

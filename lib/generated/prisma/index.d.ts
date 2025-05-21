@@ -66,7 +66,8 @@ export namespace $Enums {
   export const UserType: {
   NEWSREPORTER: 'NEWSREPORTER',
   ADVERTISER: 'ADVERTISER',
-  SUPERADMIN: 'SUPERADMIN'
+  SUPERADMIN: 'SUPERADMIN',
+  SOMPANDOK: 'SOMPANDOK'
 };
 
 export type UserType = (typeof UserType)[keyof typeof UserType]
