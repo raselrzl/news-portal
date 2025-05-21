@@ -1,14 +1,27 @@
-import { SquarePlay, LocateIcon } from "lucide-react";
+"use client";
+import {
+  Download,
+  Facebook,
+  MessageCircle,
+  Copy,
+  SquarePlay,
+  LocateIcon,
+  Wheat,
+  LinkIcon,
+} from "lucide-react";
+import { useRef } from "react";
+import html2canvas from "html2canvas-pro";
+import { Button } from "../ui/button";
+import Image from "next/image";
 
-// Update the props to accept individual fields instead of a single data object
 interface PrintNewsProps {
-    newsPicture: string | null;
-    newsPictureHeading: string | null;
-    newsPictureCredit: string | null;
-    newsLocation: string | null;
-    newsDetails: string | null;
-    newsResource: string | null;
-  }
+  newsPicture: string | null;
+  newsPictureHeading: string | null;
+  newsPictureCredit: string | null;
+  newsLocation: string | null;
+  newsDetails: string | null;
+  newsResource: string | null;
+}
 
 export default function PrintNews({
   newsPicture,
@@ -18,32 +31,116 @@ export default function PrintNews({
   newsDetails,
   newsResource,
 }: PrintNewsProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (!contentRef.current) return;
+    const canvas = await html2canvas(contentRef.current, {
+      scale: 2,
+      useCORS: true, // for external images
+    });
+    const link = document.createElement("a");
+    link.download = "news-article.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+  const handleShareWhatsApp = () => {
+    // WhatsApp sharing logic here
+  };
+
+  const handleShareFacebook = () => {
+    // Facebook sharing logic here
+  };
+
+  const handleShareMessenger = () => {
+    // Messenger sharing logic here
+  };
+
+  const handleCopyLink = () => {
+    // Copy link logic here
+  };
+
   return (
-    <div className="w-full">
-    <img
-      src={newsPicture ?? undefined}
-      alt="Description"
-      className="w-full h-[300px] md:h-[400px] block md:px-6"
-    />
-    <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
-      <p className="mr-4">{newsPictureHeading}</p>
+    <>
+      <div className="flex justify-end flex-wrap space-x-1 pr-4 mt-6 md:mt-2">
+        <Button
+          onClick={handleDownload}
+          className="mb-2 p-2 sm:p-3 bg-primary text-white rounded hover:bg-primary/90"
+          variant="outline"
+        >
+          <Download size={16} />
+        </Button>
 
-      <p>কৃতিত্ব: {newsPictureCredit}</p>
-    </div>
-    <div className="whitespace-pre-line text-md mg:text-lg">
-      <div className="flex flex-row ml-6">
-        <SquarePlay />
-        <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
-        <LocateIcon />
-        <p className=" text-xl font-bold">{newsLocation}</p>
+        <Button
+          onClick={handleShareWhatsApp}
+          className="w-9 h-9 p-0 bg-green-100 text-white rounded hover:bg-green-600 overflow-hidden"
+          variant="outline"
+        >
+          <Image
+            src="/whatsapp.png"
+            alt="WhatsApp"
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+          />
+        </Button>
+
+        <Button
+          onClick={handleShareFacebook}
+          className="mb-2 p-2 sm:p-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+          variant="outline"
+        >
+          <Facebook size={16} />
+        </Button>
+
+        <Button
+          onClick={handleShareMessenger}
+          className="mb-2 p-2 sm:p-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+          variant="outline"
+        >
+          <MessageCircle size={16} />
+        </Button>
+
+        <Button
+          onClick={handleCopyLink}
+          className="mb-2 p-2 sm:p-3 bg-gray-600 text-white rounded hover:bg-gray-700"
+          variant="outline"
+        >
+          <LinkIcon size={16} />
+        </Button>
       </div>
-      <p className="py-6 px-2 text-justify">{newsDetails}</p>
-    </div>
 
-    <p className="ml-6 font-extrabold">
-      {">>>"}
-      {newsResource}
-    </p>
-  </div>
+      <div className="mb-10">
+        <div
+          id="printable-content"
+          ref={contentRef}
+          className="w-full bg-white p-4 rounded shadow"
+        >
+          {newsPicture && (
+            <img
+              src={newsPicture}
+              alt="Description"
+              className="w-full h-[300px] md:h-[400px] block md:px-6"
+            />
+          )}
+          <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
+            <p className="mr-4">{newsPictureHeading}</p>
+            <p>কৃতিত্ব: {newsPictureCredit}</p>
+          </div>
+          <div className="whitespace-pre-line text-md mg:text-lg">
+            <div className="flex flex-row ml-6">
+              <SquarePlay />
+              <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
+              <LocateIcon />
+              <p className="text-xl font-bold">{newsLocation}</p>
+            </div>
+            <p className="py-6 px-2 text-justify">{newsDetails}</p>
+          </div>
+          <p className="ml-6 font-extrabold">
+            {">>>"} {newsResource}
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
