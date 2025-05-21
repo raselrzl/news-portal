@@ -62,9 +62,11 @@ export default function PrintNews({
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
   };
 
-/*   const handleShareMessenger = () => {
-    // Messenger sharing logic here
-  }; */
+  const handleShareMessenger = () => {
+    const url = encodeURIComponent(articleUrl);
+    const shareUrl = `https://m.me/?link=${url}`;
+    window.open(shareUrl, '_blank');
+  };
 
   const handleCopyLink = async () => {
     try {
@@ -82,10 +84,16 @@ export default function PrintNews({
       <div className="flex justify-end flex-wrap space-x-1 pr-4 mt-6 md:mt-2">
         <Button
           onClick={handleDownload}
-          className="mb-2 p-2 sm:p-3 "
+          className="w-9 h-9 overflow-hidden p-[6px]"
           variant="outline"
         >
-          <Download size={16} />
+          <Image
+            src="/download.png"
+            alt="WhatsApp"
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+          />
         </Button>
 
         <Button
@@ -116,13 +124,19 @@ export default function PrintNews({
           />
         </Button>
 
-     {/*    <Button
+        <Button
           onClick={handleShareMessenger}
-          className="mb-2 p-2 sm:p-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="w-9 h-9 p-0 overflow-hidden"
           variant="outline"
         >
-          <MessageCircle size={16} />
-        </Button> */}
+          <Image
+            src="/messanger.svg"
+            alt="WhatsApp"
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+          />
+        </Button>
 
         <Button
           onClick={handleCopyLink}
