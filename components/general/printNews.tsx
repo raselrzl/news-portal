@@ -9,10 +9,11 @@ import {
   Wheat,
   LinkIcon,
 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas-pro";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { toast } from "sonner";
 
 interface PrintNewsProps {
   newsPicture: string | null;
@@ -44,21 +45,37 @@ export default function PrintNews({
     link.href = canvas.toDataURL("image/png");
     link.click();
   };
+
+
+  const [articleUrl, setArticleUrl] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setArticleUrl(window.location.href); // Grabs full current URL
+    }
+  }, []);
   const handleShareWhatsApp = () => {
-    // WhatsApp sharing logic here
+    window.open(`https://wa.me/?text=${encodeURIComponent(articleUrl)}`, '_blank');
   };
 
   const handleShareFacebook = () => {
-    // Facebook sharing logic here
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
   };
 
   const handleShareMessenger = () => {
     // Messenger sharing logic here
   };
 
-  const handleCopyLink = () => {
-    // Copy link logic here
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(articleUrl);
+      toast('লিংক কপি হয়েছে!');
+    } catch {
+      toast('লিংক কপি করা যায়নি।');
+    }
   };
+
+
 
   return (
     <>
