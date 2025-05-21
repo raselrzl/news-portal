@@ -156,7 +156,7 @@ export default function PrintNews({
           ref={contentRef}
           className="w-full bg-white rounded shadow mt-6"
         >
-          <h1 className="text-3xl font-bold my-4 px-6 pt-4">{newsHeading}</h1>
+          <h1 className="text-3xl font-bold my-4  px-2 md:px-6 pt-6">{newsHeading}</h1>
           {newsPicture && (
             <img
               src={newsPicture}
