@@ -6,10 +6,7 @@ import {
 } from "@/components/general/homepageArticleList";
 import {
   Clock,
-  LocateIcon,
   Notebook,
-  SquarePlay,
-  User,
   User2,
 } from "lucide-react";
 import Image from "next/image";
@@ -70,6 +67,14 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
       />
     );
 
+  // Format the createdAt date before passing it to PrintNews
+  const formattedCreatedAt = data.createdAt
+    ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "তারিখ পাওয়া যায়নি"; 
 
   return (
     <div className="grid grid-cols-5 gap-4 my-10">
@@ -79,8 +84,8 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             src="/gif111.gif"
             alt="image"
             fill
-            className="object-cover" // or "object-cover" if you want it to fill the box
-            priority // Optional: loads the image faster
+            className="object-cover"
+            priority
           />
         </div>
         <div className="hidden md:block mt-10">
@@ -88,101 +93,63 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         </div>
       </div>
       <div className="col-span-5 md:col-span-3">
-        <div className="col-span-4 md:col-span-3">
-          <h1 className="text-3xl font-bold mb-4 pl-4">{data?.newsHeading}</h1>
-          <div className="flex flex-row font-bold mb-1">
-            <div className="flex flex-row pl-4">
-              {" "}
-              <Notebook className="size-4 pt-1" />
-              <p className="">পূর্ণ খবর</p>
-            </div>
-            <div className="flex flex-row pl-2">
-              {" "}
-              <User2 className="size-4 pt-1" />
-              <p className="">জাগ্রত প্রতিবেদক</p>
-            </div>
-            <div className="flex flex-row pl-2">
-              <Clock className="size-4 pt-1" />
-              <p className=" font-bold ">
-                {data.createdAt
-                  ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })
-                  : "তারিখ পাওয়া যায়নি"}
-              </p>
-            </div>
+        <div className="flex flex-row font-bold mb-1 md:text-xl">
+          <div className="flex flex-row pl-4">
+            <Notebook className="size-4 md:size-5 pt-1" />
+            <p>পূর্ণ খবর</p>
           </div>
-
-         {/*  <div className="w-full">
-            <img
-              src={data?.newsPicture}
-              alt="Description"
-              className="w-full h-[300px] md:h-[400px] block md:px-6"
-            />
-            <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
-              <p className="mr-4">{data?.newsPictureHeading}</p>
-
-              <p>কৃতিত্ব: {data?.newsPictureCredit}</p>
-            </div>
-            <div className="whitespace-pre-line text-md mg:text-lg">
-              <div className="flex flex-row ml-6">
-                <SquarePlay />
-                <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
-                <LocateIcon />
-                <p className=" text-xl font-bold">{data?.newsLocation}</p>
-              </div>
-              <p className="py-6 px-2 text-justify">{data?.newsDetails}</p>
-            </div>
-
-            <p className="ml-6 font-extrabold">
-              {">>>"}
-              {data?.newsResource}
-            </p>
-          </div> */}
-
-          <PrintNews 
-                newsDetails={data?.newsDetails} 
-                newsResource={data?.newsResource}
-                newsPicture={data?.newsPicture}
-                newsLocation={data?.newsLocation}
-                newsPictureHeading={data?.newsPictureHeading}
-                newsPictureCredit={data?.newsPictureCredit}
-
-          />
-
-          
-          <div className="relative w-full h-[100px] md:h-[200px] px-10">
-            <Image
-              src="/gif111.gif"
-              alt="image"
-              fill
-              className="object-cover" // or "object-cover" if you want it to fill the box
-              priority // Optional: loads the image faster
-            />
+          <div className="flex flex-row pl-2">
+            <User2 className="size-4 md:size-5 pt-1" />
+            <p>জাগ্রত প্রতিবেদক</p>
           </div>
-          {data.quotes && data.quotes.length > 0 && (
-            <div className="mt-6 px-4">
-              <div className="space-y-4 ">
-                {data.quotes.map((quote, index) => (
-                  <div
-                    key={index}
-                    className="relative border-l-4 border-primary pl-4 bg-accent-foreground/5 p-4 rounded-3xl min-h-[100px] text-justify"
-                  >
-                    <p className="italic mb-6">"{quote.text}"</p>
-                    <p className="absolute bottom-2 right-4 text-sm text-accent-foreground/60">
-                      — {quote.speakerInfo}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className="flex flex-row  pl-2">
+            <Clock className="size-4 md:size-5 pt-1" />
+            <p className="font-bold">{formattedCreatedAt}</p>
+          </div>
         </div>
+
+        {/* Passing the formattedCreatedAt to PrintNews */}
+        <PrintNews 
+          newsDetails={data?.newsDetails} 
+          newsResource={data?.newsResource}
+          newsPicture={data?.newsPicture}
+          newsLocation={data?.newsLocation}
+          newsPictureHeading={data?.newsPictureHeading}
+          newsPictureCredit={data?.newsPictureCredit}
+          newsHeading={data?.newsHeading}
+        />
+
+        <div className="relative w-full h-[100px] md:h-[200px] px-10">
+          <Image
+            src="/gif111.gif"
+            alt="image"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {data.quotes && data.quotes.length > 0 && (
+          <div className="mt-6 px-4">
+            <div className="space-y-4">
+              {data.quotes.map((quote, index) => (
+                <div
+                  key={index}
+                  className="relative border-l-4 border-primary pl-4 bg-accent-foreground/5 p-4 rounded-3xl min-h-[100px] text-justify"
+                >
+                  <p className="italic mb-6">"{quote.text}"</p>
+                  <p className="absolute bottom-2 right-4 text-sm text-accent-foreground/60">
+                    — {quote.speakerInfo}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
+
       <div className="col-span-5 md:col-span-1">
-        <div className=" flex flex-col items-center rounded-2xl mx-auto">
+        <div className="flex flex-col items-center rounded-2xl mx-auto">
           <Image
             src="/gif111.gif"
             alt="image"

@@ -14,6 +14,7 @@ import html2canvas from "html2canvas-pro";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { toast } from "sonner";
+import { Card } from "../ui/card";
 
 interface PrintNewsProps {
   newsPicture: string | null;
@@ -22,6 +23,7 @@ interface PrintNewsProps {
   newsLocation: string | null;
   newsDetails: string | null;
   newsResource: string | null;
+  newsHeading: string | null;
 }
 
 export default function PrintNews({
@@ -31,6 +33,7 @@ export default function PrintNews({
   newsLocation,
   newsDetails,
   newsResource,
+  newsHeading,
 }: PrintNewsProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -151,8 +154,9 @@ export default function PrintNews({
         <div
           id="printable-content"
           ref={contentRef}
-          className="w-full bg-white rounded shadow"
+          className="w-full bg-white rounded shadow mt-6"
         >
+          <h1 className="text-3xl font-bold my-4 px-6 pt-4">{newsHeading}</h1>
           {newsPicture && (
             <img
               src={newsPicture}
@@ -160,7 +164,7 @@ export default function PrintNews({
               className="w-full h-[300px] md:h-[400px] block md:px-6"
             />
           )}
-          <div className="flex justify-center mt-2 px-2 mb-10 text-sm text-accent-foreground/75">
+          <div className="flex justify-center mt-2 px-2 mb-6 md:mb-10 text-sm text-accent-foreground/75">
             <p className="mr-4">{newsPictureHeading}</p>
             <p>কৃতিত্ব: {newsPictureCredit}</p>
           </div>
@@ -171,13 +175,15 @@ export default function PrintNews({
               <LocateIcon />
               <p className="text-xl font-bold">{newsLocation}</p>
             </div>
-            <p className="py-6 px-2 text-justify">{newsDetails}</p>
+            <p className="py-4 md:py-6 px-2 md:px-6 text-justify">{newsDetails}</p>
           </div>
           <p className="ml-6 font-extrabold">
             {">>>"} {newsResource}
           </p>
         </div>
       </div>
+
+      
     </>
   );
 }
