@@ -57,7 +57,7 @@ export default async function AllNewsArticleList({currentPage}:{currentPage:numb
   return (
     <>
       {articles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
           {articles.map((article, index) => (
             <NewsArticleCard article={article} key={index} />
           ))}

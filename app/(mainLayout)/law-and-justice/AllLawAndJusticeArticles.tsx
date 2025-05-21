@@ -44,7 +44,7 @@ export default async function AllLawAndJusticeArticles() {
   return (
     <>
       {articles.length > 0 ? (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 px-2">
           {articles.map((article, index) => (
             <NewsArticleCard article={article} key={index} />
           ))}

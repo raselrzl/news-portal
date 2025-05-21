@@ -9,7 +9,7 @@ export default function Country() {
           {`>>>`}
           সারাদেশ সংবাদ
         </h1>
-        <AllCountryNewsArticleList />
+       <div className="px-2"> <AllCountryNewsArticleList /></div>
       </div>
       <div className="col-span-3 md:col-span-2">
         <AllArticleList />
