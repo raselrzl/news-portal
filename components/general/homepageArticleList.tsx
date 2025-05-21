@@ -383,7 +383,7 @@ export default async function AllArticleList() {
      </div>
 
       {allArticles && Object.keys(allArticles).length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-6 border-y-1 md:border-1 my-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
           {allArticles.slice(1, 7).map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
               <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
