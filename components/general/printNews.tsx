@@ -62,9 +62,9 @@ export default function PrintNews({
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
   };
 
-  const handleShareMessenger = () => {
+/*   const handleShareMessenger = () => {
     // Messenger sharing logic here
-  };
+  }; */
 
   const handleCopyLink = async () => {
     try {
@@ -82,7 +82,7 @@ export default function PrintNews({
       <div className="flex justify-end flex-wrap space-x-1 pr-4 mt-6 md:mt-2">
         <Button
           onClick={handleDownload}
-          className="mb-2 p-2 sm:p-3 bg-primary text-white rounded hover:bg-primary/90"
+          className="mb-2 p-2 sm:p-3 "
           variant="outline"
         >
           <Download size={16} />
@@ -90,11 +90,11 @@ export default function PrintNews({
 
         <Button
           onClick={handleShareWhatsApp}
-          className="w-9 h-9 p-0 bg-green-100 text-white rounded hover:bg-green-600 overflow-hidden"
+          className="w-9 h-9 p-0 overflow-hidden"
           variant="outline"
         >
           <Image
-            src="/whatsapp.png"
+            src="/whatsapp.svg"
             alt="WhatsApp"
             width={40}
             height={40}
@@ -104,23 +104,29 @@ export default function PrintNews({
 
         <Button
           onClick={handleShareFacebook}
-          className="mb-2 p-2 sm:p-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="w-9 h-9 p-0 overflow-hidden"
           variant="outline"
         >
-          <Facebook size={16} />
+          <Image
+            src="/facebook.svg"
+            alt="WhatsApp"
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+          />
         </Button>
 
-        <Button
+     {/*    <Button
           onClick={handleShareMessenger}
           className="mb-2 p-2 sm:p-3 bg-blue-500 text-white rounded hover:bg-blue-600"
           variant="outline"
         >
           <MessageCircle size={16} />
-        </Button>
+        </Button> */}
 
         <Button
           onClick={handleCopyLink}
-          className="mb-2 p-2 sm:p-3 bg-gray-600 text-white rounded hover:bg-gray-700"
+          className="mb-2 p-2 sm:p-3"
           variant="outline"
         >
           <LinkIcon size={16} />
