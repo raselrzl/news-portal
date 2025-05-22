@@ -482,7 +482,7 @@ export default async function Home() {
 
 
 
-      <div>
+      <div className="border-b-4 mb-10 border-primary">
       <TabsData />
       </div>
     </>
