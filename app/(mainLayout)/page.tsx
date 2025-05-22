@@ -462,13 +462,9 @@ export default async function Home() {
         </div>
       </Card>
 
-      {/*  tabdata section */}
-
+      {/*  bachaikreto section */}
       <div className="border-y-4 my-2 py-6 border-primary">
         <div className="grid grid-cols-3 border-primary my-4">
-          {/*  <div className="col-span-3 md:col-span-1">
-          <TabsData />
-        </div> */}
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between">
             {" "}
             <Bachaikreto />
@@ -482,6 +478,12 @@ export default async function Home() {
             <Samoyik />
           </div>
         </div>
+      </div>
+
+
+
+      <div>
+      <TabsData />
       </div>
     </>
   );

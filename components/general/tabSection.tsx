@@ -17,28 +17,30 @@ import {
   ShirShoNewsHeadings,
   SirshoNewsList,
 } from "./homepageArticleList";
+import { OpinionForm } from "./OpinionForm";
+import { ContactForm } from "./ContactForm";
 
 export function TabsData() {
   return (
     <Tabs
-      defaultValue="guruttopurno"
+      defaultValue="ovijug"
       className="w-auto my-10 p-2"
     >
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="guruttopurno">গুরুত্বপূর্ণ ও আলোচিত</TabsTrigger>
-        <TabsTrigger value="samprotik">সাম্প্রতিক বিষয়</TabsTrigger>
+        <TabsTrigger value="ovijug">অভিযোগ</TabsTrigger>
+        <TabsTrigger value="samprotik">যোগাযোগ</TabsTrigger>
       </TabsList>
-      <TabsContent value="guruttopurno">
+      <TabsContent value="ovijug">
         <Card className="min-h-[400px]">
           <CardHeader>
-            <GututtoPurnoAlochito />
+            <OpinionForm />
           </CardHeader>
         </Card>
       </TabsContent>
       <TabsContent value="samprotik">
         <Card className="min-h-[400px]">
           <CardHeader>
-            <SamprotikBisoy />
+            <ContactForm />
           </CardHeader>
         </Card>
       </TabsContent>
