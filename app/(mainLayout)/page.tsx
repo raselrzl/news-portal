@@ -463,21 +463,29 @@ export default async function Home() {
       </Card>
 
       {/*  tabdata section */}
-      <div className="grid grid-cols-3 border-y-4 border-primary my-8">
-        <div className="col-span-3 md:col-span-1">
+
+      <div className="border-y-4 my-2 py-6 border-primary">
+        <div className="flex flex-row items-center justify-end mr-4">
+          <Clock />
+          <h1 className=" ml-4 pt-1 text-2xl font-bold">বাছাইকৃত</h1>
+        </div>
+
+        <div className="grid grid-cols-3 border-primary my-4">
+          {/*  <div className="col-span-3 md:col-span-1">
           <TabsData />
-        </div>
-        <div className="col-span-3 md:col-span-1 p-2 mt-8">
-          {" "}
-          <Bachaikreto />
-          <img
-            src="/shoe.gif"
-            alt="gif image"
-            className="w-full h-[100px] rounded-xl mt-2"
-          />
-        </div>
-        <div className="col-span-3 md:col-span-1 p-2 mt-8">
-          <Samoyik />
+        </div> */}
+          <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between">
+            {" "}
+            <Bachaikreto />
+            <img
+              src="/shoe.gif"
+              alt="gif image"
+              className="w-full h-[100px] rounded-xl mt-2"
+            />
+          </div>
+          <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
+            <Samoyik />
+          </div>
         </div>
       </div>
     </>

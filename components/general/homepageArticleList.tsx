@@ -603,32 +603,38 @@ export async function Samoyik() {
 
   return (
     <>
-      <div className="">
-        <div className="flex flex-row items-center justify-center"><Clock /><h1 className=" ml-4 pt-1 text-2xl font-bold">সমসাময়িক</h1></div>
-        {Samoyik && Samoyik.length > 0 ? (
-          Samoyik.map((item) => (
-            <Link key={item.id} href={`/newsDetails/${item.id}`}>
-              <div className="border-t-1 py-2">
-                
-                
-                  <h3 className="text-lg font-semibold mr-2">
-                    {`>>>`}{item.newsHeading}
-                  </h3>
-       
-              </div>
-            </Link>
-          ))
-        ) : (
-          <EmptyState
-            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-            href="/"
-          />
-        )}
-
-
+      {Samoyik && Samoyik.length > 0 ? (
+  Samoyik.map((item) => (
+    <Link key={item.id} href={`/newsDetails/${item.id}`}>
+      <div className="shadow-xl my-2 border-2">
+        <div className="flex">
+          {/* Image: Half width */}
+          <div className="w-1/2 pr-2">
+            <img
+              src={item.newsPicture}
+              alt="Card Image"
+              className="w-full h-28 object-cover"
+            />
+          </div>
+          {/* Text: Half width */}
+          <div className="w-1/2 flex items-center">
+            <h3 className="text-lg font-semibold">
+              {item.newsHeading}
+            </h3>
+          </div>
+        </div>
       </div>
+    </Link>
+  ))
+) : (
+  <EmptyState
+    title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+    description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+    buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+    href="/"
+  />
+)}
+
     </>
   );
 }
@@ -639,11 +645,11 @@ export async function Bachaikreto() {
   const Bachaikreto = await getEnvironmentNews();
   return (
     <>
-    <div className="flex flex-row items-center justify-center"><Clock /><h1 className=" ml-4 pt-1 text-2xl font-bold">বাছাইকৃত</h1></div>
+    
       {Bachaikreto && Object.keys(Bachaikreto).length > 0 ? (
         <Link href={`/newsDetails/${Bachaikreto.id}`}>
-          <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2">
-            <div className="p-1">
+          <div className="w-full rounded-lg shadow-md border flex flex-col justify-between mt-2">
+            <div className="pt-2">
               <h2 className="text-lg font-semibold text-center">
                 {Bachaikreto.newsHeading}
               </h2>
