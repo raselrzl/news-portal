@@ -480,13 +480,14 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-
-
+      {/* binodonsection */}
       <div className="border-b-4 mb-10 border-primary grid grid-cols-1 md:grid-cols-3">
-            
-            <div className="col-span-3 md:col-span-2"><Binodon /></div>
-            <div className="col-span-3 md:col-span-1"><Contact /></div>
+        <div className="col-span-3 md:col-span-2">
+          <Binodon />
+        </div>
+        <div className="col-span-3 md:col-span-1">
+          <Contact />
+        </div>
       </div>
     </>
   );
