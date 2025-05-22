@@ -8,9 +8,10 @@ import { Clock, Notebook, StepForward } from "lucide-react";
 import { aauth } from "../actions";
 import YouTubeVideo from "@/components/general/YouTubeVideo";
 import { Card, CardHeader } from "@/components/ui/card";
-import { TabsData } from "@/components/general/tabSection";
+import { Contact } from "@/components/general/Contact";
 import {
   Bachaikreto,
+  Binodon,
   CrimeHEadings,
   Samoyik,
 } from "@/components/general/homepageArticleList";
@@ -482,8 +483,10 @@ export default async function Home() {
 
 
 
-      <div className="border-b-4 mb-10 border-primary">
-      <TabsData />
+      <div className="border-b-4 mb-10 border-primary grid grid-cols-1 md:grid-cols-3">
+            
+            <div className="col-span-3 md:col-span-2"><Binodon /></div>
+            <div className="col-span-3 md:col-span-1"><Contact /></div>
       </div>
     </>
   );

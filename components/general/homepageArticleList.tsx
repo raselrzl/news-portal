@@ -200,6 +200,41 @@ export async function getAllArticles() {
   });
 }
 
+
+
+export async function Contact() {
+  return await prisma.newsArticle.findMany({
+    where: { newsArticleStatus: "ACTIVE" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 6,
+  });
+}
+
+
+
 // getLastFeaturedArticle.ts
 export async function getLastFeaturedArticle() {
   return await prisma.newsArticle.findFirst({
@@ -668,6 +703,49 @@ export async function Bachaikreto() {
             />
           </div>
         </Link>
+      ) : (
+        <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+      )}
+    </>
+  );
+}
+
+
+
+export async function Binodon() {
+  const Binodon = await Contact();
+
+  return (
+    <>
+           {Binodon && Object.keys(Binodon).length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
+          {Binodon.map((article) => (
+            <Link href={`/newsDetails/${article.id}`} key={article.id}>
+              <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
+                <div className="w-auto h-[110px] md:h-[150px] border-1 rounded-xl overflow-hidden">
+                  <Image
+                    src={article.newsPicture}
+                    alt="picture"
+                    width={190}
+                    height={140}
+                    className="w-full h-full md:h-[150px] object-fit"
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed">
+                    {article.newsHeading}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       ) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"

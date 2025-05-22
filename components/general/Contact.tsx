@@ -20,7 +20,7 @@ import {
 import { OpinionForm } from "./OpinionForm";
 import { ContactForm } from "./ContactForm";
 
-export function TabsData() {
+export function Contact() {
   return (
     <Tabs
       defaultValue="ovijug"
