@@ -481,13 +481,20 @@ export default async function Home() {
         </div>
       </div>
       {/* binodonsection */}
-      <div className="border-b-4 mb-10 border-primary grid grid-cols-1 md:grid-cols-3">
-        <div className="col-span-3 md:col-span-2">
-          <Binodon />
+      <div className="border-b-4 mb-10 pb-6 border-primary">
+        <div className=" grid grid-cols-1 md:grid-cols-3">
+          <div className="col-span-3 md:col-span-2">
+            <Binodon />
+          </div>
+          <div className="col-span-3 md:col-span-1 md:mt-11">
+            <Contact />
+          </div>
         </div>
-        <div className="col-span-3 md:col-span-1 mt-11">
-          <Contact />
-        </div>
+        <img
+          src="/save1.gif"
+          alt="gif image"
+          className="w-full h-[100px] rounded-xl px-8 md:px-32"
+        />
       </div>
     </>
   );
