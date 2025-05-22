@@ -332,9 +332,8 @@ export async function getPoliticsNews() {
   });
 }
 
-
 export default async function AllArticleList() {
-  const allArticles=await getAllArticles()
+  const allArticles = await getAllArticles();
   const lastFeaturedArticle = await getLastFeaturedArticle();
 
   return (
@@ -342,7 +341,10 @@ export default async function AllArticleList() {
       {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
         <div className="mb-6 max-h-[320px] md:border-1 md:p-2 ">
           {lastFeaturedArticle && (
-            <Link href={`/newsDetails/${lastFeaturedArticle.id}`} className="mb-10">
+            <Link
+              href={`/newsDetails/${lastFeaturedArticle.id}`}
+              className="mb-10"
+            >
               <div className="grid grid-cols-5">
                 <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3 mt-10 md:mt-0">
                   <Image
@@ -374,14 +376,13 @@ export default async function AllArticleList() {
           href="/"
         />
       )}
-     <div className="flex justify-center items-center my-16 md:mt-0">
-       <img
+      <div className="flex justify-center items-center my-16 md:mt-0">
+        <img
           src="/shoe.gif"
           alt="gif image"
           className="w-[360px] md:w-full h-[170px] md:h-[170px] rounded-xl md:pt-0 py-2 mt-5 object-fill md:object-cover"
         />
-
-     </div>
+      </div>
 
       {allArticles && Object.keys(allArticles).length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
@@ -506,23 +507,27 @@ export async function ShirShoNewsHeadings() {
 
   return (
     <>
-      {Politics && Object.keys(Politics).length > 0 ? ( 
+      {Politics && Object.keys(Politics).length > 0 ? (
         <div className="bg-primary-foreground dark:bg-accent-foreground/5 py-2">
-        <h1 className="font-extrabold mb-2 pl-4 text-2xl"> {`>>>`}গুরুত্বপূর্ণ ও আলোচিত</h1>
-        <div className="rounded-xl py-2">
-          {Politics.map((article) => (
-            <Link href={`/newsDetails/${article.id}`} key={article.id}>
-              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
-                <div className="p-1">
-                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
-                    {article.newsHeading}
-                  </h2>
+          <h1 className="font-extrabold mb-2 pl-4 text-2xl">
+            {" "}
+            {`>>>`}গুরুত্বপূর্ণ ও আলোচিত
+          </h1>
+          <div className="rounded-xl py-2">
+            {Politics.map((article) => (
+              <Link href={`/newsDetails/${article.id}`} key={article.id}>
+                <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
+                  <div className="p-1">
+                    <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                      {article.newsHeading}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
-        </div>) : (
+      ) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
           description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
@@ -534,13 +539,12 @@ export async function ShirShoNewsHeadings() {
   );
 }
 
-
 export async function GututtoPurnoAlochito() {
   const guruttopurno = await getPoliticsNews();
 
   return (
     <>
-      {guruttopurno && Object.keys(guruttopurno).length > 0 ? ( 
+      {guruttopurno && Object.keys(guruttopurno).length > 0 ? (
         <div className="py-2">
           {guruttopurno.map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>
@@ -553,7 +557,8 @@ export async function GututtoPurnoAlochito() {
               </div>
             </Link>
           ))}
-        </div>) : (
+        </div>
+      ) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
           description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
@@ -564,7 +569,6 @@ export async function GututtoPurnoAlochito() {
     </>
   );
 }
-
 
 export async function SamprotikBisoy() {
   const samprotik = await getLatestNews();
@@ -578,7 +582,7 @@ export async function SamprotikBisoy() {
               <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
                 <div className="p-1">
                   <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
-                  {item.newsHeading}
+                    {item.newsHeading}
                   </h2>
                 </div>
               </div>
@@ -597,55 +601,58 @@ export async function SamprotikBisoy() {
   );
 }
 
-
 export async function Samoyik() {
   const Samoyik = await getLatestNews();
 
   return (
     <>
       {Samoyik && Samoyik.length > 0 ? (
-  Samoyik.map((item) => (
-    <Link key={item.id} href={`/newsDetails/${item.id}`}>
-      <div className="shadow-xl my-2 border-2">
-        <div className="flex">
-          {/* Image: Half width */}
-          <div className="w-1/2 pr-2">
-            <img
-              src={item.newsPicture}
-              alt="Card Image"
-              className="w-full h-28 object-cover"
-            />
-          </div>
-          {/* Text: Half width */}
-          <div className="w-1/2 flex items-center">
-            <h3 className="text-lg font-semibold">
-              {item.newsHeading}
-            </h3>
-          </div>
-        </div>
-      </div>
-    </Link>
-  ))
-) : (
-  <EmptyState
-    title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-    description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-    buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-    href="/"
-  />
-)}
-
+        Samoyik.map((item) => (
+          <Link key={item.id} href={`/newsDetails/${item.id}`}>
+            <div className="shadow-xl my-2 border-2">
+              <div className="flex">
+                {/* Image: Half width */}
+                <div className="w-1/2 pr-2">
+                  <img
+                    src={item.newsPicture}
+                    alt="Card Image"
+                    className="w-full h-28 object-cover"
+                  />
+                </div>
+                {/* Text: Half width */}
+                <div className="w-1/2 flex items-center">
+                  <h3 className="text-lg font-semibold">{item.newsHeading}</h3>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))
+      ) : (
+        <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+      )}
     </>
   );
 }
-
-
 
 export async function Bachaikreto() {
   const Bachaikreto = await getEnvironmentNews();
   return (
     <>
-    
+      <div className="flex flex-row items-center space-x-2">
+        <Image
+          src="/clock.gif"
+          alt="YouTube GIF"
+          width={50} // adjust as needed
+          height={50}
+          className="object-contain"
+        />
+        <p className="font-bold text-2xl">বাছাইকৃত</p>
+      </div>
       {Bachaikreto && Object.keys(Bachaikreto).length > 0 ? (
         <Link href={`/newsDetails/${Bachaikreto.id}`}>
           <div className="w-full rounded-lg shadow-md border flex flex-col justify-between mt-2">
