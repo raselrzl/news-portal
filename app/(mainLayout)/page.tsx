@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { prisma } from "../utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
 import Link from "next/link";
 import Image from "next/image";
 import SocialLinks from "@/components/general/socialLink";
-import { Clock, Notebook, StepForward } from "lucide-react";
+import { Clock, Loader2, Notebook, StepForward } from "lucide-react";
 import { aauth } from "../actions";
 import YouTubeVideo from "@/components/general/YouTubeVideo";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -15,6 +15,7 @@ import {
   CrimeHEadings,
   Samoyik,
 } from "@/components/general/homepageArticleList";
+import { PremiarOne } from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -241,11 +242,9 @@ export default async function Home() {
         <div className="order-2 md:order-2 md:col-span-1">
           <div className=" grid grid-cols-1">
             <div>
-              <img
-                src="/gif111.gif"
-                alt="gif image"
-                className="w-full h-[150px] rounded-xl"
-              />
+            <Suspense fallback={<Loader2 />}>
+              <PremiarOne />
+            </Suspense>
             </div>
 
             {Environment && Object.keys(Environment).length > 0 ? (
