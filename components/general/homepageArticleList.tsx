@@ -200,8 +200,6 @@ export async function getAllArticles() {
   });
 }
 
-
-
 export async function Contact() {
   return await prisma.newsArticle.findMany({
     where: { newsArticleStatus: "ACTIVE" },
@@ -232,8 +230,6 @@ export async function Contact() {
     take: 6,
   });
 }
-
-
 
 // getLastFeaturedArticle.ts
 export async function getLastFeaturedArticle() {
@@ -715,14 +711,21 @@ export async function Bachaikreto() {
   );
 }
 
-
-
 export async function Binodon() {
   const Binodon = await Contact();
-
   return (
     <>
-           {Binodon && Object.keys(Binodon).length > 0 ? (
+    <div className="flex flex-row items-center space-x-2">
+        <Image
+          src="/binodon.gif"
+          alt="YouTube GIF"
+          width={50} // adjust as needed
+          height={50}
+          className="object-contain"
+        />
+        <p className="font-bold text-2xl">বিনোদন</p>
+      </div>
+      {Binodon && Object.keys(Binodon).length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
           {Binodon.map((article) => (
             <Link href={`/newsDetails/${article.id}`} key={article.id}>

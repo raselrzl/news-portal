@@ -485,7 +485,7 @@ export default async function Home() {
         <div className="col-span-3 md:col-span-2">
           <Binodon />
         </div>
-        <div className="col-span-3 md:col-span-1">
+        <div className="col-span-3 md:col-span-1 mt-11">
           <Contact />
         </div>
       </div>
