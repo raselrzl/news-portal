@@ -8,6 +8,12 @@ import { Clock, Notebook, StepForward } from "lucide-react";
 import { aauth } from "../actions";
 import YouTubeVideo from "@/components/general/YouTubeVideo";
 import { Card, CardHeader } from "@/components/ui/card";
+import { TabsData } from "@/components/general/tabSection";
+import {
+  Bachaikreto,
+  CrimeHEadings,
+  Samoyik,
+} from "@/components/general/homepageArticleList";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -394,7 +400,7 @@ export default async function Home() {
         </div>
       </div>
 
-       {/* Youtuve vedio section */}
+      {/* Youtuve vedio section */}
       <Card className="p-4 shadow-lg mb-20 mt-8 rounded-none">
         <CardHeader className="p-0 flex flex-row justify-between">
           <div className="flex flex-row items-center space-x-2">
@@ -455,6 +461,25 @@ export default async function Home() {
           </div>
         </div>
       </Card>
+
+      {/*  tabdata section */}
+      <div className="grid grid-cols-3 border-y-4 border-primary my-8">
+        <div className="col-span-3 md:col-span-1">
+          <TabsData />
+        </div>
+        <div className="col-span-3 md:col-span-1 p-2 mt-8">
+          {" "}
+          <Bachaikreto />
+          <img
+            src="/shoe.gif"
+            alt="gif image"
+            className="w-full h-[100px] rounded-xl mt-2"
+          />
+        </div>
+        <div className="col-span-3 md:col-span-1 p-2 mt-8">
+          <Samoyik />
+        </div>
+      </div>
     </>
   );
 }

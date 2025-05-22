@@ -3,6 +3,7 @@ import Image from "next/image";
 import { EmptyState } from "./EmptyState";
 import SocialLinks from "./socialLink";
 import Link from "next/link";
+import { Clock } from "lucide-react";
 
 /* async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -522,6 +523,139 @@ export async function ShirShoNewsHeadings() {
           ))}
         </div>
         </div>) : (
+        <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+      )}
+    </>
+  );
+}
+
+
+export async function GututtoPurnoAlochito() {
+  const guruttopurno = await getPoliticsNews();
+
+  return (
+    <>
+      {guruttopurno && Object.keys(guruttopurno).length > 0 ? ( 
+        <div className="py-2">
+          {guruttopurno.map((article) => (
+            <Link href={`/newsDetails/${article.id}`} key={article.id}>
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
+                <div className="p-1">
+                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                    {article.newsHeading}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>) : (
+        <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+      )}
+    </>
+  );
+}
+
+
+export async function SamprotikBisoy() {
+  const samprotik = await getLatestNews();
+
+  return (
+    <>
+      <div className="py-2 bg-amber-50">
+        {samprotik && samprotik.length > 0 ? (
+          samprotik.map((item) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
+                <div className="p-1">
+                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                  {item.newsHeading}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+            href="/"
+          />
+        )}
+      </div>
+    </>
+  );
+}
+
+
+export async function Samoyik() {
+  const Samoyik = await getLatestNews();
+
+  return (
+    <>
+      <div className="">
+        <div className="flex flex-row items-center justify-center"><Clock /><h1 className=" ml-4 pt-1 text-2xl font-bold">সমসাময়িক</h1></div>
+        {Samoyik && Samoyik.length > 0 ? (
+          Samoyik.map((item) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="border-t-1 py-2">
+                
+                
+                  <h3 className="text-lg font-semibold mr-2">
+                    {`>>>`}{item.newsHeading}
+                  </h3>
+       
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+            href="/"
+          />
+        )}
+
+
+      </div>
+    </>
+  );
+}
+
+
+
+export async function Bachaikreto() {
+  const Bachaikreto = await getEnvironmentNews();
+  return (
+    <>
+    <div className="flex flex-row items-center justify-center"><Clock /><h1 className=" ml-4 pt-1 text-2xl font-bold">বাছাইকৃত</h1></div>
+      {Bachaikreto && Object.keys(Bachaikreto).length > 0 ? (
+        <Link href={`/newsDetails/${Bachaikreto.id}`}>
+          <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2">
+            <div className="p-1">
+              <h2 className="text-lg font-semibold text-center">
+                {Bachaikreto.newsHeading}
+              </h2>
+            </div>
+            <img
+              src={Bachaikreto.newsPicture}
+              alt="Card image"
+              className="w-full h-40 object-cover"
+            />
+          </div>
+        </Link>
+      ) : (
         <EmptyState
           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
           description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
