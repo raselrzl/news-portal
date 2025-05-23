@@ -95,3 +95,50 @@ export async function PremiumOneAdvertise() {
     </>
   );
 }
+
+
+
+export async function getPremierTwoAdvertise() {
+  return await prisma.advertisement.findMany({
+    where: { advertisedCategory: "PREMIER_2" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      companyName: true,
+      companyaddress: true,
+      websiteLink: true,
+      advertiseBanner: true,
+      endDate: true,
+      supervisedPhonenumber: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 1,
+  });
+}
+
+export async function PremiarTwo() {
+  const PremiarOneAdvertise = await getPremierTwoAdvertise();
+  return (
+    <>
+      {PremiarOneAdvertise && Object.keys(PremiarOneAdvertise).length > 0 ? (
+        <div className="flex items-center justify-center">
+          {PremiarOneAdvertise.map((premier1) => (
+            <Link href={`https://${premier1.websiteLink}`} key={premier1.id}  target="_blank"
+            rel="noopener noreferrer">
+              <Image
+                src={premier1.advertiseBanner}
+                alt={premier1.companyName}
+                width={300} // adjust as needed
+                height={200}
+                className="w-[300px] h-[225px] rounded-xl mb-10"
+              />
+            </Link>
+          ))}
+        </div>
+      ) : null}
+    </>
+  );
+}

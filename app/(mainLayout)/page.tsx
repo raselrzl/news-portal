@@ -15,7 +15,7 @@ import {
   ScienceNews,
   ScienceNewsHeadPost,
 } from "@/components/general/homepageArticleList";
-import { PremiarOne, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
+import { PremiarOne, PremiarTwo, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, InternationalAll] =
@@ -403,11 +403,7 @@ export default async function Home() {
               />
             </div>
             <div className="min-w-[300px] flex items-center justify-center">
-              <img
-                src="/apple.gif"
-                alt="Apple GIF"
-                className="object-contain w-full h-auto"
-              />
+              <PremiarTwo />
             </div>
             <div className="min-w-[300px]">
               <YouTubeVideo
