@@ -18,7 +18,7 @@ import {
 import { PremiarOne, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
-  const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
+  const [allArticles, lastFeaturedArticle, latestNews, InternationalAll] =
     await Promise.all([
       prisma.newsArticle.findMany({
         where: { newsArticleStatus: "ACTIVE" },
@@ -110,40 +110,8 @@ async function getData() {
         take: 7,
       }),
 
-      prisma.newsArticle.findFirst({
-        where: {
-          newsCategory: "EDUCATION",
-          isFeatured: true,
-        },
-        select: {
-          id: true,
-          createdAt: true,
-          isFeatured: true,
-          newsCategory: true,
-          newsDetails: true,
-          newsHeading: true,
-          newsPicture: true,
-          quotes: {
-            select: {
-              speakerInfo: true,
-              text: true,
-            },
-          },
-          newsResource: true,
-          newsPictureHeading: true,
-          newsPictureCredit: true,
-          newsLocation: true,
-          newsReporter: true,
-          newsArticleStatus: true,
-        },
-
-        orderBy: {
-          createdAt: "desc",
-        },
-      }),
-
       prisma.newsArticle.findMany({
-        where: { newsCategory: "EDUCATION" },
+        where: { newsCategory: "INTERNATIONAL" },
         select: {
           id: true,
           createdAt: true,
@@ -176,8 +144,8 @@ async function getData() {
     allArticles,
     lastFeaturedArticle,
     latestNews,
-    Environment,
-    Politics,
+    /* International, */
+    InternationalAll,
   };
 }
 export default async function Home() {
@@ -185,8 +153,7 @@ export default async function Home() {
     allArticles,
     lastFeaturedArticle,
     latestNews,
-    Environment,
-    Politics,
+    InternationalAll,
   } = await getData();
 
   const session = await aauth();
@@ -247,16 +214,16 @@ export default async function Home() {
             </Suspense>
             </div>
 
-            {Environment && Object.keys(Environment).length > 0 ? (
-              <Link href={`/newsDetails/${Environment.id}`}>
+            {InternationalAll && Object.keys(InternationalAll).length > 0 ? (
+              <Link href={`/newsDetails/${InternationalAll[0].id}`}>
                 <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2 p-2">
                   <div className="p-1">
                     <h2 className="text-lg font-semibold text-center">
-                      {Environment.newsHeading}
+                      {InternationalAll[0].newsHeading}
                     </h2>
                   </div>
                   <img
-                    src={Environment.newsPicture}
+                    src={InternationalAll[0].newsPicture}
                     alt="Card image"
                     className="w-full h-40 object-cover"
                   />
@@ -273,9 +240,9 @@ export default async function Home() {
             <div className="bg-primary-foreground dark:bg-accent-foreground/5 mt-4 pt-2 border-1">
               <h1 className="font-bold text-center text-2xl">"শীর্ষ খবর"</h1>
               <div className="relative h-56 overflow-y-scroll mx-4 md:mx-0 md:px-1  mb-6 px-4">
-                {Politics && Object.keys(Politics).length > 0 ? (
+                {InternationalAll && Object.keys(InternationalAll).length > 0 ? (
                   <div className="rounded-xl">
-                    {Politics.map((article) => (
+                    {InternationalAll.slice(1).map((article) => (
                       <Link
                         href={`/newsDetails/${article.id}`}
                         key={article.id}

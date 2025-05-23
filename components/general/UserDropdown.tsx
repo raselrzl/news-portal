@@ -5,7 +5,12 @@ import {
   Layers2,
   Lock,
   LogOut,
+  Megaphone,
+  MessagesSquare,
+  Newspaper,
   PoundSterling,
+  Settings2,
+  Users,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import {
@@ -33,7 +38,7 @@ interface iAppProps {
 export async function UserDropdown({ email, name, image }: iAppProps) {
   const isAdmin = await supperAdmin(email);
   const newsReporter = await isNewsReporter(email);
-  const mkr=ime(email)
+  const mkr = ime(email);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,61 +57,64 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
           <span className="text-xs font-medium text-foreground">{email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/alluseropinion">
+            <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
+            <span>সব অভিযোগসমূহ</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuGroup>
           {(newsReporter || isAdmin || mkr) && (
             <>
-            <DropdownMenuItem asChild>
-            <Link href="/post-an-article">
-              <BookPlus size={16} strokeWidth={2} className="opacity-60" />
-              একটি সংবাদ লিখুন
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/my-article">
-              <Layers2 size={16} strokeWidth={2} className="opacity-60" />
-              <span>আমার প্রকাশিত সংবাদের তালিকা</span>
-            </Link>
-          </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/post-an-article">
+                  <BookPlus size={16} strokeWidth={2} className="opacity-60" />
+                  একটি সংবাদ লিখুন
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/my-article">
+                <Newspaper size={16} strokeWidth={2} className="opacity-60" />
+                  <span>আমার প্রকাশিত সংবাদের তালিকা</span>
+                </Link>
+              </DropdownMenuItem>
             </>
           )}
-          
-          {(isAdmin || mkr)&& (
+
+          {(isAdmin || mkr) && (
             <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
-                  <Lock size={16} strokeWidth={2} className="opacity-60" />
+                    <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/allusers">
-                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                <Users size={16} strokeWidth={2} className="opacity-60" />
                   <span>অ্যাপের সকল ব্যবহারকারী</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement">
-                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                <Megaphone size={16} strokeWidth={2} className="opacity-60" />
                   <span>বিজ্ঞাপন পোস্ট করুন</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement/alladvertise">
-                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
                 <Link href="/alluseropinion/opiniontable">
-                  <Heart size={16} strokeWidth={2} className="opacity-60" />
+                <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব অভিযোগসমূহ নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
-
-
-              
             </>
           )}
 
