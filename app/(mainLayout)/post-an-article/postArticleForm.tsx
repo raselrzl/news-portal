@@ -3,7 +3,7 @@ import { Toaster, toast } from "sonner";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { XIcon } from "lucide-react";
+import { Loader2, XIcon } from "lucide-react";
 import { useState } from "react";
 import {
   Form,
@@ -624,7 +624,14 @@ export function CreateNewsArticleForm({
         </div>
 
         <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "প্রকাশিত হচ্ছে..." : "প্রকাশ করুন"}
+        {pending ? (
+            <>
+              <Loader2 className="animate-spin w-4 h-4 mr-2" />
+              প্রকাশ করা হচ্ছে...
+            </>
+          ) : (
+            " প্রকাশ করুন"
+          )}
         </Button>
       </form>
     </Form>
