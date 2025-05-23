@@ -53,7 +53,7 @@ async function getData() {
         take: 7,
       }),
 
-      prisma.newsArticle.findFirst({
+      prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
           isFeatured: true,
@@ -83,6 +83,7 @@ async function getData() {
         orderBy: {
           createdAt: "desc",
         },
+        take: 7,
       }),
 
       prisma.newsArticle.findMany({
@@ -296,11 +297,11 @@ export default async function Home() {
           Object.keys(lastFeaturedArticle).length > 0 ? (
             <div className="mb-6 max-h-[290px] md:border-1 md:p-2">
               {lastFeaturedArticle && (
-                <Link href={`/newsDetails/${lastFeaturedArticle.id}`}>
+                <Link href={`/newsDetails/${lastFeaturedArticle[0].id}`}>
                   <div className="grid grid-cols-5">
                     <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
                       <Image
-                        src={lastFeaturedArticle.newsPicture}
+                        src={lastFeaturedArticle[0].newsPicture}
                         alt="picture"
                         width={500}
                         height={270}
@@ -309,11 +310,11 @@ export default async function Home() {
                     </div>
                     <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
                       <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0 line-clamp-2 md:line-clamp-5">
-                        {lastFeaturedArticle.newsHeading}
+                        {lastFeaturedArticle[0].newsHeading}
                         <span className="md:hidden sm:block">বিস্তরিত....</span>
                       </h2>
                       <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                        {lastFeaturedArticle.newsDetails}
+                        {lastFeaturedArticle[0].newsDetails}
                       </p>
                     </div>
                   </div>
@@ -329,9 +330,9 @@ export default async function Home() {
             />
           )}
 
-          {allArticles && Object.keys(allArticles).length > 0 ? (
+          {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-16 border-t-2">
-              {allArticles.slice(1, 7).map((article) => (
+              {lastFeaturedArticle.slice(1, 7).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
                   <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
                     <div className="w-auto h-[110px] md:h-[150px] border-1 rounded-xl overflow-hidden">
