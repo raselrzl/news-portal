@@ -443,7 +443,7 @@ export default async function Home() {
         </div>
       </div>
       {/* binodonsection */}
-      <div className="border-b-4 mb-10 pb-6 border-primary">
+      <div className="mb-10 pb-6">
         <div className=" grid grid-cols-1 md:grid-cols-3">
           <div className="col-span-3 md:col-span-2">
             <Binodon />
