@@ -14,7 +14,7 @@ import {
   Binodon,
   ScienceNews,
 } from "@/components/general/homepageArticleList";
-import { PremiarOne } from "@/components/general/FetchAllAdvertisement";
+import { PremiarOne, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -193,9 +193,9 @@ export default async function Home() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-10">
         <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 text-center items-center justify-center">
             <Clock />
-            <h1 className="text-2xl font-bold">সাম্প্রতিক</h1>
+            <h1 className="text-2xl font-bold pt-2">সাম্প্রতিক</h1>
           </div>
           {latestNews && latestNews.length > 0 ? (
             latestNews.map((item) => (
@@ -319,11 +319,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="flex justify-center items-center pt-4 border-t-1">
-            <img
-              src="/save1.gif"
-              alt="gif image"
-              className="w-[300px] h-[100px] md:h-[150px] rounded-xl"
-            />
+            <PremiumOneAdvertise />
           </div>
         </div>
         <div className="order-1 md:order-3 md:col-span-3">

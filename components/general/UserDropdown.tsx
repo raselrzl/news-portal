@@ -92,14 +92,14 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
-                <Link href="post-an-article/post-advertisement/alladvertise">
+                <Link href="/post-an-article/post-advertisement/alladvertise">
                   <Heart size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
-                <Link href="alluseropinion/opiniontable">
+                <Link href="/alluseropinion/opiniontable">
                   <Heart size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব অভিযোগসমূহ নিয়ন্ত্রণ</span>
                 </Link>

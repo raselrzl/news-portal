@@ -4,6 +4,7 @@ import { EmptyState } from "./EmptyState";
 import SocialLinks from "./socialLink";
 import Link from "next/link";
 import { Clock } from "lucide-react";
+import { PremiarOne } from "./FetchAllAdvertisement";
 
 /* async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -517,11 +518,7 @@ export async function SirshoNewsList() {
           />
         )}
 
-        <img
-          src="/shoe.gif"
-          alt="gif image"
-          className="w-full h-[100px] rounded-xl mt-2"
-        />
+        <PremiarOne />
         <div className="mt-10 text-left flex-col hidden sm:block">
           <p className="text-sm font-semibold text-primary text-justify">
             সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল মিডিয়া
