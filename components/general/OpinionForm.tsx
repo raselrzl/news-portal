@@ -15,21 +15,24 @@ import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { useState } from 'react';
+import { submitOpinion } from '@/app/actions'; // server action
+import { Loader2 } from 'lucide-react';
 
-// Updated schema with phone validation
-const formSchema = z.object({
+export const OpinionSchema = z.object({
   name: z.string().min(1, 'নাম লিখুন'),
-  email: z.string().email('সঠিক ইমেইল লিখুন'),
+  email: z.string().email('সঠিক ইমেইল লিখুন').optional(),
   phone: z
     .string()
     .min(10, 'ফোন নম্বর অন্তত ১০ অঙ্কের হতে হবে')
-    .max(15, 'ফোন নম্বর সর্বোচ্চ ১৫ অঙ্কের হতে পারে'),
-  opinion: z.string().min(10, 'কমপক্ষে ১০ অক্ষরের অভিযোগ লিখুন')
+    .max(15, 'ফোন নম্বর সর্বোচ্চ ১৫ অঙ্কের হতে পারে')
+    .optional(),
+  opinion: z.string().min(10, 'কমপক্ষে ১০ অক্ষরের অভিযোগ লিখুন').max(300,'100 অক্ষরের অভিযোগ লিখুন')
 });
 
 export function OpinionForm() {
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(OpinionSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -38,11 +41,35 @@ export function OpinionForm() {
     }
   });
 
-  const onSubmit = (data: any) => {
-    console.log('Submitted Opinion:', data);
-    toast('আপনার অভিযোগ জমা দেওয়া হয়েছে!');
-    form.reset();
+  type OpinionData = {
+    name: string;
+    email?: string;
+    phone?: string;
+    opinion: string;
   };
+  const [pending, setPending] = useState(false);
+
+  async function onSubmit(data: z.infer<typeof OpinionSchema>) {
+    try {
+      setPending(true);
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('opinion', data.opinion);
+      if (data.email) formData.append('email', data.email);
+      if (data.phone) formData.append('phone', data.phone);
+  
+      await submitOpinion(formData);
+  
+      toast.success('✅ আপনার অভিযোগ সফলভাবে জমা হয়েছে!');
+      form.reset();
+    } catch (error) {
+      if (error instanceof Error && error.message !== 'NEXT_REDIRECT') {
+        toast.error('❌ কিছু ভুল হয়েছে। আবার চেষ্টা করুন।');
+      }
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
     <div className="w-full mx-auto p-4 bg-white rounded-md">
@@ -71,7 +98,7 @@ export function OpinionForm() {
               <FormItem>
                 <FormLabel>ইমেইল</FormLabel>
                 <FormControl>
-                  <Input placeholder="আপনার ইমেইল লিখুন" {...field} className="text-xs" />
+                  <Input placeholder="আপনার ইমেইল লিখুন (ঐচ্ছিক)" {...field} className="text-xs" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -85,13 +112,13 @@ export function OpinionForm() {
               <FormItem>
                 <FormLabel>ফোন নম্বর</FormLabel>
                 <FormControl>
-                  <Input placeholder="ফোন নম্বর লিখুন" {...field} className="text-xs" />
+                  <Input placeholder="ফোন নম্বর লিখুন (ঐচ্ছিক)" {...field} className="text-xs" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/* Opinion/Complaint */}
+          {/* Opinion */}
           <FormField
             control={form.control}
             name="opinion"
@@ -110,8 +137,15 @@ export function OpinionForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
-            অভিযোগ পাঠান
+          <Button type="submit" className="w-full" disabled={pending}>
+          {pending ? (
+            <span className="flex items-center justify-center gap-2">
+              <Loader2 className="animate-spin w-4 h-4" />
+              পাঠানো হচ্ছে...
+            </span>
+          ) : (
+            'অভিযোগ পাঠান'
+          )}
           </Button>
         </form>
       </Form>

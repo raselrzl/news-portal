@@ -164,6 +164,16 @@ enum advertiseStatus {
   EXPIRED
 }
 
+model Opinion {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?
+  phone     String?
+  opinion   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum AdvertisedCategory {
   PREMIER_1
   PREMIER_2

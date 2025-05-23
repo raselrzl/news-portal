@@ -44,6 +44,11 @@ export type quote = $Result.DefaultSelection<Prisma.$quotePayload>
  */
 export type Advertisement = $Result.DefaultSelection<Prisma.$AdvertisementPayload>
 /**
+ * Model Opinion
+ * 
+ */
+export type Opinion = $Result.DefaultSelection<Prisma.$OpinionPayload>
+/**
  * Model Account
  * 
  */
@@ -358,6 +363,16 @@ export class PrismaClient<
     * ```
     */
   get advertisement(): Prisma.AdvertisementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.opinion`: Exposes CRUD operations for the **Opinion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Opinions
+    * const opinions = await prisma.opinion.findMany()
+    * ```
+    */
+  get opinion(): Prisma.OpinionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -834,6 +849,7 @@ export namespace Prisma {
     newsArticle: 'newsArticle',
     quote: 'quote',
     Advertisement: 'Advertisement',
+    Opinion: 'Opinion',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken'
@@ -855,7 +871,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "account" | "session" | "verificationToken"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1303,6 +1319,80 @@ export namespace Prisma {
           }
         }
       }
+      Opinion: {
+        payload: Prisma.$OpinionPayload<ExtArgs>
+        fields: Prisma.OpinionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OpinionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OpinionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          findFirst: {
+            args: Prisma.OpinionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OpinionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          findMany: {
+            args: Prisma.OpinionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          create: {
+            args: Prisma.OpinionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          createMany: {
+            args: Prisma.OpinionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OpinionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          delete: {
+            args: Prisma.OpinionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          update: {
+            args: Prisma.OpinionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          deleteMany: {
+            args: Prisma.OpinionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OpinionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OpinionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          upsert: {
+            args: Prisma.OpinionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          aggregate: {
+            args: Prisma.OpinionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOpinion>
+          }
+          groupBy: {
+            args: Prisma.OpinionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OpinionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OpinionCountArgs<ExtArgs>
+            result: $Utils.Optional<OpinionCountAggregateOutputType> | number
+          }
+        }
+      }
       Account: {
         payload: Prisma.$AccountPayload<ExtArgs>
         fields: Prisma.AccountFieldRefs
@@ -1615,6 +1705,7 @@ export namespace Prisma {
     newsArticle?: newsArticleOmit
     quote?: quoteOmit
     advertisement?: AdvertisementOmit
+    opinion?: OpinionOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -8807,6 +8898,1027 @@ export namespace Prisma {
 
 
   /**
+   * Model Opinion
+   */
+
+  export type AggregateOpinion = {
+    _count: OpinionCountAggregateOutputType | null
+    _min: OpinionMinAggregateOutputType | null
+    _max: OpinionMaxAggregateOutputType | null
+  }
+
+  export type OpinionMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    phone: string | null
+    opinion: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OpinionMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    phone: string | null
+    opinion: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OpinionCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    phone: number
+    opinion: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type OpinionMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phone?: true
+    opinion?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OpinionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phone?: true
+    opinion?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OpinionCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    phone?: true
+    opinion?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type OpinionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Opinion to aggregate.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Opinions
+    **/
+    _count?: true | OpinionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OpinionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OpinionMaxAggregateInputType
+  }
+
+  export type GetOpinionAggregateType<T extends OpinionAggregateArgs> = {
+        [P in keyof T & keyof AggregateOpinion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOpinion[P]>
+      : GetScalarType<T[P], AggregateOpinion[P]>
+  }
+
+
+
+
+  export type OpinionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpinionWhereInput
+    orderBy?: OpinionOrderByWithAggregationInput | OpinionOrderByWithAggregationInput[]
+    by: OpinionScalarFieldEnum[] | OpinionScalarFieldEnum
+    having?: OpinionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OpinionCountAggregateInputType | true
+    _min?: OpinionMinAggregateInputType
+    _max?: OpinionMaxAggregateInputType
+  }
+
+  export type OpinionGroupByOutputType = {
+    id: string
+    name: string
+    email: string | null
+    phone: string | null
+    opinion: string
+    createdAt: Date
+    updatedAt: Date
+    _count: OpinionCountAggregateOutputType | null
+    _min: OpinionMinAggregateOutputType | null
+    _max: OpinionMaxAggregateOutputType | null
+  }
+
+  type GetOpinionGroupByPayload<T extends OpinionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OpinionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OpinionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OpinionGroupByOutputType[P]>
+            : GetScalarType<T[P], OpinionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OpinionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    opinion?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    opinion?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    opinion?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    opinion?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type OpinionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "opinion" | "createdAt" | "updatedAt", ExtArgs["result"]["opinion"]>
+
+  export type $OpinionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Opinion"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      email: string | null
+      phone: string | null
+      opinion: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["opinion"]>
+    composites: {}
+  }
+
+  type OpinionGetPayload<S extends boolean | null | undefined | OpinionDefaultArgs> = $Result.GetResult<Prisma.$OpinionPayload, S>
+
+  type OpinionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OpinionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OpinionCountAggregateInputType | true
+    }
+
+  export interface OpinionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Opinion'], meta: { name: 'Opinion' } }
+    /**
+     * Find zero or one Opinion that matches the filter.
+     * @param {OpinionFindUniqueArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OpinionFindUniqueArgs>(args: SelectSubset<T, OpinionFindUniqueArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Opinion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OpinionFindUniqueOrThrowArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OpinionFindUniqueOrThrowArgs>(args: SelectSubset<T, OpinionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Opinion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindFirstArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OpinionFindFirstArgs>(args?: SelectSubset<T, OpinionFindFirstArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Opinion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindFirstOrThrowArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OpinionFindFirstOrThrowArgs>(args?: SelectSubset<T, OpinionFindFirstOrThrowArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Opinions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Opinions
+     * const opinions = await prisma.opinion.findMany()
+     * 
+     * // Get first 10 Opinions
+     * const opinions = await prisma.opinion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const opinionWithIdOnly = await prisma.opinion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OpinionFindManyArgs>(args?: SelectSubset<T, OpinionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Opinion.
+     * @param {OpinionCreateArgs} args - Arguments to create a Opinion.
+     * @example
+     * // Create one Opinion
+     * const Opinion = await prisma.opinion.create({
+     *   data: {
+     *     // ... data to create a Opinion
+     *   }
+     * })
+     * 
+     */
+    create<T extends OpinionCreateArgs>(args: SelectSubset<T, OpinionCreateArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Opinions.
+     * @param {OpinionCreateManyArgs} args - Arguments to create many Opinions.
+     * @example
+     * // Create many Opinions
+     * const opinion = await prisma.opinion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OpinionCreateManyArgs>(args?: SelectSubset<T, OpinionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Opinions and returns the data saved in the database.
+     * @param {OpinionCreateManyAndReturnArgs} args - Arguments to create many Opinions.
+     * @example
+     * // Create many Opinions
+     * const opinion = await prisma.opinion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Opinions and only return the `id`
+     * const opinionWithIdOnly = await prisma.opinion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OpinionCreateManyAndReturnArgs>(args?: SelectSubset<T, OpinionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Opinion.
+     * @param {OpinionDeleteArgs} args - Arguments to delete one Opinion.
+     * @example
+     * // Delete one Opinion
+     * const Opinion = await prisma.opinion.delete({
+     *   where: {
+     *     // ... filter to delete one Opinion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OpinionDeleteArgs>(args: SelectSubset<T, OpinionDeleteArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Opinion.
+     * @param {OpinionUpdateArgs} args - Arguments to update one Opinion.
+     * @example
+     * // Update one Opinion
+     * const opinion = await prisma.opinion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OpinionUpdateArgs>(args: SelectSubset<T, OpinionUpdateArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Opinions.
+     * @param {OpinionDeleteManyArgs} args - Arguments to filter Opinions to delete.
+     * @example
+     * // Delete a few Opinions
+     * const { count } = await prisma.opinion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OpinionDeleteManyArgs>(args?: SelectSubset<T, OpinionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Opinions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Opinions
+     * const opinion = await prisma.opinion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OpinionUpdateManyArgs>(args: SelectSubset<T, OpinionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Opinions and returns the data updated in the database.
+     * @param {OpinionUpdateManyAndReturnArgs} args - Arguments to update many Opinions.
+     * @example
+     * // Update many Opinions
+     * const opinion = await prisma.opinion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Opinions and only return the `id`
+     * const opinionWithIdOnly = await prisma.opinion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OpinionUpdateManyAndReturnArgs>(args: SelectSubset<T, OpinionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Opinion.
+     * @param {OpinionUpsertArgs} args - Arguments to update or create a Opinion.
+     * @example
+     * // Update or create a Opinion
+     * const opinion = await prisma.opinion.upsert({
+     *   create: {
+     *     // ... data to create a Opinion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Opinion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OpinionUpsertArgs>(args: SelectSubset<T, OpinionUpsertArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Opinions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionCountArgs} args - Arguments to filter Opinions to count.
+     * @example
+     * // Count the number of Opinions
+     * const count = await prisma.opinion.count({
+     *   where: {
+     *     // ... the filter for the Opinions we want to count
+     *   }
+     * })
+    **/
+    count<T extends OpinionCountArgs>(
+      args?: Subset<T, OpinionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OpinionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Opinion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OpinionAggregateArgs>(args: Subset<T, OpinionAggregateArgs>): Prisma.PrismaPromise<GetOpinionAggregateType<T>>
+
+    /**
+     * Group by Opinion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OpinionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OpinionGroupByArgs['orderBy'] }
+        : { orderBy?: OpinionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OpinionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOpinionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Opinion model
+   */
+  readonly fields: OpinionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Opinion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OpinionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Opinion model
+   */
+  interface OpinionFieldRefs {
+    readonly id: FieldRef<"Opinion", 'String'>
+    readonly name: FieldRef<"Opinion", 'String'>
+    readonly email: FieldRef<"Opinion", 'String'>
+    readonly phone: FieldRef<"Opinion", 'String'>
+    readonly opinion: FieldRef<"Opinion", 'String'>
+    readonly createdAt: FieldRef<"Opinion", 'DateTime'>
+    readonly updatedAt: FieldRef<"Opinion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Opinion findUnique
+   */
+  export type OpinionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion findUniqueOrThrow
+   */
+  export type OpinionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion findFirst
+   */
+  export type OpinionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Opinions.
+     */
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion findFirstOrThrow
+   */
+  export type OpinionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Opinions.
+     */
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion findMany
+   */
+  export type OpinionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter, which Opinions to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion create
+   */
+  export type OpinionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Opinion.
+     */
+    data: XOR<OpinionCreateInput, OpinionUncheckedCreateInput>
+  }
+
+  /**
+   * Opinion createMany
+   */
+  export type OpinionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Opinions.
+     */
+    data: OpinionCreateManyInput | OpinionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Opinion createManyAndReturn
+   */
+  export type OpinionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Opinions.
+     */
+    data: OpinionCreateManyInput | OpinionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Opinion update
+   */
+  export type OpinionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Opinion.
+     */
+    data: XOR<OpinionUpdateInput, OpinionUncheckedUpdateInput>
+    /**
+     * Choose, which Opinion to update.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion updateMany
+   */
+  export type OpinionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Opinions.
+     */
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyInput>
+    /**
+     * Filter which Opinions to update
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Opinion updateManyAndReturn
+   */
+  export type OpinionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data used to update Opinions.
+     */
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyInput>
+    /**
+     * Filter which Opinions to update
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Opinion upsert
+   */
+  export type OpinionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Opinion to update in case it exists.
+     */
+    where: OpinionWhereUniqueInput
+    /**
+     * In case the Opinion found by the `where` argument doesn't exist, create a new Opinion with this data.
+     */
+    create: XOR<OpinionCreateInput, OpinionUncheckedCreateInput>
+    /**
+     * In case the Opinion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OpinionUpdateInput, OpinionUncheckedUpdateInput>
+  }
+
+  /**
+   * Opinion delete
+   */
+  export type OpinionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Filter which Opinion to delete.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion deleteMany
+   */
+  export type OpinionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Opinions to delete
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Opinion without action
+   */
+  export type OpinionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Account
    */
 
@@ -12147,6 +13259,19 @@ export namespace Prisma {
   export type AdvertisementScalarFieldEnum = (typeof AdvertisementScalarFieldEnum)[keyof typeof AdvertisementScalarFieldEnum]
 
 
+  export const OpinionScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    phone: 'phone',
+    opinion: 'opinion',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type OpinionScalarFieldEnum = (typeof OpinionScalarFieldEnum)[keyof typeof OpinionScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     userId: 'userId',
     type: 'type',
@@ -12899,6 +14024,68 @@ export namespace Prisma {
     advertiseStatus?: EnumadvertiseStatusWithAggregatesFilter<"Advertisement"> | $Enums.advertiseStatus
     createdAt?: DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
+  }
+
+  export type OpinionWhereInput = {
+    AND?: OpinionWhereInput | OpinionWhereInput[]
+    OR?: OpinionWhereInput[]
+    NOT?: OpinionWhereInput | OpinionWhereInput[]
+    id?: StringFilter<"Opinion"> | string
+    name?: StringFilter<"Opinion"> | string
+    email?: StringNullableFilter<"Opinion"> | string | null
+    phone?: StringNullableFilter<"Opinion"> | string | null
+    opinion?: StringFilter<"Opinion"> | string
+    createdAt?: DateTimeFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeFilter<"Opinion"> | Date | string
+  }
+
+  export type OpinionOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    opinion?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OpinionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OpinionWhereInput | OpinionWhereInput[]
+    OR?: OpinionWhereInput[]
+    NOT?: OpinionWhereInput | OpinionWhereInput[]
+    name?: StringFilter<"Opinion"> | string
+    email?: StringNullableFilter<"Opinion"> | string | null
+    phone?: StringNullableFilter<"Opinion"> | string | null
+    opinion?: StringFilter<"Opinion"> | string
+    createdAt?: DateTimeFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeFilter<"Opinion"> | Date | string
+  }, "id">
+
+  export type OpinionOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    opinion?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: OpinionCountOrderByAggregateInput
+    _max?: OpinionMaxOrderByAggregateInput
+    _min?: OpinionMinOrderByAggregateInput
+  }
+
+  export type OpinionScalarWhereWithAggregatesInput = {
+    AND?: OpinionScalarWhereWithAggregatesInput | OpinionScalarWhereWithAggregatesInput[]
+    OR?: OpinionScalarWhereWithAggregatesInput[]
+    NOT?: OpinionScalarWhereWithAggregatesInput | OpinionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Opinion"> | string
+    name?: StringWithAggregatesFilter<"Opinion"> | string
+    email?: StringNullableWithAggregatesFilter<"Opinion"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Opinion"> | string | null
+    opinion?: StringWithAggregatesFilter<"Opinion"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Opinion"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -13719,6 +14906,76 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OpinionCreateInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    opinion: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OpinionUncheckedCreateInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    opinion: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OpinionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    opinion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpinionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    opinion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpinionCreateManyInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    opinion: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OpinionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    opinion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpinionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    opinion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountCreateInput = {
     type: string
     provider: string
@@ -14527,6 +15784,36 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumadvertiseStatusFilter<$PrismaModel>
     _max?: NestedEnumadvertiseStatusFilter<$PrismaModel>
+  }
+
+  export type OpinionCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    opinion?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OpinionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    opinion?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OpinionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    opinion?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {

@@ -409,3 +409,41 @@ export async function promoteToUserType(userId: string, userType: UserType): Pro
 
   redirect("/post-an-article/allusers");
 }
+
+
+const OpinionSchema = z.object({
+  name: z.string().min(1, 'নাম লিখুন'),
+  email: z.string().email('সঠিক ইমেইল লিখুন').optional(),
+  phone: z
+    .string()
+    .min(10, 'ফোন নম্বর অন্তত ১০ অঙ্কের হতে হবে')
+    .max(15, 'ফোন নম্বর সর্বোচ্চ ১৫ অঙ্কের হতে পারে')
+    .optional(),
+  opinion: z.string().min(10, 'কমপক্ষে ১০ অক্ষরের অভিযোগ লিখুন'),
+});
+
+export async function submitOpinion(formData: FormData) {
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+  const raw = Object.fromEntries(formData.entries());
+  const parsed = OpinionSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    throw new Error('Invalid form data');
+  }
+
+  const data = parsed.data;
+
+  await prisma.opinion.create({
+    data: {
+      name: data.name,
+      email: data.email ?? null,
+      phone: data.phone ?? null,
+      opinion: data.opinion,
+    },
+  });
+  redirect("/alluseropinion");
+}
