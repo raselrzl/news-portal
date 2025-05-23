@@ -200,9 +200,9 @@ export async function getAllArticles() {
   });
 }
 
-export async function Contact() {
+export async function getBinodonNews() {
   return await prisma.newsArticle.findMany({
-    where: { newsArticleStatus: "ACTIVE" },
+    where: { newsCategory: "ENTERTAINMENT" },
     select: {
       id: true,
       createdAt: true,
@@ -744,7 +744,7 @@ export async function Bachaikreto() {
 }
 
 export async function Binodon() {
-  const Binodon = await Contact();
+  const Binodon = await getBinodonNews();
   return (
     <>
     <div className="flex flex-row items-center space-x-2">
