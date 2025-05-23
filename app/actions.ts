@@ -447,3 +447,31 @@ export async function submitOpinion(formData: FormData) {
   });
   redirect("/alluseropinion");
 }
+
+
+export async function deleteOpinionById(opinionId: string) {
+  const superadmin =await requireSuperAdmin()
+  if (!superadmin) {
+    return redirect("/restricted");
+  }
+  const user = await requireUser();
+
+  const req = await request();
+  const dicision = await aj.protect(req);
+  if (dicision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  try {
+    await prisma.opinion.delete({
+      where: {
+        id: opinionId,
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting article:", error);
+    throw new Error("Failed to delete article");
+  }
+}
