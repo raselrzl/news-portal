@@ -15,7 +15,11 @@ import {
   ScienceNews,
   ScienceNewsHeadPost,
 } from "@/components/general/homepageArticleList";
-import { PremiarOne, PremiarTwo, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
+import {
+  PremiarOne,
+  PremiarTwo,
+  PremiumOneAdvertise,
+} from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, InternationalAll] =
@@ -149,12 +153,8 @@ async function getData() {
   };
 }
 export default async function Home() {
-  const {
-    allArticles,
-    lastFeaturedArticle,
-    latestNews,
-    InternationalAll,
-  } = await getData();
+  const { allArticles, lastFeaturedArticle, latestNews, InternationalAll } =
+    await getData();
 
   const session = await aauth();
   return (
@@ -209,9 +209,9 @@ export default async function Home() {
         <div className="order-2 md:order-2 md:col-span-1">
           <div className=" grid grid-cols-1">
             <div>
-            <Suspense fallback={<Loader2 />}>
-              <PremiarOne />
-            </Suspense>
+              <Suspense fallback={<Loader2 />}>
+                <PremiarOne />
+              </Suspense>
             </div>
 
             {InternationalAll && Object.keys(InternationalAll).length > 0 ? (
@@ -240,7 +240,8 @@ export default async function Home() {
             <div className="bg-primary-foreground dark:bg-accent-foreground/5 mt-4 pt-2 border-1">
               <h1 className="font-bold text-center text-2xl">"শীর্ষ খবর"</h1>
               <div className="relative h-56 overflow-y-scroll mx-4 md:mx-0 md:px-1  mb-6 px-4">
-                {InternationalAll && Object.keys(InternationalAll).length > 0 ? (
+                {InternationalAll &&
+                Object.keys(InternationalAll).length > 0 ? (
                   <div className="rounded-xl">
                     {InternationalAll.slice(1).map((article) => (
                       <Link
@@ -370,48 +371,52 @@ export default async function Home() {
             <Image
               src="/youtube.gif"
               alt="YouTube GIF"
-              width={50} // adjust as needed
+              width={50}
               height={50}
               className="object-contain"
             />
             <p className="font-bold text-2xl">ভিডিও</p>
           </div>
           <div className="text-primary flex flex-row items-center justify-center">
-            <p className="font-bold text-2xl pt-2"></p>
-            {/* <StepForward size={30} className="" /> */}
             <Image
               src="/arrow1.gif"
-              alt="YouTube GIF"
-              width={50} // adjust as needed
+              alt="Arrow GIF"
+              width={50}
               height={50}
               className="object-contain"
             />
           </div>
         </CardHeader>
-        <div className="overflow-x-auto">
+
+        <div className="overflow-x-auto pb-10">
           <div className="flex gap-4 px-2">
-            <div className="min-w-[300px]">
+            {/* Reusable wrapper for uniform height */}
+            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
               <YouTubeVideo
                 videoId="sMN1JpCXH1c"
                 title="বাংলাদেশের ইতিহাসের সেরা ম্যাচ"
               />
             </div>
-            <div className="min-w-[300px]">
+
+            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
               <YouTubeVideo
                 videoId="pHRvJUYwwek"
                 title="বাংলাদেশের রাজনৈতিক পরিবর্তন"
               />
             </div>
-            <div className="min-w-[300px] flex items-center justify-center">
+
+            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
               <PremiarTwo />
             </div>
-            <div className="min-w-[300px]">
+
+            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
               <YouTubeVideo
                 videoId="UQjzSvy4zT0"
                 title="বাংলাদেশের ফুটবল ইতিহাস"
               />
             </div>
-            <div className="min-w-[300px]">
+
+            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
               <YouTubeVideo
                 videoId="mJyekeQcAww"
                 title="বিশ্ববিদ্যালয়ের জীবন"

@@ -132,8 +132,8 @@ export async function PremiarTwo() {
                 src={premier1.advertiseBanner}
                 alt={premier1.companyName}
                 width={300} // adjust as needed
-                height={200}
-                className="w-[300px] h-[225px] rounded-xl mb-10 pb-6"
+                height={220}
+                className="w-[300px] min-h-[220px] mb-16"
               />
             </Link>
           ))}
