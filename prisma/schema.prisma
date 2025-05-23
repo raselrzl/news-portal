@@ -240,3 +240,16 @@ model VerificationToken {
  
   @@id([identifier, token])
 }
+
+
+model AdvertiseRequest {
+  id        String   @id @default(uuid())              
+  name            String
+  email           String
+  companyName     String
+  companyWebsite  String
+  phoneNumber     String
+  message         String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

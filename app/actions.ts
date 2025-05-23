@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "./utils/db";
 import { requireNewsReporter, requireSuperAdmin, requireUser } from "./utils/requireUser";
 import {
+  AdvertiseRequestSchema,
   AdvertiserSchema,
   newsArticleSchema,
   newsReporterSchema,
@@ -474,4 +475,37 @@ export async function deleteOpinionById(opinionId: string) {
     console.error("Error deleting article:", error);
     throw new Error("Failed to delete article");
   }
+}
+
+
+
+export async function submitAdvertiseRequest(formData: FormData) {
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  const raw = Object.fromEntries(formData.entries());
+  const parsed = AdvertiseRequestSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    throw new Error("Invalid form data");
+  }
+
+  const data = parsed.data;
+
+  await prisma.advertiseRequest.create({
+    data: {
+      name: data.name,
+      email: data.email,
+      companyName: data.companyName,
+      companyWebsite: data.companyWebsite,
+      phoneNumber: data.phoneNumber,
+      message: data.message,
+    },
+  });
+
+  redirect("/thank-you");
 }

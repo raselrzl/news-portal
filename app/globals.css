@@ -137,3 +137,18 @@
 a {
   @apply hover:text-primary transition-colors duration-500 ease-in-out;
 }
+
+
+/* globals.css */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--primary); /* Tailwind primary (blue-500) */
+  border-radius: 4px;
+}

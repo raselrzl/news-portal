@@ -388,7 +388,7 @@ export default async function Home() {
           </div>
         </CardHeader>
 
-        <div className="overflow-x-auto pb-10">
+        <div className="overflow-x-auto pb-10 overflow-y-hidden scrollbar-thin">
           <div className="flex gap-4 px-2">
             {/* Reusable wrapper for uniform height */}
             <div className="min-w-[300px] h-[230px] flex items-center justify-center">

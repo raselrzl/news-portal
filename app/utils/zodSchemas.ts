@@ -61,3 +61,11 @@ export const newsArticleSchema = z.object({
   quotes: z.array(quoteSchema)
 });
 
+export const AdvertiseRequestSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  companyName: z.string().min(4),
+  companyWebsite: z.string().min(4),
+  phoneNumber: z.string().min(10),
+  message: z.string().min(10),
+});
