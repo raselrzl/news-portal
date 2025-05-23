@@ -24,12 +24,12 @@ export function Contact() {
   return (
     <Tabs
       defaultValue="ovijug"
-      className="w-auto my-10 p-2"
+      className="w-auto my-10 p-1"
     >
-      <TabsList className="grid w-full grid-cols-2">
+      {/* <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="ovijug">অভিযোগ</TabsTrigger>
         <TabsTrigger value="samprotik">যোগাযোগ</TabsTrigger>
-      </TabsList>
+      </TabsList> */}
       <TabsContent value="ovijug">
         <Card className="min-h-[400px]">
           <CardHeader>

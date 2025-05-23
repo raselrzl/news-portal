@@ -747,6 +747,7 @@ export async function Binodon() {
   const Binodon = await getBinodonNews();
   return (
     <>
+    <div className="flex flex-row items-center justify-between">
     <div className="flex flex-row items-center space-x-2">
         <Image
           src="/binodon.gif"
@@ -756,7 +757,21 @@ export async function Binodon() {
           className="object-contain"
         />
         <p className="font-bold text-2xl">বিনোদন</p>
+
+      
       </div>
+      <div className="md:block hidden">
+      
+      <Image
+          src="/arrow.gif"
+          alt="YouTube GIF"
+          width={50} // adjust as needed
+          height={50}
+          className="object-contain "
+        />
+      </div>
+
+    </div>
       {Binodon && Object.keys(Binodon).length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
           {Binodon.map((article) => (
@@ -773,7 +788,7 @@ export async function Binodon() {
                 </div>
 
                 <div className="pt-4">
-                  <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed">
+                  <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed line-clamp-2">
                     {article.newsHeading}
                   </h2>
                 </div>
