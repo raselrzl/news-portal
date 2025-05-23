@@ -133,7 +133,7 @@ export async function PremiarTwo() {
                 alt={premier1.companyName}
                 width={300} // adjust as needed
                 height={200}
-                className="w-[300px] h-[225px] rounded-xl mb-10"
+                className="w-[300px] h-[225px] rounded-xl mb-10 pb-6"
               />
             </Link>
           ))}
