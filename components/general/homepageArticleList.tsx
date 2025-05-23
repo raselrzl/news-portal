@@ -297,6 +297,38 @@ export async function getLatestNews() {
   });
 }
 
+
+
+export async function getScienceNews() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "SCIENCE" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 6,
+  });
+}
 // getEnvironmentNews.ts
 export async function getEnvironmentNews() {
   return await prisma.newsArticle.findFirst({
@@ -632,8 +664,8 @@ export async function SamprotikBisoy() {
   );
 }
 
-export async function Samoyik() {
-  const Samoyik = await getLatestNews();
+export async function ScienceNews() {
+  const Samoyik = await getScienceNews();
 
   return (
     <>

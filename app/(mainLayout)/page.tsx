@@ -12,8 +12,7 @@ import { Contact } from "@/components/general/Contact";
 import {
   Bachaikreto,
   Binodon,
-  CrimeHEadings,
-  Samoyik,
+  ScienceNews,
 } from "@/components/general/homepageArticleList";
 import { PremiarOne } from "@/components/general/FetchAllAdvertisement";
 
@@ -475,7 +474,7 @@ export default async function Home() {
             />
           </div>
           <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
-            <Samoyik />
+            <ScienceNews />
           </div>
         </div>
       </div>
