@@ -1,4 +1,5 @@
 import { prisma } from "@/app/utils/db";
+import { EmptyState } from "./EmptyState";
 
 type Opinion = {
   id: string;
@@ -30,9 +31,12 @@ export default async function OpinionsList() {
 
   if (!opinions || opinions.length === 0) {
     return (
-      <p className="text-center p-4 text-gray-500">
-        কোনও অভিযোগ পাওয়া যায়নি।
-      </p>
+      <EmptyState
+                title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                href="/"
+              />
     );
   }
 

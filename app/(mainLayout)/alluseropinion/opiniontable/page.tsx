@@ -27,6 +27,7 @@ import { XCircle, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
 import Link from "next/link";
 import { requireSuperAdmin } from "@/app/utils/requireUser";
+import { EmptyState } from "@/components/general/EmptyState";
 
 async function getAllOpinions() {
   return await prisma.opinion.findMany({
@@ -111,12 +112,12 @@ export default async function AllOpinionsTable() {
           </CardContent>
         </Card>
       ) : (
-        <div className="text-center py-10">
-          <h2 className="text-xl font-semibold">No Complaints Found</h2>
-          <p className="text-muted-foreground">
-            There are no opinions in the system.
-          </p>
-        </div>
+        <EmptyState
+                  title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
+                />
       )}
     </>
   );
