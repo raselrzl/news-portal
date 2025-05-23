@@ -23,9 +23,9 @@ export default function Footer() {
           <Link href="/about/advertise" className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2">
             বিজ্ঞাপন
           </Link>
-          <Link href="/about/contact" className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2">
+         {/*  <Link href="/about/contact" className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2">
             যোগাযোগ
-          </Link>
+          </Link> */}
         </div>
         <div className="p-6 w-full">
           <h2 className="text-2xl font-semibold mb-4 text-center text-neutral-900">
