@@ -74,7 +74,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <p className="text-xs text-primary mt-2">
+        <p className="text-xs text-primary py-2">
           &copy; {new Date().getFullYear()} Jagroto Barta. All rights reserved.
         </p>
       </div>
