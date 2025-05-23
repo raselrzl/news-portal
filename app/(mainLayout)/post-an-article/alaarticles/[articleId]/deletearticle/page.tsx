@@ -2,18 +2,21 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { use } from "react";
+import { use, useState } from "react";
 import { deleteArticleById } from '@/app/actions';
+import { Loader2 } from 'lucide-react';
 
 export default function ConfirmDeletePage({ params }: { params: Promise<{ articleId: string }> }) {
-  
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { articleId } = use(params);
 
   const handleConfirm = async () => {
     try {
+      setLoading(true);
       await deleteArticleById(articleId);
-      router.push("/post-an-article/alaarticles"); // Redirect to list
+      router.push("/post-an-article/alaarticles");
+      setLoading(false);
     } catch (error) {
       console.error("Error deleting article:", error);
     }
@@ -34,7 +37,15 @@ export default function ConfirmDeletePage({ params }: { params: Promise<{ articl
             আগের পাতায় ফিরে যান
           </Button>
           <Button variant="link" onClick={handleCancel} className='cursor-pointer'>বাতিল করুন</Button>
-          <Button variant="destructive" onClick={handleConfirm} className='cursor-pointer'>হ্যাঁ, মুছে ফেলুন</Button>
+          <Button
+      variant="destructive"
+      onClick={handleConfirm}
+      className="cursor-pointer flex items-center gap-2"
+      disabled={loading}
+    >
+      {loading && <Loader2 className="animate-spin w-4 h-4" />}
+      হ্যাঁ, মুছে ফেলুন
+    </Button>
         </div>
       </div>
     </div>
