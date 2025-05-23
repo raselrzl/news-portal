@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/general/theme-provider";
+import Footer from "@/components/general/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="max-w-7xl mx-auto">{children}</div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

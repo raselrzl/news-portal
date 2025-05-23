@@ -4,11 +4,9 @@ import React, { ReactNode } from "react";
 import Link from "next/link";
 import BanglaNavMenu from "@/components/general/BanglaNavMenu";
 import { Toaster } from "sonner";
-import Footer from "@/components/general/Footer";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <> 
     <div className="max-w-7xl mx-auto">
       <div className="fixed top-0 left-0 right-0 z-50 px-2 md:px-20 bg-background shadow-md">
         <Navbar />
@@ -29,6 +27,5 @@ export default function MainLayout({ children }: { children: ReactNode }) {
      
       <Toaster closeButton richColors />
     </div>
-    <div className=""><Footer /></div></>
   );
 }

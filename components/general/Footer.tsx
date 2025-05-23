@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground/5 mt-10 min-w-full">
+    <footer className="bg-foreground/5 mt-10 w-full">
       <div className=" text-center text-sm text-foreground ">
         <div className="flex flex-wrap justify-center gap-4 mb-2 py-6 border-y-2">
           <Link
@@ -40,9 +40,7 @@ export default function Footer() {
           </p>
           <p className="mb-2 text-base text-neutral-600">
             জাগরতোবার্তা মিডিয়া লিমিটেডের পক্ষে প্রকাশক কর্তৃক নিউমার্কেট ইসলাম ইসলাম ইসলাম
-            কমপ্লেক্স, ৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা থেকে প্রকাশিত এবং
-            ২৮/বি, টয়েনবি সার্কুলার রোড, মতিঝিল ঢাকা, শরীয়তপুর প্রিন্টিং প্রেস
-            থেকে মুদ্রিত।
+            কমপ্লেক্স, ৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা 
           </p>
           <p className="mb-2 text-base text-neutral-700">
             <strong>ফোন:</strong> +৮৮ ০২ 00000000, +৮৮ ০২ 00000000
