@@ -22,38 +22,9 @@ import {
 } from "@/components/general/FetchAllAdvertisement";
 
 async function getData() {
-  const [allArticles, lastFeaturedArticle, latestNews, InternationalAll] =
+  const [lastFeaturedArticle, latestNews, InternationalAll] =
     await Promise.all([
-      prisma.newsArticle.findMany({
-        where: { newsArticleStatus: "ACTIVE" },
-        select: {
-          id: true,
-          createdAt: true,
-          isFeatured: true,
-          newsCategory: true,
-          newsDetails: true,
-          newsHeading: true,
-          newsPicture: true,
-          quotes: {
-            select: {
-              speakerInfo: true,
-              text: true,
-            },
-          },
-          newsResource: true,
-          newsPictureHeading: true,
-          newsPictureCredit: true,
-          newsLocation: true,
-          newsReporter: true,
-          newsArticleStatus: true,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-        take: 7,
-      }),
-
-      prisma.newsArticle.findMany({
+          prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
           isFeatured: true,
@@ -146,15 +117,13 @@ async function getData() {
     ]);
 
   return {
-    allArticles,
     lastFeaturedArticle,
     latestNews,
-    /* International, */
     InternationalAll,
   };
 }
 export default async function Home() {
-  const { allArticles, lastFeaturedArticle, latestNews, InternationalAll } =
+  const {lastFeaturedArticle, latestNews, InternationalAll } =
     await getData();
 
   const session = await aauth();
