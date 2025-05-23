@@ -13,6 +13,7 @@ import {
   Bachaikreto,
   Binodon,
   ScienceNews,
+  ScienceNewsHeadPost,
 } from "@/components/general/homepageArticleList";
 import { PremiarOne, PremiumOneAdvertise } from "@/components/general/FetchAllAdvertisement";
 
@@ -457,12 +458,12 @@ export default async function Home() {
         </div>
       </Card>
 
-      {/*  bachaikreto section */}
+      {/*  Science section */}
       <div className="border-y-4 my-2 py-6 border-primary">
         <div className="grid grid-cols-3 border-primary my-4">
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between">
             {" "}
-            <Bachaikreto />
+            <ScienceNewsHeadPost />
             <img
               src="/shoe.gif"
               alt="gif image"

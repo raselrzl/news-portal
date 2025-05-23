@@ -330,6 +330,38 @@ export async function getScienceNews() {
     take: 6,
   });
 }
+
+
+export async function getScienceNewsHead() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "SCIENCE" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 1,
+  });
+}
 // getEnvironmentNews.ts
 export async function getEnvironmentNews() {
   return await prisma.newsArticle.findFirst({
@@ -662,12 +694,12 @@ export async function SamprotikBisoy() {
 }
 
 export async function ScienceNews() {
-  const Samoyik = await getScienceNews();
+  const science = await getScienceNews();
 
   return (
     <>
-      {Samoyik && Samoyik.length > 0 ? (
-        Samoyik.map((item) => (
+      {science && science.length > 0 ? (
+        science.slice(1).map((item) => (
           <Link key={item.id} href={`/newsDetails/${item.id}`}>
             <div className="shadow-xl my-2 border-2">
               <div className="flex">
@@ -698,6 +730,53 @@ export async function ScienceNews() {
     </>
   );
 }
+
+
+export async function ScienceNewsHeadPost() {
+  const scienceheadpost = await getScienceNewsHead();
+
+  return (
+    <>
+    <div className="flex flex-row items-center space-x-2">
+        <Image
+          src="/clock.gif"
+          alt="YouTube GIF"
+          width={50} // adjust as needed
+          height={50}
+          className="object-contain"
+        />
+        <p className="font-bold text-2xl">বিজ্ঞান ও গবেষণা</p>
+      </div>
+      {scienceheadpost && scienceheadpost.length > 0 ? (
+        scienceheadpost.map((item) => (
+          <Link key={item.id} href={`/newsDetails/${item.id}`}>
+ 
+            <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2">
+            <div className="p-1">
+              <h2 className="text-lg font-semibold ">
+                {item.newsHeading}
+              </h2>
+            </div>
+            <img
+              src={item.newsPicture}
+              alt="Card image"
+              className="w-full h-40 object-cover"
+            />
+          </div>
+          </Link>
+        ))
+      ) : (
+        <EmptyState
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
+        />
+      )}
+    </>
+  );
+}
+
 
 export async function Bachaikreto() {
   const Bachaikreto = await getEnvironmentNews();
