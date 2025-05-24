@@ -1,16 +1,31 @@
 import AllTechnologyArticles from "./AllTechnologyArticles";
 import AllArticleList from "@/components/general/homepageArticleList";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
+import { Suspense } from "react";
 
-export default function Technology() {
+type SearchParamsProps = {
+  searchParams: Promise<{
+    page?: string;
+    jobTypes?: string;
+    location?: string;
+  }>;
+};
+
+export default async function Technology({ searchParams }: SearchParamsProps) {
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
+
   return (
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-3 md:col-span-1">
-        {" "}
         <h1 className="font-extrabold pl-2 mb-2">
-          {`>>>`}
-          প্রযুক্তি সংবাদ
+          {`>>>`} প্রযুক্তি সংবাদ
         </h1>
-        <AllTechnologyArticles />
+        <div className="p-1 md:p-4">
+          <Suspense key={currentPage} fallback={<LoadingSpinner />}>
+            <AllTechnologyArticles currentPage={currentPage} />
+          </Suspense>
+        </div>
       </div>
       <div className="col-span-3 md:col-span-2">
         <AllArticleList />
