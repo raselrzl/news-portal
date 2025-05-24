@@ -17,7 +17,7 @@ export default async function Latest({ searchParams }: SearchParamsProps) {
   return (
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-3 md:col-span-2">
-      <h1 className="font-extrabold pl-2 mb-2"> {`>>>`}সর্বশেষ সকল সংবাদ</h1>
+        <h1 className="font-extrabold pl-2 mb-2"> {`>>>`}সর্বশেষ সকল সংবাদ</h1>
         <Suspense key={currentPage} fallback={<LoadingSpinner />}>
           <AllNewsArticleList currentPage={currentPage} />
         </Suspense>

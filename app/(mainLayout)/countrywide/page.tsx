@@ -1,7 +1,21 @@
+import LoadingSpinner from "@/components/general/LoadingSpinner";
 import AllCountryNewsArticleList from "./countryNewsArticleList";
 import AllArticleList from "@/components/general/homepageArticleList";
+import { Suspense } from "react";
 
-export default function Country() {
+
+type SearchParamsProps = {
+  searchParams: Promise<{
+    page?: string;
+    jobTypes?: string;
+    location?: string;
+  }>;
+};
+
+
+export default async function Country({ searchParams }: SearchParamsProps) {
+const params = await searchParams;
+const currentPage = Number(params.page) || 1;
   return (
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-3 md:col-span-1">
@@ -9,11 +23,14 @@ export default function Country() {
           {`>>>`}
           সারাদেশ সংবাদ
         </h1>
-       <AllCountryNewsArticleList />
+
+        <Suspense key={currentPage} fallback={<LoadingSpinner />}>
+              <AllCountryNewsArticleList currentPage={currentPage} />
+        </Suspense>
       </div>
       <div className="col-span-3 md:col-span-2">
         <AllArticleList />
       </div>
-    </div>
+    </div> 
   );
 }
