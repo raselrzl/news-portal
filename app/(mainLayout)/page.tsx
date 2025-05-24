@@ -58,7 +58,7 @@ async function getData() {
       }),
 
       prisma.newsArticle.findMany({
-        where: { newsCategory: "EDUCATION" },
+        where: { newsCategory: "ENTERTAINMENT" },
         select: {
           id: true,
           createdAt: true,
@@ -147,7 +147,7 @@ export default async function Home() {
                     />
                   </div>
                   <div className="col-span-2">
-                    <h3 className="text-lg font-semibold ml-2">
+                    <h3 className="text-md font-semibold ml-2 line-clamp-3">
                       {item.newsHeading}
                     </h3>
                   </div>
@@ -300,7 +300,7 @@ export default async function Home() {
           )}
 
           {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-16 border-t-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-23 border-t-2">
               {lastFeaturedArticle.slice(1, 7).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
                   <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
