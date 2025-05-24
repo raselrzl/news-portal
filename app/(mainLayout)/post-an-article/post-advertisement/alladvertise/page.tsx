@@ -93,11 +93,13 @@ export default async function AllAdvertisementTable() {
                     <TableCell>{ad.supervisedName}</TableCell>
                     <TableCell>{ad.advertisedCategory}</TableCell>
                     <TableCell>
-                    {ad.advertiseStatus === advertiseStatus.ACTIVE ? (
+                   {/*  {ad.advertiseStatus === advertiseStatus.ACTIVE ? (
                             <CheckCircle className="text-green-600 w-4 h-4" />
                             ) : (
                             <XCircle className="text-red-600 w-4 h-4" />
-                            )}
+                            )} */}
+
+                            {ad.advertiseStatus}
                     </TableCell>
                     <TableCell>{ad.advertiseduration ?? "N/A"}</TableCell>
                     <TableCell>{ad.startDate}</TableCell>
@@ -121,14 +123,14 @@ export default async function AllAdvertisementTable() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuItem asChild>
-                            <Link href={`/advertisements/${ad.id}/edit`}>
+                            <Link href={`/post-an-article/post-advertisement/alladvertise/${ad.id}/updatestatus`}>
                               <PenBoxIcon className="w-4 h-4 mr-2" />
-                              Edit
+                              Update Status
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
-                            <Link href={`/advertisements/${ad.id}/delete`}>
+                            <Link href={`/post-an-article/post-advertisement/alladvertise/${ad.id}/delete`}>
                               <XCircle className="w-4 h-4 mr-2 text-red-500" />
                               Delete
                             </Link>

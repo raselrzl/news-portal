@@ -538,3 +538,52 @@ export async function deleteadvertiseRequestMEssageById(advertisecontactId: stri
     throw new Error("Failed to delete article");
   }
 }
+
+
+
+export async function updateAdvertisementStatus(advertisementId: string, status: "ACTIVE" | "DRAFT" | "EXPIRED") {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) redirect("/restricted");
+
+  await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) throw new Error("Forbidden");
+
+  const ad = await prisma.advertisement.findUnique({
+    where: { id: advertisementId },
+  });
+  if (!ad) throw new Error("Advertisement not found");
+
+  await prisma.advertisement.update({
+    where: { id: advertisementId },
+    data: { advertiseStatus: status },
+  });
+}
+
+
+export async function deleteAdvertisementById(advertisementId: string) {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
+
+  await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  try {
+    await prisma.advertisement.delete({
+      where: { id: advertisementId },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting advertisement:", error);
+    throw new Error("Failed to delete advertisement");
+  }
+}
