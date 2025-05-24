@@ -1,6 +1,7 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
 async function getAllOpinionArticles(page: number = 1, pageSize: number = 8) {
   const skip = (page - 1) * pageSize;
@@ -44,8 +45,12 @@ async function getAllOpinionArticles(page: number = 1, pageSize: number = 8) {
   };
 }
 
-export default async function AllOpinionArticles() {
-  const { articles } = await getAllOpinionArticles();
+export default async function AllOpinionArticles({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  const { articles, totalPages } = await getAllOpinionArticles(currentPage);
   return (
     <>
       {articles.length > 0 ? (
@@ -62,6 +67,7 @@ export default async function AllOpinionArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }

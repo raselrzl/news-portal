@@ -1,6 +1,8 @@
 import AllNewsArticleList from "@/app/(mainLayout)/latest/AllNewsArticleList";
 import AllOpinionArticles from "./AllNationalArticles";
 import AllArticleList from "@/components/general/homepageArticleList";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
+import { Suspense } from "react";
 
 
 type SearchParamsProps = {
@@ -17,7 +19,10 @@ export default async function Opinion({ searchParams }: SearchParamsProps) {
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-3 md:col-span-1">
         <h1 className="font-extrabold pl-2 mb-2">{`>>>`}মতামত</h1>
-        <AllOpinionArticles />
+
+        <Suspense key={currentPage} fallback={<LoadingSpinner />}>
+                      <AllOpinionArticles currentPage={currentPage} />
+        </Suspense>
       </div>
       <div className="col-span-3 md:col-span-2">
         <AllArticleList />
