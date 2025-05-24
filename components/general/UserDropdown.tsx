@@ -119,7 +119,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
               <DropdownMenuItem asChild>
                 <Link href="/about/advertise/allcontactinfo">
                 <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
-                  <span>All advertise request</span>
+                  <span>সব বিজ্ঞাপন অনুরোধ</span>
                 </Link>
               </DropdownMenuItem>
             </>

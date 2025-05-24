@@ -77,7 +77,7 @@ export default async function AllOpinionsTable() {
                     <TableCell>{opinion.phone || "-"}</TableCell>
                     <TableCell className="max-w-sm">
                       <p className="line-clamp-1">
-                        {opinion.opinion.split(" ").slice(0, 6).join(" ")}...
+                        {opinion.opinion}
                       </p>
                     </TableCell>
                     <TableCell>

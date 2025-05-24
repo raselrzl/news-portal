@@ -56,8 +56,8 @@ export default async function AllAdvertiseRequestsTable() {
       {requests.length > 0 ? (
         <Card>
           <CardHeader>
-            <CardTitle>All Advertisement Requests</CardTitle>
-            <CardDescription>Recent submissions from interested advertisers.</CardDescription>
+            <CardTitle>সব বিজ্ঞাপন অনুরোধ</CardTitle>
+            <CardDescription>বিজ্ঞাপন দিতে ইচ্ছুক ব্যক্তিদের সাম্প্রতিক অনুরোধসমূহ।</CardDescription>
           </CardHeader>
           <CardContent className="overflow-x-auto">
             <Table>
@@ -86,8 +86,8 @@ export default async function AllAdvertiseRequestsTable() {
                       </a>
                     </TableCell>
                     <TableCell className="max-w-sm">
-                      <p className="line-clamp-1">
-                        {req.message.split(" ").slice(0, 6).join(" ")}...
+                      <p className="">
+                        {req.message}
                       </p>
                     </TableCell>
                     <TableCell>
