@@ -19,7 +19,7 @@ export default function ConfirmDeleteAdvertisementPage({
     try {
       setLoading(true);
       await deleteAdvertisementById(advertisementId);
-      router.push("/about/advertise/allcontactinfo");
+      router.push("/post-an-article/post-advertisement/alladvertise");
     } catch (error) {
       console.error("Error deleting advertisement:", error);
     } finally {
@@ -28,7 +28,7 @@ export default function ConfirmDeleteAdvertisementPage({
   };
 
   const handleCancel = () => {
-    router.push("/about/advertise/allcontactinfo");
+    router.push("/post-an-article/post-advertisement/alladvertise");
   };
 
   return (
