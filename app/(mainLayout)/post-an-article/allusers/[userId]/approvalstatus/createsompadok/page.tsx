@@ -2,6 +2,7 @@
 
 import { promoteToUserType } from "@/app/actions";
 import { UserType } from "@/lib/generated/prisma";
+import { Loader2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -49,12 +50,19 @@ export default function CreateSompandokPage() {
       </select>
 
       <button
-        onClick={handlePromote}
-        disabled={isLoading}
-        className="bg-primary hover:primary/5 text-white px-4 py-2 rounded w-full"
-      >
-        {isLoading ? "পদোন্নতি হচ্ছে..." : "আপডেট করুন"}
-      </button>
+  onClick={handlePromote}
+  disabled={isLoading}
+  className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded w-full flex items-center justify-center gap-2"
+>
+  {isLoading ? (
+    <>
+      <Loader2 className="w-4 h-4 animate-spin" />
+      <span>পদোন্নতি হচ্ছে...</span>
+    </>
+  ) : (
+    "আপডেট করুন"
+  )}
+</button>
     </div>
   );
 }

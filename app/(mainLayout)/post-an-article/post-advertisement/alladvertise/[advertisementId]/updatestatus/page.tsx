@@ -15,6 +15,7 @@ export default function UpdateAdvertiseStatus(
     params: Promise<{ advertisementId: string }>;
   }
 ) {
+  
   const { advertisementId } = use(params);
   return (
     <form
