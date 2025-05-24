@@ -1,11 +1,16 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllHealthArticles() {
-  const [data] = await Promise.all([
+async function getAllHealthArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "HEALTH" },
+      take: pageSize,
+      skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +36,19 @@ async function getAllHealthArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "HEALTH" },
+    }),
   ]);
 
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllHealthArticles() {
-  const { articles } = await getAllHealthArticles();
+export default async function AllHealthArticles({ currentPage }: { currentPage: number }) {
+  const { articles, totalPages } = await getAllHealthArticles(currentPage);
 
   return (
     <>
@@ -57,6 +66,7 @@ export default async function AllHealthArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }
