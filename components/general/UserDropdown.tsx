@@ -115,6 +115,13 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
                   <span>সব অভিযোগসমূহ নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href="/about/advertise/allcontactinfo">
+                <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
+                  <span>All advertise request</span>
+                </Link>
+              </DropdownMenuItem>
             </>
           )}
 
