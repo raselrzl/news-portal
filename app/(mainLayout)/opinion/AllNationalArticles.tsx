@@ -2,10 +2,13 @@ import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
 
-async function getAllOpinionArticles() {
-  const [data] = await Promise.all([
+async function getAllOpinionArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "OPINION" },
+      take: pageSize,
+      skip,
       select: {
         id: true,
         createdAt: true,
@@ -16,7 +19,7 @@ async function getAllOpinionArticles() {
         newsPicture: true,
         quotes: {
           select: {
-            speakerInfo: true,
+            speakerInfo: true, 
             text: true,
           },
         },
@@ -31,16 +34,18 @@ async function getAllOpinionArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "OPINION" },
+    }),
   ]);
-
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
 export default async function AllOpinionArticles() {
   const { articles } = await getAllOpinionArticles();
-
   return (
     <>
       {articles.length > 0 ? (
