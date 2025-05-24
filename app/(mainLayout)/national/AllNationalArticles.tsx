@@ -1,11 +1,15 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllNationalArticles() {
-  const [data] = await Promise.all([
+async function getAllNationalArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "NATIONAL" },
+      take: pageSize,
+      skip: skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +35,22 @@ async function getAllNationalArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "NATIONAL" },
+    }),
   ]);
-
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllNationalArticles() {
-  const { articles } = await getAllNationalArticles();
+export default async function AllNationalArticles({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  const { articles, totalPages } = await getAllNationalArticles(currentPage);
 
   return (
     <>
@@ -57,6 +68,7 @@ export default async function AllNationalArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }

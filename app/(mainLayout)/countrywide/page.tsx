@@ -23,10 +23,13 @@ const currentPage = Number(params.page) || 1;
           {`>>>`}
           সারাদেশ সংবাদ
         </h1>
-
+        <div className="p-1 md:p-4">
         <Suspense key={currentPage} fallback={<LoadingSpinner />}>
               <AllCountryNewsArticleList currentPage={currentPage} />
         </Suspense>
+        </div>
+
+      
       </div>
       <div className="col-span-3 md:col-span-2">
         <AllArticleList />

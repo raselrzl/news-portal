@@ -46,7 +46,7 @@ async function getAllCountryArticles(page: number = 1, pageSize: number = 8) {
     totalPages: Math.ceil(totalCount / pageSize),
   };
 }
-
+ 
 export default async function AllCountryNewsArticleList({
   currentPage,
 }: {
