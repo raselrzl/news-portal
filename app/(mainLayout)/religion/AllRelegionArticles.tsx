@@ -1,11 +1,15 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllRelegionArticles() {
-  const [data] = await Promise.all([
+async function getAllRelegionArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "RELIGION" },
+      take: pageSize,
+      skip: skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +35,23 @@ async function getAllRelegionArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "RELIGION" },
+    }),
   ]);
 
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllRelegionArticles() {
-  const { articles } = await getAllRelegionArticles();
+export default async function AllRelegionArticles({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  const { articles, totalPages } = await getAllRelegionArticles(currentPage);
 
   return (
     <>
@@ -57,6 +69,7 @@ export default async function AllRelegionArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }
