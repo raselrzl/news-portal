@@ -1,11 +1,16 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllLawAndJusticeArticles() {
-  const [data] = await Promise.all([
+async function getAllLawAndJusticeArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "LAW_AND_JUSTICE" },
+      take: pageSize,
+      skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +36,19 @@ async function getAllLawAndJusticeArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "LAW_AND_JUSTICE" },
+    }),
   ]);
 
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllLawAndJusticeArticles() {
-  const { articles } = await getAllLawAndJusticeArticles();
+export default async function AllLawAndJusticeArticles({ currentPage }: { currentPage: number }) {
+  const { articles, totalPages } = await getAllLawAndJusticeArticles(currentPage);
 
   return (
     <>
@@ -57,6 +66,7 @@ export default async function AllLawAndJusticeArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }
