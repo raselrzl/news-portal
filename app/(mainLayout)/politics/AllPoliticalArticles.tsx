@@ -1,11 +1,15 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllPoliticalArticles() {
-  const [data] = await Promise.all([
+async function getAllPoliticalArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "POLITICS" },
+      take: pageSize,
+      skip: skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +35,23 @@ async function getAllPoliticalArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "POLITICS" },
+    }),
   ]);
 
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllPoliticalArticles() {
-  const { articles } = await getAllPoliticalArticles();
+export default async function AllPoliticalArticles({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  const { articles, totalPages } = await getAllPoliticalArticles(currentPage);
 
   return (
     <>
@@ -57,6 +69,7 @@ export default async function AllPoliticalArticles() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }
