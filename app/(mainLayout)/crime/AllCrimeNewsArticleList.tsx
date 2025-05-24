@@ -1,11 +1,16 @@
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "../../../components/general/EmptyState";
 import { NewsArticleCard } from "../../../components/general/NewsArticleCard";
+import { PaginationComponent } from "@/components/general/PaginationComponent";
 
-async function getAllCrimeArticles() {
-  const [data] = await Promise.all([
+async function getAllCrimeArticles(page: number = 1, pageSize: number = 8) {
+  const skip = (page - 1) * pageSize;
+
+  const [data, totalCount] = await Promise.all([
     prisma.newsArticle.findMany({
       where: { newsCategory: "CRIME" },
+      take: pageSize,
+      skip: skip,
       select: {
         id: true,
         createdAt: true,
@@ -31,15 +36,23 @@ async function getAllCrimeArticles() {
         createdAt: "desc",
       },
     }),
+    prisma.newsArticle.count({
+      where: { newsCategory: "CRIME" },
+    }),
   ]);
 
   return {
     articles: data,
+    totalPages: Math.ceil(totalCount / pageSize),
   };
 }
 
-export default async function AllCrimeNewsArticleList() {
-  const { articles } = await getAllCrimeArticles();
+export default async function AllCrimeNewsArticleList({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  const { articles, totalPages } = await getAllCrimeArticles(currentPage);
 
   return (
     <>
@@ -57,6 +70,7 @@ export default async function AllCrimeNewsArticleList() {
           href="/"
         />
       )}
+      <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
     </>
   );
 }
