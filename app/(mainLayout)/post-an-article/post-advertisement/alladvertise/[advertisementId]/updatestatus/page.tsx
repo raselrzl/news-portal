@@ -1,5 +1,6 @@
 import { updateAdvertisementStatus } from "@/app/actions";
 import { redirect } from "next/navigation";
+import { use } from "react";
 
 const statusOptions = [
   { label: "খসড়া", value: "DRAFT" },
@@ -7,13 +8,20 @@ const statusOptions = [
   { label: "মেয়াদোত্তীর্ণ", value: "EXPIRED" },
 ];
 
-export default function UpdateAdvertiseStatus({ params }: { params: { advertisementId: string } }) {
+export default function UpdateAdvertiseStatus(
+  {
+    params,
+  }: {
+    params: Promise<{ advertisementId: string }>;
+  }
+) {
+  const { advertisementId } = use(params);
   return (
     <form
       action={async (formData) => {
         "use server";
         const status = formData.get("status") as "DRAFT" | "ACTIVE" | "EXPIRED";
-        await updateAdvertisementStatus(params.advertisementId, status);
+        await updateAdvertisementStatus(advertisementId, status);
         redirect("/post-an-article/post-advertisement/alladvertise");
       }}
       className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow"
