@@ -484,7 +484,7 @@ export function CreateNewsArticleForm({
             </CardContent>
           </Card>
 
-          <Card>
+       {/*    <Card>
             <CardHeader>
               <CardTitle>এক নজরে দেখুন আপনার ব্যক্তিগত তথ্য</CardTitle>
             </CardHeader>
@@ -566,7 +566,6 @@ export function CreateNewsArticleForm({
                 )}
               />
 
-              {/* Bio section */}
               <FormField
                 control={form.control}
                 name="bio"
@@ -584,7 +583,6 @@ export function CreateNewsArticleForm({
                 )}
               />
 
-              {/* Profile Picture Upload */}
               <FormField
                 control={form.control}
                 name="profilePicture"
@@ -636,7 +634,7 @@ export function CreateNewsArticleForm({
                 )}
               />
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         <Button type="submit" className="w-full" disabled={pending}>
