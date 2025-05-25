@@ -10,6 +10,7 @@ const userTypes = [
   { label: "সংবাদ প্রতিবেদক", value: "NEWSREPORTER" },
   { label: "বিজ্ঞাপনদাতা", value: "ADVERTISER" },
   { label: "সম্পাদক", value: "SOMPANDOK" },
+  { label: "Super Admin", value: "SUPERADMIN" },
 ];
 
 export default function CreateSompandokPage() {
