@@ -39,15 +39,18 @@ interface iAppProps {
 export async function UserDropdown({ email, name, image }: iAppProps) {
   /* const isAdmin = await supperAdmin(email);
   const newsReporter = await isNewsReporter(email);*/
-  const mkr = ime(email); 
+  const mkr = ime(email);
 
-const currentUser = await getCurrentUserType();
-const userType = currentUser?.userType;
-const approvalStatus=currentUser?.approvalStatus;
+  const currentUser = await getCurrentUserType();
+  const userType = currentUser?.userType;
+  const approvalStatus = currentUser?.approvalStatus;
 
-const canSeeSection1 = userType === "NEWSREPORTER" && approvalStatus==="APPROVED" || userType === "SOMPANDOK" || userType === "SUPERADMIN";
-const canSeeSection2 = userType === "SOMPANDOK" || userType === "SUPERADMIN";
-const canSeeSection3 = userType === "SUPERADMIN";
+  const canSeeSection1 =
+    (userType === "NEWSREPORTER" && approvalStatus === "APPROVED") ||
+    userType === "SOMPANDOK" ||
+    userType === "SUPERADMIN";
+  const canSeeSection2 = userType === "SOMPANDOK" || userType === "SUPERADMIN";
+  const canSeeSection3 = userType === "SUPERADMIN";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -83,7 +86,7 @@ const canSeeSection3 = userType === "SUPERADMIN";
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/my-article">
-                <Newspaper size={16} strokeWidth={2} className="opacity-60" />
+                  <Newspaper size={16} strokeWidth={2} className="opacity-60" />
                   <span>আমার প্রকাশিত সংবাদের তালিকা</span>
                 </Link>
               </DropdownMenuItem>
@@ -94,38 +97,43 @@ const canSeeSection3 = userType === "SUPERADMIN";
             <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
-                    <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
-               <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement">
-                <Megaphone size={16} strokeWidth={2} className="opacity-60" />
+                  <Megaphone size={16} strokeWidth={2} className="opacity-60" />
                   <span>বিজ্ঞাপন পোস্ট করুন</span>
                 </Link>
-              </DropdownMenuItem>         
-             
+              </DropdownMenuItem>
+
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement/alladvertise">
-                <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/about/advertise/allcontactinfo">
-                <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
+                  <MessagesSquare
+                    size={16}
+                    strokeWidth={2}
+                    className="opacity-60"
+                  />
                   <span>সব বিজ্ঞাপন অনুরোধ</span>
                 </Link>
               </DropdownMenuItem>
             </>
           )}
-{canSeeSection3 && (
-          <DropdownMenuItem asChild>
-                <Link href="/post-an-article/allusers">
+          {canSeeSection3 && (
+            <DropdownMenuItem asChild>
+              <Link href="/post-an-article/allusers">
                 <Users size={16} strokeWidth={2} className="opacity-60" />
-                  <span>অ্যাপের সকল ব্যবহারকারী</span>
-                </Link>
-              </DropdownMenuItem>)}
+                <span>অ্যাপের সকল ব্যবহারকারী</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
 
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="w-full">

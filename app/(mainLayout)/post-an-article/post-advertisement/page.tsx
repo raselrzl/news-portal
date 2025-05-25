@@ -1,10 +1,12 @@
 import React from "react";
 import { CreateAdvertisementForm } from "./post-advertisement-form";
-import { requireSuperAdmin } from "@/app/utils/requireUser";
+import { requireSompandokOrSuperAdmin } from "@/app/utils/requireUser";
 import { redirect } from "next/navigation";
+
+
 export default async function PostAnArticle() {
-  const approvedreporter = await requireSuperAdmin();
-  if (!approvedreporter) {
+  const SompandokOrSuperAdmin = await requireSompandokOrSuperAdmin();
+  if (!SompandokOrSuperAdmin) {
     return redirect("/restricted");
   }
   return (

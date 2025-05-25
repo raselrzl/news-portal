@@ -42,6 +42,28 @@ export async function requireNewsReporter() {
 }
 
 
+export async function requireSompandokOrSuperAdmin() {
+  const session = await auth();
+  if (!session?.user?.email) {
+    return redirect("/login");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    select: { userType: true },
+  });
+
+  const isSuperAdmin = user?.userType === "SUPERADMIN";
+  const isSompandok = user?.userType === "SOMPANDOK";
+
+  if (!isSuperAdmin && !isSompandok) {
+    return redirect("/restricted");
+  }
+
+  return session.user;
+}
+
+
 
 
 export async function requireSuperAdmin() {
