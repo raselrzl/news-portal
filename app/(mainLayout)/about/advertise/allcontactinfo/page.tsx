@@ -1,33 +1,24 @@
 import { prisma } from "@/app/utils/db";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead,
+  TableHeader, TableRow
 } from "@/components/ui/table";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
+  Card, CardContent, CardHeader,
+  CardTitle, CardDescription
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenu, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuLabel,
+  DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { XCircle, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
 import Link from "next/link";
-import { requireSuperAdmin } from "@/app/utils/requireUser";
 import { EmptyState } from "@/components/general/EmptyState";
+import { getCurrentUserType } from "@/app/utils/getCurrentUserType";
+import { requireNewsReporter } from "@/app/utils/requireUser";
 
 async function getAllAdvertiseRequests() {
   return await prisma.advertiseRequest.findMany({
@@ -48,8 +39,11 @@ async function getAllAdvertiseRequests() {
 }
 
 export default async function AllAdvertiseRequestsTable() {
+  const requireuser= await requireNewsReporter()
   const requests = await getAllAdvertiseRequests();
-  const superadmin = await requireSuperAdmin();
+  const currentUser = await getCurrentUserType();
+  const userType = currentUser?.userType;
+  const isPrivilegedUser = userType === "SOMPANDOK" || userType === "SUPERADMIN";
 
   return (
     <>
@@ -57,7 +51,9 @@ export default async function AllAdvertiseRequestsTable() {
         <Card>
           <CardHeader>
             <CardTitle>সব বিজ্ঞাপন অনুরোধ</CardTitle>
-            <CardDescription>বিজ্ঞাপন দিতে ইচ্ছুক ব্যক্তিদের সাম্প্রতিক অনুরোধসমূহ।</CardDescription>
+            <CardDescription>
+              বিজ্ঞাপন দিতে ইচ্ছুক ব্যক্তিদের সাম্প্রতিক অনুরোধসমূহ।
+            </CardDescription>
           </CardHeader>
           <CardContent className="overflow-x-auto">
             <Table>
@@ -81,39 +77,44 @@ export default async function AllAdvertiseRequestsTable() {
                     <TableCell>{req.phoneNumber}</TableCell>
                     <TableCell>{req.companyName}</TableCell>
                     <TableCell>
-                      <a href={req.companyWebsite} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                      <a
+                        href={req.companyWebsite}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline"
+                      >
                         {req.companyWebsite}
                       </a>
                     </TableCell>
                     <TableCell className="max-w-sm">
-                      <p className="">
-                        {req.message}
-                      </p>
+                      <p>{req.message}</p>
                     </TableCell>
                     <TableCell>
                       {format(new Date(req.createdAt), "yyyy-MM-dd HH:mm")}
                     </TableCell>
                     <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem asChild>
-                            <Link
-                              href={`/about/advertise/allcontactinfo/${req.id}/delete`}
-                              className="text-red-600"
-                            >
-                              <XCircle className="w-4 h-4 mr-2" />
-                              Delete
-                            </Link>
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      {isPrivilegedUser && (
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/about/advertise/allcontactinfo/${req.id}/delete`}
+                                className="text-red-600"
+                              >
+                                <XCircle className="w-4 h-4 mr-2" />
+                                Delete
+                              </Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
