@@ -27,9 +27,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CheckCircle, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
-import { requireNewsReporter, requireSuperAdmin } from "@/app/utils/requireUser";
-import { isNewsReporter, isNewsReporterOrSuperAdmin, supperAdmin } from "@/app/utils/ime";
+import {
+  requireNewsReporter,
+  requireSuperAdmin,
+} from "@/app/utils/requireUser";
+import { isNewsReporterOrSuperAdmin, supperAdmin } from "@/app/utils/ime";
 import { auth } from "@/app/utils/auth";
+import { getCurrentUserType } from "@/app/utils/getCurrentUserType";
 
 async function getAllUsers() {
   const users = await prisma.user.findMany({
@@ -51,12 +55,22 @@ async function getAllUsers() {
 
 export default async function AllUsersTable() {
   const users = await getAllUsers();
-  const superadmin = await requireNewsReporter();
   let user = await auth();
   let email = user?.user?.email;
 
   const isSuperAdmin = await supperAdmin(email);
   const newsReporterOrSuperAdmin = await isNewsReporterOrSuperAdmin(email);
+
+  const currentUser = await getCurrentUserType();
+  const userType = currentUser?.userType;
+  const approvalStatus = currentUser?.approvalStatus;
+
+  const canSeeSection1 =
+    (userType === "NEWSREPORTER" && approvalStatus === "APPROVED") ||
+    userType === "SOMPANDOK" ||
+    userType === "SUPERADMIN";
+  const canSeeSection2 = userType === "SOMPANDOK" || userType === "SUPERADMIN";
+  const canSeeSection3 = userType === "SUPERADMIN";
 
   return (
     <>
@@ -84,32 +98,66 @@ export default async function AllUsersTable() {
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user.id}>
-                    <TableCell>{user.name ?? "N/A"}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.userType ?? "Unknown"}</TableCell>
                     <TableCell>
-                      {user.onboardingCompleted ? (
-                        <CheckCircle className="text-green-500 w-4 h-4" />
-                      ) : (
-                        <XCircle className="text-red-500 w-4 h-4" />
-                      )}
+                      {" "}
+                      {userType === "SUPERADMIN" ||
+                      user.userType !== "SUPERADMIN"
+                        ? user.name ?? "N/A"
+                        : null}{" "}
                     </TableCell>
                     <TableCell>
-                      {new Date(user.createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
+                      {" "}
+                      {userType === "SUPERADMIN" ||
+                      user.userType !== "SUPERADMIN"
+                        ? user.email
+                        : null}{" "}
                     </TableCell>
                     <TableCell>
-                      {user.approvalStatus ? user.approvalStatus : "Pending"}
+                      {canSeeSection3
+                        ? user.userType
+                        : user.userType === "SUPERADMIN"
+                        ? null
+                        : user.userType ?? "Unknown"}
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      {userType === "SUPERADMIN" ||
+                      user.userType !== "SUPERADMIN" ? (
+                        user.onboardingCompleted ? (
+                          <CheckCircle className="text-green-500 w-4 h-4" />
+                        ) : (
+                          <XCircle className="text-red-500 w-4 h-4" />
+                        )
+                      ) : null}{" "}
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      {userType === "SUPERADMIN" ||
+                      user.userType !== "SUPERADMIN"
+                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })
+                        : null}{" "}
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      {userType === "SUPERADMIN" ||
+                      user.userType !== "SUPERADMIN"
+                        ? user.approvalStatus
+                          ? user.approvalStatus
+                          : "Pending"
+                        : null}{" "}
                     </TableCell>
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
+                          {(userType === "SUPERADMIN" || user.userType !== "SUPERADMIN") && (
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="w-4 h-4" />
+                            </Button>
+                          )}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -121,7 +169,7 @@ export default async function AllUsersTable() {
                           </DropdownMenuItem> */}
                           <DropdownMenuSeparator />
 
-                          {isSuperAdmin && (
+                          {canSeeSection3 && (
                             <DropdownMenuItem asChild>
                               <Link
                                 href={`/post-an-article/allusers/${user.id}/deleteuser`}
@@ -132,19 +180,18 @@ export default async function AllUsersTable() {
                             </DropdownMenuItem>
                           )}
 
-                          {newsReporterOrSuperAdmin &&(
-                              <DropdownMenuItem asChild>
+                          {canSeeSection2 && (
+                            <DropdownMenuItem asChild>
                               <Link
                                 href={`/post-an-article/allusers/${user.id}/approvalstatus`}
                               >
                                 <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
                                 ইউজার স্ট্যাটাস
                               </Link>
-                              </DropdownMenuItem>
+                            </DropdownMenuItem>
                           )}
 
-                         
-                          {isSuperAdmin && (
+                          {canSeeSection3 && (
                             <DropdownMenuItem asChild>
                               <Link
                                 href={`/post-an-article/allusers/${user.id}/approvalstatus/createsompadok`}

@@ -2,21 +2,26 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { use } from "react";
+import { use, useState } from "react";
 import { updateArticleStatusToActive } from "@/app/actions";
+import { CheckCircle, Loader2 } from "lucide-react";
 
 export default function ConfirmPublishPageActive({
   params,
 }: {
   params: Promise<{ articleId: string }>;
 }) {
+  const [isPublishing, setIsPublishing] = useState(false);
   const router = useRouter();
   const { articleId } = use(params);
   const handleConfirm = async () => {
+    setIsPublishing(true);
     try {
       await updateArticleStatusToActive(articleId);
     } catch (error) {
       console.error("Error updating article status:", error);
+    }finally {
+      setIsPublishing(false);
     }
   };
 
@@ -42,8 +47,21 @@ export default function ConfirmPublishPageActive({
           <Button variant="link" onClick={handleCancel} className="cursor-pointer">
             বাতিল করুন
           </Button>
-          <Button variant="secondary" onClick={handleConfirm} className="cursor-pointer">
-            প্রকাশ করুন
+          <Button variant="secondary"
+            onClick={handleConfirm}
+            className="cursor-pointer"
+            disabled={isPublishing}>
+             {isPublishing ? (
+              <>
+                <Loader2 className="animate-spin w-4 h-4 mr-2" />
+                প্রকাশ হচ্ছে...
+              </>
+            ) : (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                প্রকাশ করুন
+              </>
+            )}
           </Button>
         </div>
       </div>
