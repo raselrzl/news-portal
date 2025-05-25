@@ -1,3 +1,4 @@
+import React from "react";
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
 import {
@@ -11,9 +12,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PrintNews from "@/components/general/printNews";
+import { PrintNewsDetailsClient } from "../../../../components/general/PrintNewsClient";
 
 async function getNewsArticle(articleId: string) {
-  const newsArticle = prisma.newsArticle.findUnique({
+  const newsArticle = await prisma.newsArticle.findUnique({
     where: {
       id: articleId,
     },
@@ -27,8 +30,11 @@ async function getNewsArticle(articleId: string) {
       newsPicture: true,
       quotes: {
         select: {
-          speakerInfo: true,
-          text: true,
+         id: true,
+        createdAt: true,
+        text: true,
+        speakerInfo: true,
+        articleId: true,
         },
       },
       newsResource: true,
@@ -39,25 +45,19 @@ async function getNewsArticle(articleId: string) {
       newsArticleStatus: true,
     },
   });
-  if (!newsArticle) {
-    return notFound();
-  }
+
+  if (!newsArticle) notFound();
+
   return newsArticle;
 }
 
 type Params = Promise<{ articleId: string }>;
 
-
-
-import PrintNews from "@/components/general/printNews";
-
-
-
 export default async function NewsDetailsPage({ params }: { params: Params }) {
   const { articleId } = await params;
   const data = await getNewsArticle(articleId);
 
-  if (!data)
+  if (!data) {
     return (
       <EmptyState
         title="উফ! এখনো কিছু দেখানোর মতো নেই।"
@@ -66,18 +66,20 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         href="/"
       />
     );
+  }
 
-  // Format the createdAt date before passing it to PrintNews
+  // Format the createdAt date before passing it to the UI
   const formattedCreatedAt = data.createdAt
     ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
         year: "numeric",
         month: "long",
         day: "numeric",
       })
-    : "তারিখ পাওয়া যায়নি"; 
+    : "তারিখ পাওয়া যায়নি";
 
   return (
     <div className="grid grid-cols-5 gap-4 my-10">
+      {/* Left Sidebar */}
       <div className="col-span-5 md:col-span-1">
         <div className="relative w-full h-[100px] md:h-[200px] px-10">
           <Image
@@ -92,7 +94,10 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           <ShirShoNewsHeadings />
         </div>
       </div>
+
+      {/* Main Content */}
       <div className="col-span-5 md:col-span-3">
+        {/* Article Meta Info */}
         <div className="flex flex-row font-bold mb-1 md:text-xl">
           <div className="flex flex-row pl-4">
             <Notebook className="size-4 md:size-5 pt-1" />
@@ -107,20 +112,22 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             <p className="font-bold">{formattedCreatedAt}</p>
           </div>
         </div>
-
-        {/* Passing the formattedCreatedAt to PrintNews */}
-        <PrintNews 
-          newsDetails={data?.newsDetails} 
-          newsResource={data?.newsResource}
-          newsPicture={data?.newsPicture}
-          newsLocation={data?.newsLocation}
-          newsPictureHeading={data?.newsPictureHeading}
-          newsPictureCredit={data?.newsPictureCredit}
-          newsHeading={data?.newsHeading}
+      
+        {/* News Content using PrintNews component */}
+        <PrintNews
+          id={data.id}
+          newsDetails={data.newsDetails}
+          newsResource={data.newsResource}
+          newsPicture={data.newsPicture}
+          newsLocation={data.newsLocation}
+          newsPictureHeading={data.newsPictureHeading}
+          newsPictureCredit={data.newsPictureCredit}
+          newsHeading={data.newsHeading}
+          createdAt={data.createdAt}          // <--- Pass createdAt here
+          quotes={data.quotes ?? []}
         />
 
-         
-
+        {/* Bottom Banner */}
         <div className="relative w-full h-[100px] md:h-[200px] px-10">
           <Image
             src="/gif111.gif"
@@ -131,6 +138,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           />
         </div>
 
+        {/* Quotes Section */}
         {data.quotes && data.quotes.length > 0 && (
           <div className="mt-6 px-4">
             <div className="space-y-4">
@@ -150,6 +158,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         )}
       </div>
 
+      {/* Right Sidebar */}
       <div className="col-span-5 md:col-span-1">
         <div className="flex flex-col items-center rounded-2xl mx-auto">
           <Image

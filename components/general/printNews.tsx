@@ -1,22 +1,16 @@
 "use client";
 import {
-  Download,
-  Facebook,
-  MessageCircle,
-  Copy,
   SquarePlay,
   LocateIcon,
-  Wheat,
   LinkIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import html2canvas from "html2canvas-pro";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Card } from "../ui/card";
-import { JsonToHtml } from "../richTextEditor/JsonToHtml";
 import { NewsDetailsDisplay } from "../richTextEditor/NewsDetailsDisplay";
+import { PrintNewsDetailsClient } from "@/components/general/PrintNewsClient";
+import { quote } from "@/lib/generated/prisma";
 
 interface PrintNewsProps {
   newsPicture: string | null;
@@ -26,6 +20,9 @@ interface PrintNewsProps {
   newsDetails: string | "...";
   newsResource: string | null;
   newsHeading: string | null;
+  id: string | null;
+  createdAt: Date;
+  quotes?: quote[];
 }
 
 export default function PrintNews({
@@ -36,21 +33,11 @@ export default function PrintNews({
   newsDetails,
   newsResource,
   newsHeading,
+  createdAt,
+  quotes = [],
+  id,
 }: PrintNewsProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const handleDownload = async () => {
-    if (!contentRef.current) return;
-    const canvas = await html2canvas(contentRef.current, {
-      scale: 2,
-      useCORS: true, // for external images
-    });
-    const link = document.createElement("a");
-    link.download = "news-article.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  };
-
 
   const [articleUrl, setArticleUrl] = useState('');
 
@@ -59,6 +46,7 @@ export default function PrintNews({
       setArticleUrl(window.location.href); // Grabs full current URL
     }
   }, []);
+
   const handleShareWhatsApp = () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(articleUrl)}`, '_blank');
   };
@@ -82,25 +70,18 @@ export default function PrintNews({
     }
   };
 
-
-
   return (
     <>
       <div className="flex justify-end flex-wrap space-x-1 pr-4 mt-6 md:mt-2">
-        <Button
-          onClick={handleDownload}
-          className="w-9 h-9 overflow-hidden p-[6px]"
-          variant="outline"
-        >
-          <Image
-            src="/download.png"
-            alt="WhatsApp"
-            width={40}
-            height={40}
-            className="object-cover w-full h-full"
-          />
-        </Button>
-
+        {/* Removed the Download button here */}
+        <PrintNewsDetailsClient
+          newsHeading={newsHeading ?? ""}
+          newsPicture={newsPicture ?? null}
+          newsPictureHeading={newsPictureHeading ?? null}
+          newsDetails={newsDetails}
+          createdAt={createdAt}
+          quotes={quotes}
+        />
         <Button
           onClick={handleShareWhatsApp}
           className="w-9 h-9 p-0 overflow-hidden"
@@ -122,7 +103,7 @@ export default function PrintNews({
         >
           <Image
             src="/facebook.svg"
-            alt="WhatsApp"
+            alt="Facebook"
             width={40}
             height={40}
             className="object-cover w-full h-full"
@@ -136,7 +117,7 @@ export default function PrintNews({
         >
           <Image
             src="/messanger.svg"
-            alt="WhatsApp"
+            alt="Messenger"
             width={40}
             height={40}
             className="object-cover w-full h-full"
@@ -176,18 +157,16 @@ export default function PrintNews({
               <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
               <LocateIcon />
               <p className="text-xl font-bold">{newsLocation}</p>
-              
             </div>
-            <div className="px-2 md:px-6"><NewsDetailsDisplay newsDetails={newsDetails} /></div>
-            
+            <div className="px-2 md:px-6">
+              <NewsDetailsDisplay newsDetails={newsDetails} />
+            </div>
           </div>
           <p className="ml-6 font-extrabold">
             {">>>"} {newsResource}
           </p>
         </div>
       </div>
-
-      
     </>
   );
 }

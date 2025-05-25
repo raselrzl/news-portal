@@ -152,3 +152,21 @@ a {
   background-color: var(--primary); /* Tailwind primary (blue-500) */
   border-radius: 4px;
 }
+
+
+/* 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-content, #printable-content * {
+    visibility: visible;
+  }
+  #printable-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    min-height: 297mm;
+  }
+} */
