@@ -28,6 +28,8 @@ import {
 import { CheckCircle, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
 import { advertiseStatus } from "@/lib/generated/prisma";
+import { requireSompandokOrSuperAdmin } from "@/app/utils/requireUser";
+import { redirect } from "next/navigation";
 
 async function getAllAdvertisements() {
     const ads = await prisma.advertisement.findMany({
@@ -60,6 +62,10 @@ async function getAllAdvertisements() {
 
 export default async function AllAdvertisementTable() {
   const ads = await getAllAdvertisements();
+   const SompandokOrSuperAdmin = await requireSompandokOrSuperAdmin();
+    if (!SompandokOrSuperAdmin) {
+      return redirect("/restricted");
+    }
 
   return (
     <>

@@ -16,6 +16,7 @@ export default function UpdateAdvertiseStatus(
   }
 ) {
   const { advertisementId } = use(params);
+  
   return (
     <form
       action={async (formData) => {
