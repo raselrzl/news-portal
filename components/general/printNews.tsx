@@ -15,13 +15,15 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Card } from "../ui/card";
+import { JsonToHtml } from "../richTextEditor/JsonToHtml";
+import { NewsDetailsDisplay } from "../richTextEditor/NewsDetailsDisplay";
 
 interface PrintNewsProps {
   newsPicture: string | null;
   newsPictureHeading: string | null;
   newsPictureCredit: string | null;
   newsLocation: string | null;
-  newsDetails: string | null;
+  newsDetails: string | "...";
   newsResource: string | null;
   newsHeading: string | null;
 }
@@ -174,8 +176,10 @@ export default function PrintNews({
               <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
               <LocateIcon />
               <p className="text-xl font-bold">{newsLocation}</p>
+              
             </div>
-            <p className="py-4 md:py-6 px-2 md:px-6 text-justify">{newsDetails}</p>
+            <div className="px-2 md:px-6"><NewsDetailsDisplay newsDetails={newsDetails} /></div>
+            
           </div>
           <p className="ml-6 font-extrabold">
             {">>>"} {newsResource}

@@ -119,6 +119,8 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           newsHeading={data?.newsHeading}
         />
 
+         
+
         <div className="relative w-full h-[100px] md:h-[200px] px-10">
           <Image
             src="/gif111.gif"

@@ -35,6 +35,7 @@ import Image from "next/image";
 import { newsCategory } from "@/lib/generated/prisma";
 import { createAnArticle } from "@/app/actions";
 import { Label } from "@/components/ui/label";
+import NewsDescriptionEditor from "@/components/richTextEditor/newsDescriptionEditor";
 
 interface iAppProps {
   reporterLocation: string;
@@ -42,7 +43,7 @@ interface iAppProps {
   reporterProfilePicture: string;
   reporterPhoneNumber: string;
   reporterFacebookProfileAddress?: string | undefined;
-  reporterName?:string | undefined;
+  reporterName?: string | undefined;
 }
 
 export function CreateNewsArticleForm({
@@ -79,7 +80,7 @@ export function CreateNewsArticleForm({
       quotes: [],
     },
   });
-
+  const [useEditor, setUseEditor] = useState(true);
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "quotes",
@@ -122,23 +123,38 @@ export function CreateNewsArticleForm({
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="newsDetails"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>সংবাদের বিস্তারিত</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="উদাহরণ: মঙ্গলবার সকালে ঢাকার শাহবাগ এলাকায়..."
-                        className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <>
+                <div className="flex items-center gap-2 mb-4">
+                  <Switch
+                    id="toggle-editor"
+                    checked={useEditor}
+                    onCheckedChange={setUseEditor}
+                  />
+                  <Label htmlFor="toggle-editor">এডিটর ব্যবহার করতে চান?</Label>
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="newsDetails"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>সংবাদের বিস্তারিত</FormLabel>
+                      <FormControl>
+                        {useEditor ? (
+                          <NewsDescriptionEditor field={field} />
+                        ) : (
+                          <Textarea
+                            placeholder="উদাহরণ: মঙ্গলবার সকালে ঢাকার শাহবাগ এলাকায়..."
+                            className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
+                            {...field}
+                          />
+                        )}
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
             </CardContent>
           </Card>
           <Card>
@@ -624,7 +640,7 @@ export function CreateNewsArticleForm({
         </div>
 
         <Button type="submit" className="w-full" disabled={pending}>
-        {pending ? (
+          {pending ? (
             <>
               <Loader2 className="animate-spin w-4 h-4 mr-2" />
               প্রকাশ করা হচ্ছে...

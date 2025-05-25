@@ -27,11 +27,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { districts } from "@/app/utils/locationList";
 import { links } from "@/app/utils/linkList";
 import { Switch } from "@/components/ui/switch";
-import Image from "next/image";
-import { prisma } from "@/app/utils/db";
-import { notFound } from "next/navigation";
 import { newsCategory } from "@/lib/generated/prisma";
 import { updateNewsArticle } from "@/app/actions";
+import NewsDescriptionEditor from "@/components/richTextEditor/newsDescriptionEditor";
+import { Label } from "@/components/ui/label";
 
 interface iAppProps {
   article: {
@@ -100,6 +99,8 @@ export function EditNewsArticleForm({ article }: iAppProps) {
     }
   }
 
+  const [useEditor, setUseEditor] = useState(false);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10 mb-20">
@@ -123,23 +124,42 @@ export function EditNewsArticleForm({ article }: iAppProps) {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="newsDetails"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>সংবাদের বিস্তারিত</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="উদাহরণ: মঙ্গলবার সকালে ঢাকার শাহবাগ এলাকায়..."
-                        className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <>
+      <div className="flex items-center gap-2 mb-4">
+        <Switch
+          id="toggle-editor"
+          checked={useEditor}
+          onCheckedChange={setUseEditor}
+        />
+        <Label htmlFor="toggle-editor">এডিটর ব্যবহার করতে চান?</Label>
+      </div>
+
+      <FormField
+        control={form.control}
+        name="newsDetails"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>সংবাদের বিস্তারিত</FormLabel>
+            <FormControl>
+              {useEditor ? (
+                <NewsDescriptionEditor key="editor" field={field} />
+              ) : (
+                <Textarea
+                  key="textarea"
+                  placeholder="উদাহরণ: মঙ্গলবার সকালে ঢাকার শাহবাগ এলাকায়..."
+                  className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
+                  {...field}
+                />
+              )}
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </>
+
+
+
             </CardContent>
           </Card>
 
