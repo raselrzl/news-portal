@@ -11,6 +11,7 @@ export async function getCurrentUserType() {
     select: {
       email: true,
       userType: true,
+      approvalStatus: true,
     },
   });
 

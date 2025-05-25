@@ -27,6 +27,7 @@ import { signOut } from "@/app/utils/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ime, isNewsReporter, supperAdmin } from "@/app/utils/ime";
 import { requireSuperAdmin } from "@/app/utils/requireUser";
+import { getCurrentUserType } from "@/app/utils/getCurrentUserType";
 /* import { ime } from "@/app/utils/ime"; */
 
 interface iAppProps {
@@ -36,9 +37,17 @@ interface iAppProps {
 }
 
 export async function UserDropdown({ email, name, image }: iAppProps) {
-  const isAdmin = await supperAdmin(email);
-  const newsReporter = await isNewsReporter(email);
-  const mkr = ime(email);
+  /* const isAdmin = await supperAdmin(email);
+  const newsReporter = await isNewsReporter(email);*/
+  const mkr = ime(email); 
+
+const currentUser = await getCurrentUserType();
+const userType = currentUser?.userType;
+const approvalStatus=currentUser?.approvalStatus;
+
+const canSeeSection1 = userType === "NEWSREPORTER" && approvalStatus==="APPROVED" || userType === "SOMPANDOK" || userType === "SUPERADMIN";
+const canSeeSection2 = userType === "SOMPANDOK" || userType === "SUPERADMIN";
+const canSeeSection3 = userType === "SUPERADMIN";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -64,7 +73,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuGroup>
-          {(newsReporter || isAdmin || mkr) && (
+          {(canSeeSection1 || mkr) && (
             <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article">
@@ -81,7 +90,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
             </>
           )}
 
-          {(isAdmin || mkr) && (
+          {canSeeSection2 && (
             <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
@@ -89,33 +98,19 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/post-an-article/allusers">
-                <Users size={16} strokeWidth={2} className="opacity-60" />
-                  <span>অ্যাপের সকল ব্যবহারকারী</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement">
                 <Megaphone size={16} strokeWidth={2} className="opacity-60" />
                   <span>বিজ্ঞাপন পোস্ট করুন</span>
                 </Link>
-              </DropdownMenuItem>
-
+              </DropdownMenuItem>         
+             
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement/alladvertise">
                 <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
-
-              <DropdownMenuItem asChild>
-                <Link href="/alluseropinion/opiniontable">
-                <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
-                  <span>সব অভিযোগসমূহ নিয়ন্ত্রণ</span>
-                </Link>
-              </DropdownMenuItem>
-
               <DropdownMenuItem asChild>
                 <Link href="/about/advertise/allcontactinfo">
                 <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
@@ -124,6 +119,13 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
               </DropdownMenuItem>
             </>
           )}
+{canSeeSection3 && (
+          <DropdownMenuItem asChild>
+                <Link href="/post-an-article/allusers">
+                <Users size={16} strokeWidth={2} className="opacity-60" />
+                  <span>অ্যাপের সকল ব্যবহারকারী</span>
+                </Link>
+              </DropdownMenuItem>)}
 
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="w-full">
