@@ -1,10 +1,11 @@
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className=" mt-10 w-full">
-      <div className=" text-center text-sm text-foreground ">
-        <div className="flex flex-wrap justify-center gap-4 mb-2 py-6 border-y-2">
+    <footer className="mt-10 w-full flex justify-center">
+      <div className=" w-full max-w-7xl text-center">
+        <div className="flex flex-wrap justify-center gap-4 mb-2 py-2 border-2">
           <Link
             href="/about"
             className="hover:underline font-semibold text-foreground/90 text-md md:text-2xl px-2"
@@ -41,17 +42,17 @@ export default function Footer() {
         </div>
         <div className="md:grid md:grid-cols-3">
           <div>
-            <h2 className="text-xl font-semibold mb-2 text-center text-neutral-900">
+            <h2 className="text-xl font-semibold mb-2 text-center">
               প্রকাশনা ও যোগাযোগ
             </h2>
-            <p className="mb-1 text-base text-neutral-700">
+            <p className="mb-1">
               <strong>সম্পাদক:</strong> ইসলাম ইসলাম ইসলাম
               <br />
               <strong>প্রকাশক:</strong> ইসলাম ইসলাম ইসলাম
               <br />
             </p>
 
-            <p className="mb-2 text-base text-neutral-700">
+            <p className="">
               <strong>ফোন:</strong> +৮৮ ০২ 00000000, +৮৮ ০২ 00000000
               <br />
               <strong>ই-মেইল:</strong>{" "}
@@ -61,13 +62,11 @@ export default function Footer() {
               >
                 news@jagrotobarta.com
               </a>
-              <p className="text-base text-neutral-600">
-                ৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা
-              </p>
+              <p>৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা</p>
             </p>
           </div>
 
-          <p className="mb-2 text-base text-neutral-700">
+          <p>
             <strong>বিজ্ঞাপন</strong>
             <br />
             ফোন: +৮৮ ০২ 00000000, ০১৭৩০ 000000
@@ -80,13 +79,39 @@ export default function Footer() {
               ads@jagrotobarta.com
             </a>
           </p>
-          <div>
-
+          <div className="flex items-center justify-center gap-4 mt-6 md:mt-0">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-primary hover:text-blue-600"
+            >
+              <Facebook className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-primary hover:text-pink-500"
+            >
+              <Instagram className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+            </a>
+            <a
+              href="https://www.youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="text-primary hover:text-red-600"
+            >
+              <Youtube className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+            </a>
           </div>
         </div>
 
-        <p className="text-xs text-primary py-2">
-          &copy; {new Date().getFullYear()} Jagroto Barta. All rights reserved.
+        <p className="text-xs text-primary py-2 mt-2 bg-accent">
+          &copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।
         </p>
       </div>
     </footer>
