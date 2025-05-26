@@ -1,11 +1,11 @@
+import LoadingSpinner from "@/components/general/LoadingSpinner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Clock } from "lucide-react";
 import React from "react";
 
 export default function HomeSkeleton() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-10">
-      {/* Left Sidebar */}
+/*     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-10">
       <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
       <div className="flex flex-row gap-2 justify-center"><Clock /><h1 className="text-2xl font-bold">সাম্প্রতিক</h1></div>
         {[...Array(6)].map((_, i) => (
@@ -35,7 +35,6 @@ export default function HomeSkeleton() {
         </div>
       </div>
 
-      {/* Middle Column */}
       <div className="order-2 md:order-2 md:col-span-1">
         <Skeleton className="w-full h-[150px] rounded-xl" />
 
@@ -58,7 +57,7 @@ export default function HomeSkeleton() {
               </div>
             ))}
 
-            {/* Fade & Scroll Hint */}
+
             <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-accent-foreground/5 to-transparent pointer-events-none" />
             <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
               <svg
@@ -83,7 +82,6 @@ export default function HomeSkeleton() {
         </div>
       </div>
 
-      {/* Main Content Area */}
       <div className="order-1 md:order-3 md:col-span-3 space-y-4">
       <div className="mb-6 max-h-[290px] md:border p-2">
         <div className="grid grid-cols-5 gap-2">
@@ -102,7 +100,7 @@ export default function HomeSkeleton() {
         </div>
       </div>
 
-      {/* Grid Articles Skeleton */}
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border">
         {Array.from({ length: 6 }).map((_, i) => (
           <div
@@ -121,6 +119,8 @@ export default function HomeSkeleton() {
         ))}
       </div>
       </div>
-    </div>
+    </div> */
+    <>
+    <LoadingSpinner /></>
   );
 }
