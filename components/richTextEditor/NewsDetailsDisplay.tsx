@@ -23,7 +23,19 @@ export function NewsDetailsDisplay({ newsDetails }: NewsDetailsDisplayProps) {
     const doc = JSON.parse(newsDetails);
     return <JsonToHtml json={doc} />;
   }
+  return <p className="whitespace-pre-wrap text-justify">{newsDetails}</p>;
+}
 
-  // Plain text fallback
+
+
+export function NewsDetailsDisplayforPDF({ newsDetails }: NewsDetailsDisplayProps) {
+  if (!newsDetails) {
+    return null;
+  }
+
+  if (isJson(newsDetails)) {
+    const doc = JSON.parse(newsDetails);
+    return <JsonToHtml json={doc} />;
+  }
   return <p className="whitespace-pre-wrap text-justify">{newsDetails}</p>;
 }
