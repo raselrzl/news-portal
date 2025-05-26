@@ -52,7 +52,7 @@ export default function Footer() {
               <br />
             </p>
 
-            <p className="">
+            <div>
               <strong>ফোন:</strong> +৮৮ ০২ 00000000, +৮৮ ০২ 00000000
               <br />
               <strong>ই-মেইল:</strong>{" "}
@@ -63,7 +63,7 @@ export default function Footer() {
                 news@jagrotobarta.com
               </a>
               <p>৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা</p>
-            </p>
+            </div>
           </div>
 
           <p>
@@ -79,33 +79,30 @@ export default function Footer() {
               ads@jagrotobarta.com
             </a>
           </p>
-          <div className="flex items-center justify-center gap-4 mt-6 md:mt-0">
+          <div className="flex items-center  justify-center gap-4 mt-6 md:mt-0">
             <a
               href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="text-primary hover:text-blue-600"
             >
-              <Facebook className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+              <Facebook className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-blue-600" />
             </a>
             <a
               href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="text-primary hover:text-pink-500"
             >
-              <Instagram className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+              <Instagram className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-pink-500" />
             </a>
             <a
               href="https://www.youtube.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
-              className="text-primary hover:text-red-600"
             >
-              <Youtube className="w-10 h-10 bg-accent-foreground p-1 rounded-xl" />
+              <Youtube className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-red-600" />
             </a>
           </div>
         </div>

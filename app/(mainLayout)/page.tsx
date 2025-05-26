@@ -20,6 +20,7 @@ import {
   PremiarTwo,
   PremiumOneAdvertise,
 } from "@/components/general/FetchAllAdvertisement";
+import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
 
 async function getData() {
   const [lastFeaturedArticle, latestNews, InternationalAll] =
@@ -334,6 +335,8 @@ export default async function Home() {
         </div>
       </div>
 
+      
+
       {/* Youtuve vedio section */}
       <Card className="p-4 shadow-lg mb-20 mt-8 rounded-none">
         <CardHeader className="p-0 flex flex-row justify-between">
@@ -395,6 +398,8 @@ export default async function Home() {
           </div>
         </div>
       </Card>
+
+      <SorboseshAndJonoprioTab />
 
       {/*  Science section */}
       <div className="border-y-4 my-2 py-6 border-primary">

@@ -428,6 +428,8 @@ export async function getPoliticsNews() {
   });
 }
 
+
+
 export default async function AllArticleList() {
   const allArticles = await getAllArticles();
   const lastFeaturedArticle = await getLastFeaturedArticle();
@@ -883,3 +885,155 @@ export async function Binodon() {
     </>
   );
 }
+
+
+// getsorboseshnews
+export async function getSorboseshNews() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "LATEST" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+}
+export async function SorboseshNews() {
+  const sorbosesh = await getSorboseshNews();
+
+  const convertToBanglaNumber = (number: number): string => {
+    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return number.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
+  };
+
+  return (
+    <>
+      <div className="py-2 min-h-[450px] overflow-y-auto">
+        {sorbosesh && sorbosesh.length > 0 ? (
+          sorbosesh.slice(0, 10).map((item, index) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
+                <div className="p-1 flex gap-2 items-start">
+                  <span className="text-lg font-bold text-primary">
+                    {convertToBanglaNumber(index + 1)}.
+                  </span>
+                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                    {item.newsHeading}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+            href="/"
+          />
+        )}
+      </div>
+    </>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+// getsorboseshnews
+export async function getJonoprioNews() {
+  return await prisma.newsArticle.findMany({
+    where: { newsCategory: "CRIME" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      newsCategory: true,
+      newsDetails: true,
+      newsHeading: true,
+      newsPicture: true,
+      quotes: {
+        select: {
+          speakerInfo: true,
+          text: true,
+        },
+      },
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+      newsReporter: true,
+      newsArticleStatus: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+}
+export async function JonoprioNews() {
+  const sorbosesh = await getJonoprioNews();
+
+  const convertToBanglaNumber = (number: number): string => {
+    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return number.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
+  };
+
+  return (
+    <>
+      <div className="py-2 min-h-[450px] overflow-y-auto">
+        {sorbosesh && sorbosesh.length > 0 ? (
+          sorbosesh.slice(0, 10).map((item, index) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
+                <div className="p-1 flex gap-2 items-start">
+                  <span className="text-lg font-bold text-primary">
+                    {convertToBanglaNumber(index + 1)}.
+                  </span>
+                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                    {item.newsHeading}
+                  </h2>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+            href="/"
+          />
+        )}
+      </div>
+    </>
+  );
+}
+
+
