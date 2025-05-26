@@ -19,7 +19,7 @@ import { JonoprioNews, SorboseshNews } from "./general/homepageArticleList"
 
 export function SorboseshAndJonoprioTab() {
   return (
-    <div className="p-4">
+    <div className="p-2 md:py-4">
     <Tabs defaultValue="sorbosesh" className="w-full">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="sorbosesh">সর্বশেষ</TabsTrigger>
