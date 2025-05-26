@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import jsPDF from "jspdf";
 
 type Quote = {
@@ -20,6 +20,7 @@ import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import html2canvas from "html2canvas-pro";
+import { Loader2 } from "lucide-react";
 
 export function PrintNewsDetailsClient({
   newsHeading,
@@ -30,10 +31,10 @@ export function PrintNewsDetailsClient({
   quotes = [],
 }: PrintNewsDetailsClientProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
+const [isLoading, setIsLoading] = useState(false);
   const handleDownload = async () => {
     if (!contentRef.current) return;
-
+setIsLoading(true);
     const canvas = await html2canvas(contentRef.current, {
       scale: 2,
       useCORS: true,
@@ -53,6 +54,7 @@ export function PrintNewsDetailsClient({
       createdAt.toISOString().split("T")[0]
     }.pdf`;
     pdf.save(fileName);
+    setIsLoading(false);
   };
   const approxSplitLength = 350;
   const firstPart = newsDetails.slice(0, approxSplitLength);
@@ -65,14 +67,19 @@ export function PrintNewsDetailsClient({
         onClick={handleDownload}
         className="w-9 h-9 overflow-hidden p-[6px]"
         variant="outline"
+        disabled={isLoading}
       >
-        <Image
-          src="/download.png"
-          alt="WhatsApp"
-          width={40}
-          height={40}
-          className="object-cover w-full h-full"
-        />
+        {isLoading ? (
+          <Loader2 className="animate-spin w-5 h-5 text-primary" />
+        ) : (
+          <Image
+            src="/download.png"
+            alt="Download"
+            width={40}
+            height={40}
+            className="object-cover w-full h-full"
+          />
+        )}
       </Button>
       <div
         ref={contentRef}
