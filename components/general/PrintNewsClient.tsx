@@ -1,4 +1,4 @@
-/* "use client";
+"use client";
 import React, { useRef, useState } from "react";
 import jsPDF from "jspdf";
 
@@ -16,29 +16,23 @@ type PrintNewsDetailsClientProps = {
   quotes?: Quote[];
 };
 
+function splitTextByLength(text: string, firstPartLength: number = 350) {
+  return {
+    firstPart: text.slice(0, firstPartLength),
+    remainingPart: text.slice(firstPartLength),
+  };
+}
+
 import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import html2canvas from "html2canvas-pro";
 import { Loader2 } from "lucide-react";
 import { isJson } from "@/app/utils/isJson";
-import { JsonToHtml } from "../richTextEditor/JsonToHtml";
+import { richTextToPlainText } from "@/app/utils/richTextToPlainText";
 
 interface NewsDetailsDisplayProps {
   newsDetails: string;
-}
-export function NewsDetailsDisplayforPDF({
-  newsDetails,
-}: NewsDetailsDisplayProps) {
-  if (!newsDetails) {
-    return null;
-  }
-
-  if (isJson(newsDetails)) {
-    const doc = JSON.parse(newsDetails);
-    return <JsonToHtml json={doc} />;
-  }
-  return <p className="whitespace-pre-wrap text-justify">{newsDetails}</p>;
 }
 
 export function PrintNewsDetailsClient({
@@ -51,7 +45,7 @@ export function PrintNewsDetailsClient({
 }: PrintNewsDetailsClientProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const handleDownload = async () => {
+  /*  const handleDownload = async () => {
     if (!contentRef.current) return;
     setIsLoading(true);
     const canvas = await html2canvas(contentRef.current, {
@@ -60,10 +54,6 @@ export function PrintNewsDetailsClient({
     });
 
     const imgData = canvas.toDataURL("image/png");
-
-    console.log(newsDetails);
-
-    // Create a PDF with same width/height as canvas
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "px",
@@ -76,11 +66,32 @@ export function PrintNewsDetailsClient({
     }.pdf`;
     pdf.save(fileName);
     setIsLoading(false);
-  };
-  const approxSplitLength = 350;
-  const firstPart = newsDetails.slice(0, approxSplitLength);
-  const remainingPart = newsDetails.slice(approxSplitLength);
+  }; */
+  const handleDownload = async () => {
+    if (!contentRef.current) return;
+    setIsLoading(true);
 
+    const canvas = await html2canvas(contentRef.current, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: [canvas.width, canvas.height],
+    });
+
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+    // Open the PDF in a new browser tab instead of downloading
+    const pdfBlob = pdf.output("blob");
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    window.open(pdfUrl, "_blank");
+
+    setIsLoading(false);
+  };
   return (
     <>
       {" "}
@@ -125,8 +136,8 @@ export function PrintNewsDetailsClient({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid #ccc",
-            borderBottom: "1px solid #ccc",
+          /*   borderTop: "1px solid #ccc",
+            borderBottom: "1px solid #ccc", */
             paddingBottom: "8px",
             marginBottom: "16px",
             fontWeight: "bold",
@@ -140,11 +151,21 @@ export function PrintNewsDetailsClient({
             width={120}
             height={30}
           />
-          <div>{formatRelativeTime(createdAt)}</div>
+          <div>
+            {createdAt.toLocaleString("bn-BD", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
+            })}
+          </div>
         </header>
 
         <article
           style={{ flexGrow: 1, overflow: "auto", paddingBottom: "8px" }}
+          className="border-2 p-4"
         >
           <h1
             style={{
@@ -156,15 +177,7 @@ export function PrintNewsDetailsClient({
             {newsHeading}
           </h1>
 
-          <div
-            style={{
-              overflow: "hidden",
-              fontSize: "12px",
-              lineHeight: 1.3,
-              textAlign: "justify",
-              marginBottom: "16px",
-            }}
-          >
+          <div style={{ overflow: "hidden", marginBottom: "16px" }}>
             {newsPicture && (
               <img
                 src={newsPicture}
@@ -176,27 +189,46 @@ export function PrintNewsDetailsClient({
                   objectFit: "cover",
                   marginRight: "16px",
                   marginBottom: "16px",
-                  borderRadius: "8px",
+                  /*  borderRadius: "8px", */
                 }}
               />
             )}
-            <p style={{ whiteSpace: "pre-line" }}>{firstPart}</p>
-          </div>
 
-          {remainingPart && (
-            <section
-              style={{
-                whiteSpace: "pre-line",
-                fontSize: "12px",
-                lineHeight: 1.3,
-                columnCount: 3,
-                columnGap: "1rem",
-                textAlign: "justify",
-              }}
-            >
-              {remainingPart}
-            </section>
-          )}
+            {(() => {
+              const fullText = isJson(newsDetails)
+                ? richTextToPlainText(JSON.parse(newsDetails))
+                : newsDetails;
+
+              const { firstPart, remainingPart } = splitTextByLength(
+                fullText,
+                350
+              );
+
+              return (
+                <>
+                  {/* Text next to the floated image */}
+                  <p className="text-[12px] leading-[1.3] text-justify mb-4 whitespace-pre-line">
+                    {firstPart}
+                  </p>
+
+                  {/* Remaining text in 3 columns below */}
+                  <div
+                    style={{
+                      clear: "both",
+                      columnCount: 3,
+                      columnGap: "1rem",
+                      fontSize: "12px",
+                      lineHeight: 1.3,
+                      textAlign: "justify",
+                      whiteSpace: "pre-line",
+                    }}
+                  >
+                    {remainingPart}
+                  </div>
+                </>
+              );
+            })()}
+          </div>
         </article>
 
         {quotes.length > 0 && (
@@ -231,247 +263,6 @@ export function PrintNewsDetailsClient({
             ))}
           </section>
         )}
-      </div>
-    </>
-  );
-}
- */
-
-
-
-"use client";
-import React, { useRef, useState } from "react";
-import jsPDF from "jspdf";
-
-import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import html2canvas from "html2canvas-pro";
-import { Loader2 } from "lucide-react";
-import { isJson } from "@/app/utils/isJson";
-import { JsonToHtml } from "../richTextEditor/JsonToHtml";
-
-type Quote = {
-  speakerInfo: string;
-  text: string;
-};
-
-type PrintNewsDetailsClientProps = {
-  newsHeading: string;
-  newsPicture?: string | null;
-  newsPictureHeading?: string | null;
-  newsDetails: string;
-  createdAt: Date;
-  quotes?: Quote[];
-};
-
-function NewsDetailsDisplayforPDF({ newsDetails }: { newsDetails: string }) {
-  if (!newsDetails) {
-    return null;
-  }
-
-  if (isJson(newsDetails)) {
-    const doc = JSON.parse(newsDetails);
-    return (
-      <div style={{ fontSize: "12px", lineHeight: 1.3, textAlign: "justify" }}>
-        <JsonToHtml json={doc} />
-      </div>
-    );
-  }
-  // Plain text
-  return (
-    <p
-      style={{
-        whiteSpace: "pre-line",
-        fontSize: "12px",
-        lineHeight: 1.3,
-        textAlign: "justify",
-      }}
-    >
-      {newsDetails}
-    </p>
-  );
-}
-
-export function PrintNewsDetailsClient({
-  newsHeading,
-  newsPicture,
-  newsPictureHeading,
-  newsDetails,
-  createdAt,
-  quotes = [],
-}: PrintNewsDetailsClientProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDownload = async () => {
-    if (!contentRef.current) return;
-    setIsLoading(true);
-
-    try {
-      const canvas = await html2canvas(contentRef.current, {
-        scale: 2,
-        useCORS: true,
-        // optional: allow tainted images from other domains
-        allowTaint: true,
-      });
-
-      const imgData = canvas.toDataURL("image/png");
-
-      // Create a PDF with same width/height as canvas
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "px",
-        format: [canvas.width, canvas.height],
-      });
-
-      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-      const fileName = `${newsHeading}-${
-        createdAt.toISOString().split("T")[0]
-      }.pdf`;
-      pdf.save(fileName);
-    } catch (error) {
-      console.error("Failed to generate PDF", error);
-    }
-
-    setIsLoading(false);
-  };
-
-  return (
-    <>
-      <Button
-        onClick={handleDownload}
-        className="w-9 h-9 overflow-hidden p-[6px]"
-        variant="outline"
-        disabled={isLoading}
-        aria-label="Download PDF"
-      >
-        {isLoading ? (
-          <Loader2 className="animate-spin w-5 h-5 text-primary" />
-        ) : (
-          <Image
-            src="/download.png"
-            alt="Download"
-            width={40}
-            height={40}
-            className="object-cover w-full h-full"
-          />
-        )}
-      </Button>
-
-      {/* Hidden content container for html2canvas */}
-      <div
-        ref={contentRef}
-        style={{
-          position: "absolute",
-          top: "-9999px",
-          left: "-9999px",
-          backgroundColor: "#ffffff",
-          color: "#000000",
-          maxWidth: "450px",
-          width: "100%",
-          minHeight: "600px",
-          padding: "16px",
-          boxSizing: "border-box",
-          fontFamily: "'Helvetica', 'Arial', sans-serif",
-          lineHeight: 1.5,
-          margin: "0 auto",
-        }}
-      >
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderTop: "1px solid #ccc",
-            borderBottom: "1px solid #ccc",
-            paddingBottom: "8px",
-            marginBottom: "16px",
-            fontWeight: "bold",
-            fontSize: "14px",
-          }}
-        >
-          <img
-            src="/logo.png"
-            alt="Logo"
-            style={{ height: "40px", objectFit: "contain" }}
-            width={120}
-            height={30}
-          />
-          <div>{formatRelativeTime(createdAt)}</div>
-        </header>
-
-        <article
-          style={{ flexGrow: 1, overflow: "auto", paddingBottom: "8px" }}
-        >
-          <h1
-            style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              marginBottom: "8px",
-            }}
-          >
-            {newsHeading}
-          </h1>
-
-          <div
-            style={{
-              overflow: "hidden",
-              fontSize: "12px",
-              lineHeight: 1.3,
-              textAlign: "justify",
-              marginBottom: "16px",
-            }}
-          >
-            {newsPicture && (
-              <img
-                src={newsPicture}
-                alt={newsPictureHeading || "News Image"}
-                style={{
-                  float: "left",
-                  width: "120px",
-                  height: "120px",
-                  objectFit: "cover",
-                  marginRight: "16px",
-                  marginBottom: "16px",
-                  borderRadius: "8px",
-                }}
-              />
-            )}
-
-            {/* Render rich text or plain text */}
-            <NewsDetailsDisplayforPDF newsDetails={newsDetails} />
-          </div>
-        </article>
-
-        {quotes.map((quote, index) => (
-          <blockquote
-            key={index}
-            style={{
-              borderLeft: "4px solid #D18700",
-              backgroundColor: "#f2f2f2",
-              padding: "8px",
-              borderRadius: "12px",
-              marginBottom: "16px",
-              fontStyle: "italic",
-              position: "relative",
-              minHeight: "75px",
-            }}
-          >
-            <p style={{ marginBottom: "24px" }}>"{quote.text}"</p>
-            <footer
-              style={{
-                position: "absolute",
-                bottom: "8px",
-                right: "16px",
-                fontSize: "10px",
-                color: "#555",
-              }}
-            >
-              — {quote.speakerInfo}
-            </footer>
-          </blockquote>
-        ))}
       </div>
     </>
   );
