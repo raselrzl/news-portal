@@ -21,11 +21,13 @@ import {
   PremiumOneAdvertise,
 } from "@/components/general/FetchAllAdvertisement";
 import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
+import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
+import { isJson } from "../utils/isJson";
 
 async function getData() {
-  const [lastFeaturedArticle, latestNews, InternationalAll] =
-    await Promise.all([
-          prisma.newsArticle.findMany({
+  const [lastFeaturedArticle, latestNews, InternationalAll] = await Promise.all(
+    [
+      prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
           isFeatured: true,
@@ -115,7 +117,8 @@ async function getData() {
         },
         take: 10,
       }),
-    ]);
+    ]
+  );
 
   return {
     lastFeaturedArticle,
@@ -124,8 +127,7 @@ async function getData() {
   };
 }
 export default async function Home() {
-  const {lastFeaturedArticle, latestNews, InternationalAll } =
-    await getData();
+  const { lastFeaturedArticle, latestNews, InternationalAll } = await getData();
 
   const session = await aauth();
   return (
@@ -283,9 +285,19 @@ export default async function Home() {
                         {lastFeaturedArticle[0].newsHeading}
                         <span className="md:hidden sm:block">বিস্তরিত....</span>
                       </h2>
-                      <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                        {lastFeaturedArticle[0].newsDetails}
-                      </p>
+                      {isJson(lastFeaturedArticle[0].newsDetails) ? (
+                        <div className="line-clamp-1 md:line-clamp-3 overflow-hidden">
+                          <JsonToHtml
+                            json={JSON.parse(
+                              lastFeaturedArticle[0].newsDetails
+                            )}
+                          />
+                        </div>
+                      ) : (
+                        <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p overflow-hidden block">
+                          {lastFeaturedArticle[0].newsDetails}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -300,7 +312,8 @@ export default async function Home() {
             />
           )}
 
-          {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
+          {lastFeaturedArticle &&
+          Object.keys(lastFeaturedArticle).length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-23 border-t-2">
               {lastFeaturedArticle.slice(1, 7).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
@@ -334,8 +347,6 @@ export default async function Home() {
           )}
         </div>
       </div>
-
-      
 
       {/* Youtuve vedio section */}
       <Card className="p-4 shadow-lg mb-20 mt-8 rounded-none">
