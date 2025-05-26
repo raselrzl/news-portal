@@ -49,7 +49,10 @@ export function PrintNewsDetailsClient({
     });
 
     pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-    pdf.save("news-article.pdf");
+    const fileName = `${newsHeading}-${
+      createdAt.toISOString().split("T")[0]
+    }.pdf`;
+    pdf.save(fileName);
   };
   const approxSplitLength = 350;
   const firstPart = newsDetails.slice(0, approxSplitLength);
@@ -174,7 +177,7 @@ export function PrintNewsDetailsClient({
               <blockquote
                 key={index}
                 style={{
-                  borderLeft: "4px solid #000",
+                  borderLeft: "4px solid #D18700",
                   backgroundColor: "#f2f2f2",
                   padding: "8px",
                   borderRadius: "12px",
