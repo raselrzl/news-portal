@@ -133,28 +133,43 @@ export default function PrintNews({
         </Button>
       </div>
 
-      <div className="mb-10">
+      <div className="mb-10 ">
         <div
           id="printable-content"
           ref={contentRef}
-          className="w-full bg-white rounded shadow mt-6"
+          className="w-full rounded shadow mt-6"
         >
           <h1 className="text-3xl font-bold my-4  px-2 md:px-6 pt-6">{newsHeading}</h1>
-          {newsPicture && (
-            <img
-              src={newsPicture}
-              alt="Description"
-              className="w-full h-[300px] md:h-[400px] block md:px-6"
-            />
-          )}
-          <div className="flex justify-center mt-2 px-2 mb-6 md:mb-10 text-sm text-accent-foreground/75">
-            <p className="mr-4">{newsPictureHeading}</p>
-            <p>কৃতিত্ব: {newsPictureCredit}</p>
-          </div>
-          <div className="whitespace-pre-line text-md mg:text-lg">
+{newsPicture && (
+  <div className="relative w-full md:px-6 h-[300px] md:h-[400px]">
+    {/* Image Layer (underneath) */}
+    <img
+      src={newsPicture}
+      alt="Description"
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+
+    {/* Text Layer (bottom with background) */}
+    <div className="absolute bottom-0 left-0 w-full z-10 bg-black/60 text-white px-4 py-2 text-center">
+      {newsPictureHeading || newsPictureCredit ? (
+        <>
+          {newsPictureHeading && <p className="text-sm font-semibold">{newsPictureHeading}</p>}
+          {newsPictureCredit && <p className="text-xs">{newsPictureCredit}</p>}
+        </>
+      ) : (
+        <p className="text-sm font-semibold">জাগ্রত প্রতিবেদক</p>
+      )}
+    </div>
+  </div>
+)}
+
+
+
+
+          <div className="whitespace-pre-line text-md mg:text-lg dark:bg-black mt-10">
             <div className="flex flex-row ml-6">
               <SquarePlay />
-              <h1 className="text-xl font-bold pl-2 mr-4">পূর্ণ বিবরণ</h1>
+              <h1 className="text-xl font-bold pl-2 mr-4 mb-4">জাগ্রত প্রতিবেদন</h1>
               <LocateIcon />
               <p className="text-xl font-bold">{newsLocation}</p>
             </div>
