@@ -5,6 +5,8 @@ import SocialLinks from "./socialLink";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { PremiarOne } from "./FetchAllAdvertisement";
+import { isJson } from "@/app/utils/isJson";
+import { JsonToHtml } from "../richTextEditor/JsonToHtml";
 
 /* async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -458,9 +460,19 @@ export default async function AllArticleList() {
                     {lastFeaturedArticle.newsHeading}
                     <span className="md:hidden sm:block">বিস্তরিত....</span>
                   </h2>
-                  <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+              {/*     <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
                     {lastFeaturedArticle.newsDetails}
-                  </p>
+                  </p> */}
+
+                   {isJson(lastFeaturedArticle.newsDetails) ? (
+                                          <div className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                                            <JsonToHtml json={JSON.parse(lastFeaturedArticle.newsDetails)} />
+                                          </div>
+                                          ) : (
+                                            <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                                              {lastFeaturedArticle.newsDetails}
+                                            </p>
+                                          )}
                 </div>
               </div>
             </Link>
