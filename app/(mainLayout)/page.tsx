@@ -283,12 +283,11 @@ export default async function Home() {
                     <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
                       <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0 line-clamp-2 md:line-clamp-5">
                         {lastFeaturedArticle[0].newsHeading}
-                        <span className="md:hidden sm:block">বিস্তরিত....</span>
                       </h2>
                       {isJson(lastFeaturedArticle[0].newsDetails) ? (
-                        <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                        <div className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
                           <JsonToHtml json={JSON.parse(lastFeaturedArticle[0].newsDetails)} />
-                        </p>
+                        </div>
                         ) : (
                           <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
                             {lastFeaturedArticle[0].newsDetails}
