@@ -81,7 +81,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
     <div className="grid grid-cols-5 gap-4 my-10">
       {/* Left Sidebar */}
       <div className="col-span-5 md:col-span-1">
-        <div className="relative w-full h-[100px] md:h-[200px] px-10">
+        {/* <div className="relative w-full h-[100px] md:h-[200px] px-10">
           <Image
             src="/gif111.gif"
             alt="image"
@@ -89,7 +89,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             className="object-cover"
             priority
           />
-        </div>
+        </div> */}
         <div className="hidden md:block mt-10">
           <ShirShoNewsHeadings />
         </div>
@@ -128,7 +128,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         />
 
         {/* Bottom Banner */}
-        <div className="relative w-full h-[100px] md:h-[200px] px-10">
+     {/*    <div className="relative w-full h-[100px] md:h-[200px] px-10">
           <Image
             src="/gif111.gif"
             alt="image"
@@ -136,7 +136,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             className="object-cover"
             priority
           />
-        </div>
+        </div> */}
 
         {/* Quotes Section */}
         {data.quotes && data.quotes.length > 0 && (
