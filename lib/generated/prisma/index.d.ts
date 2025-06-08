@@ -68,6 +68,11 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  * 
  */
 export type AdvertiseRequest = $Result.DefaultSelection<Prisma.$AdvertiseRequestPayload>
+/**
+ * Model Videopost
+ * 
+ */
+export type Videopost = $Result.DefaultSelection<Prisma.$VideopostPayload>
 
 /**
  * Enums
@@ -158,6 +163,15 @@ export const AdvertisedCategory: {
 
 export type AdvertisedCategory = (typeof AdvertisedCategory)[keyof typeof AdvertisedCategory]
 
+
+export const vedioStatus: {
+  ACTIVE: 'ACTIVE',
+  DRAFT: 'DRAFT',
+  EXPIRED: 'EXPIRED'
+};
+
+export type vedioStatus = (typeof vedioStatus)[keyof typeof vedioStatus]
+
 }
 
 export type UserType = $Enums.UserType
@@ -183,6 +197,10 @@ export const advertiseStatus: typeof $Enums.advertiseStatus
 export type AdvertisedCategory = $Enums.AdvertisedCategory
 
 export const AdvertisedCategory: typeof $Enums.AdvertisedCategory
+
+export type vedioStatus = $Enums.vedioStatus
+
+export const vedioStatus: typeof $Enums.vedioStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -418,6 +436,16 @@ export class PrismaClient<
     * ```
     */
   get advertiseRequest(): Prisma.AdvertiseRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videopost`: Exposes CRUD operations for the **Videopost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videoposts
+    * const videoposts = await prisma.videopost.findMany()
+    * ```
+    */
+  get videopost(): Prisma.VideopostDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -476,8 +504,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -868,7 +896,8 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
-    AdvertiseRequest: 'AdvertiseRequest'
+    AdvertiseRequest: 'AdvertiseRequest',
+    Videopost: 'Videopost'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -887,7 +916,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1705,6 +1734,80 @@ export namespace Prisma {
           }
         }
       }
+      Videopost: {
+        payload: Prisma.$VideopostPayload<ExtArgs>
+        fields: Prisma.VideopostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VideopostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VideopostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          findFirst: {
+            args: Prisma.VideopostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VideopostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          findMany: {
+            args: Prisma.VideopostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>[]
+          }
+          create: {
+            args: Prisma.VideopostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          createMany: {
+            args: Prisma.VideopostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VideopostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>[]
+          }
+          delete: {
+            args: Prisma.VideopostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          update: {
+            args: Prisma.VideopostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          deleteMany: {
+            args: Prisma.VideopostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VideopostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VideopostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>[]
+          }
+          upsert: {
+            args: Prisma.VideopostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideopostPayload>
+          }
+          aggregate: {
+            args: Prisma.VideopostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideopost>
+          }
+          groupBy: {
+            args: Prisma.VideopostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VideopostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VideopostCountArgs<ExtArgs>
+            result: $Utils.Optional<VideopostCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1800,6 +1903,7 @@ export namespace Prisma {
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
     advertiseRequest?: AdvertiseRequestOmit
+    videopost?: VideopostOmit
   }
 
   /* Types for Logging */
@@ -14280,6 +14384,1053 @@ export namespace Prisma {
 
 
   /**
+   * Model Videopost
+   */
+
+  export type AggregateVideopost = {
+    _count: VideopostCountAggregateOutputType | null
+    _min: VideopostMinAggregateOutputType | null
+    _max: VideopostMaxAggregateOutputType | null
+  }
+
+  export type VideopostMinAggregateOutputType = {
+    id: string | null
+    videoAbout: string | null
+    videoHeadings: string | null
+    videoLink: string | null
+    isFeatured: boolean | null
+    startDate: string | null
+    vedioStatus: $Enums.vedioStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VideopostMaxAggregateOutputType = {
+    id: string | null
+    videoAbout: string | null
+    videoHeadings: string | null
+    videoLink: string | null
+    isFeatured: boolean | null
+    startDate: string | null
+    vedioStatus: $Enums.vedioStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VideopostCountAggregateOutputType = {
+    id: number
+    videoAbout: number
+    videoHeadings: number
+    videoLink: number
+    isFeatured: number
+    startDate: number
+    vedioStatus: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VideopostMinAggregateInputType = {
+    id?: true
+    videoAbout?: true
+    videoHeadings?: true
+    videoLink?: true
+    isFeatured?: true
+    startDate?: true
+    vedioStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VideopostMaxAggregateInputType = {
+    id?: true
+    videoAbout?: true
+    videoHeadings?: true
+    videoLink?: true
+    isFeatured?: true
+    startDate?: true
+    vedioStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VideopostCountAggregateInputType = {
+    id?: true
+    videoAbout?: true
+    videoHeadings?: true
+    videoLink?: true
+    isFeatured?: true
+    startDate?: true
+    vedioStatus?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VideopostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Videopost to aggregate.
+     */
+    where?: VideopostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videoposts to fetch.
+     */
+    orderBy?: VideopostOrderByWithRelationInput | VideopostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VideopostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videoposts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videoposts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Videoposts
+    **/
+    _count?: true | VideopostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VideopostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VideopostMaxAggregateInputType
+  }
+
+  export type GetVideopostAggregateType<T extends VideopostAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideopost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideopost[P]>
+      : GetScalarType<T[P], AggregateVideopost[P]>
+  }
+
+
+
+
+  export type VideopostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideopostWhereInput
+    orderBy?: VideopostOrderByWithAggregationInput | VideopostOrderByWithAggregationInput[]
+    by: VideopostScalarFieldEnum[] | VideopostScalarFieldEnum
+    having?: VideopostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VideopostCountAggregateInputType | true
+    _min?: VideopostMinAggregateInputType
+    _max?: VideopostMaxAggregateInputType
+  }
+
+  export type VideopostGroupByOutputType = {
+    id: string
+    videoAbout: string
+    videoHeadings: string
+    videoLink: string
+    isFeatured: boolean
+    startDate: string
+    vedioStatus: $Enums.vedioStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: VideopostCountAggregateOutputType | null
+    _min: VideopostMinAggregateOutputType | null
+    _max: VideopostMaxAggregateOutputType | null
+  }
+
+  type GetVideopostGroupByPayload<T extends VideopostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VideopostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VideopostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VideopostGroupByOutputType[P]>
+            : GetScalarType<T[P], VideopostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VideopostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    videoAbout?: boolean
+    videoHeadings?: boolean
+    videoLink?: boolean
+    isFeatured?: boolean
+    startDate?: boolean
+    vedioStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["videopost"]>
+
+  export type VideopostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    videoAbout?: boolean
+    videoHeadings?: boolean
+    videoLink?: boolean
+    isFeatured?: boolean
+    startDate?: boolean
+    vedioStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["videopost"]>
+
+  export type VideopostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    videoAbout?: boolean
+    videoHeadings?: boolean
+    videoLink?: boolean
+    isFeatured?: boolean
+    startDate?: boolean
+    vedioStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["videopost"]>
+
+  export type VideopostSelectScalar = {
+    id?: boolean
+    videoAbout?: boolean
+    videoHeadings?: boolean
+    videoLink?: boolean
+    isFeatured?: boolean
+    startDate?: boolean
+    vedioStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VideopostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoAbout" | "videoHeadings" | "videoLink" | "isFeatured" | "startDate" | "vedioStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["videopost"]>
+
+  export type $VideopostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Videopost"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      videoAbout: string
+      videoHeadings: string
+      videoLink: string
+      isFeatured: boolean
+      startDate: string
+      vedioStatus: $Enums.vedioStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["videopost"]>
+    composites: {}
+  }
+
+  type VideopostGetPayload<S extends boolean | null | undefined | VideopostDefaultArgs> = $Result.GetResult<Prisma.$VideopostPayload, S>
+
+  type VideopostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VideopostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VideopostCountAggregateInputType | true
+    }
+
+  export interface VideopostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Videopost'], meta: { name: 'Videopost' } }
+    /**
+     * Find zero or one Videopost that matches the filter.
+     * @param {VideopostFindUniqueArgs} args - Arguments to find a Videopost
+     * @example
+     * // Get one Videopost
+     * const videopost = await prisma.videopost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VideopostFindUniqueArgs>(args: SelectSubset<T, VideopostFindUniqueArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Videopost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VideopostFindUniqueOrThrowArgs} args - Arguments to find a Videopost
+     * @example
+     * // Get one Videopost
+     * const videopost = await prisma.videopost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VideopostFindUniqueOrThrowArgs>(args: SelectSubset<T, VideopostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videopost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostFindFirstArgs} args - Arguments to find a Videopost
+     * @example
+     * // Get one Videopost
+     * const videopost = await prisma.videopost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VideopostFindFirstArgs>(args?: SelectSubset<T, VideopostFindFirstArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videopost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostFindFirstOrThrowArgs} args - Arguments to find a Videopost
+     * @example
+     * // Get one Videopost
+     * const videopost = await prisma.videopost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VideopostFindFirstOrThrowArgs>(args?: SelectSubset<T, VideopostFindFirstOrThrowArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Videoposts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videoposts
+     * const videoposts = await prisma.videopost.findMany()
+     * 
+     * // Get first 10 Videoposts
+     * const videoposts = await prisma.videopost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videopostWithIdOnly = await prisma.videopost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VideopostFindManyArgs>(args?: SelectSubset<T, VideopostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Videopost.
+     * @param {VideopostCreateArgs} args - Arguments to create a Videopost.
+     * @example
+     * // Create one Videopost
+     * const Videopost = await prisma.videopost.create({
+     *   data: {
+     *     // ... data to create a Videopost
+     *   }
+     * })
+     * 
+     */
+    create<T extends VideopostCreateArgs>(args: SelectSubset<T, VideopostCreateArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Videoposts.
+     * @param {VideopostCreateManyArgs} args - Arguments to create many Videoposts.
+     * @example
+     * // Create many Videoposts
+     * const videopost = await prisma.videopost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VideopostCreateManyArgs>(args?: SelectSubset<T, VideopostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Videoposts and returns the data saved in the database.
+     * @param {VideopostCreateManyAndReturnArgs} args - Arguments to create many Videoposts.
+     * @example
+     * // Create many Videoposts
+     * const videopost = await prisma.videopost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Videoposts and only return the `id`
+     * const videopostWithIdOnly = await prisma.videopost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VideopostCreateManyAndReturnArgs>(args?: SelectSubset<T, VideopostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Videopost.
+     * @param {VideopostDeleteArgs} args - Arguments to delete one Videopost.
+     * @example
+     * // Delete one Videopost
+     * const Videopost = await prisma.videopost.delete({
+     *   where: {
+     *     // ... filter to delete one Videopost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VideopostDeleteArgs>(args: SelectSubset<T, VideopostDeleteArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Videopost.
+     * @param {VideopostUpdateArgs} args - Arguments to update one Videopost.
+     * @example
+     * // Update one Videopost
+     * const videopost = await prisma.videopost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VideopostUpdateArgs>(args: SelectSubset<T, VideopostUpdateArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Videoposts.
+     * @param {VideopostDeleteManyArgs} args - Arguments to filter Videoposts to delete.
+     * @example
+     * // Delete a few Videoposts
+     * const { count } = await prisma.videopost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VideopostDeleteManyArgs>(args?: SelectSubset<T, VideopostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videoposts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videoposts
+     * const videopost = await prisma.videopost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VideopostUpdateManyArgs>(args: SelectSubset<T, VideopostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videoposts and returns the data updated in the database.
+     * @param {VideopostUpdateManyAndReturnArgs} args - Arguments to update many Videoposts.
+     * @example
+     * // Update many Videoposts
+     * const videopost = await prisma.videopost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Videoposts and only return the `id`
+     * const videopostWithIdOnly = await prisma.videopost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VideopostUpdateManyAndReturnArgs>(args: SelectSubset<T, VideopostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Videopost.
+     * @param {VideopostUpsertArgs} args - Arguments to update or create a Videopost.
+     * @example
+     * // Update or create a Videopost
+     * const videopost = await prisma.videopost.upsert({
+     *   create: {
+     *     // ... data to create a Videopost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Videopost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VideopostUpsertArgs>(args: SelectSubset<T, VideopostUpsertArgs<ExtArgs>>): Prisma__VideopostClient<$Result.GetResult<Prisma.$VideopostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Videoposts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostCountArgs} args - Arguments to filter Videoposts to count.
+     * @example
+     * // Count the number of Videoposts
+     * const count = await prisma.videopost.count({
+     *   where: {
+     *     // ... the filter for the Videoposts we want to count
+     *   }
+     * })
+    **/
+    count<T extends VideopostCountArgs>(
+      args?: Subset<T, VideopostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VideopostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Videopost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VideopostAggregateArgs>(args: Subset<T, VideopostAggregateArgs>): Prisma.PrismaPromise<GetVideopostAggregateType<T>>
+
+    /**
+     * Group by Videopost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideopostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VideopostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VideopostGroupByArgs['orderBy'] }
+        : { orderBy?: VideopostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VideopostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideopostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Videopost model
+   */
+  readonly fields: VideopostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Videopost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VideopostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Videopost model
+   */
+  interface VideopostFieldRefs {
+    readonly id: FieldRef<"Videopost", 'String'>
+    readonly videoAbout: FieldRef<"Videopost", 'String'>
+    readonly videoHeadings: FieldRef<"Videopost", 'String'>
+    readonly videoLink: FieldRef<"Videopost", 'String'>
+    readonly isFeatured: FieldRef<"Videopost", 'Boolean'>
+    readonly startDate: FieldRef<"Videopost", 'String'>
+    readonly vedioStatus: FieldRef<"Videopost", 'vedioStatus'>
+    readonly createdAt: FieldRef<"Videopost", 'DateTime'>
+    readonly updatedAt: FieldRef<"Videopost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Videopost findUnique
+   */
+  export type VideopostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter, which Videopost to fetch.
+     */
+    where: VideopostWhereUniqueInput
+  }
+
+  /**
+   * Videopost findUniqueOrThrow
+   */
+  export type VideopostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter, which Videopost to fetch.
+     */
+    where: VideopostWhereUniqueInput
+  }
+
+  /**
+   * Videopost findFirst
+   */
+  export type VideopostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter, which Videopost to fetch.
+     */
+    where?: VideopostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videoposts to fetch.
+     */
+    orderBy?: VideopostOrderByWithRelationInput | VideopostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Videoposts.
+     */
+    cursor?: VideopostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videoposts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videoposts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Videoposts.
+     */
+    distinct?: VideopostScalarFieldEnum | VideopostScalarFieldEnum[]
+  }
+
+  /**
+   * Videopost findFirstOrThrow
+   */
+  export type VideopostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter, which Videopost to fetch.
+     */
+    where?: VideopostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videoposts to fetch.
+     */
+    orderBy?: VideopostOrderByWithRelationInput | VideopostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Videoposts.
+     */
+    cursor?: VideopostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videoposts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videoposts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Videoposts.
+     */
+    distinct?: VideopostScalarFieldEnum | VideopostScalarFieldEnum[]
+  }
+
+  /**
+   * Videopost findMany
+   */
+  export type VideopostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter, which Videoposts to fetch.
+     */
+    where?: VideopostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videoposts to fetch.
+     */
+    orderBy?: VideopostOrderByWithRelationInput | VideopostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Videoposts.
+     */
+    cursor?: VideopostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videoposts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videoposts.
+     */
+    skip?: number
+    distinct?: VideopostScalarFieldEnum | VideopostScalarFieldEnum[]
+  }
+
+  /**
+   * Videopost create
+   */
+  export type VideopostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Videopost.
+     */
+    data: XOR<VideopostCreateInput, VideopostUncheckedCreateInput>
+  }
+
+  /**
+   * Videopost createMany
+   */
+  export type VideopostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Videoposts.
+     */
+    data: VideopostCreateManyInput | VideopostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Videopost createManyAndReturn
+   */
+  export type VideopostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * The data used to create many Videoposts.
+     */
+    data: VideopostCreateManyInput | VideopostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Videopost update
+   */
+  export type VideopostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Videopost.
+     */
+    data: XOR<VideopostUpdateInput, VideopostUncheckedUpdateInput>
+    /**
+     * Choose, which Videopost to update.
+     */
+    where: VideopostWhereUniqueInput
+  }
+
+  /**
+   * Videopost updateMany
+   */
+  export type VideopostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Videoposts.
+     */
+    data: XOR<VideopostUpdateManyMutationInput, VideopostUncheckedUpdateManyInput>
+    /**
+     * Filter which Videoposts to update
+     */
+    where?: VideopostWhereInput
+    /**
+     * Limit how many Videoposts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Videopost updateManyAndReturn
+   */
+  export type VideopostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * The data used to update Videoposts.
+     */
+    data: XOR<VideopostUpdateManyMutationInput, VideopostUncheckedUpdateManyInput>
+    /**
+     * Filter which Videoposts to update
+     */
+    where?: VideopostWhereInput
+    /**
+     * Limit how many Videoposts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Videopost upsert
+   */
+  export type VideopostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Videopost to update in case it exists.
+     */
+    where: VideopostWhereUniqueInput
+    /**
+     * In case the Videopost found by the `where` argument doesn't exist, create a new Videopost with this data.
+     */
+    create: XOR<VideopostCreateInput, VideopostUncheckedCreateInput>
+    /**
+     * In case the Videopost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VideopostUpdateInput, VideopostUncheckedUpdateInput>
+  }
+
+  /**
+   * Videopost delete
+   */
+  export type VideopostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+    /**
+     * Filter which Videopost to delete.
+     */
+    where: VideopostWhereUniqueInput
+  }
+
+  /**
+   * Videopost deleteMany
+   */
+  export type VideopostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Videoposts to delete
+     */
+    where?: VideopostWhereInput
+    /**
+     * Limit how many Videoposts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Videopost without action
+   */
+  export type VideopostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Videopost
+     */
+    select?: VideopostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Videopost
+     */
+    omit?: VideopostOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14464,6 +15615,21 @@ export namespace Prisma {
   export type AdvertiseRequestScalarFieldEnum = (typeof AdvertiseRequestScalarFieldEnum)[keyof typeof AdvertiseRequestScalarFieldEnum]
 
 
+  export const VideopostScalarFieldEnum: {
+    id: 'id',
+    videoAbout: 'videoAbout',
+    videoHeadings: 'videoHeadings',
+    videoLink: 'videoLink',
+    isFeatured: 'isFeatured',
+    startDate: 'startDate',
+    vedioStatus: 'vedioStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VideopostScalarFieldEnum = (typeof VideopostScalarFieldEnum)[keyof typeof VideopostScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -14623,6 +15789,20 @@ export namespace Prisma {
    * Reference to a field of type 'advertiseStatus[]'
    */
   export type ListEnumadvertiseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'advertiseStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'vedioStatus'
+   */
+  export type EnumvedioStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'vedioStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'vedioStatus[]'
+   */
+  export type ListEnumvedioStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'vedioStatus[]'>
     
 
 
@@ -15507,6 +16687,78 @@ export namespace Prisma {
     message?: StringWithAggregatesFilter<"AdvertiseRequest"> | string
     createdAt?: DateTimeWithAggregatesFilter<"AdvertiseRequest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AdvertiseRequest"> | Date | string
+  }
+
+  export type VideopostWhereInput = {
+    AND?: VideopostWhereInput | VideopostWhereInput[]
+    OR?: VideopostWhereInput[]
+    NOT?: VideopostWhereInput | VideopostWhereInput[]
+    id?: StringFilter<"Videopost"> | string
+    videoAbout?: StringFilter<"Videopost"> | string
+    videoHeadings?: StringFilter<"Videopost"> | string
+    videoLink?: StringFilter<"Videopost"> | string
+    isFeatured?: BoolFilter<"Videopost"> | boolean
+    startDate?: StringFilter<"Videopost"> | string
+    vedioStatus?: EnumvedioStatusFilter<"Videopost"> | $Enums.vedioStatus
+    createdAt?: DateTimeFilter<"Videopost"> | Date | string
+    updatedAt?: DateTimeFilter<"Videopost"> | Date | string
+  }
+
+  export type VideopostOrderByWithRelationInput = {
+    id?: SortOrder
+    videoAbout?: SortOrder
+    videoHeadings?: SortOrder
+    videoLink?: SortOrder
+    isFeatured?: SortOrder
+    startDate?: SortOrder
+    vedioStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideopostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VideopostWhereInput | VideopostWhereInput[]
+    OR?: VideopostWhereInput[]
+    NOT?: VideopostWhereInput | VideopostWhereInput[]
+    videoAbout?: StringFilter<"Videopost"> | string
+    videoHeadings?: StringFilter<"Videopost"> | string
+    videoLink?: StringFilter<"Videopost"> | string
+    isFeatured?: BoolFilter<"Videopost"> | boolean
+    startDate?: StringFilter<"Videopost"> | string
+    vedioStatus?: EnumvedioStatusFilter<"Videopost"> | $Enums.vedioStatus
+    createdAt?: DateTimeFilter<"Videopost"> | Date | string
+    updatedAt?: DateTimeFilter<"Videopost"> | Date | string
+  }, "id">
+
+  export type VideopostOrderByWithAggregationInput = {
+    id?: SortOrder
+    videoAbout?: SortOrder
+    videoHeadings?: SortOrder
+    videoLink?: SortOrder
+    isFeatured?: SortOrder
+    startDate?: SortOrder
+    vedioStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VideopostCountOrderByAggregateInput
+    _max?: VideopostMaxOrderByAggregateInput
+    _min?: VideopostMinOrderByAggregateInput
+  }
+
+  export type VideopostScalarWhereWithAggregatesInput = {
+    AND?: VideopostScalarWhereWithAggregatesInput | VideopostScalarWhereWithAggregatesInput[]
+    OR?: VideopostScalarWhereWithAggregatesInput[]
+    NOT?: VideopostScalarWhereWithAggregatesInput | VideopostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Videopost"> | string
+    videoAbout?: StringWithAggregatesFilter<"Videopost"> | string
+    videoHeadings?: StringWithAggregatesFilter<"Videopost"> | string
+    videoLink?: StringWithAggregatesFilter<"Videopost"> | string
+    isFeatured?: BoolWithAggregatesFilter<"Videopost"> | boolean
+    startDate?: StringWithAggregatesFilter<"Videopost"> | string
+    vedioStatus?: EnumvedioStatusWithAggregatesFilter<"Videopost"> | $Enums.vedioStatus
+    createdAt?: DateTimeWithAggregatesFilter<"Videopost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Videopost"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -16493,6 +17745,90 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type VideopostCreateInput = {
+    id?: string
+    videoAbout: string
+    videoHeadings: string
+    videoLink: string
+    isFeatured?: boolean
+    startDate: string
+    vedioStatus?: $Enums.vedioStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideopostUncheckedCreateInput = {
+    id?: string
+    videoAbout: string
+    videoHeadings: string
+    videoLink: string
+    isFeatured?: boolean
+    startDate: string
+    vedioStatus?: $Enums.vedioStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideopostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    videoAbout?: StringFieldUpdateOperationsInput | string
+    videoHeadings?: StringFieldUpdateOperationsInput | string
+    videoLink?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: StringFieldUpdateOperationsInput | string
+    vedioStatus?: EnumvedioStatusFieldUpdateOperationsInput | $Enums.vedioStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideopostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    videoAbout?: StringFieldUpdateOperationsInput | string
+    videoHeadings?: StringFieldUpdateOperationsInput | string
+    videoLink?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: StringFieldUpdateOperationsInput | string
+    vedioStatus?: EnumvedioStatusFieldUpdateOperationsInput | $Enums.vedioStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideopostCreateManyInput = {
+    id?: string
+    videoAbout: string
+    videoHeadings: string
+    videoLink: string
+    isFeatured?: boolean
+    startDate: string
+    vedioStatus?: $Enums.vedioStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideopostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    videoAbout?: StringFieldUpdateOperationsInput | string
+    videoHeadings?: StringFieldUpdateOperationsInput | string
+    videoLink?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: StringFieldUpdateOperationsInput | string
+    vedioStatus?: EnumvedioStatusFieldUpdateOperationsInput | $Enums.vedioStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideopostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    videoAbout?: StringFieldUpdateOperationsInput | string
+    videoHeadings?: StringFieldUpdateOperationsInput | string
+    videoLink?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: StringFieldUpdateOperationsInput | string
+    vedioStatus?: EnumvedioStatusFieldUpdateOperationsInput | $Enums.vedioStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17269,6 +18605,59 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumvedioStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.vedioStatus | EnumvedioStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumvedioStatusFilter<$PrismaModel> | $Enums.vedioStatus
+  }
+
+  export type VideopostCountOrderByAggregateInput = {
+    id?: SortOrder
+    videoAbout?: SortOrder
+    videoHeadings?: SortOrder
+    videoLink?: SortOrder
+    isFeatured?: SortOrder
+    startDate?: SortOrder
+    vedioStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideopostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    videoAbout?: SortOrder
+    videoHeadings?: SortOrder
+    videoLink?: SortOrder
+    isFeatured?: SortOrder
+    startDate?: SortOrder
+    vedioStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideopostMinOrderByAggregateInput = {
+    id?: SortOrder
+    videoAbout?: SortOrder
+    videoHeadings?: SortOrder
+    videoLink?: SortOrder
+    isFeatured?: SortOrder
+    startDate?: SortOrder
+    vedioStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumvedioStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.vedioStatus | EnumvedioStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumvedioStatusWithAggregatesFilter<$PrismaModel> | $Enums.vedioStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumvedioStatusFilter<$PrismaModel>
+    _max?: NestedEnumvedioStatusFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -17637,6 +19026,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
+  export type EnumvedioStatusFieldUpdateOperationsInput = {
+    set?: $Enums.vedioStatus
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17911,6 +19304,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumadvertiseStatusFilter<$PrismaModel>
     _max?: NestedEnumadvertiseStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumvedioStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.vedioStatus | EnumvedioStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumvedioStatusFilter<$PrismaModel> | $Enums.vedioStatus
+  }
+
+  export type NestedEnumvedioStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.vedioStatus | EnumvedioStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.vedioStatus[] | ListEnumvedioStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumvedioStatusWithAggregatesFilter<$PrismaModel> | $Enums.vedioStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumvedioStatusFilter<$PrismaModel>
+    _max?: NestedEnumvedioStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {

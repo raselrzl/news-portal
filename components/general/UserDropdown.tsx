@@ -124,6 +124,20 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
                   <span>সব বিজ্ঞাপন অনুরোধ</span>
                 </Link>
               </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href="/post-an-article/post-a-video">
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <span>Post Videos</span>
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href="/post-an-article/post-a-video/allvideos">
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <span>সব Videos</span>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
               <Link href="/post-an-article/allusers">
                 <Users size={16} strokeWidth={2} className="opacity-60" />

@@ -23,6 +23,7 @@ import {
 import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
 import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
 import { isJson } from "../utils/isJson";
+import Videos from "@/components/general/Videos";
 
 async function getData() {
   const [lastFeaturedArticle, latestNews, InternationalAll] =
@@ -343,68 +344,7 @@ export default async function Home() {
       </div>
 
       
-
-      {/* Youtuve vedio section */}
-      <Card className="p-4 shadow-lg mb-20 mt-8 rounded-none">
-        <CardHeader className="p-0 flex flex-row justify-between">
-          <div className="flex flex-row items-center space-x-2">
-            <Image
-              src="/youtube.gif"
-              alt="YouTube GIF"
-              width={50}
-              height={50}
-              className="object-contain"
-            />
-            <p className="font-bold text-2xl">ভিডিও</p>
-          </div>
-          <div className="text-primary flex flex-row items-center justify-center">
-            <Image
-              src="/arrow1.gif"
-              alt="Arrow GIF"
-              width={50}
-              height={50}
-              className="object-contain"
-            />
-          </div>
-        </CardHeader>
-
-        <div className="overflow-x-auto pb-10 overflow-y-hidden scrollbar-thin">
-          <div className="flex gap-4 px-2">
-            {/* Reusable wrapper for uniform height */}
-            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
-              <YouTubeVideo
-                videoId="sMN1JpCXH1c"
-                title="বাংলাদেশের ইতিহাসের সেরা ম্যাচ"
-              />
-            </div>
-
-            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
-              <YouTubeVideo
-                videoId="pHRvJUYwwek"
-                title="বাংলাদেশের রাজনৈতিক পরিবর্তন"
-              />
-            </div>
-
-            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
-              <PremiarTwo />
-            </div>
-
-            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
-              <YouTubeVideo
-                videoId="UQjzSvy4zT0"
-                title="বাংলাদেশের ফুটবল ইতিহাস"
-              />
-            </div>
-
-            <div className="min-w-[300px] h-[230px] flex items-center justify-center">
-              <YouTubeVideo
-                videoId="mJyekeQcAww"
-                title="বিশ্ববিদ্যালয়ের জীবন"
-              />
-            </div>
-          </div>
-        </div>
-      </Card>
+      <Videos />
 
       <SorboseshAndJonoprioTab />
 

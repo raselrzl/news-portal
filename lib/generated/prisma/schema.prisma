@@ -247,3 +247,21 @@ model AdvertiseRequest {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model Videopost {
+  id            String      @id @default(uuid())
+  videoAbout    String
+  videoHeadings String
+  videoLink     String
+  isFeatured    Boolean     @default(false)
+  startDate     String
+  vedioStatus   vedioStatus @default(DRAFT)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum vedioStatus {
+  ACTIVE
+  DRAFT
+  EXPIRED
+}

@@ -11,7 +11,7 @@ import {
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
-import { AdvertisedCategory, advertiseStatus, UserType } from "@/lib/generated/prisma";
+import { AdvertisedCategory, advertiseStatus, UserType, vedioStatus } from "@/lib/generated/prisma";
 import { auth } from "./utils/auth";
 /* import { inngest } from "./utils/inngest/client"; */
 const aj = arcjet
@@ -585,5 +585,88 @@ export async function deleteAdvertisementById(advertisementId: string) {
   } catch (error) {
     console.error("Error deleting advertisement:", error);
     throw new Error("Failed to delete advertisement");
+  }
+}
+
+
+
+
+
+
+export async function createVideoPost(data: {
+  videoAbout: string;
+  videoHeadings: string;
+  videoLink: string;
+  vedioStatus: vedioStatus;
+  isFeatured?: boolean;
+  startDate: string;
+}) {
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  await prisma.videopost.create({
+    data: {
+      videoAbout: data.videoAbout,
+      videoHeadings: data.videoHeadings,
+      videoLink: data.videoLink,
+      isFeatured: data.isFeatured ?? false,
+      vedioStatus: data.vedioStatus ?? "DRAFT",
+      startDate: data.startDate,
+    },
+  });
+
+  return redirect("/post-an-article/post-a-video/allvideos");
+}
+
+
+
+export async function updateVedioStatus(videoId: string, status: "ACTIVE" | "DRAFT" | "EXPIRED") {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) redirect("/restricted");
+
+  await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) throw new Error("Forbidden");
+
+  const ad = await prisma.videopost.findUnique({
+    where: { id: videoId },
+  });
+  if (!ad) throw new Error("video not found");
+
+  await prisma.videopost.update({
+    where: { id: videoId },
+    data: { vedioStatus: status },
+  });
+}
+
+
+export async function deleteVedioById(videoId: string) {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
+
+  await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  try {
+    await prisma.videopost.delete({
+      where: { id: videoId },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting vedio:", error);
+    throw new Error("Failed to delete vedio");
   }
 }
