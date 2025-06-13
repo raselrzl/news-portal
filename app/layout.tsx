@@ -8,6 +8,8 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "@/components/general/theme-provider";
 import Footer from "@/components/general/Footer";
+import VisitorTracker from "@/components/general/VisitorTracker";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,6 +63,7 @@ export default function RootLayout({
         >
           <div className="max-w-7xl mx-auto">{children}</div>
           <Footer />
+          <VisitorTracker />
         </ThemeProvider>
       </body>
     </html>

@@ -26,9 +26,9 @@ import { isJson } from "../utils/isJson";
 import Videos from "@/components/general/Videos";
 
 async function getData() {
-  const [lastFeaturedArticle, latestNews, InternationalAll] =
-    await Promise.all([
-          prisma.newsArticle.findMany({
+  const [lastFeaturedArticle, latestNews, InternationalAll] = await Promise.all(
+    [
+      prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
           isFeatured: true,
@@ -118,7 +118,8 @@ async function getData() {
         },
         take: 10,
       }),
-    ]);
+    ]
+  );
 
   return {
     lastFeaturedArticle,
@@ -127,8 +128,7 @@ async function getData() {
   };
 }
 export default async function Home() {
-  const {lastFeaturedArticle, latestNews, InternationalAll } =
-    await getData();
+  const { lastFeaturedArticle, latestNews, InternationalAll } = await getData();
 
   const session = await aauth();
   return (
@@ -287,13 +287,17 @@ export default async function Home() {
                       </h2>
                       {isJson(lastFeaturedArticle[0].newsDetails) ? (
                         <div className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                          <JsonToHtml json={JSON.parse(lastFeaturedArticle[0].newsDetails)} />
+                          <JsonToHtml
+                            json={JSON.parse(
+                              lastFeaturedArticle[0].newsDetails
+                            )}
+                          />
                         </div>
-                        ) : (
-                          <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                            {lastFeaturedArticle[0].newsDetails}
-                          </p>
-                        )}
+                      ) : (
+                        <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                          {lastFeaturedArticle[0].newsDetails}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -308,7 +312,8 @@ export default async function Home() {
             />
           )}
 
-          {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
+          {lastFeaturedArticle &&
+          Object.keys(lastFeaturedArticle).length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-23 border-t-2">
               {lastFeaturedArticle.slice(1, 7).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
@@ -343,7 +348,6 @@ export default async function Home() {
         </div>
       </div>
 
-      
       <Videos />
 
       <SorboseshAndJonoprioTab />
