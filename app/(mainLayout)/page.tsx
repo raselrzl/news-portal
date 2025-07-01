@@ -271,7 +271,7 @@ export default async function Home() {
             <div className="mb-6 max-h-[290px] md:border-1 md:p-2">
               {lastFeaturedArticle && (
                 <Link href={`/newsDetails/${lastFeaturedArticle[0].id}`}>
-                  <div className="grid grid-cols-5">
+                  <div className="grid grid-cols-5 px-2">
                     <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
                       <Image
                         src={lastFeaturedArticle[0].newsPicture}
