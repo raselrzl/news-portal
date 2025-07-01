@@ -90,6 +90,13 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
                   <span>আমার প্রকাশিত সংবাদের তালিকা</span>
                 </Link>
               </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link href="/alluseropinion/opiniontable">
+                  <Newspaper size={16} strokeWidth={2} className="opacity-60" />
+                  <span>সব অভিযোগের নিয়ন্ত্রণ</span>
+                </Link>
+              </DropdownMenuItem>
             </>
           )}
 
