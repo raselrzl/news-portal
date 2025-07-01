@@ -13,20 +13,20 @@ import {
 
 export default function AdvertisePage() {
   return (
-    <div className="py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-background rounded-lg shadow-md p-6 md:p-10 text-foreground font-[Noto_Sans_Bengali]">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-orange-600">
+    <div className="py-10">
+      <div className="max-w-3xl mx-auto bg-background rounded-lg shadow-md text-foreground font-[Noto_Sans_Bengali]">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-orange-600 px-4">
           দৈনিক জাগ্রত বার্তা
         </h2>
-        <p className="mb-6">
+        <p className="mb-6  px-4">
           একটি দ্রুত বর্ধনশীল ও পাঠকপ্রিয় অনলাইন সংবাদমাধ্যম, যেখানে প্রতিদিন পৌঁছে যাই হাজারো সচেতন ও দায়িত্বশীল মানুষের দোরগোড়ায়।
           আপনার ব্র্যান্ড, পণ্য বা সেবার জন্য আমরা হতে পারি সবচেয়ে নির্ভরযোগ্য ও কার্যকরী বিজ্ঞাপন প্ল্যাটফর্ম।
         </p>
 
-        <h3 className="text-xl font-semibold mb-4 text-orange-700">
+        <h3 className="text-xl font-semibold mb-4 text-orange-700 px-4">
           কেন বিজ্ঞাপন দিবেন আমাদের সাথে?
         </h3>
-        <ul className="space-y-4 mb-6">
+        <ul className="space-y-4 mb-6  px-4">
           <li className="flex items-start gap-3">
             <Target className="text-orange-500 mt-1" />
             <span>
@@ -53,8 +53,8 @@ export default function AdvertisePage() {
           </li>
         </ul>
 
-        <h3 className="text-xl font-semibold mb-4 text-orange-700">বিজ্ঞাপন সেবা:</h3>
-        <ul className="space-y-4 mb-6">
+        <h3 className="text-xl font-semibold mb-4 text-orange-700 px-4">বিজ্ঞাপন সেবা:</h3>
+        <ul className="space-y-4 mb-6 px-4">
           <li className="flex items-center gap-3">
             <Layout className="text-orange-600" /> ব্যানার বিজ্ঞাপন (ওয়েবসাইট)
           </li>
@@ -75,13 +75,13 @@ export default function AdvertisePage() {
           </li>
         </ul>
 
-        <h3 className="text-xl font-semibold mb-2 text-orange-700">যোগাযোগ করুন:</h3>
-        <p className="mb-8 flex items-center gap-2">
+        <h3 className="text-xl font-semibold mb-2 text-orange-700  px-4">যোগাযোগ করুন:</h3>
+        <p className="mb-8 flex items-center gap-2 px-4">
           <Mail className="text-orange-500" />
           বিজ্ঞাপন বুকিং বা মূল্য জানার জন্য যোগাযোগ করুন
         </p>
 
-        <h4 className="text-lg font-semibold text-orange-600 mb-4">
+        <h4 className="text-lg font-semibold text-orange-600 mb-4 px-4">
           অথবা নিচে ফর্মটি পূরণ করুন
         </h4>
 
