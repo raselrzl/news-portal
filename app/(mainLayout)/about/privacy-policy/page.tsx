@@ -62,8 +62,7 @@ export default function PrivacyPolicyPage() {
         গোপনীয়তা সংক্রান্ত যেকোনো প্রশ্নের জন্য আমাদের সাথে যোগাযোগ করুন:
       </p>
       <ul className="list-none mb-6 text-base">
-        <li><strong>ইমেইল:</strong> <a href="mailto:privacy@jagrotobarta.com" className="text-primary hover:underline">privacy@jagrotobarta.com</a></li>
-        <li><strong>ফোন:</strong> +৮৮ ০২ ০০০০০০০০</li>
+        <li><strong>ইমেইল:</strong> <a href="mailto:info@jagrotobarta.com" className="text-primary hover:underline">info@jagrotobarta.com</a></li>
       </ul>
 
       <p className="text-base italic">

@@ -52,8 +52,7 @@ export default function CommentPolicyPage() {
         এই নীতিমালা সম্পর্কে কোনো প্রশ্ন বা অভিযোগ থাকলে আমাদের সাথে যোগাযোগ করুন:
       </p>
       <ul className="text-base mb-4">
-        <li><strong>ইমেইল:</strong> <a href="mailto:comment@jagrotobarta.com" className="text-primary hover:underline">comment@jagrotobarta.com</a></li>
-        <li><strong>ফোন:</strong> +৮৮ ০২ ০০০০০০০০</li>
+        <li><strong>ইমেইল:</strong> <a href="mailto:info@jagrotobarta.com" className="text-primary hover:underline">info@jagrotobarta.com</a></li>
       </ul>
 
       <p className="text-base italic">

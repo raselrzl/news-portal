@@ -45,31 +45,42 @@ export default function Footer() {
             <h2 className="text-xl font-semibold mb-2 text-center">
               প্রকাশনা ও যোগাযোগ
             </h2>
-            <p className="mb-1">
-              <strong>সম্পাদক:</strong> ইসলাম ইসলাম ইসলাম
+            <p className="mb-1 text-sm text-muted-foreground">
+              <span>সম্পাদক: </span>
+              <a
+                href="mailto:sompadok@jagrotobarta.com"
+                className="text-orange-600 hover:underline"
+              >
+                sompadok@jagrotobarta.com
+              </a>
               <br />
-              <strong>প্রকাশক:</strong> ইসলাম ইসলাম ইসলাম
-              <br />
+              <span>প্রকাশক: </span>
+              <a
+                href="mailto:contact@jagrotobarta.com"
+                className="text-orange-600 hover:underline"
+              >
+                contact@jagrotobarta.com
+              </a>
             </p>
 
             <div>
-              <strong>ফোন:</strong> +৮৮ ০২ 00000000, +৮৮ ০২ 00000000
+              {/*  <strong>ফোন:</strong> +৮৮ ০২ 00000000, +৮৮ ০২ 00000000 */}
               <br />
               <strong>ই-মেইল:</strong>{" "}
               <a
-                href="mailto:news@jagrotobarta.com"
+                href="mailto:info@jagrotobarta.com"
                 className="text-primary hover:underline"
               >
-                news@jagrotobarta.com
+                info@jagrotobarta.com
               </a>
-              <p>৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা</p>
+              {/* <p>৪৪/১, রহিম স্কয়ার, নিউমার্কেট, ঢাকা</p> */}
             </div>
           </div>
 
           <p>
             <strong>বিজ্ঞাপন</strong>
-            <br />
-            ফোন: +৮৮ ০২ 00000000, ০১৭৩০ 000000
+            {/* <br />
+            ফোন: +৮৮ ০২ 00000000, ০১৭৩০ 000000 */}
             <br />
             ই-মেইল:{" "}
             <a
