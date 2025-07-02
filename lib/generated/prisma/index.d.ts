@@ -73,6 +73,11 @@ export type AdvertiseRequest = $Result.DefaultSelection<Prisma.$AdvertiseRequest
  * 
  */
 export type Videopost = $Result.DefaultSelection<Prisma.$VideopostPayload>
+/**
+ * Model RouteVisit
+ * 
+ */
+export type RouteVisit = $Result.DefaultSelection<Prisma.$RouteVisitPayload>
 
 /**
  * Enums
@@ -446,6 +451,16 @@ export class PrismaClient<
     * ```
     */
   get videopost(): Prisma.VideopostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.routeVisit`: Exposes CRUD operations for the **RouteVisit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RouteVisits
+    * const routeVisits = await prisma.routeVisit.findMany()
+    * ```
+    */
+  get routeVisit(): Prisma.RouteVisitDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -897,7 +912,8 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     AdvertiseRequest: 'AdvertiseRequest',
-    Videopost: 'Videopost'
+    Videopost: 'Videopost',
+    RouteVisit: 'RouteVisit'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -916,7 +932,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost" | "routeVisit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1808,6 +1824,80 @@ export namespace Prisma {
           }
         }
       }
+      RouteVisit: {
+        payload: Prisma.$RouteVisitPayload<ExtArgs>
+        fields: Prisma.RouteVisitFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RouteVisitFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RouteVisitFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          findFirst: {
+            args: Prisma.RouteVisitFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RouteVisitFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          findMany: {
+            args: Prisma.RouteVisitFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>[]
+          }
+          create: {
+            args: Prisma.RouteVisitCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          createMany: {
+            args: Prisma.RouteVisitCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RouteVisitCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>[]
+          }
+          delete: {
+            args: Prisma.RouteVisitDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          update: {
+            args: Prisma.RouteVisitUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          deleteMany: {
+            args: Prisma.RouteVisitDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RouteVisitUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RouteVisitUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>[]
+          }
+          upsert: {
+            args: Prisma.RouteVisitUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RouteVisitPayload>
+          }
+          aggregate: {
+            args: Prisma.RouteVisitAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRouteVisit>
+          }
+          groupBy: {
+            args: Prisma.RouteVisitGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RouteVisitGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RouteVisitCountArgs<ExtArgs>
+            result: $Utils.Optional<RouteVisitCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1904,6 +1994,7 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     advertiseRequest?: AdvertiseRequestOmit
     videopost?: VideopostOmit
+    routeVisit?: RouteVisitOmit
   }
 
   /* Types for Logging */
@@ -15431,6 +15522,1052 @@ export namespace Prisma {
 
 
   /**
+   * Model RouteVisit
+   */
+
+  export type AggregateRouteVisit = {
+    _count: RouteVisitCountAggregateOutputType | null
+    _avg: RouteVisitAvgAggregateOutputType | null
+    _sum: RouteVisitSumAggregateOutputType | null
+    _min: RouteVisitMinAggregateOutputType | null
+    _max: RouteVisitMaxAggregateOutputType | null
+  }
+
+  export type RouteVisitAvgAggregateOutputType = {
+    id: number | null
+    hits: number | null
+  }
+
+  export type RouteVisitSumAggregateOutputType = {
+    id: number | null
+    hits: number | null
+  }
+
+  export type RouteVisitMinAggregateOutputType = {
+    id: number | null
+    fullUrl: string | null
+    hits: number | null
+    route: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RouteVisitMaxAggregateOutputType = {
+    id: number | null
+    fullUrl: string | null
+    hits: number | null
+    route: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RouteVisitCountAggregateOutputType = {
+    id: number
+    fullUrl: number
+    hits: number
+    route: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RouteVisitAvgAggregateInputType = {
+    id?: true
+    hits?: true
+  }
+
+  export type RouteVisitSumAggregateInputType = {
+    id?: true
+    hits?: true
+  }
+
+  export type RouteVisitMinAggregateInputType = {
+    id?: true
+    fullUrl?: true
+    hits?: true
+    route?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RouteVisitMaxAggregateInputType = {
+    id?: true
+    fullUrl?: true
+    hits?: true
+    route?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RouteVisitCountAggregateInputType = {
+    id?: true
+    fullUrl?: true
+    hits?: true
+    route?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RouteVisitAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RouteVisit to aggregate.
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RouteVisits to fetch.
+     */
+    orderBy?: RouteVisitOrderByWithRelationInput | RouteVisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RouteVisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RouteVisits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RouteVisits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RouteVisits
+    **/
+    _count?: true | RouteVisitCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RouteVisitAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RouteVisitSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RouteVisitMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RouteVisitMaxAggregateInputType
+  }
+
+  export type GetRouteVisitAggregateType<T extends RouteVisitAggregateArgs> = {
+        [P in keyof T & keyof AggregateRouteVisit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRouteVisit[P]>
+      : GetScalarType<T[P], AggregateRouteVisit[P]>
+  }
+
+
+
+
+  export type RouteVisitGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RouteVisitWhereInput
+    orderBy?: RouteVisitOrderByWithAggregationInput | RouteVisitOrderByWithAggregationInput[]
+    by: RouteVisitScalarFieldEnum[] | RouteVisitScalarFieldEnum
+    having?: RouteVisitScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RouteVisitCountAggregateInputType | true
+    _avg?: RouteVisitAvgAggregateInputType
+    _sum?: RouteVisitSumAggregateInputType
+    _min?: RouteVisitMinAggregateInputType
+    _max?: RouteVisitMaxAggregateInputType
+  }
+
+  export type RouteVisitGroupByOutputType = {
+    id: number
+    fullUrl: string
+    hits: number
+    route: string
+    createdAt: Date
+    updatedAt: Date
+    _count: RouteVisitCountAggregateOutputType | null
+    _avg: RouteVisitAvgAggregateOutputType | null
+    _sum: RouteVisitSumAggregateOutputType | null
+    _min: RouteVisitMinAggregateOutputType | null
+    _max: RouteVisitMaxAggregateOutputType | null
+  }
+
+  type GetRouteVisitGroupByPayload<T extends RouteVisitGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RouteVisitGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RouteVisitGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RouteVisitGroupByOutputType[P]>
+            : GetScalarType<T[P], RouteVisitGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RouteVisitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullUrl?: boolean
+    hits?: boolean
+    route?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["routeVisit"]>
+
+  export type RouteVisitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullUrl?: boolean
+    hits?: boolean
+    route?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["routeVisit"]>
+
+  export type RouteVisitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullUrl?: boolean
+    hits?: boolean
+    route?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["routeVisit"]>
+
+  export type RouteVisitSelectScalar = {
+    id?: boolean
+    fullUrl?: boolean
+    hits?: boolean
+    route?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RouteVisitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullUrl" | "hits" | "route" | "createdAt" | "updatedAt", ExtArgs["result"]["routeVisit"]>
+
+  export type $RouteVisitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RouteVisit"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      fullUrl: string
+      hits: number
+      route: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["routeVisit"]>
+    composites: {}
+  }
+
+  type RouteVisitGetPayload<S extends boolean | null | undefined | RouteVisitDefaultArgs> = $Result.GetResult<Prisma.$RouteVisitPayload, S>
+
+  type RouteVisitCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RouteVisitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RouteVisitCountAggregateInputType | true
+    }
+
+  export interface RouteVisitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RouteVisit'], meta: { name: 'RouteVisit' } }
+    /**
+     * Find zero or one RouteVisit that matches the filter.
+     * @param {RouteVisitFindUniqueArgs} args - Arguments to find a RouteVisit
+     * @example
+     * // Get one RouteVisit
+     * const routeVisit = await prisma.routeVisit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RouteVisitFindUniqueArgs>(args: SelectSubset<T, RouteVisitFindUniqueArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RouteVisit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RouteVisitFindUniqueOrThrowArgs} args - Arguments to find a RouteVisit
+     * @example
+     * // Get one RouteVisit
+     * const routeVisit = await prisma.routeVisit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RouteVisitFindUniqueOrThrowArgs>(args: SelectSubset<T, RouteVisitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RouteVisit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitFindFirstArgs} args - Arguments to find a RouteVisit
+     * @example
+     * // Get one RouteVisit
+     * const routeVisit = await prisma.routeVisit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RouteVisitFindFirstArgs>(args?: SelectSubset<T, RouteVisitFindFirstArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RouteVisit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitFindFirstOrThrowArgs} args - Arguments to find a RouteVisit
+     * @example
+     * // Get one RouteVisit
+     * const routeVisit = await prisma.routeVisit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RouteVisitFindFirstOrThrowArgs>(args?: SelectSubset<T, RouteVisitFindFirstOrThrowArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RouteVisits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RouteVisits
+     * const routeVisits = await prisma.routeVisit.findMany()
+     * 
+     * // Get first 10 RouteVisits
+     * const routeVisits = await prisma.routeVisit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const routeVisitWithIdOnly = await prisma.routeVisit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RouteVisitFindManyArgs>(args?: SelectSubset<T, RouteVisitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RouteVisit.
+     * @param {RouteVisitCreateArgs} args - Arguments to create a RouteVisit.
+     * @example
+     * // Create one RouteVisit
+     * const RouteVisit = await prisma.routeVisit.create({
+     *   data: {
+     *     // ... data to create a RouteVisit
+     *   }
+     * })
+     * 
+     */
+    create<T extends RouteVisitCreateArgs>(args: SelectSubset<T, RouteVisitCreateArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RouteVisits.
+     * @param {RouteVisitCreateManyArgs} args - Arguments to create many RouteVisits.
+     * @example
+     * // Create many RouteVisits
+     * const routeVisit = await prisma.routeVisit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RouteVisitCreateManyArgs>(args?: SelectSubset<T, RouteVisitCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RouteVisits and returns the data saved in the database.
+     * @param {RouteVisitCreateManyAndReturnArgs} args - Arguments to create many RouteVisits.
+     * @example
+     * // Create many RouteVisits
+     * const routeVisit = await prisma.routeVisit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RouteVisits and only return the `id`
+     * const routeVisitWithIdOnly = await prisma.routeVisit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RouteVisitCreateManyAndReturnArgs>(args?: SelectSubset<T, RouteVisitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RouteVisit.
+     * @param {RouteVisitDeleteArgs} args - Arguments to delete one RouteVisit.
+     * @example
+     * // Delete one RouteVisit
+     * const RouteVisit = await prisma.routeVisit.delete({
+     *   where: {
+     *     // ... filter to delete one RouteVisit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RouteVisitDeleteArgs>(args: SelectSubset<T, RouteVisitDeleteArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RouteVisit.
+     * @param {RouteVisitUpdateArgs} args - Arguments to update one RouteVisit.
+     * @example
+     * // Update one RouteVisit
+     * const routeVisit = await prisma.routeVisit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RouteVisitUpdateArgs>(args: SelectSubset<T, RouteVisitUpdateArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RouteVisits.
+     * @param {RouteVisitDeleteManyArgs} args - Arguments to filter RouteVisits to delete.
+     * @example
+     * // Delete a few RouteVisits
+     * const { count } = await prisma.routeVisit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RouteVisitDeleteManyArgs>(args?: SelectSubset<T, RouteVisitDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RouteVisits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RouteVisits
+     * const routeVisit = await prisma.routeVisit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RouteVisitUpdateManyArgs>(args: SelectSubset<T, RouteVisitUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RouteVisits and returns the data updated in the database.
+     * @param {RouteVisitUpdateManyAndReturnArgs} args - Arguments to update many RouteVisits.
+     * @example
+     * // Update many RouteVisits
+     * const routeVisit = await prisma.routeVisit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RouteVisits and only return the `id`
+     * const routeVisitWithIdOnly = await prisma.routeVisit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RouteVisitUpdateManyAndReturnArgs>(args: SelectSubset<T, RouteVisitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RouteVisit.
+     * @param {RouteVisitUpsertArgs} args - Arguments to update or create a RouteVisit.
+     * @example
+     * // Update or create a RouteVisit
+     * const routeVisit = await prisma.routeVisit.upsert({
+     *   create: {
+     *     // ... data to create a RouteVisit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RouteVisit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RouteVisitUpsertArgs>(args: SelectSubset<T, RouteVisitUpsertArgs<ExtArgs>>): Prisma__RouteVisitClient<$Result.GetResult<Prisma.$RouteVisitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RouteVisits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitCountArgs} args - Arguments to filter RouteVisits to count.
+     * @example
+     * // Count the number of RouteVisits
+     * const count = await prisma.routeVisit.count({
+     *   where: {
+     *     // ... the filter for the RouteVisits we want to count
+     *   }
+     * })
+    **/
+    count<T extends RouteVisitCountArgs>(
+      args?: Subset<T, RouteVisitCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RouteVisitCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RouteVisit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RouteVisitAggregateArgs>(args: Subset<T, RouteVisitAggregateArgs>): Prisma.PrismaPromise<GetRouteVisitAggregateType<T>>
+
+    /**
+     * Group by RouteVisit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RouteVisitGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RouteVisitGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RouteVisitGroupByArgs['orderBy'] }
+        : { orderBy?: RouteVisitGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RouteVisitGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRouteVisitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RouteVisit model
+   */
+  readonly fields: RouteVisitFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RouteVisit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RouteVisitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RouteVisit model
+   */
+  interface RouteVisitFieldRefs {
+    readonly id: FieldRef<"RouteVisit", 'Int'>
+    readonly fullUrl: FieldRef<"RouteVisit", 'String'>
+    readonly hits: FieldRef<"RouteVisit", 'Int'>
+    readonly route: FieldRef<"RouteVisit", 'String'>
+    readonly createdAt: FieldRef<"RouteVisit", 'DateTime'>
+    readonly updatedAt: FieldRef<"RouteVisit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RouteVisit findUnique
+   */
+  export type RouteVisitFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter, which RouteVisit to fetch.
+     */
+    where: RouteVisitWhereUniqueInput
+  }
+
+  /**
+   * RouteVisit findUniqueOrThrow
+   */
+  export type RouteVisitFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter, which RouteVisit to fetch.
+     */
+    where: RouteVisitWhereUniqueInput
+  }
+
+  /**
+   * RouteVisit findFirst
+   */
+  export type RouteVisitFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter, which RouteVisit to fetch.
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RouteVisits to fetch.
+     */
+    orderBy?: RouteVisitOrderByWithRelationInput | RouteVisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RouteVisits.
+     */
+    cursor?: RouteVisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RouteVisits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RouteVisits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RouteVisits.
+     */
+    distinct?: RouteVisitScalarFieldEnum | RouteVisitScalarFieldEnum[]
+  }
+
+  /**
+   * RouteVisit findFirstOrThrow
+   */
+  export type RouteVisitFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter, which RouteVisit to fetch.
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RouteVisits to fetch.
+     */
+    orderBy?: RouteVisitOrderByWithRelationInput | RouteVisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RouteVisits.
+     */
+    cursor?: RouteVisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RouteVisits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RouteVisits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RouteVisits.
+     */
+    distinct?: RouteVisitScalarFieldEnum | RouteVisitScalarFieldEnum[]
+  }
+
+  /**
+   * RouteVisit findMany
+   */
+  export type RouteVisitFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter, which RouteVisits to fetch.
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RouteVisits to fetch.
+     */
+    orderBy?: RouteVisitOrderByWithRelationInput | RouteVisitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RouteVisits.
+     */
+    cursor?: RouteVisitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RouteVisits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RouteVisits.
+     */
+    skip?: number
+    distinct?: RouteVisitScalarFieldEnum | RouteVisitScalarFieldEnum[]
+  }
+
+  /**
+   * RouteVisit create
+   */
+  export type RouteVisitCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * The data needed to create a RouteVisit.
+     */
+    data: XOR<RouteVisitCreateInput, RouteVisitUncheckedCreateInput>
+  }
+
+  /**
+   * RouteVisit createMany
+   */
+  export type RouteVisitCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RouteVisits.
+     */
+    data: RouteVisitCreateManyInput | RouteVisitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RouteVisit createManyAndReturn
+   */
+  export type RouteVisitCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * The data used to create many RouteVisits.
+     */
+    data: RouteVisitCreateManyInput | RouteVisitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RouteVisit update
+   */
+  export type RouteVisitUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * The data needed to update a RouteVisit.
+     */
+    data: XOR<RouteVisitUpdateInput, RouteVisitUncheckedUpdateInput>
+    /**
+     * Choose, which RouteVisit to update.
+     */
+    where: RouteVisitWhereUniqueInput
+  }
+
+  /**
+   * RouteVisit updateMany
+   */
+  export type RouteVisitUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RouteVisits.
+     */
+    data: XOR<RouteVisitUpdateManyMutationInput, RouteVisitUncheckedUpdateManyInput>
+    /**
+     * Filter which RouteVisits to update
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * Limit how many RouteVisits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RouteVisit updateManyAndReturn
+   */
+  export type RouteVisitUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * The data used to update RouteVisits.
+     */
+    data: XOR<RouteVisitUpdateManyMutationInput, RouteVisitUncheckedUpdateManyInput>
+    /**
+     * Filter which RouteVisits to update
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * Limit how many RouteVisits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RouteVisit upsert
+   */
+  export type RouteVisitUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * The filter to search for the RouteVisit to update in case it exists.
+     */
+    where: RouteVisitWhereUniqueInput
+    /**
+     * In case the RouteVisit found by the `where` argument doesn't exist, create a new RouteVisit with this data.
+     */
+    create: XOR<RouteVisitCreateInput, RouteVisitUncheckedCreateInput>
+    /**
+     * In case the RouteVisit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RouteVisitUpdateInput, RouteVisitUncheckedUpdateInput>
+  }
+
+  /**
+   * RouteVisit delete
+   */
+  export type RouteVisitDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+    /**
+     * Filter which RouteVisit to delete.
+     */
+    where: RouteVisitWhereUniqueInput
+  }
+
+  /**
+   * RouteVisit deleteMany
+   */
+  export type RouteVisitDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RouteVisits to delete
+     */
+    where?: RouteVisitWhereInput
+    /**
+     * Limit how many RouteVisits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RouteVisit without action
+   */
+  export type RouteVisitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RouteVisit
+     */
+    select?: RouteVisitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RouteVisit
+     */
+    omit?: RouteVisitOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15628,6 +16765,18 @@ export namespace Prisma {
   };
 
   export type VideopostScalarFieldEnum = (typeof VideopostScalarFieldEnum)[keyof typeof VideopostScalarFieldEnum]
+
+
+  export const RouteVisitScalarFieldEnum: {
+    id: 'id',
+    fullUrl: 'fullUrl',
+    hits: 'hits',
+    route: 'route',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RouteVisitScalarFieldEnum = (typeof RouteVisitScalarFieldEnum)[keyof typeof RouteVisitScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -16761,6 +17910,65 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Videopost"> | Date | string
   }
 
+  export type RouteVisitWhereInput = {
+    AND?: RouteVisitWhereInput | RouteVisitWhereInput[]
+    OR?: RouteVisitWhereInput[]
+    NOT?: RouteVisitWhereInput | RouteVisitWhereInput[]
+    id?: IntFilter<"RouteVisit"> | number
+    fullUrl?: StringFilter<"RouteVisit"> | string
+    hits?: IntFilter<"RouteVisit"> | number
+    route?: StringFilter<"RouteVisit"> | string
+    createdAt?: DateTimeFilter<"RouteVisit"> | Date | string
+    updatedAt?: DateTimeFilter<"RouteVisit"> | Date | string
+  }
+
+  export type RouteVisitOrderByWithRelationInput = {
+    id?: SortOrder
+    fullUrl?: SortOrder
+    hits?: SortOrder
+    route?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RouteVisitWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    fullUrl?: string
+    AND?: RouteVisitWhereInput | RouteVisitWhereInput[]
+    OR?: RouteVisitWhereInput[]
+    NOT?: RouteVisitWhereInput | RouteVisitWhereInput[]
+    hits?: IntFilter<"RouteVisit"> | number
+    route?: StringFilter<"RouteVisit"> | string
+    createdAt?: DateTimeFilter<"RouteVisit"> | Date | string
+    updatedAt?: DateTimeFilter<"RouteVisit"> | Date | string
+  }, "id" | "fullUrl">
+
+  export type RouteVisitOrderByWithAggregationInput = {
+    id?: SortOrder
+    fullUrl?: SortOrder
+    hits?: SortOrder
+    route?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RouteVisitCountOrderByAggregateInput
+    _avg?: RouteVisitAvgOrderByAggregateInput
+    _max?: RouteVisitMaxOrderByAggregateInput
+    _min?: RouteVisitMinOrderByAggregateInput
+    _sum?: RouteVisitSumOrderByAggregateInput
+  }
+
+  export type RouteVisitScalarWhereWithAggregatesInput = {
+    AND?: RouteVisitScalarWhereWithAggregatesInput | RouteVisitScalarWhereWithAggregatesInput[]
+    OR?: RouteVisitScalarWhereWithAggregatesInput[]
+    NOT?: RouteVisitScalarWhereWithAggregatesInput | RouteVisitScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"RouteVisit"> | number
+    fullUrl?: StringWithAggregatesFilter<"RouteVisit"> | string
+    hits?: IntWithAggregatesFilter<"RouteVisit"> | number
+    route?: StringWithAggregatesFilter<"RouteVisit"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RouteVisit"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RouteVisit"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -17829,6 +19037,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RouteVisitCreateInput = {
+    fullUrl: string
+    hits?: number
+    route: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RouteVisitUncheckedCreateInput = {
+    id?: number
+    fullUrl: string
+    hits?: number
+    route: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RouteVisitUpdateInput = {
+    fullUrl?: StringFieldUpdateOperationsInput | string
+    hits?: IntFieldUpdateOperationsInput | number
+    route?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RouteVisitUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fullUrl?: StringFieldUpdateOperationsInput | string
+    hits?: IntFieldUpdateOperationsInput | number
+    route?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RouteVisitCreateManyInput = {
+    id?: number
+    fullUrl: string
+    hits?: number
+    route: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RouteVisitUpdateManyMutationInput = {
+    fullUrl?: StringFieldUpdateOperationsInput | string
+    hits?: IntFieldUpdateOperationsInput | number
+    route?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RouteVisitUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fullUrl?: StringFieldUpdateOperationsInput | string
+    hits?: IntFieldUpdateOperationsInput | number
+    route?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -18658,6 +19926,70 @@ export namespace Prisma {
     _max?: NestedEnumvedioStatusFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type RouteVisitCountOrderByAggregateInput = {
+    id?: SortOrder
+    fullUrl?: SortOrder
+    hits?: SortOrder
+    route?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RouteVisitAvgOrderByAggregateInput = {
+    id?: SortOrder
+    hits?: SortOrder
+  }
+
+  export type RouteVisitMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fullUrl?: SortOrder
+    hits?: SortOrder
+    route?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RouteVisitMinOrderByAggregateInput = {
+    id?: SortOrder
+    fullUrl?: SortOrder
+    hits?: SortOrder
+    route?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RouteVisitSumOrderByAggregateInput = {
+    id?: SortOrder
+    hits?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -19030,6 +20362,14 @@ export namespace Prisma {
     set?: $Enums.vedioStatus
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -19321,6 +20661,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumvedioStatusFilter<$PrismaModel>
     _max?: NestedEnumvedioStatusFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type AccountCreateWithoutUserInput = {
