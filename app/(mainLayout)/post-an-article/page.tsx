@@ -3,6 +3,7 @@ import { CreateNewsArticleForm } from "./postArticleForm";
 import { prisma } from "@/app/utils/db";
 import { requireArticlePoster } from "@/app/utils/NewsReporter";
 import { requireUser } from "@/app/utils/requireUser";
+import { trackRoute } from "@/app/utils/routeTracker";
 
 async function getNewsReporterInfo(userId: string) {
   const data = await prisma.newsReporter.findUnique({
@@ -27,6 +28,7 @@ export default async function PostAnArticle() {
   await requireArticlePoster();
 
   const data = await getNewsReporterInfo(session.id as string);
+   await trackRoute("PostAnArticle");
 
   return (
     <div className="max-w-7xl mx-auto px-2 md:px-1 mb-10">

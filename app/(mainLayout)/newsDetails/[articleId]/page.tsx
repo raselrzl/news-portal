@@ -14,6 +14,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import PrintNews from "@/components/general/printNews";
 import { PrintNewsDetailsClient } from "../../../../components/general/PrintNewsClient";
+import { trackRoute } from "@/app/utils/routeTracker";
 
 async function getNewsArticle(articleId: string) {
   const newsArticle = await prisma.newsArticle.findUnique({
@@ -56,6 +57,7 @@ type Params = Promise<{ articleId: string }>;
 export default async function NewsDetailsPage({ params }: { params: Params }) {
   const { articleId } = await params;
   const data = await getNewsArticle(articleId);
+  await trackRoute("NewsDetailsPage");
 
   if (!data) {
     return (

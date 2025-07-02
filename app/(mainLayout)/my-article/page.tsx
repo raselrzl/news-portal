@@ -1,5 +1,6 @@
 import { prisma } from "@/app/utils/db";
 import { requireNewsReporter, requireUser } from "@/app/utils/requireUser";
+import { trackRoute } from "@/app/utils/routeTracker";
 import { EmptyState } from "@/components/general/EmptyState";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,6 +49,7 @@ export default async function MyArticle() {
   const session = await requireUser();
   const data = await getNewses(session.id as string);
   const approvednewsreporter = await requireNewsReporter();
+  await trackRoute("MyArticle");
 
   return (
     <>

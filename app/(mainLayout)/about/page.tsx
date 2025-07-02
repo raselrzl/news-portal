@@ -1,7 +1,6 @@
 import { trackRoute } from "@/app/utils/routeTracker";
 
 export default async function About() {
-  // Track the route on server side
   await trackRoute("about");
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 text-foreground text-justify">

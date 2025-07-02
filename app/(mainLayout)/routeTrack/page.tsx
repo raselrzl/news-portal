@@ -1,6 +1,9 @@
 // app/routeTrack/page.tsx
 
 import { prisma } from "@/app/utils/db";
+import { requireSompandokOrSuperAdmin } from "@/app/utils/requireUser";
+import { trackRoute } from "@/app/utils/routeTracker";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { notFound } from "next/navigation";
 
 async function getRouteHits() {
@@ -29,16 +32,44 @@ const RouteHits = async () => {
     notFound();
   }
 
+  await trackRoute("RouteTrack");
+  await requireSompandokOrSuperAdmin()
+
+  // Calculate the total route hit count
+  const totalHits = routeHits.reduce((acc, route) => acc + route.hits, 0);
+
   return (
-    <div>
-      <h1>Route Hit Counts</h1>
-      <ul>
-        {routeHits.map((route) => (
-          <li key={route.fullUrl}>
-            <strong>{route.fullUrl}</strong>: {route.hits} hits
-          </li>
-        ))}
-      </ul>
+    <div className="flex justify-center p-4">
+      <div className="w-full max-w-[600px] bg-white shadow-lg rounded-lg p-6">
+        <h1 className="text-2xl font-semibold mb-4">Route Hit Counts</h1>
+
+        {/* Display Total Route Hit Count */}
+        <div className="mb-4">
+          <p className="text-xl font-medium">Total Route Hits by all users: {totalHits}</p>
+        </div>
+
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>URL</TableHead>
+              <TableHead>Hits</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {routeHits.map((route, index) => (
+              <TableRow
+                key={route.fullUrl}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"
+                }`}
+              >
+                <TableCell>{route.fullUrl}</TableCell>
+                <TableCell>{route.hits}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

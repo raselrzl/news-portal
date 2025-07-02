@@ -2,6 +2,7 @@ import LoadingSpinner from "@/components/general/LoadingSpinner";
 import AllArticleList from "@/components/general/homepageArticleList";
 import AllEducationArticles from "./AllEducationArticles";
 import { Suspense } from "react";
+import { trackRoute } from "@/app/utils/routeTracker";
 
 type SearchParamsProps = {
   searchParams: Promise<{
@@ -14,6 +15,7 @@ type SearchParamsProps = {
 export default async function Education({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+   await trackRoute("Education");
 
   return (
     <div className="grid grid-cols-3 mt-10">

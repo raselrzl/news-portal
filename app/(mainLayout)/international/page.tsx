@@ -1,3 +1,4 @@
+import { trackRoute } from "@/app/utils/routeTracker";
 import AllInternationalArticles from "./AllInternationalArticles";
 import AllArticleList from "@/components/general/homepageArticleList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
@@ -10,6 +11,7 @@ type SearchParamsProps = {
 export default async function International({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+  await trackRoute("International");
 
   return (
     <div className="grid grid-cols-3 mt-10">

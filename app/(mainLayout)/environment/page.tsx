@@ -1,3 +1,4 @@
+import { trackRoute } from "@/app/utils/routeTracker";
 import AllEnvironmentArticles from "./AllEnvironmentArticles";
 import AllArticleList from "@/components/general/homepageArticleList";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
@@ -14,6 +15,7 @@ type SearchParamsProps = {
 export default async function Environment({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+  await trackRoute("Environment");
 
   return (
     <div className="grid grid-cols-3 mt-10">

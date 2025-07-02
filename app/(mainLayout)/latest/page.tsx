@@ -2,6 +2,7 @@ import AllNewsArticleList from "@/app/(mainLayout)/latest/AllNewsArticleList";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 import { ShirShoNewsHeadings } from "@/components/general/homepageArticleList";
+import { trackRoute } from "@/app/utils/routeTracker";
 
 type SearchParamsProps = {
   searchParams: Promise<{
@@ -13,6 +14,7 @@ type SearchParamsProps = {
 export default async function Latest({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+  await trackRoute("Latest");
 
   return (
     <div className="grid grid-cols-3 mt-10">

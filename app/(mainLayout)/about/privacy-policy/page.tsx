@@ -1,6 +1,8 @@
+import { trackRoute } from "@/app/utils/routeTracker";
 import React from "react";
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  await trackRoute("PrivacyPolicy");
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 text-foreground">
       <h1 className="text-3xl font-bold mb-6 text-center">গোপনীয়তার নীতি</h1>

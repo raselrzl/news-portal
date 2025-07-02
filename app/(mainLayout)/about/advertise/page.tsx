@@ -1,3 +1,4 @@
+import { trackRoute } from "@/app/utils/routeTracker";
 import AdvertiseForm from "./AdvertsieContactForm";
 import {
   Target,
@@ -11,7 +12,8 @@ import {
   Mail,
 } from "lucide-react";
 
-export default function AdvertisePage() {
+export default async function AdvertisePage() {
+  await trackRoute("Advertise");
   return (
     <div className="py-10">
       <div className="max-w-3xl mx-auto bg-background rounded-lg shadow-md text-foreground font-[Noto_Sans_Bengali]">

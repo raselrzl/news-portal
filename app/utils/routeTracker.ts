@@ -1,6 +1,11 @@
 import { prisma } from "./db";
+
 export async function trackRoute(fullUrl: string) {
-  const route = new URL(fullUrl, "http://localhost").pathname;
+  // Extract pathname
+  const pathname = new URL(fullUrl, "http://localhost").pathname;
+
+  // Remove leading slash
+  const route = pathname.startsWith("/") ? pathname.slice(1) : pathname;
 
   const existingRoute = await prisma.routeVisit.findUnique({
     where: { fullUrl: route },

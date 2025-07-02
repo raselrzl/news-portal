@@ -72,7 +72,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
         <DropdownMenuItem asChild>
           <Link href="/alluseropinion">
             <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
-            <span>সব অভিযোগসমূহ</span>
+            <span>অভিযোগসমূহ</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuGroup>
@@ -135,14 +135,20 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-a-video">
                   <Settings2 size={16} strokeWidth={2} className="opacity-60" />
-                  <span>Post Videos</span>
+                  <span>ইউটিউব ভিডিও পোস্ট করুন</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-a-video/allvideos">
                   <Settings2 size={16} strokeWidth={2} className="opacity-60" />
-                  <span>সব Videos</span>
+                  <span>সব ভিডিও নিয়ন্ত্রণ</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/routeTrack">
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <span>ইউজার ট্র্যাকিং চেক পেজ</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>

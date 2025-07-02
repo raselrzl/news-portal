@@ -2,6 +2,7 @@ import AllArticleList from "@/components/general/homepageArticleList";
 import AllNationalArticles from "./AllNationalArticles";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 import { Suspense } from "react";
+import { trackRoute } from "@/app/utils/routeTracker";
 
 
 type SearchParamsProps = {
@@ -14,6 +15,7 @@ type SearchParamsProps = {
 export default async function National({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
 const currentPage = Number(params.page) || 1;
+await trackRoute("National");
   return (
     
     <div className="grid grid-cols-3 my-10">

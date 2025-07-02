@@ -1,6 +1,8 @@
+import { trackRoute } from "@/app/utils/routeTracker";
 import React from "react";
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  await trackRoute("Terms");
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 text-foreground">
       <h1 className="text-3xl font-bold mb-6 text-center">শর্তাবলি</h1>

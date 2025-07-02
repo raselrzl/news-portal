@@ -24,6 +24,7 @@ import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
 import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
 import { isJson } from "../utils/isJson";
 import Videos from "@/components/general/Videos";
+import { trackRoute } from "../utils/routeTracker";
 
 async function getData() {
   const [lastFeaturedArticle, latestNews, InternationalAll] = await Promise.all(
@@ -129,7 +130,7 @@ async function getData() {
 }
 export default async function Home() {
   const { lastFeaturedArticle, latestNews, InternationalAll } = await getData();
-
+  await trackRoute("Home");
   const session = await aauth();
   return (
     <>
