@@ -1,4 +1,5 @@
 import {
+  BarChart,
   BookPlus,
   ChevronDown,
   Heart,
@@ -28,7 +29,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ime, isNewsReporter, supperAdmin } from "@/app/utils/ime";
 import { requireSuperAdmin } from "@/app/utils/requireUser";
 import { getCurrentUserType } from "@/app/utils/getCurrentUserType";
-/* import { ime } from "@/app/utils/ime"; */
 
 interface iAppProps {
   email: string;
@@ -37,8 +37,6 @@ interface iAppProps {
 }
 
 export async function UserDropdown({ email, name, image }: iAppProps) {
-  /* const isAdmin = await supperAdmin(email);
-  const newsReporter = await isNewsReporter(email);*/
   const mkr = ime(email);
 
   const currentUser = await getCurrentUserType();
@@ -51,6 +49,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
     userType === "SUPERADMIN";
   const canSeeSection2 = userType === "SOMPANDOK" || userType === "SUPERADMIN";
   const canSeeSection3 = userType === "SUPERADMIN";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -60,7 +59,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
           size="sm"
         >
           <p className="font-bold py-[5px]">{name.charAt(0)}</p>
-          <ChevronDown size={16} strokeWidth={2} className="" />
+          <ChevronDown size={16} strokeWidth={2} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48" align="end">
@@ -69,6 +68,8 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
           <span className="text-xs font-medium text-foreground">{email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+
+        {/* Section 1 - User Options */}
         <DropdownMenuItem asChild>
           <Link href="/alluseropinion">
             <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
@@ -81,7 +82,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article">
                   <BookPlus size={16} strokeWidth={2} className="opacity-60" />
-                  একটি সংবাদ লিখুন
+                  <span>একটি সংবাদ লিখুন</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
@@ -93,18 +94,19 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
               <DropdownMenuItem asChild>
                 <Link href="/alluseropinion/opiniontable">
-                  <Newspaper size={16} strokeWidth={2} className="opacity-60" />
+                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব অভিযোগের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
             </>
           )}
 
+          {/* Section 2 - Admin Options */}
           {canSeeSection2 && (
             <>
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/alaarticles">
-                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <Layers2 size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব প্রবন্ধের নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
@@ -117,17 +119,13 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-advertisement/alladvertise">
-                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <PoundSterling size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/about/advertise/allcontactinfo">
-                  <MessagesSquare
-                    size={16}
-                    strokeWidth={2}
-                    className="opacity-60"
-                  />
+                  <MessagesSquare size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব বিজ্ঞাপন অনুরোধ</span>
                 </Link>
               </DropdownMenuItem>
@@ -141,42 +139,48 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
               <DropdownMenuItem asChild>
                 <Link href="/post-an-article/post-a-video/allvideos">
-                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
+                  <BarChart size={16} strokeWidth={2} className="opacity-60" />
                   <span>সব ভিডিও নিয়ন্ত্রণ</span>
                 </Link>
               </DropdownMenuItem>
+
+              {/* Dashboard Link */}
               <DropdownMenuItem asChild>
                 <Link href="/routeTrack">
-                  <Settings2 size={16} strokeWidth={2} className="opacity-60" />
-                  <span>ইউজার ট্র্যাকিং চেক পেজ</span>
+                  <BarChart size={16} strokeWidth={2} className="opacity-60" />
+                  <span>ড্যাশবোর্ড</span>
                 </Link>
               </DropdownMenuItem>
+
+              {/* All Users Link */}
               <DropdownMenuItem asChild>
-              <Link href="/post-an-article/allusers">
-                <Users size={16} strokeWidth={2} className="opacity-60" />
-                <span>অ্যাপের সকল ব্যবহারকারী</span>
-              </Link>
-            </DropdownMenuItem>
+                <Link href="/post-an-article/allusers">
+                  <Users size={16} strokeWidth={2} className="opacity-60" />
+                  <span>অ্যাপের সকল ব্যবহারকারী</span>
+                </Link>
+              </DropdownMenuItem>
             </>
           )}
-
-          <DropdownMenuSeparator />
-          <DropdownMenuItem asChild className="w-full">
-            <form
-              action={async () => {
-                "use server";
-                await signOut({
-                  redirectTo: "/",
-                });
-              }}
-            >
-              <button className="flex w-full items-center justify-center gap-2">
-                <LogOut size={16} strokeWidth={2} className="opacity-60" />
-                <span> লগআউট </span>
-              </button>
-            </form>
-          </DropdownMenuItem>
         </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        {/* Logout */}
+        <DropdownMenuItem asChild className="w-full">
+          <form
+            action={async () => {
+              "use server";
+              await signOut({
+                redirectTo: "/",
+              });
+            }}
+          >
+            <button className="flex w-full items-center justify-center gap-2">
+              <LogOut size={16} strokeWidth={2} className="opacity-60" />
+              <span>লগআউট</span>
+            </button>
+          </form>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
