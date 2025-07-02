@@ -50,80 +50,80 @@ const Statistics = async () => {
   }
 
   return (
-    <div className="p-8 mt-4">
+    <div className="p-4 mt-15 ">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Total Users Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">Users</h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalUsers}</p>
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">Users</h2>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalUsers}</p>
         </div>
 
         {/* Total News Reporters Card */}
-        <div className=" p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">
             News Reporters
           </h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalNewsReporters}</p>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalNewsReporters}</p>
         </div>
 
         {/* Total Advertisements Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold">
              Advertisements
           </h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalAdvertisements}</p>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalAdvertisements}</p>
         </div>
 
         {/* Total News Articles Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold">
              News Articles
           </h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalNewsArticles}</p>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalNewsArticles}</p>
         </div>
 
         {/* Total Opinions Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange"> Opinions</h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalOpinions}</p>
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold"> Opinions</h2>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalOpinions}</p>
         </div>
 
         {/* Total Videos Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">Total Videos</h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalVideos}</p>
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold">Total Videos</h2>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalVideos}</p>
         </div>
 
         {/* Total Advertise Requests Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">
              Advertise Requests
           </h2>
-          <p className="text-3xl font-bold mt-4">
+          <p className="text-3xl font-bold mt-4 text-primary">
             {stats.totalAdvertiseRequests}
           </p>
         </div>
 
         {/* Total Sompandoks Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">
              Sompandoks
           </h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalSompandoks}</p>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalSompandoks}</p>
         </div>
 
         {/* Total Drafts Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-lg font-semibold text-orange">Total Drafts</h2>
-          <p className="text-3xl font-bold mt-4">{stats.totalDrafts}</p>
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold">Total Drafts</h2>
+          <p className="text-3xl font-bold mt-4 text-primary">{stats.totalDrafts}</p>
         </div>
 
         {/* Total Registered Users Card */}
-        <div className="p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-          <h2 className="text-md font-semibold text-orange">
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">
              Registered Users
           </h2>
-          <p className="text-3xl font-bold mt-4">
+          <p className="text-3xl font-bold mt-4 text-primary">
             {stats.totalRegisteredUsers}
           </p>
         </div>
