@@ -2,7 +2,6 @@
 
 import { prisma } from "@/app/utils/db";
 import { requireSompandokOrSuperAdmin } from "@/app/utils/requireUser";
-import { trackRoute } from "@/app/utils/routeTracker";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { notFound } from "next/navigation";
 
@@ -32,7 +31,6 @@ const RouteHits = async () => {
     notFound();
   }
 
-  await trackRoute("RouteTrack");
   await requireSompandokOrSuperAdmin()
 
   // Calculate the total route hit count
