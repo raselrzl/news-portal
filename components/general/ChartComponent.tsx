@@ -31,6 +31,21 @@ const ChartComponent = ({ routeHits }: ChartComponentProps) => {
     axisStroke: "#FBBF24", // Orange color for axis
   };
 
+  // Custom Tooltip content
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const { name, value } = payload[0]; // Assuming single payload data
+      return (
+        <div className="bg-white p-2 border rounded-md shadow-lg">
+          <p className="font-medium text-sm text-gray-800">{name}</p>
+          <p className="text-sm text-gray-600">Hits: {value}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div className="min-h-[250px] w-full">
       {/* Make the chart responsive using ResponsiveContainer */}
@@ -47,7 +62,7 @@ const ChartComponent = ({ routeHits }: ChartComponentProps) => {
             tick={{ fontSize: 8 }}
           />
           <YAxis stroke={chartConfig.axisStroke} />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
 
           {/* Bar using SchadCN Orange color */}
