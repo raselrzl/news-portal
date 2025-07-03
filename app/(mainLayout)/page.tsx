@@ -4,10 +4,8 @@ import { EmptyState } from "@/components/general/EmptyState";
 import Link from "next/link";
 import Image from "next/image";
 import SocialLinks from "@/components/general/socialLink";
-import { Clock, Loader2, Notebook, StepForward } from "lucide-react";
+import { Clock, Loader2 } from "lucide-react";
 import { aauth } from "../actions";
-import YouTubeVideo from "@/components/general/YouTubeVideo";
-import { Card, CardHeader } from "@/components/ui/card";
 import { Contact } from "@/components/general/Contact";
 import {
   Bachaikreto,
@@ -16,9 +14,8 @@ import {
   ScienceNewsHeadPost,
 } from "@/components/general/homepageArticleList";
 import {
-  PremiarOne,
-  PremiarTwo,
   PremiumOneAdvertise,
+  SuperTwo,
 } from "@/components/general/FetchAllAdvertisement";
 import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
 import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
@@ -185,7 +182,7 @@ export default async function Home() {
           <div className=" grid grid-cols-1">
             <div>
               <Suspense fallback={<Loader2 />}>
-                <PremiarOne />
+                <SuperTwo />
               </Suspense>
             </div>
 

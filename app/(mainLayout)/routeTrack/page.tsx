@@ -25,17 +25,13 @@ async function getRouteHits() {
 }
 
 const Dashboard = async () => {
-  
+
   await requireSompandokOrSuperAdmin()
 
   const routeHits = await getRouteHits();
-
-  // If no data found, show a not found page
   if (routeHits.length === 0) {
     notFound();
   }
-
-  // Calculate total hits
   const totalHits = routeHits.reduce((acc, route) => acc + route.hits, 0);
 
   return (
