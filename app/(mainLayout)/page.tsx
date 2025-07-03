@@ -383,12 +383,6 @@ export default async function Home() {
           alt="gif image"
           className="w-full h-[100px] rounded-xl px-8 md:px-32"
         />
-
-        <div className="w-full h-[100px] rounded-xl px-8 md:px-32">
-              <Suspense fallback={<Loader2 />}>
-                <ProOneAdvertise />
-              </Suspense>
-            </div>
       </div>
     </>
   );
