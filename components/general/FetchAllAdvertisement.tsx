@@ -270,7 +270,7 @@ export async function ProOneAdvertise() {
                 alt={pro1.companyName}
                 width={300} // adjust as needed
                 height={100}
-                className="w-[300px] h-[130px] md:h-[180px] rounded-xl"
+                className="w-full h-[100px] rounded-xl px-8 md:px-32"
               />
             </Link>
           ))}

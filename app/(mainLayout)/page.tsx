@@ -357,11 +357,11 @@ export default async function Home() {
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between">
             {" "}
             <ScienceNewsHeadPost />
-            <img
-              src="/shoe.gif"
-              alt="gif image"
-              className="w-full h-[100px] rounded-xl mt-2"
-            />
+             <div>
+              <Suspense fallback={<Loader2 />}>
+                <ProOneAdvertise />
+              </Suspense>
+            </div>
           </div>
           <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
             <ScienceNews />
@@ -378,11 +378,12 @@ export default async function Home() {
             <Contact />
           </div>
         </div>
-        <img
-          src="/save1.gif"
-          alt="gif image"
-          className="w-full h-[100px] rounded-xl px-8 md:px-32"
-        />
+
+        <div>
+              <Suspense fallback={<Loader2 />}>
+                <ProOneAdvertise />
+              </Suspense>
+            </div>
       </div>
     </>
   );
