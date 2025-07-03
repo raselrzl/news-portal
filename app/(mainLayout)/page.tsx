@@ -15,6 +15,7 @@ import {
 } from "@/components/general/homepageArticleList";
 import {
   PremiumOneAdvertise,
+  ProOneAdvertise,
   SuperTwo,
 } from "@/components/general/FetchAllAdvertisement";
 import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
@@ -165,11 +166,11 @@ export default async function Home() {
             />
           )}
 
-          <img
-            src="/shoe.gif"
-            alt="gif image"
-            className="w-full h-[100px] rounded-xl mt-2"
-          />
+           <div>
+              <Suspense fallback={<Loader2 />}>
+                <ProOneAdvertise />
+              </Suspense>
+            </div>
           <div className="mt-10 text-left flex-col hidden sm:block">
             <p className="text-sm font-semibold text-justify">
               সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল

@@ -233,3 +233,49 @@ export async function SuperTwo() {
     </>
   );
 }
+
+
+export async function getProOneAdvertise() {
+  return await prisma.advertisement.findMany({
+    where: { advertisedCategory: "PRO_1" },
+    select: {
+      id: true,
+      createdAt: true,
+      isFeatured: true,
+      companyName: true,
+      companyaddress: true,
+      websiteLink: true,
+      advertiseBanner: true,
+      endDate: true,
+      supervisedPhonenumber: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 1,
+  });
+}
+
+export async function ProOneAdvertise() {
+  const ProOneAdvertise = await getProOneAdvertise();
+  return (
+    <>
+      {ProOneAdvertise && Object.keys(ProOneAdvertise).length > 0 ? (
+        <div className="flex items-center justify-center">
+          {ProOneAdvertise.map((pro1) => (
+            <Link href={`https://${pro1.websiteLink}`} key={pro1.id}  target="_blank"
+            rel="noopener noreferrer">
+              <Image
+                src={pro1.advertiseBanner}
+                alt={pro1.companyName}
+                width={300} // adjust as needed
+                height={100}
+                className="w-[300px] h-[130px] md:h-[180px] rounded-xl"
+              />
+            </Link>
+          ))}
+        </div>
+      ) : null}
+    </>
+  );
+}
