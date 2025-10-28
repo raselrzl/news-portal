@@ -13,7 +13,7 @@ async function getStatistics() {
     const totalVideos = await prisma.videopost.count();
     const totalAdvertiseRequests = await prisma.advertiseRequest.count();
     const totalSompandoks = await prisma.user.count({
-      where: { userType: "SOMPANDOK" },
+      where: { userType: "EDITOR" },
     });
     const totalDrafts = await prisma.newsArticle.count({
       where: { newsArticleStatus: "DRAFT" },
