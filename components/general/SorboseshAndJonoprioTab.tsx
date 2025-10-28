@@ -15,7 +15,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { JonoprioNews, SorboseshNews } from "./general/homepageArticleList"
+import { JonoprioNews, SorboseshNews } from "./homepageArticleList"
 
 export function SorboseshAndJonoprioTab() {
   return (

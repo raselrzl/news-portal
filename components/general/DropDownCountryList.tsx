@@ -12,7 +12,7 @@ import {
 } from "../ui/dropdown-menu";
 import { ChevronDown, Globe } from "lucide-react";
 
-const euCountries = [
+const locations = [
   {
     name: "Bangladesh",
     flag: "/flags/bangladesh.jpg",
@@ -172,7 +172,7 @@ export default function DropDownCountryList() {
         align="end"
         className="w-56 max-h-[400px] overflow-y-auto"
       >
-        {euCountries.map((country, index) => (
+        {locations.map((country, index) => (
           <div key={country.name}>
             <DropdownMenuItem asChild className="cursor-pointer">
               <Link href={country.link}>
@@ -188,7 +188,7 @@ export default function DropDownCountryList() {
                 </div>
               </Link>
             </DropdownMenuItem>
-            {index < euCountries.length - 1 && <DropdownMenuSeparator />}
+            {index < locations.length - 1 && <DropdownMenuSeparator />}
           </div>
         ))}
       </DropdownMenuContent>

@@ -23,7 +23,7 @@ import { PremiumTwoAdvertise } from "@/components/allAdvertisement/PremiumTwo";
 import PopupOnViewServer from "@/components/PopupAd/PopupOnViewServer";
 import { PremiarOne } from "@/components/allAdvertisement/PremiarOne";
 import LatestOpinions from "@/components/general/LatestOpinions";
-import { SorboseshAndJonoprioTab } from "@/components/SorboseshAndJonoprioTab";
+import { SorboseshAndJonoprioTab } from "@/components/general/SorboseshAndJonoprioTab";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] = await Promise.all(
