@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://jagrotobarta.com"
   ),
-  title: { default: "জাগ্রত বার্তা", template: "%s | জাগ্রত সংবাদ" },
+  title: { default: "জাগ্রত বার্তা", template: "%s | জাগ্রত সংবাদ আপডেট তথ্য" },
   description:
     "দেশজুড়ে ঘটে যাওয়া সাম্প্রতিক অপরাধ, তদন্তের অগ্রগতি এবং আইনশৃঙ্খলা রক্ষাকারী বাহিনীর পদক্ষেপ নিয়ে জাগ্রত বার্তার অপরাধ বিভাগ আপনাকে পৌঁছে দেয় সঠিক ও আপডেট তথ্য। আমরা প্রতিটি ঘটনার গভীরে গিয়ে তুলে ধরি সত্য এবং সচেতনতা গড়ে তোলার জন্য কাজ করি।",
 };
