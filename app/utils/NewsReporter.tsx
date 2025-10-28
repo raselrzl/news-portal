@@ -18,7 +18,7 @@ export async function requireArticlePoster() {
   });
 
   const isSuperAdmin = user?.userType === "SUPERADMIN";
-  const isSompadok = user?.userType === "SOMPANDOK";
+  const isSompadok = user?.userType === "EDITOR";
   const isApprovedNewsReporter =
     user?.userType === "NEWSREPORTER" && user.approvalStatus === "APPROVED";
 
