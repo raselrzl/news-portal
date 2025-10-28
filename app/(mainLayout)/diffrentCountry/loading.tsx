@@ -14,7 +14,7 @@ const locations = [
   { name: "chapainawabganj" },
   { name: "chattogram" },
   { name: "chuadanga" },
-  { name: "coxs bazar" },
+  { name: "coxsbazar" },
   { name: "cumilla" },
   { name: "dhaka" },
   { name: "dinajpur" },
