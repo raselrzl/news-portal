@@ -28,44 +28,9 @@ import { createAnAdvertisement, getAdvertisementPackages } from "@/app/actions";
 import Image from "next/image";
 
 const countries = [
-  { id: "BANGLADESH", name: "Bangladesh", flag: "/flags/bangladesh.jpg" },
-  { id: "UK", name: "UK", flag: "/flags/uk.png" },
-  { id: "SWITZERLAND", name: "Switzerland", flag: "/flags/switzerland.jpg" },
-  { id: "USA", name: "United States", flag: "/flags/usa.webp" },
-  { id: "AUSTRALIA", name: "Australia", flag: "/flags/australia.jpg" },
-  { id: "AUSTRIA", name: "Austria", flag: "/flags/australia.jpg" },
-  { id: "BELGIUM", name: "Belgium", flag: "/flags/belgium.webp" },
-  { id: "BULGARIA", name: "Bulgaria", flag: "/flags/bulgaria.webp" },
-  { id: "CROATIA", name: "Croatia", flag: "/flags/croatia.webp" },
-  { id: "CYPRUS", name: "Cyprus", flag: "/flags/cyprus.jpg" },
-  {
-    id: "CZECH_REPUBLIC",
-    name: "CzechRepublic",
-    flag: "/flags/czech-republic.png",
-  },
-  { id: "DENMARK", name: "Denmark", flag: "/flags/denmark.jpg" },
-  { id: "ESTONIA", name: "Estonia", flag: "/flags/estonia.jpeg" },
-  { id: "FINLAND", name: "Finland", flag: "/flags/finland.jpg" },
-  { id: "FRANCE", name: "France", flag: "/flags/france.jpg" },
-  { id: "GERMANY", name: "Germany", flag: "/flags/germany.jpg" },
-  { id: "GREECE", name: "Greece", flag: "/flags/greece.webp" },
-  { id: "HUNGARY", name: "Hungary", flag: "/flags/hungary.png" },
-  { id: "IRELAND", name: "Ireland", flag: "/flags/ireland.webp" },
-  { id: "ITALY", name: "Italy", flag: "/flags/italy.webp" },
-  { id: "LATVIA", name: "Latvia", flag: "/flags/latvia.jpg" },
-  { id: "LITHUANIA", name: "Lithuania", flag: "/flags/lithuania.jpg" },
-  { id: "LUXEMBOURG", name: "Luxembourg", flag: "/flags/luxembourg.webp" },
-  { id: "MALTA", name: "Malta", flag: "/flags/malta.jpg" },
-  { id: "NETHERLANDS", name: "Netherlands", flag: "/flags/netherlands.webp" },
-  { id: "POLAND", name: "Poland", flag: "/flags/poland.jpeg" },
-  { id: "PORTUGAL", name: "Portugal", flag: "/flags/portugal.webp" },
-  { id: "ROMANIA", name: "Romania", flag: "/flags/romania.png" },
-  { id: "SLOVAKIA", name: "Slovakia", flag: "/flags/slovakia.jpg" },
-  { id: "SLOVENIA", name: "Slovenia", flag: "/flags/slovenia.jpeg" },
-  { id: "SPAIN", name: "Spain", flag: "/flags/spain.svg" },
-  { id: "SWEDEN", name: "Sweden", flag: "/flags/swedish.png" },
-  { id: "NORWAY", name: "Norway", flag: "/flags/norway.webp" },
-];
+  { id: "SYLHET", name: "Sylhet" },
+  { id: "DHAKA", name: "UK" },
+ ];
 
 export function CreateAdvertisementForm() {
   const [pending, setPending] = useState(false);
@@ -550,13 +515,6 @@ export function CreateAdvertisementForm() {
                           }
                           onClick={() => field.onChange(country.id)}
                         >
-                          <img
-                            src={country.flag}
-                            alt={`${country.name} flag`}
-                            width={20}
-                            height={18}
-                            className="rounded-sm border"
-                          />
                           {country.name}
                         </Button>
                       ))}
