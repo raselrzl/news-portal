@@ -175,7 +175,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
 
         {/* Bottom Banner */}
         <div className="relative w-full h-[100px] md:h-[200px] px-10">
-          <SizeTwoAdvertise />
+          {/* <SizeTwoAdvertise /> */}
         </div>
 
         {/* Quotes Section */}
