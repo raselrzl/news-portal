@@ -7,6 +7,7 @@ import { isJson } from "@/app/utils/isJson";
 import { JsonToHtml } from "../richTextEditor/JsonToHtml";
 import { DeluxeOneAdvertise } from "../allAdvertisement/DeluxeOne";
 import { PremiarOne } from "../allAdvertisement/PremiarOne";
+import { List } from "lucide-react";
 
 /* async function getData() {
   const [allArticles, lastFeaturedArticle, latestNews, Environment, Politics] =
@@ -1050,3 +1051,44 @@ export async function JonoprioNews() {
 }
 
 
+export async function RecentNews() {
+  const latestNews = await getLatestNews();
+
+  return (
+    <>
+      <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
+          <div className="font-extrabold pl-2 mb-2 flex items-center text-2xl my-4">
+            <List className="h-7 w-7 mr-2" />
+            Top News
+          </div>
+        {latestNews && latestNews.length > 0 ? (
+          latestNews.map((item) => (
+            <Link key={item.id} href={`/newsDetails/${item.id}`}>
+              <div className="grid grid-cols-3 border-b py-2">
+                <div className="col-span-1">
+                  <img
+                    src={item.newsPicture}
+                    alt="Card Image"
+                    className="w-32 h-16 object-cover border"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <h3 className="text-lg font-semibold ml-2">
+                    {item.newsHeading}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState
+            title="Oops! There's nothing to show yet."
+            description="Nothing has been added yet. Stay tuned!"
+            buttonText="Homepage"
+            href="/"
+          />
+        )}
+      </div>
+    </>
+  );
+}
