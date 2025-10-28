@@ -60,7 +60,7 @@ export function CreateAdvertisementForm() {
       additionalInfo: "",
       startDate: "",
       endDate: "",
-      country: "SWEDEN",
+      country: "DHAKA",
 
       dailyPrice: 0,
       moms: 0,

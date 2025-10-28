@@ -15,10 +15,72 @@ import { Card } from "@/components/ui/card";
 import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
 
 const locations = [
-  { name: "dhaka",},
-  { name: "sylhet",},
-  { name: "moulvibazar", },
+  { name: "bagerhat" },
+  { name: "bandarban" },
+  { name: "barguna" },
+  { name: "barishal" },
+  { name: "bhola" },
+  { name: "bogura" },
+  { name: "brahmanbaria" },
+  { name: "chandpur" },
+  { name: "chapainawabganj" },
+  { name: "chattogram" },
+  { name: "chuadanga" },
+  { name: "coxs bazar" },
+  { name: "cumilla" },
+  { name: "dhaka" },
+  { name: "dinajpur" },
+  { name: "faridpur" },
+  { name: "feni" },
+  { name: "gaibandha" },
+  { name: "gazipur" },
+  { name: "gopalganj" },
+  { name: "habiganj" },
+  { name: "jamalpur" },
+  { name: "jashore" },
+  { name: "jhenaidah" },
+  { name: "joypurhat" },
+  { name: "khagrachhari" },
+  { name: "khulna" },
+  { name: "kishoreganj" },
+  { name: "kurigram" },
+  { name: "kushtia" },
+  { name: "lakshmipur" },
+  { name: "lalmonirhat" },
+  { name: "madaripur" },
+  { name: "magura" },
+  { name: "manikganj" },
+  { name: "meherpur" },
+  { name: "moulvibazar" },
+  { name: "munshiganj" },
+  { name: "mymensingh" },
+  { name: "naogaon" },
+  { name: "narail" },
+  { name: "narayanganj" },
+  { name: "narsingdi" },
+  { name: "natore" },
+  { name: "nawabganj" },
+  { name: "netrokona" },
+  { name: "nilphamari" },
+  { name: "noakhali" },
+  { name: "pabna" },
+  { name: "panchagarh" },
+  { name: "patuakhali" },
+  { name: "pirojpur" },
+  { name: "rajbari" },
+  { name: "rajshahi" },
+  { name: "rangamati" },
+  { name: "rangpur" },
+  { name: "satkhira" },
+  { name: "shariatpur" },
+  { name: "sherpur" },
+  { name: "sirajganj" },
+  { name: "sunamganj" },
+  { name: "sylhet" },
+  { name: "tangail" },
+  { name: "thakurgaon" }
 ];
+
 
 async function getCountryNews(country: string) {
   const dbCountry = country;
@@ -75,7 +137,7 @@ export default async function CountryNews({
   searchParams: Promise<{ country?: string; page?: string }>;
 }) {
   const params = await searchParams;
-  const country = params?.country || "Sweden";
+  const country = params?.country || "dhaka";
   const currentPage = Number(params?.page) || 1;
 
   const { allArticles, lastFeaturedArticle } = await getCountryNews(country);
@@ -106,7 +168,7 @@ export default async function CountryNews({
                         : "hover:bg-muted"
                     }`}
                   >
-                    <span className="text-xs font-semibold">{c.name}</span>
+                    <span className="text-xs font-semibold uppercase">{c.name}</span>
                   </Link>
                 ))}
               </div>

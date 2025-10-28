@@ -3,10 +3,72 @@ import { SuperOne } from "@/components/allAdvertisement/SuperOne";
 import Image from "next/image";
 
 const locations = [
-  { name: "dhaka",},
-  { name: "sylhet",},
-  { name: "moulvibazar", },
+  { name: "bagerhat" },
+  { name: "bandarban" },
+  { name: "barguna" },
+  { name: "barishal" },
+  { name: "bhola" },
+  { name: "bogura" },
+  { name: "brahmanbaria" },
+  { name: "chandpur" },
+  { name: "chapainawabganj" },
+  { name: "chattogram" },
+  { name: "chuadanga" },
+  { name: "coxs bazar" },
+  { name: "cumilla" },
+  { name: "dhaka" },
+  { name: "dinajpur" },
+  { name: "faridpur" },
+  { name: "feni" },
+  { name: "gaibandha" },
+  { name: "gazipur" },
+  { name: "gopalganj" },
+  { name: "habiganj" },
+  { name: "jamalpur" },
+  { name: "jashore" },
+  { name: "jhenaidah" },
+  { name: "joypurhat" },
+  { name: "khagrachhari" },
+  { name: "khulna" },
+  { name: "kishoreganj" },
+  { name: "kurigram" },
+  { name: "kushtia" },
+  { name: "lakshmipur" },
+  { name: "lalmonirhat" },
+  { name: "madaripur" },
+  { name: "magura" },
+  { name: "manikganj" },
+  { name: "meherpur" },
+  { name: "moulvibazar" },
+  { name: "munshiganj" },
+  { name: "mymensingh" },
+  { name: "naogaon" },
+  { name: "narail" },
+  { name: "narayanganj" },
+  { name: "narsingdi" },
+  { name: "natore" },
+  { name: "nawabganj" },
+  { name: "netrokona" },
+  { name: "nilphamari" },
+  { name: "noakhali" },
+  { name: "pabna" },
+  { name: "panchagarh" },
+  { name: "patuakhali" },
+  { name: "pirojpur" },
+  { name: "rajbari" },
+  { name: "rajshahi" },
+  { name: "rangamati" },
+  { name: "rangpur" },
+  { name: "satkhira" },
+  { name: "shariatpur" },
+  { name: "sherpur" },
+  { name: "sirajganj" },
+  { name: "sunamganj" },
+  { name: "sylhet" },
+  { name: "tangail" },
+  { name: "thakurgaon" }
 ];
+
 
 export default function Loading() {
   return (
@@ -27,7 +89,7 @@ export default function Loading() {
             </div>
           </div>
           <div className="px-2 pt-3">
-            <SuperOne country="Sweden" />
+            <SuperOne country="dhaka" />
           </div>
         </div>
 
@@ -54,7 +116,7 @@ export default function Loading() {
           </div>
 
           <div className="px-2 md:px-0">
-            <SuperOne country="Swedenn" />
+            <SuperOne country="dhaka" />
           </div>
 
           {/* Grid Articles Skeleton */}
@@ -73,12 +135,12 @@ export default function Loading() {
 
         {/* Sidebar Ads */}
         <div className="col-span-5 md:col-span-1 px-2 pt-3">
-          <SuperOne country="Swedenn" />
-          <SuperOne country="Swedenn" />
+          <SuperOne country="dhaka" />
+          <SuperOne country="dhaka" />
         </div>
       </div>
 
-      <SuperOne country="Swedenn" />
+      <SuperOne country="dhaka" />
     </>
   );
 }
