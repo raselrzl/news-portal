@@ -9,11 +9,8 @@ import { Clock, List, Notebook, User2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import PrintNews from "@/components/general/printNews";
 import { trackRoute } from "@/app/utils/routeTracker";
-import { BesicOneAdvertise } from "@/components/allAdvertisement/BesicOne";
 import { BesicTwoAdvertise } from "@/components/allAdvertisement/BesicTwo";
-import { SizeTwoAdvertise } from "@/components/allAdvertisement/SizeTwo";
 import type { Metadata } from "next";
-import { UltimateOne } from "@/components/allAdvertisement/UltimateOne";
 import { StandardTwo } from "@/components/allAdvertisement/StandardTwo";
 import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
 
@@ -72,11 +69,11 @@ export async function generateMetadata({
   const { articleId } = await params; // ✅ await params
   const article = await getNewsArticle(articleId); // your existing fetch
 
-  const title = article.newsHeading ?? "News";
-  const description = toExcerpt("For details click the link...");
+  const title = article.newsHeading ?? "খবর";
+  const description = toExcerpt("বিস্তারিত জানতে লিঙ্কে ক্লিক করুন...");
 
   const base =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://nord-international.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jagrotobarta.com";
   const pic = article.newsPicture ?? "/n2.png";
   const ogImage = pic.startsWith("http") ? pic : `${base}${pic}`;
 
@@ -90,7 +87,7 @@ export async function generateMetadata({
       url: `/newsDetails/${article.id}`,
       title,
       description,
-      siteName: "Nord International",
+      siteName: "জাগ্রত বার্তা",
       images: [{ url: ogImage, alt: title }],
     },
   };
@@ -106,10 +103,10 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
   if (!data) {
     return (
       <EmptyState
-        title="Oops! Nothing to show yet."
-        description="Nothing has been added yet. Stay tuned!"
-        buttonText="Homepage"
-        href="/"
+         title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
       />
     );
   }
@@ -140,7 +137,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         <div className="flex flex-col font-bold mb-1 text-xl">
           <div className="flex flex-row pl-2 items-center">
             <User2 className="size-5 mr-1" />
-            <p>NORD Reporter</p>
+            <p>জাগ্রত বার্তা প্রতিবেদক</p>
           </div>
           <div className="flex flex-row  pl-2 items-center">
             <Clock className="size-5 mr-1" />

@@ -7,7 +7,6 @@ import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
 import Image from "next/image";
 import Link from "next/link";
 
-// ✅ Get all ACTIVE Cyprus articles
 export async function getAllArticles() {
   return await prisma.newsArticle.findMany({
     where: { 
@@ -42,7 +41,6 @@ export async function getAllArticles() {
   });
 }
 
-// ✅ Get last featured article from Cyprus
 export async function getLastFeaturedArticle() {
   return await prisma.newsArticle.findFirst({
     where: {
@@ -83,7 +81,6 @@ export default async function ChattogramNews() {
 
   return (
     <>
-      {/* ✅ Featured Cyprus article */}
       {lastFeaturedArticle && Object.keys(lastFeaturedArticle).length > 0 ? (
         <div className="mb-6 max-h-[320px] md:border-1 md:p-2">
           <Link href={`/newsDetails/${lastFeaturedArticle.id}`} className="mb-10">
@@ -100,7 +97,7 @@ export default async function ChattogramNews() {
               <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
                 <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0">
                   {lastFeaturedArticle.newsHeading}
-                  <span className="md:hidden sm:block">Details....</span>
+                  <span className="md:hidden sm:block">....</span>
                 </h2>
 
                 {isJson(lastFeaturedArticle.newsDetails) ? (
@@ -118,9 +115,9 @@ export default async function ChattogramNews() {
         </div>
       ) : (
         <EmptyState
-          title="Oops! There's nothing to show yet."
-          description="No featured article available yet."
-          buttonText="Homepage"
+         title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
           href="/"
         />
       )}
@@ -129,7 +126,6 @@ export default async function ChattogramNews() {
         <UltimateOne  />
       </div>
 
-      {/* ✅ All Cyprus articles */}
       {allArticles && allArticles.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
           {allArticles
@@ -157,9 +153,9 @@ export default async function ChattogramNews() {
         </div>
       ) : (
         <EmptyState
-          title="Oops! There's nothing to show yet."
-          description="No article available yet. Stay tuned!"
-          buttonText="Homepage"
+          title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
           href="/"
         />
       )}

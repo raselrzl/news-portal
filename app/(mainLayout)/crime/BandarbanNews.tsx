@@ -100,7 +100,7 @@ export default async function BandarbanNews() {
               <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
                 <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0">
                   {lastFeaturedArticle.newsHeading}
-                  <span className="md:hidden sm:block">Details....</span>
+                  <span className="md:hidden sm:block">....</span>
                 </h2>
 
                 {isJson(lastFeaturedArticle.newsDetails) ? (
@@ -118,9 +118,9 @@ export default async function BandarbanNews() {
         </div>
       ) : (
         <EmptyState
-          title="Oops! There's nothing to show yet."
-          description="No featured article available yet."
-          buttonText="Homepage"
+           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
           href="/"
         />
       )}
@@ -157,9 +157,9 @@ export default async function BandarbanNews() {
         </div>
       ) : (
         <EmptyState
-          title="Oops! There's nothing to show yet."
-          description="No article available yet. Stay tuned!"
-          buttonText="Homepage"
+           title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
           href="/"
         />
       )}

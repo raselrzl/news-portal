@@ -24,7 +24,8 @@ export default async function Technology({ searchParams }: SearchParamsProps) {
         <div className="col-span-3 md:col-span-1">
           <div className="font-extrabold pl-2 mb-2 flex items-center">
             <List className="h-5 w-5 mr-2" />
-            Technology News
+            প্রযুক্তি সংক্রান্ত খবর
+
           </div>
 
           <div className="p-1 md:p-4">
@@ -36,14 +37,9 @@ export default async function Technology({ searchParams }: SearchParamsProps) {
         <div id="NetherlandsNews" className="col-span-3 md:col-span-2">
           <div>
             <div className="flex items-center gap-2 pl-2 mb-2">
-              <img
-                src="/flags/poland.jpeg"
-                alt="Poland flag"
-                width={28}
-                height={18}
-                className="rounded-sm"
-              />
-              <h1 className="font-extrabold">Poland Latest</h1>
+
+              <h1 className="font-extrabold text-xl">গাজীপুর খবর
+</h1>
             </div>
             <GazipurNews />
           </div>{" "}

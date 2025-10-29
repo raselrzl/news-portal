@@ -21,7 +21,7 @@ export default async function International({
       <div className="grid grid-cols-3 mt-10">
         <div className="col-span-3 md:col-span-1">
           <div className="font-extrabold pl-2 mb-2 flex items-center">
-            <List className="h-5 w-5 mr-2" /> Latest World News
+            <List className="h-5 w-5 mr-2" /> বর্তমান বিশ্বসংবাদ
           </div>
           <div className="p-1 md:p-4">
             <Suspense key={currentPage} fallback={<LoadingSpinner />}>
@@ -32,14 +32,9 @@ export default async function International({
         <div id="AustriaNews" className="col-span-3 md:col-span-2">
           <div>
             <div className="flex items-center gap-2 pl-2 mb-2">
-              <img
-                src="/flags/Austria.png"
-                alt="Austria flag"
-                width={28}
-                height={18}
-                className="rounded-sm"
-              />
-              <h1 className="font-extrabold">Austria Latest</h1>
+
+              <h1 className="font-extrabold text-xl">চাঁদপুর খবর
+</h1>
             </div>
             <ChandpurNews />
           </div>

@@ -19,7 +19,8 @@ export default async function Health({ searchParams }: SearchParamsProps) {
       <div className="grid grid-cols-3 mt-10">
         <div className="col-span-3 md:col-span-1">
           <div className="font-extrabold pl-2 mb-2 flex items-center">
-            <List className="h-5 w-5 mr-2" /> Latest Health News
+            <List className="h-5 w-5 mr-2" /> সর্বশেষ স্বাস্থ্য সংবাদ
+
           </div>
 
           <div className="p-1 md:p-4">
@@ -31,14 +32,8 @@ export default async function Health({ searchParams }: SearchParamsProps) {
         <div id="FinlandNews" className="col-span-3 md:col-span-2">
           <div>
             <div className="flex items-center gap-2 pl-2 mb-2">
-              <img
-                src="/flags/finland.jpg"
-                alt="Finland flag"
-                width={28}
-                height={18}
-                className="rounded-sm"
-              />
-              <h1 className="font-extrabold">Finland Latest</h1>
+              <h1 className="font-extrabold text-xl">ব্রাহ্মণবাড়িয়া খবর
+</h1>
             </div>
             <BrahmanbariaNews />
           </div>{" "}

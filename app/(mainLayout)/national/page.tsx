@@ -22,7 +22,7 @@ export default async function National({ searchParams }: SearchParamsProps) {
       <div className="grid grid-cols-3 my-10">
         <div className="col-span-3 md:col-span-1">
           <div className="font-extrabold pl-2 mb-2 flex items-center">
-            <List className="h-5 w-5 mr-2" /> Latest National News
+            <List className="h-5 w-5 mr-2" /> সর্বশেষ জাতীয় খবর
           </div>
 
           <div className="p-1 md:p-4">
@@ -34,14 +34,8 @@ export default async function National({ searchParams }: SearchParamsProps) {
         <div id="SwedishNews" className="col-span-3 md:col-span-2">
           <div>
             <div className="flex items-center gap-2 pl-2 mb-2">
-              <img
-                src="/flags/swedish.png"
-                alt="Swedish flag"
-                width={28}
-                height={18}
-                className="rounded-sm"
-              />
-              <h1 className="font-extrabold">Swedish Latest</h1>
+              <h1 className="font-extrabold">ঢাকা খবর
+</h1>
             </div>
 
             <DhakaNews />

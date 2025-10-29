@@ -288,7 +288,7 @@ export function CreateAdvertisementForm() {
 
                       <FormControl>
                         <Input
-                          placeholder="nordinternational.com"
+                          placeholder="jagrotobarta.com"
                           {...field}
                           className="placeholder:text-sm"
                         />
