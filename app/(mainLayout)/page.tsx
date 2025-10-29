@@ -24,6 +24,7 @@ import PopupOnViewServer from "@/components/PopupAd/PopupOnViewServer";
 import { PremiarOne } from "@/components/allAdvertisement/PremiarOne";
 import LatestOpinions from "@/components/general/LatestOpinions";
 import { SorboseshAndJonoprioTab } from "@/components/general/SorboseshAndJonoprioTab";
+import { CrimeAndPopularTab } from "@/components/general/CrimeAndPopularTab";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] = await Promise.all(
@@ -160,10 +161,10 @@ export default async function Home() {
             ))
           ) : (
             <EmptyState
-              title="Oops! Nothing to show yet."
-              description="Nothing has been added yet. Stay tuned!"
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
             />
           )}
 
@@ -209,10 +210,10 @@ export default async function Home() {
               </Link>
             ) : (
               <EmptyState
-                title="Oops! Nothing to show yet."
-                description="Nothing has been added yet. Stay tuned!"
-                buttonText="Homepage"
-                href="/"
+                 title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
               />
             )}
        <div className="bg-primary/55 dark:bg-gray-700 mt-6 rounded-xl border border-primary/55 dark:border-gray-600 shadow-md mx-2 md:mx-0">
@@ -241,10 +242,10 @@ export default async function Home() {
         ) : (
           <div className="py-8">
             <EmptyState
-              title="Oops! Nothing to show yet."
-              description="Nothing has been added yet. Stay tuned!"
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
             />
           </div>
         )}
@@ -309,10 +310,10 @@ export default async function Home() {
             </div>
           ) : (
             <EmptyState
-              title="Oops! Nothing to show yet."
-              description="Nothing has been added yet. Stay tuned!"
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
             />
           )}
 
@@ -345,10 +346,10 @@ export default async function Home() {
             </div>
           ) : (
             <EmptyState
-              title="Oops! Nothing to show yet."
-              description="Nothing has been added yet. Stay tuned!"
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                  href="/"
             />
           )}
         </div>
@@ -363,7 +364,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
-            <SorboseshAndJonoprioTab />
+            <CrimeAndPopularTab />
           </div>
 
           {/* Right: Premium Ad */}
