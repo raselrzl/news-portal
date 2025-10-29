@@ -12,7 +12,8 @@ export default async function AdminNavbar() {
   return (
     <nav className="flex items-center justify-between pr-2 py-2">
       <Link href="/" className="flex items-center">
-        <div className="w-[100px] h-[50px] sm:w-[140px] sm:h-[60px] md:w-[160px] md:h-[80px] bg-[url('/n1w.png')] dark:bg-[url('/lg1.png')] bg-cover bg-center" />
+       {/*  <div className="w-[100px] h-[50px] sm:w-[140px] sm:h-[60px] md:w-[160px] md:h-[80px] bg-[url('/n1w.png')] dark:bg-[url('/lg1.png')] bg-cover bg-center" />
+       */}
       </Link>
 
     
