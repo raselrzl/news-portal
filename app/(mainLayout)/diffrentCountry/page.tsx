@@ -144,10 +144,10 @@ export default async function CountryNews({
   const { articles, totalPages, totalCount } =
     await getPaginatedCountryArticles(country, currentPage);
 
-  const activeCountry = locations.find(
-    (c) => c.name.toLowerCase() === country.toLowerCase()
-  ) ?? {
-    name: country  };
+const activeCountry = locations.find(
+  (c) => c.name.toLowerCase() === country.toLowerCase()
+) ?? { name: country, bangla: country }; // fallback to English if not found
+
 
   return (
     <>
@@ -179,7 +179,7 @@ export default async function CountryNews({
 
         <div className="col-span-5 md:col-span-3">
           <div className="flex items-center gap-2 pl-2 mb-2">
-            <h1 className="font-extrabold">{activeCountry.name} Latest</h1>
+            <h1 className="font-extrabold text-2xl">{activeCountry.bangla} </h1>
           </div>
 
           {lastFeaturedArticle ? (
