@@ -1059,7 +1059,7 @@ export async function RecentNews() {
       <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
           <div className="font-extrabold pl-2 mb-2 flex items-center text-2xl my-4">
             <List className="h-7 w-7 mr-2" />
-            Top News
+            শীর্ষ সংবাদ
           </div>
         {latestNews && latestNews.length > 0 ? (
           latestNews.map((item) => (
@@ -1082,9 +1082,9 @@ export async function RecentNews() {
           ))
         ) : (
           <EmptyState
-            title="Oops! There's nothing to show yet."
-            description="Nothing has been added yet. Stay tuned!"
-            buttonText="Homepage"
+             title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+            buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
             href="/"
           />
         )}
