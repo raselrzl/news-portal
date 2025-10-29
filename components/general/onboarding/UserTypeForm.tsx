@@ -19,7 +19,7 @@ export default function UserTypeSelection({
     <div className="text-center space-y-2">
       <h2 className="text-xl font-bold">স্বাগতম, চলুন শুরু করা যাক!</h2>
       <p className="text-gray-400 text-xs">
-        আপনি কি সাংবাদিক হতে চান, নাকি বিজ্ঞাপনদাতা হতে চান? তা বেছে নিন
+        আপনি কি সাংবাদিক হতে চান, নাকি নিয়মিত ব্যবহারকারী হতে চান? তা বেছে নিন
       </p>
     </div>
   
@@ -49,9 +49,9 @@ export default function UserTypeSelection({
           <UserRound className="size-6 text-primary" />
         </div>
         <div className="text-left">
-          <h3 className="text-lg font-semibold">বিজ্ঞাপনদাতা?</h3>
+          <h3 className="text-lg font-semibold">নিয়মিত ব্যবহারকারী?</h3>
           <p className="text-gray-500 text-xs">
-            বিজ্ঞাপনদাতা হিসেবে নিবন্ধন করতে পারবেন?
+            নিয়মিত ব্যবহারকারী হিসেবে নিবন্ধন করতে পারবেন?
           </p>
         </div>
       </Button>

@@ -71,7 +71,7 @@ export default function Advertiser() {
             name="supervisorName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>তত্ত্বাবধায়কের নাম</FormLabel>
+                <FormLabel> নাম</FormLabel>
                 <FormControl>
                   <Input placeholder="মি. করিম" {...field} />
                 </FormControl>
@@ -140,7 +140,7 @@ export default function Advertiser() {
             name="companyWebsite"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>প্রতিষ্ঠানের ওয়েবসাইট (যদি থাকে)</FormLabel>
+                <FormLabel> ওয়েবসাইট (যদি থাকে)</FormLabel>
                 <FormControl>
                   <Input placeholder="www.company.com" {...field} />
                 </FormControl>
@@ -154,7 +154,7 @@ export default function Advertiser() {
             name="aboutCompany"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>প্রতিষ্ঠান সম্পর্কে</FormLabel>
+                <FormLabel> সম্পর্কে</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="আমাদের প্রতিষ্ঠানটি ২০১৫ সাল থেকে দেশের বিভিন্ন অঞ্চলে গণমাধ্যম সেবা দিয়ে আসছে।আমরা ১০ দিনের জন্য বিজ্ঞাপন দিতে চাই।..."
