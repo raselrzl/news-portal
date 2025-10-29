@@ -29,7 +29,7 @@ import Image from "next/image";
 
 const countries = [
   { id: "SYLHET", name: "Sylhet" },
-  { id: "DHAKA", name: "DHAKA" },
+  { id: "DHAKA", name: "Dhaka" },
   { id: "BAGERHAT", name: "Bagerhat" },
   { id: "BANDARBAN", name: "Bandarban" },
   { id: "BARGUNA", name: "Barguna" },
