@@ -218,10 +218,10 @@ const activeCountry = locations.find(
             </div>
           ) : (
             <EmptyState
-              title="Oops! There's nothing to show yet."
-              description="No featured article available yet."
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
             />
           )}
 
@@ -256,10 +256,10 @@ const activeCountry = locations.find(
             </div>
           ) : (
             <EmptyState
-              title="Oops! There's nothing to show yet."
-              description="No article available yet. Stay tuned!"
-              buttonText="Homepage"
-              href="/"
+               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
             />
           )}
 
@@ -316,10 +316,10 @@ const activeCountry = locations.find(
               </>
             ) : (
               <EmptyState
-                title="No more news yet."
-                description="Please check again later."
-                buttonText="Homepage"
-                href="/"
+                 title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+          description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+          buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+          href="/"
               />
             )}
           </div>

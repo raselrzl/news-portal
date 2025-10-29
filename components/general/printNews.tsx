@@ -21,6 +21,73 @@ interface PrintNewsProps {
   quotes?: quote[];
 }
 
+const newsCountryBnMap: Record<string, string> = {
+  bagerhat: "বাগেরহাট",
+  bandarban: "বান্দরবান",
+  barguna: "বরগুনা",
+  barishal: "বরিশাল",
+  bhola: "ভোলা",
+  bogura: "বগুড়া",
+  brahmanbaria: "ব্রাহ্মণবাড়িয়া",
+  chandpur: "চাঁদপুর",
+  chapainawabganj: "চাঁপাইনবাবগঞ্জ",
+  chattogram: "চট্টগ্রাম",
+  chuadanga: "চুয়াডাঙ্গা",
+  coxsbazar: "কক্সবাজার",
+  cumilla: "কুমিল্লা",
+  dhaka: "ঢাকা",
+  dinajpur: "দিনাজপুর",
+  faridpur: "ফরিদপুর",
+  feni: "ফেনী",
+  gaibandha: "গাইবান্ধা",
+  gazipur: "গাজীপুর",
+  gopalganj: "গোপালগঞ্জ",
+  habiganj: "হবিগঞ্জ",
+  jamalpur: "জামালপুর",
+  jashore: "যশোর",
+  jhenaidah: "ঝিনাইদহ",
+  joypurhat: "জয়পুরহাট",
+  khagrachhari: "খাগড়াছড়ি",
+  khulna: "খুলনা",
+  kishoreganj: "কিশোরগঞ্জ",
+  kurigram: "কুড়িগ্রাম",
+  kushtia: "কুষ্টিয়া",
+  lakshmipur: "লক্ষ্মীপুর",
+  lalmonirhat: "লালমনিরহাট",
+  madaripur: "মাদারীপুর",
+  magura: "মাগুরা",
+  manikganj: "মানিকগঞ্জ",
+  meherpur: "মেহেরপুর",
+  moulvibazar: "মৌলভীবাজার",
+  munshiganj: "মুন্সীগঞ্জ",
+  mymensingh: "ময়মনসিংহ",
+  naogaon: "নওগাঁ",
+  narail: "নড়াইল",
+  narayanganj: "নারায়ণগঞ্জ",
+  narsingdi: "নরসিংদী",
+  natore: "নাটোর",
+  nawabganj: "নবাবগঞ্জ",
+  netrokona: "নেত্রকোণা",
+  nilphamari: "নীলফামারী",
+  noakhali: "নোয়াখালী",
+  pabna: "পাবনা",
+  panchagarh: "পঞ্চগড়",
+  patuakhali: "পটুয়াখালী",
+  pirojpur: "পিরোজপুর",
+  rajbari: "রাজবাড়ী",
+  rajshahi: "রাজশাহী",
+  rangamati: "রাঙামাটি",
+  rangpur: "রংপুর",
+  satkhira: "সাতক্ষীরা",
+  shariatpur: "শরীয়তপুর",
+  sherpur: "শেরপুর",
+  sirajganj: "সিরাজগঞ্জ",
+  sunamganj: "সুনামগঞ্জ",
+  sylhet: "সিলেট",
+  tangail: "টাঙ্গাইল",
+  thakurgaon: "ঠাকুরগাঁও",
+};
+
 export default function PrintNews({
   newsPicture,
   newsPictureHeading,
@@ -177,9 +244,12 @@ export default function PrintNews({
 
           <div className="whitespace-pre-line text-md mg:text-lg dark:bg-black mt-10">
             <div className="flex flex-row px-3 items-center mb-4 text-xl font-extrabold">
-              <MapPin />
-              {newsLocation?.trim() ? newsLocation : "জাগ্রতবার্তা"}
-            </div>
+  <MapPin />
+  {newsLocation?.trim()
+    ? newsCountryBnMap[newsLocation] || newsLocation
+    : "জাগ্রতবার্তা"} {" "}প্রতিনিধি
+</div>
+
             <div className="px-3">
               <NewsDetailsDisplay newsDetails={newsDetails} />
             </div>
