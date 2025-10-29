@@ -137,7 +137,7 @@ export default async function Home() {
         <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
           <div className="flex flex-row gap-2 text-center items-center justify-center">
             <Clock />
-            <h1 className="text-xl font-bold pt-2 uppercase">USA Highlights</h1>
+            <h1 className="text-xl font-bold pt-2 uppercase">অপরাধমূলক</h1>
           </div>
           {latestUSANews && latestUSANews.length > 0 ? (
             latestUSANews.map((item) => (
@@ -174,8 +174,7 @@ export default async function Home() {
 
           <div className="mt-10 text-left flex-col hidden sm:block">
             <p className="text-sm font-semibold text-justify">
-              Follow our social media accounts for the latest updates and
-              exclusive content.
+              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল মিডিয়া একাউন্টে ফলো করুন।
             </p>
 
             <SocialLinks />
@@ -221,7 +220,7 @@ export default async function Home() {
       <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
         <Flame className="text-red-600 dark:text-amber-400 w-6 h-6" />
         <h1 className="font-bold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
-          Top News
+          যুদ্ধবিগ্রহ
         </h1>
       </div>
 

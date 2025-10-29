@@ -1,6 +1,6 @@
 import { Facebook, Instagram, MailIcon, Youtube } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import CountryListLinks from "./CountryListLinks";
 
 export default function Footer() {
   return (
@@ -141,7 +141,7 @@ export default function Footer() {
             </a> */}
           </div>
         </div>
-
+          <CountryListLinks />
         <p className="text-xs text-primary py-2 mt-2 bg-accent">
           &copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।
         </p>

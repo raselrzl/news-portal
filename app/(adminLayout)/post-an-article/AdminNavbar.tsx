@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { auth } from "@/app/utils/auth";
 import { ThemeToggle } from "@/components/general/ThemeToggle";
-import DropDownCountryList from "@/components/general/DropDownCountryList";
 import { UserDropdown } from "@/components/general/UserDropdown";
 import { buttonVariants } from "@/components/ui/button";
 import { User2 } from "lucide-react";
