@@ -211,7 +211,7 @@ export function CreateNewsArticleForm({
                             <SelectItem key={district.id} value={district.name}>
                               <div className="flex items-center gap-2">
                              
-                                <span>{district.name}</span>
+                                <span>{district.label}</span>
                               </div>
                             </SelectItem>
                           ))}

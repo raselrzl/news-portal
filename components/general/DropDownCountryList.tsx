@@ -94,7 +94,7 @@ export default function DropDownCountryList() {
 
       <DropdownMenuContent
         align="end"
-        className="w-66 md:w-[400px] max-h-[400px] overflow-y-auto grid grid-cols-2 md:grid-cols-4 border-0 p-4"
+        className="w-66 md:w-[600px] max-h-[400px] overflow-y-auto grid grid-cols-2 md:grid-cols-6 border-none shadow-none padding-0"
       >
         {locations.map((country, index) => (
           <div key={country.name}>

@@ -9,7 +9,6 @@ import { EmptyState } from "@/components/general/EmptyState";
 import { RecentNews } from "@/components/general/homepageArticleList";
 import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
 import { PaginationComponent } from "@/components/general/PaginationComponent";
-import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
@@ -148,9 +147,7 @@ export default async function CountryNews({
   const activeCountry = locations.find(
     (c) => c.name.toLowerCase() === country.toLowerCase()
   ) ?? {
-    name: country,
-    flag: "/flags/default.png",
-  };
+    name: country  };
 
   return (
     <>
@@ -201,7 +198,7 @@ export default async function CountryNews({
                   <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
                     <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0">
                       {lastFeaturedArticle.newsHeading}
-                      <span className="md:hidden sm:block">Details....</span>
+                      <span className="md:hidden sm:block">....</span>
                     </h2>
 
                     {isJson(lastFeaturedArticle.newsDetails) ? (
