@@ -14,9 +14,9 @@ export default async function Navbar() {
   const user = await auth();
 
   return (
-    <nav className="flex items-center justify-between pr-2">
+    <nav className="flex items-center justify-between pr-4">
       <Link href="/" className="flex items-center p-2">
-        <div className="w-[160px] h-[60px] md:w-[200px] md:h-[80px] bg-[url('/logoo1.jpg')] dark:bg-[url('/logooo1.jpg')] bg-cover bg-center" />
+        <div className="w-[130px] h-[45px] md:w-[200px] md:h-[80px] bg-[url('/logoo1.jpg')] dark:bg-[url('/logooo1.jpg')] bg-cover bg-center" />
       </Link>
 
       <div className="hidden md:block w-full">
@@ -31,7 +31,7 @@ export default async function Navbar() {
         <ThemeToggle />
         <DropDownCountryList />
 
-        <div>
+        <div className="pr-4">
           {" "}
           {user?.user ? (
             <UserDropdown
