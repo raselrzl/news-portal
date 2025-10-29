@@ -269,7 +269,7 @@ const activeCountry = locations.find(
           <div className="mt-10 border-t pt-6">
             <div className="flex items-center justify-between bg-amber-700 px-4 rounded-md pb-1 mb-4">
               <h2 className="flex items-center font-extrabold text-sm md:text-lg border-l-8 border-primary pl-2">
-                আরত্ত {" "}{activeCountry.bangla}
+                আরত্ত 
               </h2>
 
               <div >
