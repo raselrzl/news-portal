@@ -29,8 +29,71 @@ import Image from "next/image";
 
 const countries = [
   { id: "SYLHET", name: "Sylhet" },
-  { id: "DHAKA", name: "UK" },
- ];
+  { id: "DHAKA", name: "DHAKA" },
+  { id: "BAGERHAT", name: "Bagerhat" },
+  { id: "BANDARBAN", name: "Bandarban" },
+  { id: "BARGUNA", name: "Barguna" },
+  { id: "BARISHAL", name: "Barishal" },
+  { id: "BHOLA", name: "Bhola" },
+  { id: "BOGURA", name: "Bogura" },
+  { id: "BRAHMANBARIA", name: "Brahmanbaria" },
+  { id: "CHANDPUR", name: "Chandpur" },
+  { id: "CHAPAINAWABGANJ", name: "Chapainawabganj" },
+  { id: "CHATTOGRAM", name: "Chattogram" },
+  { id: "CHUADANGA", name: "Chuadanga" },
+  { id: "COXSBAZAR", name: "Cox’s Bazar" },
+  { id: "CUMILLA", name: "Cumilla" },
+  { id: "DINAJPUR", name: "Dinajpur" },
+  { id: "FARIDPUR", name: "Faridpur" },
+  { id: "FENI", name: "Feni" },
+  { id: "GAIBANDHA", name: "Gaibandha" },
+  { id: "GAZIPUR", name: "Gazipur" },
+  { id: "GOPALGANJ", name: "Gopalganj" },
+  { id: "HABIGANJ", name: "Habiganj" },
+  { id: "JAMALPUR", name: "Jamalpur" },
+  { id: "JASHORE", name: "Jashore" },
+  { id: "JHENAIDAH", name: "Jhenaidah" },
+  { id: "JOYPURHAT", name: "Joypurhat" },
+  { id: "KHAGRACHHARI", name: "Khagrachari" },
+  { id: "KHULNA", name: "Khulna" },
+  { id: "KISHOREGANJ", name: "Kishoreganj" },
+  { id: "KURIGRAM", name: "Kurigram" },
+  { id: "KUSHTIA", name: "Kushtia" },
+  { id: "LAKSHMIPUR", name: "Lakshmipur" },
+  { id: "LALMONIRHAT", name: "Lalmonirhat" },
+  { id: "MADARIPUR", name: "Madaripur" },
+  { id: "MAGURA", name: "Magura" },
+  { id: "MANIKGANJ", name: "Manikganj" },
+  { id: "MEHERPUR", name: "Meherpur" },
+  { id: "MOULVIBAZAR", name: "Moulvibazar" },
+  { id: "MUNSHIGANJ", name: "Munshiganj" },
+  { id: "MYMENSINGH", name: "Mymensingh" },
+  { id: "NAOGAON", name: "Naogaon" },
+  { id: "NARAIL", name: "Narail" },
+  { id: "NARAYANGANJ", name: "Narayanganj" },
+  { id: "NARSINGDI", name: "Narsingdi" },
+  { id: "NATORE", name: "Natore" },
+  { id: "NAWABGANJ", name: "Nawabganj" },
+  { id: "NETROKONA", name: "Netrokona" },
+  { id: "NILPHAMARI", name: "Nilphamari" },
+  { id: "NOAKHALI", name: "Noakhali" },
+  { id: "PABNA", name: "Pabna" },
+  { id: "PANCHAGARH", name: "Panchagarh" },
+  { id: "PATUAKHALI", name: "Patuakhali" },
+  { id: "PIROJPUR", name: "Pirojpur" },
+  { id: "RAJBARI", name: "Rajbari" },
+  { id: "RAJSHAHI", name: "Rajshahi" },
+  { id: "RANGAMATI", name: "Rangamati" },
+  { id: "RANGPUR", name: "Rangpur" },
+  { id: "SATKHIRA", name: "Satkhira" },
+  { id: "SHARIATPUR", name: "Shariatpur" },
+  { id: "SHERPUR", name: "Sherpur" },
+  { id: "SIRAJGANJ", name: "Sirajganj" },
+  { id: "SUNAMGANJ", name: "Sunamganj" },
+  { id: "TANGAIL", name: "Tangail" },
+  { id: "THAKURGAON", name: "Thakurgaon" }
+];
+
 
 export function CreateAdvertisementForm() {
   const [pending, setPending] = useState(false);
@@ -504,7 +567,7 @@ export function CreateAdvertisementForm() {
                       {"    "}(This is for advertise placement in the
                       application)
                     </FormLabel>
-                    <div className="grid grid-cols-3 md:grid-cols-4 gap-1">
+                    <div className="grid grid-cols-3 md:grid-cols-5 gap-1">
                       {countries.map((country) => (
                         <Button
                           className="p-2 text-xs md:text-md"

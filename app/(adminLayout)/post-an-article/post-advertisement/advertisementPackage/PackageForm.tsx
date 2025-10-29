@@ -86,7 +86,7 @@ export default function PackageForm() {
           </label>
 
           <label className="block mb-2 font-medium">
-            Update Price (SEK)
+            Update Price (BDT)
             <input
               type="number"
               value={price}
@@ -119,7 +119,7 @@ export default function PackageForm() {
             <h4 className="font-bold text-md">{pkg.name}</h4>
             <p className="text-sm">{pkg.page}</p>
             <p className="font-medium">
-              Price: <span className="text-primary">SEK{dbPrices[pkg.id] ?? 0}</span>
+              Price: <span className="text-primary">BDT{dbPrices[pkg.id] ?? 0}</span>
             </p>
           </div>
         ))}
