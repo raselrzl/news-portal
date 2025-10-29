@@ -13,71 +13,72 @@ import {
 import { ChevronDown, Globe } from "lucide-react";
 
 const locations = [
-  { name: "bagerhat", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=bagerhat" },
-  { name: "bandarban", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=bandarban" },
-  { name: "barguna", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=barguna" },
-  { name: "barishal", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=barishal" },
-  { name: "bhola", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=bhola" },
-  { name: "bogura", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=bogura" },
-  { name: "brahmanbaria", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=brahmanbaria" },
-  { name: "chandpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=chandpur" },
-  { name: "chapainawabganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=chapainawabganj" },
-  { name: "chattogram", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=chattogram" },
-  { name: "chuadanga", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=chuadanga" },
-  { name: "coxs_bazar", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=coxs_bazar" },
-  { name: "cumilla", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=cumilla" },
-  { name: "dhaka", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=dhaka" },
-  { name: "dinajpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=dinajpur" },
-  { name: "faridpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=faridpur" },
-  { name: "feni", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=feni" },
-  { name: "gaibandha", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=gaibandha" },
-  { name: "gazipur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=gazipur" },
-  { name: "gopalganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=gopalganj" },
-  { name: "habiganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=habiganj" },
-  { name: "jamalpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=jamalpur" },
-  { name: "jashore", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=jashore" },
-  { name: "jhenaidah", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=jhenaidah" },
-  { name: "joypurhat", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=joypurhat" },
-  { name: "khagrachhari", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=khagrachhari" },
-  { name: "khulna", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=khulna" },
-  { name: "kishoreganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=kishoreganj" },
-  { name: "kurigram", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=kurigram" },
-  { name: "kushtia", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=kushtia" },
-  { name: "lakshmipur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=lakshmipur" },
-  { name: "lalmonirhat", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=lalmonirhat" },
-  { name: "madaripur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=madaripur" },
-  { name: "magura", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=magura" },
-  { name: "manikganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=manikganj" },
-  { name: "meherpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=meherpur" },
-  { name: "moulvibazar", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=moulvibazar" },
-  { name: "munshiganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=munshiganj" },
-  { name: "mymensingh", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=mymensingh" },
-  { name: "naogaon", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=naogaon" },
-  { name: "narail", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=narail" },
-  { name: "narayanganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=narayanganj" },
-  { name: "narsingdi", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=narsingdi" },
-  { name: "natore", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=natore" },
-  { name: "nawabganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=nawabganj" },
-  { name: "netrokona", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=netrokona" },
-  { name: "nilphamari", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=nilphamari" },
-  { name: "noakhali", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=noakhali" },
-  { name: "pabna", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=pabna" },
-  { name: "panchagarh", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=panchagarh" },
-  { name: "patuakhali", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=patuakhali" },
-  { name: "pirojpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=pirojpur" },
-  { name: "rajbari", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=rajbari" },
-  { name: "rajshahi", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=rajshahi" },
-  { name: "rangamati", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=rangamati" },
-  { name: "rangpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=rangpur" },
-  { name: "satkhira", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=satkhira" },
-  { name: "shariatpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=shariatpur" },
-  { name: "sherpur", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=sherpur" },
-  { name: "sirajganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=sirajganj" },
-  { name: "sunamganj", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=sunamganj" },
-  { name: "sylhet", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=sylhet" },
-  { name: "tangail", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=tangail" },
-  { name: "thakurgaon", flag: "/flags/bangladesh.jpg", link: "/diffrentCountry?country=thakurgaon" }
+  { name: "বাগেরহাট", link: "/diffrentCountry?country=bagerhat" },
+  { name: "বান্দরবান", link: "/diffrentCountry?country=bandarban" },
+  { name: "বরগুনা", link: "/diffrentCountry?country=barguna" },
+  { name: "বরিশাল", link: "/diffrentCountry?country=barishal" },
+  { name: "ভোলা", link: "/diffrentCountry?country=bhola" },
+  { name: "বগুড়া", link: "/diffrentCountry?country=bogura" },
+  { name: "ব্রাহ্মণবাড়িয়া", link: "/diffrentCountry?country=brahmanbaria" },
+  { name: "চাঁদপুর", link: "/diffrentCountry?country=chandpur" },
+  { name: "চাপাইনবাবগঞ্জ", link: "/diffrentCountry?country=chapainawabganj" },
+  { name: "চট্টগ্রাম", link: "/diffrentCountry?country=chattogram" },
+  { name: "চুয়াডাঙ্গা", link: "/diffrentCountry?country=chuadanga" },
+  { name: "কক্সবাজার", link: "/diffrentCountry?country=coxsbazar" },
+  { name: "কুমিল্লা", link: "/diffrentCountry?country=cumilla" },
+  { name: "ঢাকা", link: "/diffrentCountry?country=dhaka" },
+  { name: "দিনাজপুর", link: "/diffrentCountry?country=dinajpur" },
+  { name: "ফরিদপুর", link: "/diffrentCountry?country=faridpur" },
+  { name: "ফেনী", link: "/diffrentCountry?country=feni" },
+  { name: "গাইবান্ধা", link: "/diffrentCountry?country=gaibandha" },
+  { name: "গাজীপুর", link: "/diffrentCountry?country=gazipur" },
+  { name: "গোপালগঞ্জ", link: "/diffrentCountry?country=gopalganj" },
+  { name: "হবিগঞ্জ", link: "/diffrentCountry?country=habiganj" },
+  { name: "জামালপুর", link: "/diffrentCountry?country=jamalpur" },
+  { name: "যশোর", link: "/diffrentCountry?country=jashore" },
+  { name: "ঝিনাইদাহ", link: "/diffrentCountry?country=jhenaidah" },
+  { name: "জয়পুরহাট", link: "/diffrentCountry?country=joypurhat" },
+  { name: "খাগড়াছড়ি", link: "/diffrentCountry?country=khagrachhari" },
+  { name: "খুলনা", link: "/diffrentCountry?country=khulna" },
+  { name: "কিশোরগঞ্জ", link: "/diffrentCountry?country=kishoreganj" },
+  { name: "কুড়িগ্রাম", link: "/diffrentCountry?country=kurigram" },
+  { name: "কুষ্টিয়া", link: "/diffrentCountry?country=kushtia" },
+  { name: "লক্ষ্মীপুর", link: "/diffrentCountry?country=lakshmipur" },
+  { name: "লালমনিরহাট", link: "/diffrentCountry?country=lalmonirhat" },
+  { name: "মাদারীপুর", link: "/diffrentCountry?country=madaripur" },
+  { name: "মাগুরা", link: "/diffrentCountry?country=magura" },
+  { name: "মানিকগঞ্জ", link: "/diffrentCountry?country=manikganj" },
+  { name: "মেহেরপুর", link: "/diffrentCountry?country=meherpur" },
+  { name: "মৌলভীবাজার", link: "/diffrentCountry?country=moulvibazar" },
+  { name: "মুন্সীগঞ্জ", link: "/diffrentCountry?country=munshiganj" },
+  { name: "ময়মনসিংহ", link: "/diffrentCountry?country=mymensingh" },
+  { name: "নওগাঁ", link: "/diffrentCountry?country=naogaon" },
+  { name: "নড়াইল", link: "/diffrentCountry?country=narail" },
+  { name: "নরায়ণগঞ্জ", link: "/diffrentCountry?country=narayanganj" },
+  { name: "নরসিংদী", link: "/diffrentCountry?country=narsingdi" },
+  { name: "নাটোর", link: "/diffrentCountry?country=natore" },
+  { name: "নবাবগঞ্জ", link: "/diffrentCountry?country=nawabganj" },
+  { name: "নেত্রকোণা", link: "/diffrentCountry?country=netrokona" },
+  { name: "নীলফামারী", link: "/diffrentCountry?country=nilphamari" },
+  { name: "নোয়াখালি", link: "/diffrentCountry?country=noakhali" },
+  { name: "পাবনা", link: "/diffrentCountry?country=pabna" },
+  { name: "পঞ্চগড়", link: "/diffrentCountry?country=panchagarh" },
+  { name: "পটুয়াখালী", link: "/diffrentCountry?country=patuakhali" },
+  { name: "পিরোজপুর", link: "/diffrentCountry?country=pirojpur" },
+  { name: "রাজবাড়ি", link: "/diffrentCountry?country=rajbari" },
+  { name: "রাজশাহী", link: "/diffrentCountry?country=rajshahi" },
+  { name: "রাঙ্গামাটি", link: "/diffrentCountry?country=rangamati" },
+  { name: "রংপুর", link: "/diffrentCountry?country=rangpur" },
+  { name: "সাতক্ষীরা", link: "/diffrentCountry?country=satkhira" },
+  { name: "শরীয়তপুর", link: "/diffrentCountry?country=shariatpur" },
+  { name: "শেরপুর", link: "/diffrentCountry?country=sherpur" },
+  { name: "সিরাজগঞ্জ", link: "/diffrentCountry?country=sirajganj" },
+  { name: "সুনামগঞ্জ", link: "/diffrentCountry?country=sunamganj" },
+  { name: "সিলেট", link: "/diffrentCountry?country=sylhet" },
+  { name: "টাঙ্গাইল", link: "/diffrentCountry?country=tangail" },
+  { name: "ঠাকুরগাঁও", link: "/diffrentCountry?country=thakurgaon" }
 ];
+
 
 
 export default function DropDownCountryList() {
@@ -85,32 +86,26 @@ export default function DropDownCountryList() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="mr-1">
-          <Globe /> <p className="font-bold text-md">News</p>
+          <Globe /> <p className="font-bold text-md">জেলা
+</p>
           <ChevronDown className="h-6 w-6" />
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         align="end"
-        className="w-56 max-h-[400px] overflow-y-auto"
+        className="w-66 md:w-[400px] max-h-[400px] overflow-y-auto grid grid-cols-2 md:grid-cols-4 border-0 p-4"
       >
         {locations.map((country, index) => (
           <div key={country.name}>
-            <DropdownMenuItem asChild className="cursor-pointer">
+            <DropdownMenuItem asChild className="cursor-pointer border p-1">
               <Link href={country.link}>
                 <div className="flex items-center gap-2 pl-3">
-                  <img
-                    src={country.flag}
-                    alt={`${country.name} flag`}
-                    width={26}
-                    height={18}
-                    className="rounded-sm"
-                  />
                   <span className="font-semibold">{country.name}</span>
                 </div>
               </Link>
             </DropdownMenuItem>
-            {index < locations.length - 1 && <DropdownMenuSeparator />}
+          {/*   {index < locations.length - 1 && <DropdownMenuSeparator />} */}
           </div>
         ))}
       </DropdownMenuContent>
