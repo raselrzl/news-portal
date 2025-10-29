@@ -29,7 +29,7 @@ export async function PremiumOneAdvertise() {
   return (
     <>
       {PremiarOneAdvertise && Object.keys(PremiarOneAdvertise).length > 0 ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center px-2">
           {PremiarOneAdvertise.map((premier1) => (
             <Link
               href={`https://${premier1.websiteLink}`}
