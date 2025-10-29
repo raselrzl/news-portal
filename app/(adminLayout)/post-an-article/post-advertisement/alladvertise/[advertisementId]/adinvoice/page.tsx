@@ -2,7 +2,9 @@ import React from "react";
 import { prisma } from "@/app/utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
 import { notFound } from "next/navigation";
-import PrintInvoiceClient from "@/components/general/PrintAddInvoiceClient";
+/* import PrintInvoiceClient from "@/components/general/PrintAddInvoiceClient"; */
+import PrintInvoiceClient from "@/components/general/PrintAddInvoiceClientCopy"
+import Invoice from "@/components/general/PrintAddInvoiceClientCopy";
 
 async function getAdvertisement(advertisementId: string) {
   const ad = await prisma.advertisement.findUnique({
@@ -46,7 +48,7 @@ export default async function AdvertiseDetailsPage({
   });
 
 
-  
+
   // Duration
   const durationInDays = Math.max(
     1,
@@ -78,7 +80,7 @@ export default async function AdvertiseDetailsPage({
 
   return (
     <>
-      <PrintInvoiceClient ad={ad as any}  />
+      <Invoice ad={ad as any} />
       <div className="max-w-4xl mx-auto relative bg-white border shadow-md p-6 my-10 font-sans">
         {/* Watermark */}
         <div className="absolute top-1/2 left-1/2 w-3/4 opacity-5 -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] pointer-events-none">
@@ -92,29 +94,29 @@ export default async function AdvertiseDetailsPage({
             <span className="text-gray-600 font-semibold text-lg">চালান</span>
           </div>
           <div className="text-right text-sm text-gray-600">
-           <p>চালান নম্বর: {ad.id.slice(-8).toUpperCase()}</p>
-<p>তারিখ: {formattedStartDate}</p>
+            <p>চালান নম্বর: {ad.id.slice(-8).toUpperCase()}</p>
+            <p>তারিখ: {formattedStartDate}</p>
 
           </div>
         </div>
 
         {/* Company & Ad Info */}
         <div className="grid grid-cols-2 gap-6 text-sm text-gray-700 mb-6 relative z-10">
-         <div>
-  <h2 className="font-semibold mb-2">কোম্পানির তথ্য</h2>
-  <p><strong>নাম:</strong> {ad.companyName}</p>
-  <p><strong>ঠিকানা:</strong> {ad.companyaddress}</p>
-  <p><strong>পরিচালক:</strong> {ad.supervisedName}</p>
-  <p><strong>ফোন:</strong> {ad.supervisedPhonenumber}</p>
-  {ad.websiteLink && <p><strong>ওয়েবসাইট:</strong> {ad.websiteLink}</p>}
-</div>
-<div>
-  <h2 className="font-semibold mb-2">বিজ্ঞাপনের তথ্য</h2>
-  <p><strong>ধরন:</strong> {ad.advertisedCategory}</p>
-  <p><strong>সময়কাল:</strong> {formattedStartDate} - {formattedEndDate}</p>
-  <p><strong>মোট দিন:</strong> {durationInDays} দিন</p>
-  <p><strong>অবস্থা:</strong> {ad.advertiseStatus}</p>
-</div>
+          <div>
+            <h2 className="font-semibold mb-2">কোম্পানির তথ্য</h2>
+            <p><strong>নাম:</strong> {ad.companyName}</p>
+            <p><strong>ঠিকানা:</strong> {ad.companyaddress}</p>
+            <p><strong>পরিচালক:</strong> {ad.supervisedName}</p>
+            <p><strong>ফোন:</strong> {ad.supervisedPhonenumber}</p>
+            {ad.websiteLink && <p><strong>ওয়েবসাইট:</strong> {ad.websiteLink}</p>}
+          </div>
+          <div>
+            <h2 className="font-semibold mb-2">বিজ্ঞাপনের তথ্য</h2>
+            <p><strong>ধরন:</strong> {ad.advertisedCategory}</p>
+            <p><strong>সময়কাল:</strong> {formattedStartDate} - {formattedEndDate}</p>
+            <p><strong>মোট দিন:</strong> {durationInDays} দিন</p>
+            <p><strong>অবস্থা:</strong> {ad.advertiseStatus}</p>
+          </div>
 
         </div>
 
@@ -122,7 +124,7 @@ export default async function AdvertiseDetailsPage({
         {ad.additionalInfo && (
           <div className="mb-6 relative z-10">
             <h2 className="font-semibold mb-2">বিস্তারিত
-</h2>
+            </h2>
             <p className="text-sm text-gray-700 text-justify">{ad.additionalInfo}</p>
           </div>
         )}
@@ -143,14 +145,14 @@ export default async function AdvertiseDetailsPage({
         {/* Calculation Table */}
         <div className="relative z-10 mb-6">
           <h2 className="font-semibold mb-2">হিসাব-নিকাশ
-</h2>
+          </h2>
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="bg-gray-100">
-               <th className="border px-3 py-2 text-left font-semibold">বিবরণ</th>
-<th className="border px-3 py-2 text-right font-semibold">দর (প্রতি দিন)</th>
-<th className="border px-3 py-2 text-right font-semibold">দিন</th>
-<th className="border px-3 py-2 text-right font-semibold">মোট (SEK)</th>
+                <th className="border px-3 py-2 text-left font-semibold">বিবরণ</th>
+                <th className="border px-3 py-2 text-right font-semibold">দর (প্রতি দিন)</th>
+                <th className="border px-3 py-2 text-right font-semibold">দিন</th>
+                <th className="border px-3 py-2 text-right font-semibold">মোট (SEK)</th>
 
               </tr>
             </thead>
@@ -158,7 +160,7 @@ export default async function AdvertiseDetailsPage({
               <tr>
                 <td className="border px-3 py-2">
                   বিজ্ঞাপন
- ({formattedStartDate} - {formattedEndDate})
+                  ({formattedStartDate} - {formattedEndDate})
                 </td>
                 <td className="border px-3 py-2 text-right">
                   {dailyRate.toLocaleString("en-US")}
@@ -173,7 +175,7 @@ export default async function AdvertiseDetailsPage({
                 <tr className="bg-gray-50">
                   <td className="border px-3 py-2 text-right" colSpan={3}>
                     ছাড়
- ({discountRate}%)
+                    ({discountRate}%)
                   </td>
                   <td className="border px-3 py-2 text-right">
                     -{discountAmount.toLocaleString("en-US")}
@@ -194,7 +196,7 @@ export default async function AdvertiseDetailsPage({
               <tr className="bg-gray-50">
                 <td className="border px-3 py-2 text-right" colSpan={3}>
                   মোট কর
- ({ad.moms}%)
+                  ({ad.moms}%)
                 </td>
                 <td className="border px-3 py-2 text-right">
                   {momsAmount.toLocaleString("en-US")}
@@ -217,18 +219,18 @@ export default async function AdvertiseDetailsPage({
         {/* Bank Info */}
         <div className="mt-6 text-sm text-gray-700 border-t pt-4 relative z-10">
           <h2 className="font-semibold mb-2">পেমেন্ট তথ্য</h2>
-<p><strong>ব্যাংকের নাম:</strong> ব্যাংক এশিয়া</p>
-<p><strong>একাউন্ট নম্বর:</strong> 123 456 789</p>
-<p><strong>একাউন্ট নাম:</strong> জাগ্রত বার্তা লিঃ</p>
-<p><strong>শাখা:</strong> ঢাকা সদর</p>
-<p><strong>SWIFT কোড:</strong> BAESBDDH</p>
+          <p><strong>ব্যাংকের নাম:</strong> ব্যাংক এশিয়া</p>
+          <p><strong>একাউন্ট নম্বর:</strong> 123 456 789</p>
+          <p><strong>একাউন্ট নাম:</strong> জাগ্রত বার্তা লিঃ</p>
+          <p><strong>শাখা:</strong> ঢাকা সদর</p>
+          <p><strong>SWIFT কোড:</strong> BAESBDDH</p>
 
 
           <div className="mt-3 p-3 border bg-gray-100 rounded-md">
             <p className="font-semibold text-blue-700">📌 ব্যাংক ট্রান্সফার রেফারেন্স
-</p>
+            </p>
             <p>আপনার ট্রান্সফারে নিম্নোক্ত রেফারেন্সটি ব্যবহার করুন:
-</p>
+            </p>
             <p className="mt-1 font-bold text-lg">{ad.id.slice(-8).toUpperCase()}</p>
           </div>
         </div>
@@ -236,10 +238,10 @@ export default async function AdvertiseDetailsPage({
         {/* Payment Due */}
         <div className="mt-4 bg-yellow-50 border border-yellow-200 p-3 rounded-md text-yellow-800 text-sm relative z-10">
           <p className="font-semibold">🕒 পেমেন্ট শেষ করার তারিখ:
-</p>
+          </p>
           <p>
             অনুগ্রহ করে পেমেন্টটি সম্পন্ন করুন **এর আগে**
-{" "}
+            {" "}
             <span className="font-bold text-red-600">{formattedDueDate}</span>.
           </p>
         </div>
