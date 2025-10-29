@@ -113,7 +113,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
 
   // Format the createdAt date before passing it to the UI
   const formattedCreatedAt = data.createdAt
-    ? new Date(data.createdAt).toLocaleDateString("en-US", {
+    ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
         year: "numeric",
         month: "long",
         day: "numeric",
