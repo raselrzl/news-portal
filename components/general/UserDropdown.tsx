@@ -48,7 +48,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
   // Common links for everyone
   const linksCommon = [
-    { href: "/alluseropinion", icon: MessagesSquare, label: "অভিযোগে" },
+    { href: "/alluseropinion", icon: MessagesSquare, label: "অভিযুগসমূহ" },
   ];
 
   // Links for NEWSREPORTER approved
