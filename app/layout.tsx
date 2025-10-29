@@ -7,7 +7,6 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/general/theme-provider";
-import Footer from "@/components/general/Footer";
 import VisitorTracker from "@/components/general/VisitorTracker";
 import Script from "next/script";
 import ScrollToTopButton from "@/components/general/ScrollToTopButton";
@@ -75,8 +74,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="max-w-7xl mx-auto">{children}</div>
-          <Poll />
-          <Footer />
+          
+         
           <ScrollToTopButton />
           <VisitorTracker />
         </ThemeProvider>

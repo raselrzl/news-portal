@@ -62,7 +62,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
         <div className="fixed top-0 left-0 right-0 z-50 bg-background shadow-md max-w-7xl mx-auto">
           <AdminNavbar />
           <h1 className="text-xl font-bold bg-gray-600 text-center text-primary p-2">
-            Jagroto Barta Admin Dashboard
+            জাগ্রত বার্তা Admin Dashboard
           </h1>
         </div>
         <div className="mt-34"></div>

@@ -5,6 +5,9 @@ import Link from "next/link";
 import BanglaNavMenu from "@/components/general/BanglaNavMenu";
 import { Toaster } from "sonner";
 import NewsTicker from "@/components/general/NewsTicker";
+import Poll from "@/components/LivePoll/Poll";
+import Footer from "@/components/general/Footer";
+import VisitorTracker from "@/components/general/VisitorTracker";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -27,7 +30,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         <BanglaNavMenu />
       </div>
       {children}
-
+      <Poll />
+ <Footer />
+ <VisitorTracker />
       <Toaster closeButton richColors />
     </div>
   );
