@@ -164,9 +164,18 @@ model Advertisement {
   advertiseCollectedByPhone   String?
   advertiseCollectedByCountry String?
 
+  paymentStatus   paymentStatus   @default(UNPAID)
   advertiseStatus advertiseStatus @default(DRAFT)
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
+}
+
+enum paymentStatus {
+  PAID
+  UNPAID
+  PENDING
+  REJECTED
+  EXPIRED
 }
 
 enum advertiseStatus {

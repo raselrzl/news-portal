@@ -812,3 +812,40 @@ export async function getAdvertisementPackages() {
     orderBy: { createdAt: "asc" },
   });
 }
+
+
+
+
+export async function updateAdvertisePaymentStatus(
+  advertisementId: string,
+  status: "PAID" | "UNPAID" | "PENDING" | "REJECTED" | "EXPIRED"
+) {
+  // Ensure only superadmins can perform this action
+  const superuser = await requireSuperAdmin();
+  if (!superuser) redirect("/restricted");
+
+  // Verify the user is authenticated
+  await requireUser();
+
+  // Authorization check (AJ policy)
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) throw new Error("Forbidden");
+
+  // Check if advertisement exists
+  const ad = await prisma.advertisement.findUnique({
+    where: { id: advertisementId },
+  });
+
+  if (!ad) {
+    throw new Error("Advertisement not found");
+  }
+
+  // Update payment status
+  const updatedAd = await prisma.advertisement.update({
+    where: { id: advertisementId },
+    data: { paymentStatus: status },
+  });
+
+  return updatedAd;
+}

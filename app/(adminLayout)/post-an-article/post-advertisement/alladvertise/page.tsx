@@ -20,7 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Book, MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
+import { Book, MoreHorizontal, PenBoxIcon, Receipt, XCircle } from "lucide-react";
 import { EmptyState } from "@/components/general/EmptyState";
 import { requireSompandokOrSuperAdmin } from "@/app/utils/requireUser";
 import { redirect } from "next/navigation";
@@ -52,6 +52,7 @@ async function getAllAdvertisements(page: number = 1, pageSize: number = 10) {
         createdAt: true,
         updatedAt: true,
         country: true,
+        paymentStatus: true,
       },
     }),
     prisma.advertisement.count(),
@@ -104,6 +105,7 @@ export default async function AllAdvertisementTable({
                     <TableHead>Status</TableHead>
                     <TableHead>Duration</TableHead>
                     <TableHead>Start</TableHead>
+                    <TableHead>Payment Status</TableHead>
                     <TableHead>End</TableHead>
                     <TableHead>Banner</TableHead>
                     <TableHead>Country</TableHead>
@@ -118,6 +120,7 @@ export default async function AllAdvertisementTable({
                       <TableCell>{ad.supervisedName}</TableCell>
                       <TableCell>{ad.advertisedCategory}</TableCell>
                       <TableCell>{ad.advertiseStatus}</TableCell>
+                      <TableCell>{ad.paymentStatus}</TableCell>
                       <TableCell>{ad.advertiseduration ?? "N/A"}</TableCell>
                       <TableCell>{ad.startDate ?? "N/A"}</TableCell>
                       <TableCell>{ad.endDate ?? "N/A"}</TableCell>
@@ -156,6 +159,15 @@ export default async function AllAdvertisementTable({
                               >
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Status
+                              </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/post-an-article/post-advertisement/alladvertise/${ad.id}/paymentstatus`}
+                              >
+                                <Receipt className="w-4 h-4 mr-2" />
+                                Update Payment Status
                               </Link>
                             </DropdownMenuItem>
 
