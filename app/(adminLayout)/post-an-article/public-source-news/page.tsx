@@ -12,7 +12,7 @@ export default async function PostAnPublicSourceHeading() {
           "SUPERADMIN"
         ]);
   const SompandokOrSuperAdmin = await requireSompandokOrSuperAdmin();
-  if (!SompandokOrSuperAdmin) {
+  if (!SompandokOrSuperAdmin) { 
     return redirect("/restricted");
   }
   return (

@@ -10,7 +10,7 @@ type NewsType = {
   link: "FACEBOOK" | "INSTAGRAM" | "TWITTER";
   createdAt: Date;
   updatedAt: Date;
-};
+}; 
 
 async function getAllNews(): Promise<NewsType[]> {
   return prisma.publicSourceNews.findMany({
