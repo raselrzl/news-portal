@@ -28,7 +28,7 @@ export default async function LiveUpdate() {
 
   return (
     <div className="mt-4 px-6 py-3">
-      <h1 className="text-sm uppercase font-bold mb-2">Live updates</h1>
+      <h1 className="text-sm uppercase font-bold mb-2">লাইভ আপডেট</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
         {news.map((item, index) => {
           const created = new Date(item.createdAt);
@@ -68,7 +68,7 @@ export default async function LiveUpdate() {
               {/* News heading with minutes */}
               <div className="flex-1 flex flex-col">
                 <span className="text-xs text-gray-500 italic">
-                  {diffMinutes} {diffMinutes === 1 ? "m" : "m"} ago
+                  {diffMinutes} {diffMinutes === 1 ? "মিনিট" : "মিনিট"}  আগে
                 </span>
                 <span className="font-medium text-sm">{item.headings}</span>
               </div>
