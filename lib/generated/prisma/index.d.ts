@@ -93,6 +93,11 @@ export type PollAnswer = $Result.DefaultSelection<Prisma.$PollAnswerPayload>
  * 
  */
 export type AdvertisementPackage = $Result.DefaultSelection<Prisma.$AdvertisementPackagePayload>
+/**
+ * Model PublicSourceNews
+ * 
+ */
+export type PublicSourceNews = $Result.DefaultSelection<Prisma.$PublicSourceNewsPayload>
 
 /**
  * Enums
@@ -344,6 +349,15 @@ export const Country: {
 
 export type Country = (typeof Country)[keyof typeof Country]
 
+
+export const Link: {
+  FACEBOOK: 'FACEBOOK',
+  INSTAGRAM: 'INSTAGRAM',
+  TWITTER: 'TWITTER'
+};
+
+export type Link = (typeof Link)[keyof typeof Link]
+
 }
 
 export type UserType = $Enums.UserType
@@ -385,6 +399,10 @@ export const NewsCountry: typeof $Enums.NewsCountry
 export type Country = $Enums.Country
 
 export const Country: typeof $Enums.Country
+
+export type Link = $Enums.Link
+
+export const Link: typeof $Enums.Link
 
 /**
  * ##  Prisma Client ʲˢ
@@ -670,6 +688,16 @@ export class PrismaClient<
     * ```
     */
   get advertisementPackage(): Prisma.AdvertisementPackageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.publicSourceNews`: Exposes CRUD operations for the **PublicSourceNews** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PublicSourceNews
+    * const publicSourceNews = await prisma.publicSourceNews.findMany()
+    * ```
+    */
+  get publicSourceNews(): Prisma.PublicSourceNewsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1125,7 +1153,8 @@ export namespace Prisma {
     RouteVisit: 'RouteVisit',
     PollQuestion: 'PollQuestion',
     PollAnswer: 'PollAnswer',
-    AdvertisementPackage: 'AdvertisementPackage'
+    AdvertisementPackage: 'AdvertisementPackage',
+    PublicSourceNews: 'PublicSourceNews'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1144,7 +1173,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost" | "routeVisit" | "pollQuestion" | "pollAnswer" | "advertisementPackage"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost" | "routeVisit" | "pollQuestion" | "pollAnswer" | "advertisementPackage" | "publicSourceNews"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2332,6 +2361,80 @@ export namespace Prisma {
           }
         }
       }
+      PublicSourceNews: {
+        payload: Prisma.$PublicSourceNewsPayload<ExtArgs>
+        fields: Prisma.PublicSourceNewsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PublicSourceNewsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PublicSourceNewsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          findFirst: {
+            args: Prisma.PublicSourceNewsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PublicSourceNewsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          findMany: {
+            args: Prisma.PublicSourceNewsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>[]
+          }
+          create: {
+            args: Prisma.PublicSourceNewsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          createMany: {
+            args: Prisma.PublicSourceNewsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PublicSourceNewsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>[]
+          }
+          delete: {
+            args: Prisma.PublicSourceNewsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          update: {
+            args: Prisma.PublicSourceNewsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          deleteMany: {
+            args: Prisma.PublicSourceNewsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PublicSourceNewsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PublicSourceNewsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>[]
+          }
+          upsert: {
+            args: Prisma.PublicSourceNewsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublicSourceNewsPayload>
+          }
+          aggregate: {
+            args: Prisma.PublicSourceNewsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePublicSourceNews>
+          }
+          groupBy: {
+            args: Prisma.PublicSourceNewsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PublicSourceNewsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PublicSourceNewsCountArgs<ExtArgs>
+            result: $Utils.Optional<PublicSourceNewsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2432,6 +2535,7 @@ export namespace Prisma {
     pollQuestion?: PollQuestionOmit
     pollAnswer?: PollAnswerOmit
     advertisementPackage?: AdvertisementPackageOmit
+    publicSourceNews?: PublicSourceNewsOmit
   }
 
   /* Types for Logging */
@@ -20368,6 +20472,1014 @@ export namespace Prisma {
 
 
   /**
+   * Model PublicSourceNews
+   */
+
+  export type AggregatePublicSourceNews = {
+    _count: PublicSourceNewsCountAggregateOutputType | null
+    _min: PublicSourceNewsMinAggregateOutputType | null
+    _max: PublicSourceNewsMaxAggregateOutputType | null
+  }
+
+  export type PublicSourceNewsMinAggregateOutputType = {
+    id: string | null
+    headings: string | null
+    sourceIdName: string | null
+    link: $Enums.Link | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PublicSourceNewsMaxAggregateOutputType = {
+    id: string | null
+    headings: string | null
+    sourceIdName: string | null
+    link: $Enums.Link | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PublicSourceNewsCountAggregateOutputType = {
+    id: number
+    headings: number
+    sourceIdName: number
+    link: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PublicSourceNewsMinAggregateInputType = {
+    id?: true
+    headings?: true
+    sourceIdName?: true
+    link?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PublicSourceNewsMaxAggregateInputType = {
+    id?: true
+    headings?: true
+    sourceIdName?: true
+    link?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PublicSourceNewsCountAggregateInputType = {
+    id?: true
+    headings?: true
+    sourceIdName?: true
+    link?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PublicSourceNewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PublicSourceNews to aggregate.
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublicSourceNews to fetch.
+     */
+    orderBy?: PublicSourceNewsOrderByWithRelationInput | PublicSourceNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PublicSourceNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublicSourceNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublicSourceNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PublicSourceNews
+    **/
+    _count?: true | PublicSourceNewsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PublicSourceNewsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PublicSourceNewsMaxAggregateInputType
+  }
+
+  export type GetPublicSourceNewsAggregateType<T extends PublicSourceNewsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePublicSourceNews]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePublicSourceNews[P]>
+      : GetScalarType<T[P], AggregatePublicSourceNews[P]>
+  }
+
+
+
+
+  export type PublicSourceNewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PublicSourceNewsWhereInput
+    orderBy?: PublicSourceNewsOrderByWithAggregationInput | PublicSourceNewsOrderByWithAggregationInput[]
+    by: PublicSourceNewsScalarFieldEnum[] | PublicSourceNewsScalarFieldEnum
+    having?: PublicSourceNewsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PublicSourceNewsCountAggregateInputType | true
+    _min?: PublicSourceNewsMinAggregateInputType
+    _max?: PublicSourceNewsMaxAggregateInputType
+  }
+
+  export type PublicSourceNewsGroupByOutputType = {
+    id: string
+    headings: string
+    sourceIdName: string
+    link: $Enums.Link
+    createdAt: Date
+    updatedAt: Date
+    _count: PublicSourceNewsCountAggregateOutputType | null
+    _min: PublicSourceNewsMinAggregateOutputType | null
+    _max: PublicSourceNewsMaxAggregateOutputType | null
+  }
+
+  type GetPublicSourceNewsGroupByPayload<T extends PublicSourceNewsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PublicSourceNewsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PublicSourceNewsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PublicSourceNewsGroupByOutputType[P]>
+            : GetScalarType<T[P], PublicSourceNewsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PublicSourceNewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    headings?: boolean
+    sourceIdName?: boolean
+    link?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["publicSourceNews"]>
+
+  export type PublicSourceNewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    headings?: boolean
+    sourceIdName?: boolean
+    link?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["publicSourceNews"]>
+
+  export type PublicSourceNewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    headings?: boolean
+    sourceIdName?: boolean
+    link?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["publicSourceNews"]>
+
+  export type PublicSourceNewsSelectScalar = {
+    id?: boolean
+    headings?: boolean
+    sourceIdName?: boolean
+    link?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PublicSourceNewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "headings" | "sourceIdName" | "link" | "createdAt" | "updatedAt", ExtArgs["result"]["publicSourceNews"]>
+
+  export type $PublicSourceNewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PublicSourceNews"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      headings: string
+      sourceIdName: string
+      link: $Enums.Link
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["publicSourceNews"]>
+    composites: {}
+  }
+
+  type PublicSourceNewsGetPayload<S extends boolean | null | undefined | PublicSourceNewsDefaultArgs> = $Result.GetResult<Prisma.$PublicSourceNewsPayload, S>
+
+  type PublicSourceNewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PublicSourceNewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PublicSourceNewsCountAggregateInputType | true
+    }
+
+  export interface PublicSourceNewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PublicSourceNews'], meta: { name: 'PublicSourceNews' } }
+    /**
+     * Find zero or one PublicSourceNews that matches the filter.
+     * @param {PublicSourceNewsFindUniqueArgs} args - Arguments to find a PublicSourceNews
+     * @example
+     * // Get one PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PublicSourceNewsFindUniqueArgs>(args: SelectSubset<T, PublicSourceNewsFindUniqueArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PublicSourceNews that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PublicSourceNewsFindUniqueOrThrowArgs} args - Arguments to find a PublicSourceNews
+     * @example
+     * // Get one PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PublicSourceNewsFindUniqueOrThrowArgs>(args: SelectSubset<T, PublicSourceNewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PublicSourceNews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsFindFirstArgs} args - Arguments to find a PublicSourceNews
+     * @example
+     * // Get one PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PublicSourceNewsFindFirstArgs>(args?: SelectSubset<T, PublicSourceNewsFindFirstArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PublicSourceNews that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsFindFirstOrThrowArgs} args - Arguments to find a PublicSourceNews
+     * @example
+     * // Get one PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PublicSourceNewsFindFirstOrThrowArgs>(args?: SelectSubset<T, PublicSourceNewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PublicSourceNews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findMany()
+     * 
+     * // Get first 10 PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const publicSourceNewsWithIdOnly = await prisma.publicSourceNews.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PublicSourceNewsFindManyArgs>(args?: SelectSubset<T, PublicSourceNewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PublicSourceNews.
+     * @param {PublicSourceNewsCreateArgs} args - Arguments to create a PublicSourceNews.
+     * @example
+     * // Create one PublicSourceNews
+     * const PublicSourceNews = await prisma.publicSourceNews.create({
+     *   data: {
+     *     // ... data to create a PublicSourceNews
+     *   }
+     * })
+     * 
+     */
+    create<T extends PublicSourceNewsCreateArgs>(args: SelectSubset<T, PublicSourceNewsCreateArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PublicSourceNews.
+     * @param {PublicSourceNewsCreateManyArgs} args - Arguments to create many PublicSourceNews.
+     * @example
+     * // Create many PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PublicSourceNewsCreateManyArgs>(args?: SelectSubset<T, PublicSourceNewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PublicSourceNews and returns the data saved in the database.
+     * @param {PublicSourceNewsCreateManyAndReturnArgs} args - Arguments to create many PublicSourceNews.
+     * @example
+     * // Create many PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PublicSourceNews and only return the `id`
+     * const publicSourceNewsWithIdOnly = await prisma.publicSourceNews.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PublicSourceNewsCreateManyAndReturnArgs>(args?: SelectSubset<T, PublicSourceNewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PublicSourceNews.
+     * @param {PublicSourceNewsDeleteArgs} args - Arguments to delete one PublicSourceNews.
+     * @example
+     * // Delete one PublicSourceNews
+     * const PublicSourceNews = await prisma.publicSourceNews.delete({
+     *   where: {
+     *     // ... filter to delete one PublicSourceNews
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PublicSourceNewsDeleteArgs>(args: SelectSubset<T, PublicSourceNewsDeleteArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PublicSourceNews.
+     * @param {PublicSourceNewsUpdateArgs} args - Arguments to update one PublicSourceNews.
+     * @example
+     * // Update one PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PublicSourceNewsUpdateArgs>(args: SelectSubset<T, PublicSourceNewsUpdateArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PublicSourceNews.
+     * @param {PublicSourceNewsDeleteManyArgs} args - Arguments to filter PublicSourceNews to delete.
+     * @example
+     * // Delete a few PublicSourceNews
+     * const { count } = await prisma.publicSourceNews.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PublicSourceNewsDeleteManyArgs>(args?: SelectSubset<T, PublicSourceNewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PublicSourceNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PublicSourceNewsUpdateManyArgs>(args: SelectSubset<T, PublicSourceNewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PublicSourceNews and returns the data updated in the database.
+     * @param {PublicSourceNewsUpdateManyAndReturnArgs} args - Arguments to update many PublicSourceNews.
+     * @example
+     * // Update many PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PublicSourceNews and only return the `id`
+     * const publicSourceNewsWithIdOnly = await prisma.publicSourceNews.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PublicSourceNewsUpdateManyAndReturnArgs>(args: SelectSubset<T, PublicSourceNewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PublicSourceNews.
+     * @param {PublicSourceNewsUpsertArgs} args - Arguments to update or create a PublicSourceNews.
+     * @example
+     * // Update or create a PublicSourceNews
+     * const publicSourceNews = await prisma.publicSourceNews.upsert({
+     *   create: {
+     *     // ... data to create a PublicSourceNews
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PublicSourceNews we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PublicSourceNewsUpsertArgs>(args: SelectSubset<T, PublicSourceNewsUpsertArgs<ExtArgs>>): Prisma__PublicSourceNewsClient<$Result.GetResult<Prisma.$PublicSourceNewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PublicSourceNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsCountArgs} args - Arguments to filter PublicSourceNews to count.
+     * @example
+     * // Count the number of PublicSourceNews
+     * const count = await prisma.publicSourceNews.count({
+     *   where: {
+     *     // ... the filter for the PublicSourceNews we want to count
+     *   }
+     * })
+    **/
+    count<T extends PublicSourceNewsCountArgs>(
+      args?: Subset<T, PublicSourceNewsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PublicSourceNewsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PublicSourceNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PublicSourceNewsAggregateArgs>(args: Subset<T, PublicSourceNewsAggregateArgs>): Prisma.PrismaPromise<GetPublicSourceNewsAggregateType<T>>
+
+    /**
+     * Group by PublicSourceNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublicSourceNewsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PublicSourceNewsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PublicSourceNewsGroupByArgs['orderBy'] }
+        : { orderBy?: PublicSourceNewsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PublicSourceNewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPublicSourceNewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PublicSourceNews model
+   */
+  readonly fields: PublicSourceNewsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PublicSourceNews.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PublicSourceNewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PublicSourceNews model
+   */
+  interface PublicSourceNewsFieldRefs {
+    readonly id: FieldRef<"PublicSourceNews", 'String'>
+    readonly headings: FieldRef<"PublicSourceNews", 'String'>
+    readonly sourceIdName: FieldRef<"PublicSourceNews", 'String'>
+    readonly link: FieldRef<"PublicSourceNews", 'Link'>
+    readonly createdAt: FieldRef<"PublicSourceNews", 'DateTime'>
+    readonly updatedAt: FieldRef<"PublicSourceNews", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PublicSourceNews findUnique
+   */
+  export type PublicSourceNewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter, which PublicSourceNews to fetch.
+     */
+    where: PublicSourceNewsWhereUniqueInput
+  }
+
+  /**
+   * PublicSourceNews findUniqueOrThrow
+   */
+  export type PublicSourceNewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter, which PublicSourceNews to fetch.
+     */
+    where: PublicSourceNewsWhereUniqueInput
+  }
+
+  /**
+   * PublicSourceNews findFirst
+   */
+  export type PublicSourceNewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter, which PublicSourceNews to fetch.
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublicSourceNews to fetch.
+     */
+    orderBy?: PublicSourceNewsOrderByWithRelationInput | PublicSourceNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PublicSourceNews.
+     */
+    cursor?: PublicSourceNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublicSourceNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublicSourceNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PublicSourceNews.
+     */
+    distinct?: PublicSourceNewsScalarFieldEnum | PublicSourceNewsScalarFieldEnum[]
+  }
+
+  /**
+   * PublicSourceNews findFirstOrThrow
+   */
+  export type PublicSourceNewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter, which PublicSourceNews to fetch.
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublicSourceNews to fetch.
+     */
+    orderBy?: PublicSourceNewsOrderByWithRelationInput | PublicSourceNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PublicSourceNews.
+     */
+    cursor?: PublicSourceNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublicSourceNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublicSourceNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PublicSourceNews.
+     */
+    distinct?: PublicSourceNewsScalarFieldEnum | PublicSourceNewsScalarFieldEnum[]
+  }
+
+  /**
+   * PublicSourceNews findMany
+   */
+  export type PublicSourceNewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter, which PublicSourceNews to fetch.
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublicSourceNews to fetch.
+     */
+    orderBy?: PublicSourceNewsOrderByWithRelationInput | PublicSourceNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PublicSourceNews.
+     */
+    cursor?: PublicSourceNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublicSourceNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublicSourceNews.
+     */
+    skip?: number
+    distinct?: PublicSourceNewsScalarFieldEnum | PublicSourceNewsScalarFieldEnum[]
+  }
+
+  /**
+   * PublicSourceNews create
+   */
+  export type PublicSourceNewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PublicSourceNews.
+     */
+    data: XOR<PublicSourceNewsCreateInput, PublicSourceNewsUncheckedCreateInput>
+  }
+
+  /**
+   * PublicSourceNews createMany
+   */
+  export type PublicSourceNewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PublicSourceNews.
+     */
+    data: PublicSourceNewsCreateManyInput | PublicSourceNewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PublicSourceNews createManyAndReturn
+   */
+  export type PublicSourceNewsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * The data used to create many PublicSourceNews.
+     */
+    data: PublicSourceNewsCreateManyInput | PublicSourceNewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PublicSourceNews update
+   */
+  export type PublicSourceNewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PublicSourceNews.
+     */
+    data: XOR<PublicSourceNewsUpdateInput, PublicSourceNewsUncheckedUpdateInput>
+    /**
+     * Choose, which PublicSourceNews to update.
+     */
+    where: PublicSourceNewsWhereUniqueInput
+  }
+
+  /**
+   * PublicSourceNews updateMany
+   */
+  export type PublicSourceNewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PublicSourceNews.
+     */
+    data: XOR<PublicSourceNewsUpdateManyMutationInput, PublicSourceNewsUncheckedUpdateManyInput>
+    /**
+     * Filter which PublicSourceNews to update
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * Limit how many PublicSourceNews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PublicSourceNews updateManyAndReturn
+   */
+  export type PublicSourceNewsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * The data used to update PublicSourceNews.
+     */
+    data: XOR<PublicSourceNewsUpdateManyMutationInput, PublicSourceNewsUncheckedUpdateManyInput>
+    /**
+     * Filter which PublicSourceNews to update
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * Limit how many PublicSourceNews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PublicSourceNews upsert
+   */
+  export type PublicSourceNewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PublicSourceNews to update in case it exists.
+     */
+    where: PublicSourceNewsWhereUniqueInput
+    /**
+     * In case the PublicSourceNews found by the `where` argument doesn't exist, create a new PublicSourceNews with this data.
+     */
+    create: XOR<PublicSourceNewsCreateInput, PublicSourceNewsUncheckedCreateInput>
+    /**
+     * In case the PublicSourceNews was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PublicSourceNewsUpdateInput, PublicSourceNewsUncheckedUpdateInput>
+  }
+
+  /**
+   * PublicSourceNews delete
+   */
+  export type PublicSourceNewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+    /**
+     * Filter which PublicSourceNews to delete.
+     */
+    where: PublicSourceNewsWhereUniqueInput
+  }
+
+  /**
+   * PublicSourceNews deleteMany
+   */
+  export type PublicSourceNewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PublicSourceNews to delete
+     */
+    where?: PublicSourceNewsWhereInput
+    /**
+     * Limit how many PublicSourceNews to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PublicSourceNews without action
+   */
+  export type PublicSourceNewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublicSourceNews
+     */
+    select?: PublicSourceNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublicSourceNews
+     */
+    omit?: PublicSourceNewsOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -20619,6 +21731,18 @@ export namespace Prisma {
   export type AdvertisementPackageScalarFieldEnum = (typeof AdvertisementPackageScalarFieldEnum)[keyof typeof AdvertisementPackageScalarFieldEnum]
 
 
+  export const PublicSourceNewsScalarFieldEnum: {
+    id: 'id',
+    headings: 'headings',
+    sourceIdName: 'sourceIdName',
+    link: 'link',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PublicSourceNewsScalarFieldEnum = (typeof PublicSourceNewsScalarFieldEnum)[keyof typeof PublicSourceNewsScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20848,6 +21972,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Link'
+   */
+  export type EnumLinkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Link'>
+    
+
+
+  /**
+   * Reference to a field of type 'Link[]'
+   */
+  export type ListEnumLinkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Link[]'>
     
   /**
    * Deep Input Types
@@ -22052,6 +23190,63 @@ export namespace Prisma {
     dailyPrice?: FloatWithAggregatesFilter<"AdvertisementPackage"> | number
     createdAt?: DateTimeWithAggregatesFilter<"AdvertisementPackage"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AdvertisementPackage"> | Date | string
+  }
+
+  export type PublicSourceNewsWhereInput = {
+    AND?: PublicSourceNewsWhereInput | PublicSourceNewsWhereInput[]
+    OR?: PublicSourceNewsWhereInput[]
+    NOT?: PublicSourceNewsWhereInput | PublicSourceNewsWhereInput[]
+    id?: StringFilter<"PublicSourceNews"> | string
+    headings?: StringFilter<"PublicSourceNews"> | string
+    sourceIdName?: StringFilter<"PublicSourceNews"> | string
+    link?: EnumLinkFilter<"PublicSourceNews"> | $Enums.Link
+    createdAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+    updatedAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+  }
+
+  export type PublicSourceNewsOrderByWithRelationInput = {
+    id?: SortOrder
+    headings?: SortOrder
+    sourceIdName?: SortOrder
+    link?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PublicSourceNewsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PublicSourceNewsWhereInput | PublicSourceNewsWhereInput[]
+    OR?: PublicSourceNewsWhereInput[]
+    NOT?: PublicSourceNewsWhereInput | PublicSourceNewsWhereInput[]
+    headings?: StringFilter<"PublicSourceNews"> | string
+    sourceIdName?: StringFilter<"PublicSourceNews"> | string
+    link?: EnumLinkFilter<"PublicSourceNews"> | $Enums.Link
+    createdAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+    updatedAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+  }, "id">
+
+  export type PublicSourceNewsOrderByWithAggregationInput = {
+    id?: SortOrder
+    headings?: SortOrder
+    sourceIdName?: SortOrder
+    link?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PublicSourceNewsCountOrderByAggregateInput
+    _max?: PublicSourceNewsMaxOrderByAggregateInput
+    _min?: PublicSourceNewsMinOrderByAggregateInput
+  }
+
+  export type PublicSourceNewsScalarWhereWithAggregatesInput = {
+    AND?: PublicSourceNewsScalarWhereWithAggregatesInput | PublicSourceNewsScalarWhereWithAggregatesInput[]
+    OR?: PublicSourceNewsScalarWhereWithAggregatesInput[]
+    NOT?: PublicSourceNewsScalarWhereWithAggregatesInput | PublicSourceNewsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PublicSourceNews"> | string
+    headings?: StringWithAggregatesFilter<"PublicSourceNews"> | string
+    sourceIdName?: StringWithAggregatesFilter<"PublicSourceNews"> | string
+    link?: EnumLinkWithAggregatesFilter<"PublicSourceNews"> | $Enums.Link
+    createdAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -23396,6 +24591,69 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PublicSourceNewsCreateInput = {
+    id?: string
+    headings: string
+    sourceIdName: string
+    link?: $Enums.Link
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicSourceNewsUncheckedCreateInput = {
+    id?: string
+    headings: string
+    sourceIdName: string
+    link?: $Enums.Link
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicSourceNewsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headings?: StringFieldUpdateOperationsInput | string
+    sourceIdName?: StringFieldUpdateOperationsInput | string
+    link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicSourceNewsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headings?: StringFieldUpdateOperationsInput | string
+    sourceIdName?: StringFieldUpdateOperationsInput | string
+    link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicSourceNewsCreateManyInput = {
+    id?: string
+    headings: string
+    sourceIdName: string
+    link?: $Enums.Link
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicSourceNewsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headings?: StringFieldUpdateOperationsInput | string
+    sourceIdName?: StringFieldUpdateOperationsInput | string
+    link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicSourceNewsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headings?: StringFieldUpdateOperationsInput | string
+    sourceIdName?: StringFieldUpdateOperationsInput | string
+    link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24507,6 +25765,50 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type EnumLinkFilter<$PrismaModel = never> = {
+    equals?: $Enums.Link | EnumLinkFieldRefInput<$PrismaModel>
+    in?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    not?: NestedEnumLinkFilter<$PrismaModel> | $Enums.Link
+  }
+
+  export type PublicSourceNewsCountOrderByAggregateInput = {
+    id?: SortOrder
+    headings?: SortOrder
+    sourceIdName?: SortOrder
+    link?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PublicSourceNewsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    headings?: SortOrder
+    sourceIdName?: SortOrder
+    link?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PublicSourceNewsMinOrderByAggregateInput = {
+    id?: SortOrder
+    headings?: SortOrder
+    sourceIdName?: SortOrder
+    link?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumLinkWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Link | EnumLinkFieldRefInput<$PrismaModel>
+    in?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    not?: NestedEnumLinkWithAggregatesFilter<$PrismaModel> | $Enums.Link
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLinkFilter<$PrismaModel>
+    _max?: NestedEnumLinkFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -24963,6 +26265,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type EnumLinkFieldUpdateOperationsInput = {
+    set?: $Enums.Link
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25348,6 +26654,23 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLinkFilter<$PrismaModel = never> = {
+    equals?: $Enums.Link | EnumLinkFieldRefInput<$PrismaModel>
+    in?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    not?: NestedEnumLinkFilter<$PrismaModel> | $Enums.Link
+  }
+
+  export type NestedEnumLinkWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Link | EnumLinkFieldRefInput<$PrismaModel>
+    in?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Link[] | ListEnumLinkFieldRefInput<$PrismaModel>
+    not?: NestedEnumLinkWithAggregatesFilter<$PrismaModel> | $Enums.Link
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLinkFilter<$PrismaModel>
+    _max?: NestedEnumLinkFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {

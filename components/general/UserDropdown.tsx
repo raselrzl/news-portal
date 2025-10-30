@@ -4,6 +4,7 @@ import {
   ChartColumnBig,
   ChevronDown,
   FileQuestion,
+  FlameIcon,
   Layers2,
   LogOut,
   Megaphone,
@@ -60,7 +61,9 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
   // Links for SOMPADOK and SUPERADMIN
   const linksSompadokSuperAdmin = [
     { href: "/post-an-article/poll", icon: FileQuestion, label: "Write Poll Question" },
-    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },
+    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },    
+    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A live Update" },
+    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "Manage All Live Update" },
     { href: "/post-an-article/alaarticles", icon: Layers2, label: "Manage All Articles" },
     { href: "/post-an-article/post-advertisement", icon: Megaphone, label: "Post Advertisement" },
     { href: "/post-an-article/post-advertisement/alladvertise", icon: PoundSterling, label: "Manage Advertisements" },

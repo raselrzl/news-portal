@@ -456,3 +456,20 @@ model AdvertisementPackage {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+
+
+model PublicSourceNews {
+  id               String   @id @default(uuid())
+  headings         String
+  sourceIdName     String
+  link             Link @default(INSTAGRAM)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+enum Link {
+  FACEBOOK
+  INSTAGRAM
+  TWITTER
+}
