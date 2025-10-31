@@ -104,6 +104,11 @@ export default async function LiveUpdate() {
           );
         })}
       </div>
+       <div className="flex justify-end mt-4">
+        <Link href="/breakingnews" className="text-sm text-primary hover:underline">
+  আরো দেখুন →
+</Link>
+      </div>
     </div>
   );
 }
