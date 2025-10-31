@@ -873,3 +873,31 @@ export async function createPublicSourceNews(data: {
 
   revalidatePath("/"); // optional
 }
+
+
+
+export async function deletePublicSourceNews(id: string) {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
+
+  await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  try {
+    await prisma.publicSourceNews.delete({
+      where: { id: id },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting public source news:", error);
+    throw new Error("Failed to delete public source news");
+  }
+}
