@@ -102,13 +102,13 @@ export default async function AllAdvertisementTable({
                     <TableHead>Company</TableHead>
                     <TableHead>Supervisor</TableHead>
                     <TableHead>Category</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Duration</TableHead>
-                    <TableHead>Start</TableHead>
-                    <TableHead>Payment Status</TableHead>
-                    <TableHead>End</TableHead>
+                    <TableHead>Active Status</TableHead>
+                    <TableHead>Payment status</TableHead>
+                    {/* <TableHead>Duration</TableHead> */}
+                    <TableHead>Start Date</TableHead>
+                    <TableHead>End Date</TableHead>
                     <TableHead>Banner</TableHead>
-                    <TableHead>Country</TableHead>
+                    <TableHead>Location</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -121,7 +121,7 @@ export default async function AllAdvertisementTable({
                       <TableCell>{ad.advertisedCategory}</TableCell>
                       <TableCell>{ad.advertiseStatus}</TableCell>
                       <TableCell>{ad.paymentStatus}</TableCell>
-                      <TableCell>{ad.advertiseduration ?? "N/A"}</TableCell>
+                      {/* <TableCell>{ad.advertiseduration ?? "N/A"}</TableCell> */}
                       <TableCell>{ad.startDate ?? "N/A"}</TableCell>
                       <TableCell>{ad.endDate ?? "N/A"}</TableCell>
                       <TableCell>
