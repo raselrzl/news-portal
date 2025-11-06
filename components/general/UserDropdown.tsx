@@ -60,6 +60,8 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
   // Links for SOMPADOK and SUPERADMIN
   const linksSompadokSuperAdmin = [
+    { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
+    { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
     { href: "/post-an-article/poll", icon: FileQuestion, label: "Write Poll Question" },
     { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },    
     { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A live Update" },
