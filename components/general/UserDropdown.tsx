@@ -63,9 +63,9 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
     { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
     { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
     { href: "/post-an-article/poll", icon: FileQuestion, label: "Write Poll Question" },
-    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },    
-    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A live Update" },
-    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "Manage All Live Update" },
+    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },
+    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A Live Update" },
+    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "Manage All Live Updates" },
     { href: "/post-an-article/alaarticles", icon: Layers2, label: "Manage All Articles" },
     { href: "/post-an-article/post-advertisement", icon: Megaphone, label: "Post Advertisement" },
     { href: "/post-an-article/post-advertisement/alladvertise", icon: PoundSterling, label: "Manage Advertisements" },
@@ -82,20 +82,21 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
     { href: "/post-an-article/routeTrack", icon: ChartColumnBig, label: "Statistics" },
   ];
 
-  // Compose final links
-  let allLinks = [...linksCommon];
-
-  if (isNewsReporter || mkr) {
-    allLinks.push(...linksNewsReporter);
+  // ✅ Helper function to merge and remove duplicates
+  function mergeLinks(...groups: any[][]) {
+    const merged = groups.flat();
+    return merged.filter(
+      (link, i, arr) => i === arr.findIndex((l) => l.href === link.href)
+    );
   }
 
-  if (isEditor || isSuperAdmin) {
-    allLinks.push(...linksSompadokSuperAdmin);
-  }
-
-  if (isSuperAdmin) {
-    allLinks.push(...linksSuperAdmin);
-  }
+  // Combine links based on user type
+  const allLinks = mergeLinks(
+    linksCommon,
+    (isNewsReporter || mkr) ? linksNewsReporter : [],
+    (isEditor || isSuperAdmin) ? linksSompadokSuperAdmin : [],
+    isSuperAdmin ? linksSuperAdmin : []
+  );
 
   return (
     <DropdownMenu>
@@ -111,6 +112,7 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-60" align="end">
+        {/* User Info */}
         <DropdownMenuLabel className="flex flex-col">
           <span className="text-sm font-medium text-foreground">{name}</span>
           <span className="text-xs font-medium text-foreground">{email}</span>
@@ -118,10 +120,11 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
         <DropdownMenuSeparator />
 
+        {/* Dynamic Links */}
         <DropdownMenuGroup>
           {allLinks.map((link) => (
             <DropdownMenuItem key={link.href} asChild>
-              <Link href={link.href}>
+              <Link href={link.href} className="flex items-center gap-2">
                 <link.icon size={16} strokeWidth={2} className="opacity-60" />
                 <span>{link.label}</span>
               </Link>
