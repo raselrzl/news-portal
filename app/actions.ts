@@ -901,3 +901,23 @@ export async function deletePublicSourceNews(id: string) {
     throw new Error("Failed to delete public source news");
   }
 }
+
+
+
+
+export async function createInstagramPost(data: {
+  igLink: string;
+  igStatus: "DRAFT" | "ACTIVE" | "EXPIRED";
+  isFeatured?: boolean;
+}) {
+  const user = await requireUser();
+
+  await prisma.instagramPost.create({
+    data: {
+      igLink: data.igLink,
+      igStatus: data.igStatus ?? "DRAFT",
+    },
+  });
+
+  return redirect("/");
+}

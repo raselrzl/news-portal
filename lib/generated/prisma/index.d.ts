@@ -98,6 +98,11 @@ export type AdvertisementPackage = $Result.DefaultSelection<Prisma.$Advertisemen
  * 
  */
 export type PublicSourceNews = $Result.DefaultSelection<Prisma.$PublicSourceNewsPayload>
+/**
+ * Model InstagramPost
+ * 
+ */
+export type InstagramPost = $Result.DefaultSelection<Prisma.$InstagramPostPayload>
 
 /**
  * Enums
@@ -358,6 +363,15 @@ export const Link: {
 
 export type Link = (typeof Link)[keyof typeof Link]
 
+
+export const igPostStatus: {
+  ACTIVE: 'ACTIVE',
+  DRAFT: 'DRAFT',
+  EXPIRED: 'EXPIRED'
+};
+
+export type igPostStatus = (typeof igPostStatus)[keyof typeof igPostStatus]
+
 }
 
 export type UserType = $Enums.UserType
@@ -403,6 +417,10 @@ export const Country: typeof $Enums.Country
 export type Link = $Enums.Link
 
 export const Link: typeof $Enums.Link
+
+export type igPostStatus = $Enums.igPostStatus
+
+export const igPostStatus: typeof $Enums.igPostStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -698,6 +716,16 @@ export class PrismaClient<
     * ```
     */
   get publicSourceNews(): Prisma.PublicSourceNewsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.instagramPost`: Exposes CRUD operations for the **InstagramPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InstagramPosts
+    * const instagramPosts = await prisma.instagramPost.findMany()
+    * ```
+    */
+  get instagramPost(): Prisma.InstagramPostDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1154,7 +1182,8 @@ export namespace Prisma {
     PollQuestion: 'PollQuestion',
     PollAnswer: 'PollAnswer',
     AdvertisementPackage: 'AdvertisementPackage',
-    PublicSourceNews: 'PublicSourceNews'
+    PublicSourceNews: 'PublicSourceNews',
+    InstagramPost: 'InstagramPost'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1173,7 +1202,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost" | "routeVisit" | "pollQuestion" | "pollAnswer" | "advertisementPackage" | "publicSourceNews"
+      modelProps: "user" | "newsReporter" | "advertiser" | "newsArticle" | "quote" | "advertisement" | "opinion" | "account" | "session" | "verificationToken" | "advertiseRequest" | "videopost" | "routeVisit" | "pollQuestion" | "pollAnswer" | "advertisementPackage" | "publicSourceNews" | "instagramPost"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2435,6 +2464,80 @@ export namespace Prisma {
           }
         }
       }
+      InstagramPost: {
+        payload: Prisma.$InstagramPostPayload<ExtArgs>
+        fields: Prisma.InstagramPostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InstagramPostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InstagramPostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          findFirst: {
+            args: Prisma.InstagramPostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InstagramPostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          findMany: {
+            args: Prisma.InstagramPostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>[]
+          }
+          create: {
+            args: Prisma.InstagramPostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          createMany: {
+            args: Prisma.InstagramPostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InstagramPostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>[]
+          }
+          delete: {
+            args: Prisma.InstagramPostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          update: {
+            args: Prisma.InstagramPostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          deleteMany: {
+            args: Prisma.InstagramPostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InstagramPostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InstagramPostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>[]
+          }
+          upsert: {
+            args: Prisma.InstagramPostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstagramPostPayload>
+          }
+          aggregate: {
+            args: Prisma.InstagramPostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInstagramPost>
+          }
+          groupBy: {
+            args: Prisma.InstagramPostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InstagramPostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InstagramPostCountArgs<ExtArgs>
+            result: $Utils.Optional<InstagramPostCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2536,6 +2639,7 @@ export namespace Prisma {
     pollAnswer?: PollAnswerOmit
     advertisementPackage?: AdvertisementPackageOmit
     publicSourceNews?: PublicSourceNewsOmit
+    instagramPost?: InstagramPostOmit
   }
 
   /* Types for Logging */
@@ -21480,6 +21584,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model InstagramPost
+   */
+
+  export type AggregateInstagramPost = {
+    _count: InstagramPostCountAggregateOutputType | null
+    _min: InstagramPostMinAggregateOutputType | null
+    _max: InstagramPostMaxAggregateOutputType | null
+  }
+
+  export type InstagramPostMinAggregateOutputType = {
+    id: string | null
+    igLink: string | null
+    igStatus: $Enums.igPostStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstagramPostMaxAggregateOutputType = {
+    id: string | null
+    igLink: string | null
+    igStatus: $Enums.igPostStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstagramPostCountAggregateOutputType = {
+    id: number
+    igLink: number
+    igStatus: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InstagramPostMinAggregateInputType = {
+    id?: true
+    igLink?: true
+    igStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstagramPostMaxAggregateInputType = {
+    id?: true
+    igLink?: true
+    igStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstagramPostCountAggregateInputType = {
+    id?: true
+    igLink?: true
+    igStatus?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InstagramPostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstagramPost to aggregate.
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstagramPosts to fetch.
+     */
+    orderBy?: InstagramPostOrderByWithRelationInput | InstagramPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InstagramPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstagramPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstagramPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InstagramPosts
+    **/
+    _count?: true | InstagramPostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InstagramPostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InstagramPostMaxAggregateInputType
+  }
+
+  export type GetInstagramPostAggregateType<T extends InstagramPostAggregateArgs> = {
+        [P in keyof T & keyof AggregateInstagramPost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInstagramPost[P]>
+      : GetScalarType<T[P], AggregateInstagramPost[P]>
+  }
+
+
+
+
+  export type InstagramPostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstagramPostWhereInput
+    orderBy?: InstagramPostOrderByWithAggregationInput | InstagramPostOrderByWithAggregationInput[]
+    by: InstagramPostScalarFieldEnum[] | InstagramPostScalarFieldEnum
+    having?: InstagramPostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InstagramPostCountAggregateInputType | true
+    _min?: InstagramPostMinAggregateInputType
+    _max?: InstagramPostMaxAggregateInputType
+  }
+
+  export type InstagramPostGroupByOutputType = {
+    id: string
+    igLink: string
+    igStatus: $Enums.igPostStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: InstagramPostCountAggregateOutputType | null
+    _min: InstagramPostMinAggregateOutputType | null
+    _max: InstagramPostMaxAggregateOutputType | null
+  }
+
+  type GetInstagramPostGroupByPayload<T extends InstagramPostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InstagramPostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InstagramPostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InstagramPostGroupByOutputType[P]>
+            : GetScalarType<T[P], InstagramPostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InstagramPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    igLink?: boolean
+    igStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["instagramPost"]>
+
+  export type InstagramPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    igLink?: boolean
+    igStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["instagramPost"]>
+
+  export type InstagramPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    igLink?: boolean
+    igStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["instagramPost"]>
+
+  export type InstagramPostSelectScalar = {
+    id?: boolean
+    igLink?: boolean
+    igStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InstagramPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "igLink" | "igStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["instagramPost"]>
+
+  export type $InstagramPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InstagramPost"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      igLink: string
+      igStatus: $Enums.igPostStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["instagramPost"]>
+    composites: {}
+  }
+
+  type InstagramPostGetPayload<S extends boolean | null | undefined | InstagramPostDefaultArgs> = $Result.GetResult<Prisma.$InstagramPostPayload, S>
+
+  type InstagramPostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InstagramPostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InstagramPostCountAggregateInputType | true
+    }
+
+  export interface InstagramPostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InstagramPost'], meta: { name: 'InstagramPost' } }
+    /**
+     * Find zero or one InstagramPost that matches the filter.
+     * @param {InstagramPostFindUniqueArgs} args - Arguments to find a InstagramPost
+     * @example
+     * // Get one InstagramPost
+     * const instagramPost = await prisma.instagramPost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InstagramPostFindUniqueArgs>(args: SelectSubset<T, InstagramPostFindUniqueArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InstagramPost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InstagramPostFindUniqueOrThrowArgs} args - Arguments to find a InstagramPost
+     * @example
+     * // Get one InstagramPost
+     * const instagramPost = await prisma.instagramPost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InstagramPostFindUniqueOrThrowArgs>(args: SelectSubset<T, InstagramPostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InstagramPost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostFindFirstArgs} args - Arguments to find a InstagramPost
+     * @example
+     * // Get one InstagramPost
+     * const instagramPost = await prisma.instagramPost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InstagramPostFindFirstArgs>(args?: SelectSubset<T, InstagramPostFindFirstArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InstagramPost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostFindFirstOrThrowArgs} args - Arguments to find a InstagramPost
+     * @example
+     * // Get one InstagramPost
+     * const instagramPost = await prisma.instagramPost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InstagramPostFindFirstOrThrowArgs>(args?: SelectSubset<T, InstagramPostFindFirstOrThrowArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InstagramPosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InstagramPosts
+     * const instagramPosts = await prisma.instagramPost.findMany()
+     * 
+     * // Get first 10 InstagramPosts
+     * const instagramPosts = await prisma.instagramPost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const instagramPostWithIdOnly = await prisma.instagramPost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InstagramPostFindManyArgs>(args?: SelectSubset<T, InstagramPostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InstagramPost.
+     * @param {InstagramPostCreateArgs} args - Arguments to create a InstagramPost.
+     * @example
+     * // Create one InstagramPost
+     * const InstagramPost = await prisma.instagramPost.create({
+     *   data: {
+     *     // ... data to create a InstagramPost
+     *   }
+     * })
+     * 
+     */
+    create<T extends InstagramPostCreateArgs>(args: SelectSubset<T, InstagramPostCreateArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InstagramPosts.
+     * @param {InstagramPostCreateManyArgs} args - Arguments to create many InstagramPosts.
+     * @example
+     * // Create many InstagramPosts
+     * const instagramPost = await prisma.instagramPost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InstagramPostCreateManyArgs>(args?: SelectSubset<T, InstagramPostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InstagramPosts and returns the data saved in the database.
+     * @param {InstagramPostCreateManyAndReturnArgs} args - Arguments to create many InstagramPosts.
+     * @example
+     * // Create many InstagramPosts
+     * const instagramPost = await prisma.instagramPost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InstagramPosts and only return the `id`
+     * const instagramPostWithIdOnly = await prisma.instagramPost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InstagramPostCreateManyAndReturnArgs>(args?: SelectSubset<T, InstagramPostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InstagramPost.
+     * @param {InstagramPostDeleteArgs} args - Arguments to delete one InstagramPost.
+     * @example
+     * // Delete one InstagramPost
+     * const InstagramPost = await prisma.instagramPost.delete({
+     *   where: {
+     *     // ... filter to delete one InstagramPost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InstagramPostDeleteArgs>(args: SelectSubset<T, InstagramPostDeleteArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InstagramPost.
+     * @param {InstagramPostUpdateArgs} args - Arguments to update one InstagramPost.
+     * @example
+     * // Update one InstagramPost
+     * const instagramPost = await prisma.instagramPost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InstagramPostUpdateArgs>(args: SelectSubset<T, InstagramPostUpdateArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InstagramPosts.
+     * @param {InstagramPostDeleteManyArgs} args - Arguments to filter InstagramPosts to delete.
+     * @example
+     * // Delete a few InstagramPosts
+     * const { count } = await prisma.instagramPost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InstagramPostDeleteManyArgs>(args?: SelectSubset<T, InstagramPostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InstagramPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InstagramPosts
+     * const instagramPost = await prisma.instagramPost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InstagramPostUpdateManyArgs>(args: SelectSubset<T, InstagramPostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InstagramPosts and returns the data updated in the database.
+     * @param {InstagramPostUpdateManyAndReturnArgs} args - Arguments to update many InstagramPosts.
+     * @example
+     * // Update many InstagramPosts
+     * const instagramPost = await prisma.instagramPost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InstagramPosts and only return the `id`
+     * const instagramPostWithIdOnly = await prisma.instagramPost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InstagramPostUpdateManyAndReturnArgs>(args: SelectSubset<T, InstagramPostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InstagramPost.
+     * @param {InstagramPostUpsertArgs} args - Arguments to update or create a InstagramPost.
+     * @example
+     * // Update or create a InstagramPost
+     * const instagramPost = await prisma.instagramPost.upsert({
+     *   create: {
+     *     // ... data to create a InstagramPost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InstagramPost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InstagramPostUpsertArgs>(args: SelectSubset<T, InstagramPostUpsertArgs<ExtArgs>>): Prisma__InstagramPostClient<$Result.GetResult<Prisma.$InstagramPostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InstagramPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostCountArgs} args - Arguments to filter InstagramPosts to count.
+     * @example
+     * // Count the number of InstagramPosts
+     * const count = await prisma.instagramPost.count({
+     *   where: {
+     *     // ... the filter for the InstagramPosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends InstagramPostCountArgs>(
+      args?: Subset<T, InstagramPostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InstagramPostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InstagramPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InstagramPostAggregateArgs>(args: Subset<T, InstagramPostAggregateArgs>): Prisma.PrismaPromise<GetInstagramPostAggregateType<T>>
+
+    /**
+     * Group by InstagramPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstagramPostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InstagramPostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InstagramPostGroupByArgs['orderBy'] }
+        : { orderBy?: InstagramPostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InstagramPostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInstagramPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InstagramPost model
+   */
+  readonly fields: InstagramPostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InstagramPost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InstagramPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InstagramPost model
+   */
+  interface InstagramPostFieldRefs {
+    readonly id: FieldRef<"InstagramPost", 'String'>
+    readonly igLink: FieldRef<"InstagramPost", 'String'>
+    readonly igStatus: FieldRef<"InstagramPost", 'igPostStatus'>
+    readonly createdAt: FieldRef<"InstagramPost", 'DateTime'>
+    readonly updatedAt: FieldRef<"InstagramPost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InstagramPost findUnique
+   */
+  export type InstagramPostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter, which InstagramPost to fetch.
+     */
+    where: InstagramPostWhereUniqueInput
+  }
+
+  /**
+   * InstagramPost findUniqueOrThrow
+   */
+  export type InstagramPostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter, which InstagramPost to fetch.
+     */
+    where: InstagramPostWhereUniqueInput
+  }
+
+  /**
+   * InstagramPost findFirst
+   */
+  export type InstagramPostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter, which InstagramPost to fetch.
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstagramPosts to fetch.
+     */
+    orderBy?: InstagramPostOrderByWithRelationInput | InstagramPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstagramPosts.
+     */
+    cursor?: InstagramPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstagramPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstagramPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstagramPosts.
+     */
+    distinct?: InstagramPostScalarFieldEnum | InstagramPostScalarFieldEnum[]
+  }
+
+  /**
+   * InstagramPost findFirstOrThrow
+   */
+  export type InstagramPostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter, which InstagramPost to fetch.
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstagramPosts to fetch.
+     */
+    orderBy?: InstagramPostOrderByWithRelationInput | InstagramPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstagramPosts.
+     */
+    cursor?: InstagramPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstagramPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstagramPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstagramPosts.
+     */
+    distinct?: InstagramPostScalarFieldEnum | InstagramPostScalarFieldEnum[]
+  }
+
+  /**
+   * InstagramPost findMany
+   */
+  export type InstagramPostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter, which InstagramPosts to fetch.
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstagramPosts to fetch.
+     */
+    orderBy?: InstagramPostOrderByWithRelationInput | InstagramPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InstagramPosts.
+     */
+    cursor?: InstagramPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstagramPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstagramPosts.
+     */
+    skip?: number
+    distinct?: InstagramPostScalarFieldEnum | InstagramPostScalarFieldEnum[]
+  }
+
+  /**
+   * InstagramPost create
+   */
+  export type InstagramPostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * The data needed to create a InstagramPost.
+     */
+    data: XOR<InstagramPostCreateInput, InstagramPostUncheckedCreateInput>
+  }
+
+  /**
+   * InstagramPost createMany
+   */
+  export type InstagramPostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InstagramPosts.
+     */
+    data: InstagramPostCreateManyInput | InstagramPostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InstagramPost createManyAndReturn
+   */
+  export type InstagramPostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * The data used to create many InstagramPosts.
+     */
+    data: InstagramPostCreateManyInput | InstagramPostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InstagramPost update
+   */
+  export type InstagramPostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * The data needed to update a InstagramPost.
+     */
+    data: XOR<InstagramPostUpdateInput, InstagramPostUncheckedUpdateInput>
+    /**
+     * Choose, which InstagramPost to update.
+     */
+    where: InstagramPostWhereUniqueInput
+  }
+
+  /**
+   * InstagramPost updateMany
+   */
+  export type InstagramPostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InstagramPosts.
+     */
+    data: XOR<InstagramPostUpdateManyMutationInput, InstagramPostUncheckedUpdateManyInput>
+    /**
+     * Filter which InstagramPosts to update
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * Limit how many InstagramPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InstagramPost updateManyAndReturn
+   */
+  export type InstagramPostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * The data used to update InstagramPosts.
+     */
+    data: XOR<InstagramPostUpdateManyMutationInput, InstagramPostUncheckedUpdateManyInput>
+    /**
+     * Filter which InstagramPosts to update
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * Limit how many InstagramPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InstagramPost upsert
+   */
+  export type InstagramPostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * The filter to search for the InstagramPost to update in case it exists.
+     */
+    where: InstagramPostWhereUniqueInput
+    /**
+     * In case the InstagramPost found by the `where` argument doesn't exist, create a new InstagramPost with this data.
+     */
+    create: XOR<InstagramPostCreateInput, InstagramPostUncheckedCreateInput>
+    /**
+     * In case the InstagramPost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InstagramPostUpdateInput, InstagramPostUncheckedUpdateInput>
+  }
+
+  /**
+   * InstagramPost delete
+   */
+  export type InstagramPostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+    /**
+     * Filter which InstagramPost to delete.
+     */
+    where: InstagramPostWhereUniqueInput
+  }
+
+  /**
+   * InstagramPost deleteMany
+   */
+  export type InstagramPostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstagramPosts to delete
+     */
+    where?: InstagramPostWhereInput
+    /**
+     * Limit how many InstagramPosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InstagramPost without action
+   */
+  export type InstagramPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstagramPost
+     */
+    select?: InstagramPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstagramPost
+     */
+    omit?: InstagramPostOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21743,6 +22842,17 @@ export namespace Prisma {
   export type PublicSourceNewsScalarFieldEnum = (typeof PublicSourceNewsScalarFieldEnum)[keyof typeof PublicSourceNewsScalarFieldEnum]
 
 
+  export const InstagramPostScalarFieldEnum: {
+    id: 'id',
+    igLink: 'igLink',
+    igStatus: 'igStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InstagramPostScalarFieldEnum = (typeof InstagramPostScalarFieldEnum)[keyof typeof InstagramPostScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -21986,6 +23096,20 @@ export namespace Prisma {
    * Reference to a field of type 'Link[]'
    */
   export type ListEnumLinkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Link[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'igPostStatus'
+   */
+  export type EnumigPostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'igPostStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'igPostStatus[]'
+   */
+  export type ListEnumigPostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'igPostStatus[]'>
     
   /**
    * Deep Input Types
@@ -23247,6 +24371,58 @@ export namespace Prisma {
     link?: EnumLinkWithAggregatesFilter<"PublicSourceNews"> | $Enums.Link
     createdAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
+  }
+
+  export type InstagramPostWhereInput = {
+    AND?: InstagramPostWhereInput | InstagramPostWhereInput[]
+    OR?: InstagramPostWhereInput[]
+    NOT?: InstagramPostWhereInput | InstagramPostWhereInput[]
+    id?: StringFilter<"InstagramPost"> | string
+    igLink?: StringFilter<"InstagramPost"> | string
+    igStatus?: EnumigPostStatusFilter<"InstagramPost"> | $Enums.igPostStatus
+    createdAt?: DateTimeFilter<"InstagramPost"> | Date | string
+    updatedAt?: DateTimeFilter<"InstagramPost"> | Date | string
+  }
+
+  export type InstagramPostOrderByWithRelationInput = {
+    id?: SortOrder
+    igLink?: SortOrder
+    igStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstagramPostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InstagramPostWhereInput | InstagramPostWhereInput[]
+    OR?: InstagramPostWhereInput[]
+    NOT?: InstagramPostWhereInput | InstagramPostWhereInput[]
+    igLink?: StringFilter<"InstagramPost"> | string
+    igStatus?: EnumigPostStatusFilter<"InstagramPost"> | $Enums.igPostStatus
+    createdAt?: DateTimeFilter<"InstagramPost"> | Date | string
+    updatedAt?: DateTimeFilter<"InstagramPost"> | Date | string
+  }, "id">
+
+  export type InstagramPostOrderByWithAggregationInput = {
+    id?: SortOrder
+    igLink?: SortOrder
+    igStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InstagramPostCountOrderByAggregateInput
+    _max?: InstagramPostMaxOrderByAggregateInput
+    _min?: InstagramPostMinOrderByAggregateInput
+  }
+
+  export type InstagramPostScalarWhereWithAggregatesInput = {
+    AND?: InstagramPostScalarWhereWithAggregatesInput | InstagramPostScalarWhereWithAggregatesInput[]
+    OR?: InstagramPostScalarWhereWithAggregatesInput[]
+    NOT?: InstagramPostScalarWhereWithAggregatesInput | InstagramPostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InstagramPost"> | string
+    igLink?: StringWithAggregatesFilter<"InstagramPost"> | string
+    igStatus?: EnumigPostStatusWithAggregatesFilter<"InstagramPost"> | $Enums.igPostStatus
+    createdAt?: DateTimeWithAggregatesFilter<"InstagramPost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InstagramPost"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -24654,6 +25830,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InstagramPostCreateInput = {
+    id?: string
+    igLink: string
+    igStatus?: $Enums.igPostStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstagramPostUncheckedCreateInput = {
+    id?: string
+    igLink: string
+    igStatus?: $Enums.igPostStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstagramPostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    igLink?: StringFieldUpdateOperationsInput | string
+    igStatus?: EnumigPostStatusFieldUpdateOperationsInput | $Enums.igPostStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstagramPostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    igLink?: StringFieldUpdateOperationsInput | string
+    igStatus?: EnumigPostStatusFieldUpdateOperationsInput | $Enums.igPostStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstagramPostCreateManyInput = {
+    id?: string
+    igLink: string
+    igStatus?: $Enums.igPostStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstagramPostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    igLink?: StringFieldUpdateOperationsInput | string
+    igStatus?: EnumigPostStatusFieldUpdateOperationsInput | $Enums.igPostStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstagramPostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    igLink?: StringFieldUpdateOperationsInput | string
+    igStatus?: EnumigPostStatusFieldUpdateOperationsInput | $Enums.igPostStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25809,6 +27041,47 @@ export namespace Prisma {
     _max?: NestedEnumLinkFilter<$PrismaModel>
   }
 
+  export type EnumigPostStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.igPostStatus | EnumigPostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumigPostStatusFilter<$PrismaModel> | $Enums.igPostStatus
+  }
+
+  export type InstagramPostCountOrderByAggregateInput = {
+    id?: SortOrder
+    igLink?: SortOrder
+    igStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstagramPostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    igLink?: SortOrder
+    igStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstagramPostMinOrderByAggregateInput = {
+    id?: SortOrder
+    igLink?: SortOrder
+    igStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumigPostStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.igPostStatus | EnumigPostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumigPostStatusWithAggregatesFilter<$PrismaModel> | $Enums.igPostStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumigPostStatusFilter<$PrismaModel>
+    _max?: NestedEnumigPostStatusFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -26269,6 +27542,10 @@ export namespace Prisma {
     set?: $Enums.Link
   }
 
+  export type EnumigPostStatusFieldUpdateOperationsInput = {
+    set?: $Enums.igPostStatus
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -26671,6 +27948,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumLinkFilter<$PrismaModel>
     _max?: NestedEnumLinkFilter<$PrismaModel>
+  }
+
+  export type NestedEnumigPostStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.igPostStatus | EnumigPostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumigPostStatusFilter<$PrismaModel> | $Enums.igPostStatus
+  }
+
+  export type NestedEnumigPostStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.igPostStatus | EnumigPostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.igPostStatus[] | ListEnumigPostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumigPostStatusWithAggregatesFilter<$PrismaModel> | $Enums.igPostStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumigPostStatusFilter<$PrismaModel>
+    _max?: NestedEnumigPostStatusFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {

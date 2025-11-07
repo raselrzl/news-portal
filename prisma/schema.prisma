@@ -473,3 +473,19 @@ enum Link {
   INSTAGRAM
   TWITTER
 }
+
+
+
+model InstagramPost {
+  id            String      @id @default(uuid())
+  igLink        String
+  igStatus      igPostStatus @default(DRAFT)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum igPostStatus {
+  ACTIVE
+  DRAFT
+  EXPIRED
+}

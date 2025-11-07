@@ -26,10 +26,11 @@ import LatestOpinions from "@/components/general/LatestOpinions";
 import { SorboseshAndJonoprioTab } from "@/components/general/SorboseshAndJonoprioTab";
 import { CrimeAndPopularTab } from "@/components/general/CrimeAndPopularTab";
 import LiveUpdate from "@/components/general/PublicSourceNewsLiveUpdate";
+import InstagramPosts from "@/components/instagram/InstagramPosts";
 
 async function getData() {
-  const [lastFeaturedArticle, latestUSANews, InternationalAll] = await Promise.all(
-    [
+  const [lastFeaturedArticle, latestUSANews, InternationalAll] =
+    await Promise.all([
       prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
@@ -120,8 +121,7 @@ async function getData() {
         },
         take: 10,
       }),
-    ]
-  );
+    ]);
 
   return {
     lastFeaturedArticle,
@@ -130,12 +130,16 @@ async function getData() {
   };
 }
 export default async function Home() {
-  const { lastFeaturedArticle, latestUSANews, InternationalAll } = await getData();
+  const { lastFeaturedArticle, latestUSANews, InternationalAll } =
+    await getData();
   await trackRoute("Home");
   const session = await aauth();
   return (
     <>
-    <div className="bg-red-50 dark:bg-black mb-2"> <LiveUpdate /> </div>
+      <div className="bg-red-50 dark:bg-black mb-2">
+        {" "}
+        <LiveUpdate />{" "}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-4">
         <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
           <div className="flex flex-row gap-2 text-center items-center justify-center">
@@ -163,10 +167,10 @@ export default async function Home() {
             ))
           ) : (
             <EmptyState
-               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
+              title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+              description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+              buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+              href="/"
             />
           )}
 
@@ -177,7 +181,8 @@ export default async function Home() {
 
           <div className="mt-10 text-left flex-col hidden sm:block">
             <p className="text-sm font-semibold text-justify">
-              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল মিডিয়া একাউন্টে ফলো করুন।
+              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল
+              মিডিয়া একাউন্টে ফলো করুন।
             </p>
 
             <SocialLinks />
@@ -212,61 +217,68 @@ export default async function Home() {
               </Link>
             ) : (
               <EmptyState
-                 title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
+                title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                href="/"
               />
             )}
-       <div className="bg-primary/55 dark:bg-gray-700 mt-6 rounded-xl border border-primary/55 dark:border-gray-600 shadow-md mx-2 md:mx-0">
-      {/* Header */}
-      <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
-        <Flame className="text-red-600 dark:text-amber-400 w-6 h-6" />
-        <h1 className="font-bold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
-          যুদ্ধবিগ্রহ
-        </h1>
-      </div>
+            <div className="bg-primary/55 dark:bg-gray-700 mt-6 rounded-xl border border-primary/55 dark:border-gray-600 shadow-md mx-2 md:mx-0">
+              {/* Header */}
+              <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
+                <Flame className="text-red-600 dark:text-amber-400 w-6 h-6" />
+                <h1 className="font-bold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
+                  যুদ্ধবিগ্রহ
+                </h1>
+              </div>
 
-      {/* Scrollable List */}
-      <div className="relative h-64 md:h-92 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-transparent px-4 py-3">
-        {InternationalAll && InternationalAll.length > 0 ? (
-          <div className="space-y-3">
-            {InternationalAll.slice(1).map((article) => (
-              <Link href={`/newsDetails/${article.id}`} key={article.id}>
-                <div className="rounded-lg bg-amber-50 dark:bg-gray-800 hover:bg-amber-200 dark:hover:bg-gray-700 border border-primary/55 dark:border-gray-600 transition-all shadow-sm hover:shadow-md p-3">
-                  <h2 className="text-base font-semibold line-clamp-1 text-gray-800 dark:text-gray-100">
-                    {article.newsHeading}
-                  </h2>
+              {/* Scrollable List */}
+              <div className="relative h-64 md:h-92 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-transparent px-4 py-3">
+                {InternationalAll && InternationalAll.length > 0 ? (
+                  <div className="space-y-3">
+                    {InternationalAll.slice(1).map((article) => (
+                      <Link
+                        href={`/newsDetails/${article.id}`}
+                        key={article.id}
+                      >
+                        <div className="rounded-lg bg-amber-50 dark:bg-gray-800 hover:bg-amber-200 dark:hover:bg-gray-700 border border-primary/55 dark:border-gray-600 transition-all shadow-sm hover:shadow-md p-3">
+                          <h2 className="text-base font-semibold line-clamp-1 text-gray-800 dark:text-gray-100">
+                            {article.newsHeading}
+                          </h2>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="py-8">
+                    <EmptyState
+                      title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+                      description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+                      buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+                      href="/"
+                    />
+                  </div>
+                )}
+
+                {/* Gradient & Scroll Hint */}
+                <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-amber-100 dark:from-gray-700 to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-gray-500 dark:text-gray-300 animate-bounce">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
                 </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="py-8">
-            <EmptyState
-               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
-            />
-          </div>
-        )}
-
-        {/* Gradient & Scroll Hint */}
-        <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-amber-100 dark:from-gray-700 to-transparent pointer-events-none" />
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-gray-500 dark:text-gray-300 animate-bounce">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
-      </div>
-    </div>
+              </div>
+            </div>
           </div>
           <div className="flex justify-center items-center pt-4 border-t-1">
             <DeluxeTwoAdvertise />
@@ -302,7 +314,7 @@ export default async function Home() {
                         </div>
                       ) : (
                         <p className="text-sm md:text-md text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-5 pl-2 md:pl-1">
-                         {lastFeaturedArticle[0].newsDetails}
+                          {lastFeaturedArticle[0].newsDetails}
                         </p>
                       )}
                     </div>
@@ -312,10 +324,10 @@ export default async function Home() {
             </div>
           ) : (
             <EmptyState
-               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
+              title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+              description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+              buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+              href="/"
             />
           )}
 
@@ -348,10 +360,10 @@ export default async function Home() {
             </div>
           ) : (
             <EmptyState
-               title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
+              title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+              description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+              buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+              href="/"
             />
           )}
         </div>
@@ -359,8 +371,9 @@ export default async function Home() {
 
       <div className="border-y-2 my-2 border-primary"></div>
 
-      <Videos />
+   {/*    <Videos /> */}
 
+<InstagramPosts />
       {/*  tab section */}
       <div className="my-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -373,11 +386,11 @@ export default async function Home() {
           <div className="py-4">
             <Suspense fallback={<Loader2 className="animate-spin" />}>
               <PremiarOne />
-            </Suspense>          
-         
+            </Suspense>
           </div>
-          <div className="py-4"><LatestOpinions /></div>
-           
+          <div className="py-4">
+            <LatestOpinions />
+          </div>
         </div>
       </div>
 
@@ -386,7 +399,7 @@ export default async function Home() {
         <div className="grid grid-cols-3 border-primary my-4">
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between w-full max-w-sm mx-auto md:mx-0">
             <ScienceNewsHeadPost />
-             <PremiumTwoAdvertise />
+            <PremiumTwoAdvertise />
           </div>
 
           <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
@@ -406,8 +419,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
- 
     </>
   );
 }
