@@ -1,4 +1,4 @@
-import { Facebook, Instagram, MailIcon, Youtube } from "lucide-react";
+import { Facebook, Instagram, InstagramIcon, MailIcon, Youtube } from "lucide-react";
 import Link from "next/link";
 import CountryListLinks from "./CountryListLinks";
 
@@ -44,7 +44,7 @@ export default function Footer() {
         <div className="md:grid md:grid-cols-3">
           <div>
             <h1 className="font-bold text-2xl mt-6">প্রকাশনা ও যোগাযোগ</h1>
-            <h3 className="font-bold">সম্পাদক & প্রকাশক: শাহাব উদ্দিন রাসেল</h3>
+            <h3 className="font-bold">সম্পাদক & প্রকাশক: শাহাব উদ্দিন</h3>
 
             <p className="mb-1 text-sm text-muted-foreground">
               <a
@@ -122,6 +122,14 @@ export default function Footer() {
               >
                 <MailIcon size={32} />
               </Link>
+              <Link
+        href="https://www.instagram.com/jagrotobarta/"
+        target="_blank"
+        rel="noopener noreferrer"
+         className="w-10 h-10 bg-primary p-1 rounded-xl text-white hover:text-pink-700"
+      >
+        <InstagramIcon size={32} />
+      </Link>
             </div>
             {/*      <a
               href="https://www.instagram.com"

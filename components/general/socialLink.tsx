@@ -20,14 +20,14 @@ const SocialLinks = () => {
             >
               <Facebook className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-blue-600" />
             </a>
-     {/*  <Link
-        href="https://instagram.com"
+      <Link
+        href="https://www.instagram.com/jagrotobarta/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-pink-500 hover:text-pink-700"
+         className="w-10 h-10 bg-primary p-1 rounded-xl text-white hover:text-pink-700"
       >
         <InstagramIcon size={32} />
-      </Link> */}
+      </Link>
   {/*     <Link
         href="https://youtube.com"
         target="_blank"
