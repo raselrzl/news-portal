@@ -64,23 +64,23 @@ export default function InstagramAllPostsClient() {
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-0 py-6">
       {/* Support Banner */}
-    <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 p-4 rounded-lg shadow-lg mb-6 text-center">
-  <h1 className="text-lg md:text-xl font-bold text-white mb-2">
-    ⚡ স্বাধীন ও সমাজনির্ভর সংবাদমাধ্যম
-  </h1>
-  <p className="text-white mb-4">
-    বিক্রির জন্য নয়, প্রভাবশালীদের অর্থায়নে নয়। আমাদের কাজকে সমর্থন করুন—ফলো ও শেয়ার করে!
-  </p>
-  <Button
-    className="bg-white text-purple-600 hover:bg-purple-100"
-    onClick={() =>
-      window.open("https://www.instagram.com/jagrotobarta/", "_blank")
-    }
-  >
-    আমাদের ইনস্টাগ্রামে অনুসরণ করুন
-  </Button>
-</div>
-
+      <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 p-4 rounded-lg shadow-lg mb-6 text-center">
+        <h1 className="text-lg md:text-xl font-bold text-white mb-2">
+          ⚡ স্বাধীন ও সমাজনির্ভর সংবাদমাধ্যম
+        </h1>
+        <p className="text-white mb-4">
+          বিক্রির জন্য নয়, প্রভাবশালীদের অর্থায়নে নয়। আমাদের কাজকে সমর্থন
+          করুন—ফলো ও শেয়ার করে!
+        </p>
+        <Button
+          className="bg-white text-purple-600 hover:bg-purple-100"
+          onClick={() =>
+            window.open("https://www.instagram.com/jagrotobarta/", "_blank")
+          }
+        >
+          আমাদের ইনস্টাগ্রামে অনুসরণ করুন
+        </Button>
+      </div>
 
       {/* Instagram Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -102,15 +102,11 @@ export default function InstagramAllPostsClient() {
       )}
 
       {!hasMore && posts.length > 0 && (
-        <p className="text-center mt-6 text-gray-500">
-          The End
-        </p>
+        <p className="text-center mt-6 text-gray-500">The End</p>
       )}
 
       {!hasMore && posts.length === 0 && !loading && (
-        <p className="text-center mt-6 text-gray-500">
-          No posts found.
-        </p>
+        <p className="text-center mt-6 text-gray-500">No posts found.</p>
       )}
     </div>
   );
