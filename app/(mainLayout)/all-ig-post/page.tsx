@@ -78,7 +78,8 @@ export default function InstagramAllPostsClient() {
             window.open("https://www.instagram.com/jagrotobarta/", "_blank")
           }
         >
-          আমাদের ইনস্টাগ্রামে অনুসরণ করুন
+          আমাদের ইনস্টাগ্রামে ফলো ✅
+ করুন
         </Button>
       </div>
 
