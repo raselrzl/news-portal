@@ -64,23 +64,23 @@ export default function InstagramAllPostsClient() {
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-0 py-6">
       {/* Support Banner */}
-      <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 p-4 rounded-lg shadow-lg mb-6 text-center">
-        <h1 className="text-lg md:text-xl font-bold text-white mb-2">
-          ⚡ Independent & Community-Driven
-        </h1>
-        <p className="text-white mb-4">
-          Not for sale. Not funded by billionaires. Support us by following and
-          sharing our work!
-        </p>
-        <Button
-          className="bg-white text-purple-600 hover:bg-purple-100"
-          onClick={() =>
-            window.open("https://www.instagram.com/globaleyepress/", "_blank")
-          }
-        >
-          Follow Us on Instagram
-        </Button>
-      </div>
+    <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 p-4 rounded-lg shadow-lg mb-6 text-center">
+  <h1 className="text-lg md:text-xl font-bold text-white mb-2">
+    ⚡ স্বাধীন ও সমাজনির্ভর সংবাদমাধ্যম
+  </h1>
+  <p className="text-white mb-4">
+    বিক্রির জন্য নয়, প্রভাবশালীদের অর্থায়নে নয়। আমাদের কাজকে সমর্থন করুন—ফলো ও শেয়ার করে!
+  </p>
+  <Button
+    className="bg-white text-purple-600 hover:bg-purple-100"
+    onClick={() =>
+      window.open("https://www.instagram.com/jagrotobarta/", "_blank")
+    }
+  >
+    আমাদের ইনস্টাগ্রামে অনুসরণ করুন
+  </Button>
+</div>
+
 
       {/* Instagram Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
