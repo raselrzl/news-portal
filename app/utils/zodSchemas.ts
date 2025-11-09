@@ -42,6 +42,7 @@ export const newsArticleSchema = z.object({
     "TECHNOLOGY",
     "ENTERTAINMENT",
     "ECONOMY",
+    "WAR",
     "LAW_AND_JUSTICE",
     "ENVIRONMENT",
     "SCIENCE",]),
