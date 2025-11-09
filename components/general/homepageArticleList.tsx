@@ -983,7 +983,7 @@ export async function SorboseshNews() {
 // getsorboseshnews
 export async function getJonoprioNews() {
   return await prisma.newsArticle.findMany({
-    where: { newsCategory: "CRIME" },
+    where: { newsCategory: "POLITICS" },
     select: {
       id: true,
       createdAt: true,
