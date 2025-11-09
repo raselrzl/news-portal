@@ -64,6 +64,7 @@ export default function SidebarClient({ email, name, userType, approvalStatus, m
     { href: "/post-an-article/advertise/allcontactinfo", icon: MessagesSquare, label: "All Advertisement Requests" },
     { href: "/post-an-article/post-a-video", icon: Settings2, label: "Post a YouTube Video" },
     { href: "/post-an-article/post-an-instagram", icon: Settings2, label: "Post a Instagram Link" },
+     { href: "/post-an-article/post-an-instagram/allinstagrampost", icon: Settings2, label: "Manage all instagram post" },
     { href: "/post-an-article/post-a-video/allvideos", icon: BarChart, label: "Manage All Videos" },
     { href: "/post-an-article/allusers", icon: Users, label: "Users" },
   ];

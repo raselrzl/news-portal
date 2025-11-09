@@ -921,3 +921,58 @@ export async function createInstagramPost(data: {
 
   return redirect("/");
 }
+
+
+
+export async function deleteInstagramById(instagramId: string) {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) {
+    return redirect("/restricted");
+  }
+
+  await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  try {
+    await prisma.instagramPost.delete({
+      where: { id: instagramId },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting Instagram post:", error);
+    throw new Error("Failed to delete Instagram post");
+  }
+}
+
+
+export async function updateInstagramStatus(
+  instagramId: string,
+  status: "ACTIVE" | "DRAFT" | "EXPIRED"
+) {
+  const superuser = await requireSuperAdmin();
+  if (!superuser) redirect("/restricted");
+
+  await requireUser();
+
+  const req = await request();
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) throw new Error("Forbidden");
+
+  const post = await prisma.instagramPost.findUnique({
+    where: { id: instagramId },
+  });
+  if (!post) throw new Error("Instagram post not found");
+
+  await prisma.instagramPost.update({
+    where: { id: instagramId },
+    data: { igStatus: status },
+  });
+
+  return { success: true };
+}
