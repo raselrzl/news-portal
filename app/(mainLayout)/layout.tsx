@@ -8,11 +8,13 @@ import NewsTicker from "@/components/general/NewsTicker";
 import Poll from "@/components/LivePoll/Poll";
 import Footer from "@/components/general/Footer";
 import VisitorTracker from "@/components/general/VisitorTracker";
+import AdsTicker from "@/components/general/AdsTicker";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="fixed top-0 left-0 right-0 z-50 bg-background shadow-md max-w-7xl mx-auto">
+        <AdsTicker />
         <Navbar />
         <div className="flex justify-between items-center py-1 bg-primary-foreground">
           <Link
@@ -24,15 +26,15 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           <TodayDate locale="bn-BD" withTime />
         </div>
 
-        <NewsTicker />
+            <NewsTicker />
       </div>
-      <div className="mt-36 md:mt-42">
+      <div className="mt-38 md:mt-48">
         <BanglaNavMenu />
       </div>
       {children}
       <Poll />
- <Footer />
- <VisitorTracker />
+      <Footer />
+      <VisitorTracker />
       <Toaster closeButton richColors />
     </div>
   );

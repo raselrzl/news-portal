@@ -16,7 +16,7 @@ export default async function NewsTicker() {
     <div className="overflow-hidden bg-primary text-white font-bold py-1">
       <div
         className="flex gap-10 whitespace-nowrap [will-change:transform] animate-ticker"
-        style={{ ["--ticker-speed" as any]: "20s" }}
+        style={{ ["--ticker-speed" as any]: "45s" }}
         aria-label="Latest headlines"
       >
         {latestFive.map((item) => (

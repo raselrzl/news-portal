@@ -371,9 +371,9 @@ export default async function Home() {
 
       <div className="border-y-2 my-2 border-primary"></div>
 
-   {/*    <Videos /> */}
+      {/*    <Videos /> */}
 
-<InstagramPosts />
+      <InstagramPosts />
       {/*  tab section */}
       <div className="my-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
