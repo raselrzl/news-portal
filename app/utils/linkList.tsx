@@ -16,4 +16,5 @@
     { id: "15", href: "/law-and-justice", label: "আইন ও আদালত" },
     { id: "16", href: "/environment", label: "পরিবেশ" },
     { id: "17", href: "/science", label: "বিজ্ঞান" },
+    { id: "18", href: "/war", label: "যুদ্ধ আপডেট" },
   ];

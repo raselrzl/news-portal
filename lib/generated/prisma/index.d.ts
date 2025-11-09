@@ -154,7 +154,8 @@ export const newsCategory: {
   ECONOMY: 'ECONOMY',
   LAW_AND_JUSTICE: 'LAW_AND_JUSTICE',
   ENVIRONMENT: 'ENVIRONMENT',
-  SCIENCE: 'SCIENCE'
+  SCIENCE: 'SCIENCE',
+  WAR: 'WAR'
 };
 
 export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]

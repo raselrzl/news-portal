@@ -27,6 +27,7 @@ import { SorboseshAndJonoprioTab } from "@/components/general/SorboseshAndJonopr
 import { CrimeAndPopularTab } from "@/components/general/CrimeAndPopularTab";
 import LiveUpdate from "@/components/general/PublicSourceNewsLiveUpdate";
 import InstagramPosts from "@/components/instagram/InstagramPosts";
+import WarLatest from "@/components/general/WarLatest";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -369,6 +370,8 @@ export default async function Home() {
         </div>
       </div>
 
+      <div className="border-y-2 my-2 border-primary"></div>
+      <WarLatest />
       <div className="border-y-2 my-2 border-primary"></div>
 
       {/*    <Videos /> */}

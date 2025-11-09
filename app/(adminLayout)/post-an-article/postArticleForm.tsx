@@ -210,7 +210,6 @@ export function CreateNewsArticleForm({
                           {districts.map((district) => (
                             <SelectItem key={district.id} value={district.name}>
                               <div className="flex items-center gap-2">
-                             
                                 <span>{district.label}</span>
                               </div>
                             </SelectItem>
