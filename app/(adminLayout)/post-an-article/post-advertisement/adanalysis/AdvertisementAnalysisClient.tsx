@@ -338,12 +338,12 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                   <TableHead>Supervisor</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Country</TableHead>
-                  <TableHead>Price / Per day (SEK)</TableHead>
+                  <TableHead>Price / Per day (BDT)</TableHead>
                   <TableHead>Start → End</TableHead>
                   <TableHead>Duration (Days)</TableHead>
                   <TableHead>Discount (%)</TableHead>
                   <TableHead>Moms (%)</TableHead>
-                  <TableHead>Total (SEK)</TableHead>
+                  <TableHead>Total (BDT)</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Created At</TableHead>
                 </TableRow>
@@ -449,19 +449,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                     </div>
                     <div className="p-4 bg-muted/30 rounded-lg border hover:shadow-lg transition-shadow">
                       <strong>Total Base:</strong>{" "}
-                      {summary.totalBase.toFixed(2)} SEK
+                      {summary.totalBase.toFixed(2)} BDT
                     </div>
                     <div className="p-4 bg-muted/30 rounded-lg border hover:shadow-lg transition-shadow">
                       <strong>Total Discount:</strong>{" "}
-                      {summary.totalDiscountAmt.toFixed(2)} SEK
+                      {summary.totalDiscountAmt.toFixed(2)} BDT
                     </div>
                     <div className="p-4 bg-muted/30 rounded-lg border hover:shadow-lg transition-shadow">
                       <strong>Total Excl. Moms:</strong>{" "}
-                      {summary.totalExclMoms.toFixed(2)} SEK
+                      {summary.totalExclMoms.toFixed(2)} BDT
                     </div>
                     <div className="p-4 bg-muted/30 rounded-lg border hover:shadow-lg transition-shadow">
                       <strong>Total Incl. Moms:</strong>{" "}
-                      {summary.totalInclMoms.toFixed(2)} SEK
+                      {summary.totalInclMoms.toFixed(2)} BDT
                     </div>
                   </div>
                 </TabsContent>
@@ -485,19 +485,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                           </p>
                           <p>
                             <strong>Total Base:</strong>{" "}
-                            {s.totalBase.toFixed(2)} SEK
+                            {s.totalBase.toFixed(2)} BDT
                           </p>
                           <p>
                             <strong>Total Discount:</strong>{" "}
-                            {s.totalDiscountAmt.toFixed(2)} SEK
+                            {s.totalDiscountAmt.toFixed(2)} BDT
                           </p>
                           <p>
                             <strong>Total Excl. Moms:</strong>{" "}
-                            {s.totalExclMoms.toFixed(2)} SEK
+                            {s.totalExclMoms.toFixed(2)} BDT
                           </p>
                           <p>
                             <strong>Total Incl. Moms:</strong>{" "}
-                            {s.totalInclMoms.toFixed(2)} SEK
+                            {s.totalInclMoms.toFixed(2)} BDT
                           </p>
                         </div>
                       );
@@ -536,19 +536,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                               </p>
                               <p>
                                 <strong>Total Base:</strong>{" "}
-                                {stats.totalBase.toFixed(2)} SEK
+                                {stats.totalBase.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Discount:</strong>{" "}
-                                {stats.totalDiscount.toFixed(2)} SEK
+                                {stats.totalDiscount.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Excl. Moms:</strong>{" "}
-                                {stats.totalExclMoms.toFixed(2)} SEK
+                                {stats.totalExclMoms.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Incl. Moms:</strong>{" "}
-                                {stats.totalInclMoms.toFixed(2)} SEK
+                                {stats.totalInclMoms.toFixed(2)} BDT
                               </p>
                             </div>
                           ))}
@@ -634,19 +634,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                               </p>
                               <p>
                                 <strong>Total Base:</strong>{" "}
-                                {stats.totalBase.toFixed(2)} SEK
+                                {stats.totalBase.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Discount:</strong>{" "}
-                                {stats.totalDiscountAmt.toFixed(2)} SEK
+                                {stats.totalDiscountAmt.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Excl. Moms:</strong>{" "}
-                                {stats.totalExclMoms.toFixed(2)} SEK
+                                {stats.totalExclMoms.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Incl. Moms:</strong>{" "}
-                                {stats.totalInclMoms.toFixed(2)} SEK
+                                {stats.totalInclMoms.toFixed(2)} BDT
                               </p>
                             </div>
                           ))}
@@ -732,19 +732,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                               </p>
                               <p>
                                 <strong>Total Base:</strong>{" "}
-                                {stats.totalBase.toFixed(2)} SEK
+                                {stats.totalBase.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Discount:</strong>{" "}
-                                {stats.totalDiscountAmt.toFixed(2)} SEK
+                                {stats.totalDiscountAmt.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Excl. Moms:</strong>{" "}
-                                {stats.totalExclMoms.toFixed(2)} SEK
+                                {stats.totalExclMoms.toFixed(2)} BDT
                               </p>
                               <p>
                                 <strong>Total Incl. Moms:</strong>{" "}
-                                {stats.totalInclMoms.toFixed(2)} SEK
+                                {stats.totalInclMoms.toFixed(2)} BDT
                               </p>
                             </div>
                           ))}
@@ -825,19 +825,19 @@ export default function AdvertisementAnalysisClient({ serverAds }: Props) {
                             <strong>Duration:</strong> {duration} Days
                           </p>
                           <p>
-                            <strong>Base:</strong> {base.toFixed(2)} SEK
+                            <strong>Base:</strong> {base.toFixed(2)} BDT
                           </p>
                           <p>
                             <strong>Discount:</strong> {discountAmt.toFixed(2)}{" "}
-                            SEK
+                            BDT
                           </p>
                           <p>
                             <strong>Total Excl. Moms:</strong>{" "}
-                            {withDiscount.toFixed(2)} SEK
+                            {withDiscount.toFixed(2)} BDT
                           </p>
                           <p>
                             <strong>Total Incl. Moms:</strong>{" "}
-                            {totalWithMoms.toFixed(2)} SEK
+                            {totalWithMoms.toFixed(2)} BDT
                           </p>
                         </div>
                       );

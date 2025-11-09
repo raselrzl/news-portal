@@ -152,7 +152,7 @@ export default async function AdvertiseDetailsPage({
                 <th className="border px-3 py-2 text-left font-semibold">বিবরণ</th>
                 <th className="border px-3 py-2 text-right font-semibold">দর (প্রতি দিন)</th>
                 <th className="border px-3 py-2 text-right font-semibold">দিন</th>
-                <th className="border px-3 py-2 text-right font-semibold">মোট (SEK)</th>
+                <th className="border px-3 py-2 text-right font-semibold">মোট (BDT)</th>
 
               </tr>
             </thead>

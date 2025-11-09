@@ -407,7 +407,7 @@ export function CreateAdvertisementForm() {
                           <div>
                             <span>{pkg.name}</span>
                             <span className="text-primary p-1 ml-2 rounded bg-gray-800">
-                              SEK {pkg.dailyPrice}
+                              BDT {pkg.dailyPrice}
                             </span>
                           </div>
                           <span>{pkg.page}</span>

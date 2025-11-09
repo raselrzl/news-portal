@@ -29,7 +29,7 @@ export default async function About() {
 
       <p className="mb-4 text-lg leading-relaxed">
         পাঠকের মতামত, পরামর্শ ও সমালোচনাকে আমরা স্বাগত জানাই। আপনি চাইলে আমাদের{" "}
-        <a href="mailto:contact@jagrotobarta.com" className="text-orange-600 hover:underline">
+        <a href="mailto:info@jagrotobarta.com" className="text-orange-600 hover:underline">
           যোগাযোগ
         </a>{" "}
         পৃষ্ঠার মাধ্যমে সরাসরি বার্তা পাঠাতে পারেন।

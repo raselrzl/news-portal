@@ -54,12 +54,6 @@ export default function Footer() {
                 sompadok@jagrotobarta.com
               </a>
               <br />
-              <a
-                href="mailto:contact@jagrotobarta.com"
-                className="text-orange-600 hover:underline"
-              >
-                contact@jagrotobarta.com
-              </a>
             </p>
 
             <div>
@@ -79,10 +73,10 @@ export default function Footer() {
      
             বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
                <a
-              href="mailto:ads@jagrotobarta.com"
+              href="mailto:info@jagrotobarta.com"
               className="text-primary hover:underline"
             >
-              ads@jagrotobarta.com
+              info@jagrotobarta.com
             </a>
             <div className="max-w-2xl mx-auto px-4 py-4 text-foreground text-center">
               <p className="mb-4 inline">
