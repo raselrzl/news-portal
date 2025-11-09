@@ -875,7 +875,7 @@ export async function Binodon() {
                     alt="picture"
                     width={190}
                     height={140}
-                    className="w-full h-full md:h-[150px] object-fit"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 

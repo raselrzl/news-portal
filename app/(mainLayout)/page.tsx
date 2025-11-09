@@ -65,7 +65,7 @@ async function getData() {
       }),
 
       prisma.newsArticle.findMany({
-        where: { newsLocation: "dhaka" },
+        where: { newsCategory: "CRIME" },
         select: {
           id: true,
           createdAt: true,
