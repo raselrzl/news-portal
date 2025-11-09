@@ -46,7 +46,7 @@ export default async function WarLatest() {
         <h2 className="text-xl font-extrabold mb-4 flex items-center">
           যুদ্ধ ও সংকট
         </h2>
-        <Link href="/war" className="text-sm font-bold hover:underline">আরো দেখুন</Link>
+        <Link href="/war" className="text-sm font-bold hover:underline">আরো দেখুন →</Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
