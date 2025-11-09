@@ -229,7 +229,7 @@ export default async function Home() {
               <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
                 <Flame className="text-red-600 dark:text-amber-400 w-6 h-6" />
                 <h1 className="font-bold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
-                  যুদ্ধবিগ্রহ
+                  বিশ্বজুড়ে
                 </h1>
               </div>
 
