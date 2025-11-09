@@ -7,7 +7,7 @@ import { EconomyNews } from "../NewsCategory/EconomyNews";
 export function CrimeAndPopularTab() {
   return (
     <div className="">
-      <Tabs defaultValue="crime" className="w-full">
+      <Tabs defaultValue="politics" className="w-full">
         <TabsList className="grid w-full grid-cols-2 bg-amber-800">
           <TabsTrigger className=" font-bold" value="politics">
             রাজনীতি
