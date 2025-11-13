@@ -137,9 +137,27 @@ export default async function Home() {
   const session = await aauth();
   return (
     <>
-      <div className="bg-red-50 dark:bg-black mb-2">
-        {" "}
-        <LiveUpdate />{" "}
+      <div className="bg-red-50 dark:bg-black mb-2 grid grid-cols-3 items-center px-2">
+        {/* Live Updates */}
+        <div className="col-span-3 md:col-span-2">
+          <LiveUpdate />
+        </div>
+
+        {/* Desktop-only Advertisement Banner */}
+        <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-gradient-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
+          <p className="text-xs md:text-sm text-gray-800 dark:text-gray-200 text-center leading-snug">
+            <strong className="text-yellow-700 dark:text-yellow-400">
+              বিজ্ঞপ্তি:
+            </strong>{" "}
+            আমরা স্থানীয়, কর্পোরেট, পণ্য এবং সামাজিক যোগাযোগ মাধ্যমের বিজ্ঞাপন
+            প্রচার করি, সম্পূর্ণ স্বতন্ত্র এবং কোনো প্রতিষ্ঠান বা ব্যক্তির
+            তহবিলের উপর নির্ভরশীল নয়। আমাদের পাঠকরা সারাবাংলায় ছড়িয়ে আছে।
+            অংশীদারিত্ব বা বিজ্ঞাপনের জন্য যোগাযোগ করুন
+            <span className="font-semibold underline hover:text-yellow-700 dark:hover:text-yellow-400 cursor-pointer">
+              contact@jagrotobarta.com
+            </span>
+          </p>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-4">
         <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
