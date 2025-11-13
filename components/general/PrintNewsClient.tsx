@@ -1,6 +1,12 @@
 "use client";
 import React, { useRef, useState } from "react";
 import jsPDF from "jspdf";
+import { Button } from "@/components/ui/button";
+import html2canvas from "html2canvas-pro";
+import { Download, Loader2 } from "lucide-react";
+import Image from "next/image";
+import { isJson } from "@/app/utils/isJson";
+import { richTextToPlainText } from "@/app/utils/richTextToPlainText";
 
 type Quote = {
   speakerInfo: string;
@@ -21,18 +27,6 @@ function splitTextByLength(text: string, firstPartLength: number = 350) {
     firstPart: text.slice(0, firstPartLength),
     remainingPart: text.slice(firstPartLength),
   };
-}
-
-import { formatRelativeTime } from "@/app/utils/formatRelativeTime";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import html2canvas from "html2canvas-pro";
-import { Download, Loader2 } from "lucide-react";
-import { isJson } from "@/app/utils/isJson";
-import { richTextToPlainText } from "@/app/utils/richTextToPlainText";
-
-interface NewsDetailsDisplayProps {
-  newsDetails: string;
 }
 
 export function PrintNewsDetailsClient({
@@ -71,12 +65,81 @@ export function PrintNewsDetailsClient({
 
     setIsLoading(false);
   };
+
+  // Function to format numbers to Bengali digits
+  const toBn = (num: number) =>
+    num
+      .toString()
+      .split("")
+      .map((d) => "০১২৩৪৫৬৭৮৯"[parseInt(d)])
+      .join("");
+
+  // Helper arrays for calendars
+  const bnMonths = [
+    "বৈশাখ",
+    "জ্যৈষ্ঠ",
+    "আষাঢ়",
+    "শ্রাবণ",
+    "ভাদ্র",
+    "আশ্বিন",
+    "কার্তিক",
+    "অগ্রহায়ণ",
+    "পৌষ",
+    "মাঘ",
+    "ফাল্গুন",
+    "চৈত্র",
+  ];
+  const hijriMonths = [
+    "মুহররম",
+    "সফর",
+    "রবিউল আউয়াল",
+    "রবিউস সানি",
+    "জমাদিউল আউয়াল",
+    "জমাদিউস সানি",
+    "রজব",
+    "শাবান",
+    "রমজান",
+    "শাওয়াল",
+    "জিলক্বদ",
+    "জিলহজ",
+  ];
+  const gregMonthsBn = [
+    "জানুয়ারি",
+    "ফেব্রুয়ারি",
+    "মার্চ",
+    "এপ্রিল",
+    "মে",
+    "জুন",
+    "জুলাই",
+    "আগস্ট",
+    "সেপ্টেম্বর",
+    "অক্টোবর",
+    "নভেম্বর",
+    "ডিসেম্বর",
+  ];
+
+  const day = toBn(createdAt.getDate());
+  const hour = toBn(createdAt.getHours());
+  const minute = toBn(createdAt.getMinutes());
+
+  const gregMonth = gregMonthsBn[createdAt.getMonth()];
+  const banglaMonth = bnMonths[createdAt.getMonth()];
+  const hijriMonth = hijriMonths[createdAt.getMonth()];
+
+  const gregYear = toBn(createdAt.getFullYear());
+  const banglaYear = toBn(createdAt.getFullYear() - 593);
+  const hijriYear = toBn(createdAt.getFullYear() - 622);
+
+  const hour12 = createdAt.getHours() % 12 || 12;
+  const ampm = createdAt.getHours() >= 12 ? "PM" : "AM";
+  const hourBn = toBn(hour12);
+  const minuteBn = toBn(createdAt.getMinutes());
+
   return (
     <>
-      {" "}
       <Button
         onClick={handleDownload}
-        className="overflow-hidden w-10 h-10 bg-black shadow border rounded-xl text- cursor-pointer"
+        className="overflow-hidden w-10 h-10 bg-black shadow border rounded-xl cursor-pointer"
         variant="outline"
         disabled={isLoading}
       >
@@ -107,77 +170,132 @@ export function PrintNewsDetailsClient({
         <header
           style={{
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "center",
             padding: "8px 12px",
             marginBottom: "16px",
-            fontWeight: "bold",
-            fontSize: "14px",
             background: "#000000",
             color: "#ffffff",
-            borderRadius: "1px",
+            borderRadius: "4px",
             boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            position: "relative",
           }}
         >
-          {/* Logo & Tagline */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <img
-                src="/lg1.png"
-                alt="Logo"
-                style={{ height: "40px", objectFit: "contain" }}
-                width={120}
-                height={30}
-              />
-               <span
+          {/* Top Row: Logo & Tagline */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                <img
+                  src="/lg1.png"
+                  alt="Logo"
+                  style={{ height: "40px", objectFit: "contain" }}
+                  width={120}
+                  height={30}
+                />
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "normal",
+                    color: "#f0f0f0",
+                  }}
+                >
+                  নির্ভীক সংবাদ, নির্ভরযোগ্য সূত্র।
+                </span>
+              </div>
+              <a
+                href="www.jagrotobarta.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  fontSize: "12px",
-                  fontWeight: "normal",
-                  color: "#f0f0f0",
+                  fontSize: "8px",
+                  color: "#00bfff",
+                  textDecoration: "underline",
+                  paddingLeft: "9px",
                 }}
               >
-                নির্ভীক সংবাদ, নির্ভরযোগ্য সূত্র।
-              </span>
+                www.jagrotobarta.com
+              </a>
             </div>
-            <a
-              href="www.jagrotobarta.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontSize: "8px",
-                color: "#00bfff",
-                textDecoration: "underline",
-                paddingLeft: "9px"
-              }}
-            >
-              www.jagrotobarta.com
-            </a>
-          </div>
 
-          {/* Date & Breaking News */}
-          <div
-            style={{ textAlign: "right", fontSize: "10px", color: "#f0f0f0" }}
-          >
-            <div>
-              {createdAt.toLocaleString("bn-BD", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-                hour12: false,
-              })}
-            </div>
+            {/* Top-right time */}
             <div
               style={{
-                fontStyle: "italic",
-                marginTop: "2px",
-                color: "#ffcc00",
+                position: "absolute",
+                top: "8px",
+                right: "12px",
+                background: "#000",
+                color: "#fff",
+                padding: "2px 6px",
+                borderRadius: "6px",
+                fontSize: "10px",
               }}
             >
-              নিখুঁত খবর, আপনার বিশ্বাসে।
+              {hourBn}:{minuteBn} {ampm}
             </div>
+          </div>
+
+          {/* Bottom Row: All dates in one line (without time) */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "6px",
+              marginTop: "6px",
+              flexWrap: "nowrap",
+              fontSize: "10px",
+            }}
+          >
+            <span
+              style={{
+                background: "#ff4d4f",
+                padding: "2px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {day} {gregMonth} {gregYear}
+            </span>
+            <span
+              style={{
+                background: "#52c41a",
+                padding: "2px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {day} {banglaMonth} {banglaYear}
+            </span>
+            <span
+              style={{
+                background: "#1890ff",
+                padding: "2px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {day} {hijriMonth} {hijriYear} হিজরী
+            </span>
+          </div>
+
+          {/* Tagline at bottom */}
+          <div
+            style={{
+              fontStyle: "italic",
+              marginTop: "4px",
+              color: "#ffcc00",
+              fontSize: "10px",
+              textAlign: "right",
+            }}
+          >
+            নিখুঁত খবর, আপনার বিশ্বাসে।
           </div>
         </header>
 
@@ -185,7 +303,7 @@ export function PrintNewsDetailsClient({
           style={{ flexGrow: 1, overflow: "auto", paddingBottom: "8px" }}
           className="border-1 p-4"
         >
-           <h1
+          <h1
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -208,7 +326,6 @@ export function PrintNewsDetailsClient({
                   objectFit: "cover",
                   marginRight: "16px",
                   marginBottom: "16px",
-                  /*  borderRadius: "8px", */
                 }}
               />
             )}
@@ -225,12 +342,10 @@ export function PrintNewsDetailsClient({
 
               return (
                 <>
-                  {/* Text next to the floated image */}
                   <p className="text-[12px] leading-[1.3] text-justify mb-4 whitespace-pre-line">
                     {firstPart}
                   </p>
 
-                  {/* Remaining text in 3 columns below */}
                   <div
                     style={{
                       clear: "both",
@@ -292,7 +407,7 @@ export function PrintNewsDetailsClient({
             textDecoration: "underline",
           }}
         >
-          Source: www.jagrotobarta.com
+          www.jagrotobarta.com
         </a>
       </div>
     </>
