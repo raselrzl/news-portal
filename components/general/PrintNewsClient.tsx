@@ -131,23 +131,23 @@ export function PrintNewsDetailsClient({
   const hijriYear = toBn(createdAt.getFullYear() - 622);
 
   const bnWeekdays = [
-  "রবিবার",
-  "সোমবার",
-  "মঙ্গলবার",
-  "বুধবার",
-  "বৃহস্পতিবার",
-  "শুক্রবার",
-  "শনিবার",
-];
+    "রবিবার",
+    "সোমবার",
+    "মঙ্গলবার",
+    "বুধবার",
+    "বৃহস্পতিবার",
+    "শুক্রবার",
+    "শনিবার",
+  ];
 
-// Get day name
-const weekdayBn = bnWeekdays[createdAt.getDay()];
+  // Get day name
+  const weekdayBn = bnWeekdays[createdAt.getDay()];
 
-// 12-hour format
-const hour12 = createdAt.getHours() % 12 || 12;
-const ampmBn = createdAt.getHours() >= 12 ? "পিএম" : "এএম";
-const hourBn = toBn(hour12);
-const minuteBn = toBn(createdAt.getMinutes());
+  // 12-hour format
+  const hour12 = createdAt.getHours() % 12 || 12;
+  const ampmBn = createdAt.getHours() >= 12 ? "পিএম" : "এএম";
+  const hourBn = toBn(hour12);
+  const minuteBn = toBn(createdAt.getMinutes());
 
   return (
     <>
@@ -243,21 +243,20 @@ const minuteBn = toBn(createdAt.getMinutes());
             </div>
 
             {/* Top-right time */}
-           <div
-  style={{
-    position: "absolute",
-    top: "8px",
-    right: "12px",
-    background: "#000",
-    color: "#fff",
-    padding: "2px 6px",
-    borderRadius: "6px",
-    fontSize: "10px",
-    textAlign: "center",
-  }}
->
-  {weekdayBn} {hourBn}:{minuteBn} {ampmBn}
-</div>
+            <div
+              style={{
+                position: "absolute",
+                top: "2px",
+                right: "2px",
+                color: "#fff",
+                padding: "2px 2px",
+                borderRadius: "6px",
+                fontSize: "8px",
+                textAlign: "center",
+              }}
+            >
+              {weekdayBn} {hourBn}:{minuteBn} {ampmBn}
+            </div>
           </div>
 
           {/* Bottom Row: All dates in one line (without time) */}
