@@ -23,12 +23,17 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           >
             এখন
           </Link>
-          <TodayDate locale="bn-BD" withTime />
+        <div className="flex flex-wrap justify-end gap-1">
+  <TodayDate calendar="gregorian" className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full shadow-sm" />
+  <TodayDate calendar="bangla" className="bg-green-100 text-green-800 px-3 py-1 rounded-full shadow-sm" />
+  <TodayDate calendar="hijri" className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full shadow-sm" />
+</div>
+
         </div>
 
-            <NewsTicker />
+        <NewsTicker />
       </div>
-      <div className="mt-38 md:mt-48">
+      <div className="mt-46 md:mt-48">
         <BanglaNavMenu />
       </div>
       {children}
