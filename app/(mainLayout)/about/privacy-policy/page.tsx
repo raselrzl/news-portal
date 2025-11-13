@@ -6,7 +6,7 @@ export default async function PrivacyPolicyPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 text-foreground">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        Privacy Policy of JagrotoBarta.com
+        Privacy Policy
       </h1>
 
       <p className="text-xs mb-4 text-justify">
