@@ -130,10 +130,24 @@ export function PrintNewsDetailsClient({
   const banglaYear = toBn(createdAt.getFullYear() - 593);
   const hijriYear = toBn(createdAt.getFullYear() - 622);
 
-  const hour12 = createdAt.getHours() % 12 || 12;
-  const ampm = createdAt.getHours() >= 12 ? "PM" : "AM";
-  const hourBn = toBn(hour12);
-  const minuteBn = toBn(createdAt.getMinutes());
+  const bnWeekdays = [
+  "রবিবার",
+  "সোমবার",
+  "মঙ্গলবার",
+  "বুধবার",
+  "বৃহস্পতিবার",
+  "শুক্রবার",
+  "শনিবার",
+];
+
+// Get day name
+const weekdayBn = bnWeekdays[createdAt.getDay()];
+
+// 12-hour format
+const hour12 = createdAt.getHours() % 12 || 12;
+const ampmBn = createdAt.getHours() >= 12 ? "পিএম" : "এএম";
+const hourBn = toBn(hour12);
+const minuteBn = toBn(createdAt.getMinutes());
 
   return (
     <>
@@ -176,7 +190,7 @@ export function PrintNewsDetailsClient({
             marginBottom: "16px",
             background: "#000000",
             color: "#ffffff",
-            borderRadius: "4px",
+            borderRadius: "2px",
             boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
             position: "relative",
           }}
@@ -229,20 +243,21 @@ export function PrintNewsDetailsClient({
             </div>
 
             {/* Top-right time */}
-            <div
-              style={{
-                position: "absolute",
-                top: "8px",
-                right: "12px",
-                background: "#000",
-                color: "#fff",
-                padding: "2px 6px",
-                borderRadius: "6px",
-                fontSize: "10px",
-              }}
-            >
-              {hourBn}:{minuteBn} {ampm}
-            </div>
+           <div
+  style={{
+    position: "absolute",
+    top: "8px",
+    right: "12px",
+    background: "#000",
+    color: "#fff",
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontSize: "10px",
+    textAlign: "center",
+  }}
+>
+  {weekdayBn} {hourBn}:{minuteBn} {ampmBn}
+</div>
           </div>
 
           {/* Bottom Row: All dates in one line (without time) */}
