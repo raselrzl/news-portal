@@ -5,70 +5,165 @@ export default async function TermsPage() {
   await trackRoute("Terms");
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 text-foreground">
-      <h1 className="text-3xl font-bold mb-6 text-center">শর্তাবলি</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Terms of Use</h1>
 
-      <p className="mb-4 text-base">
-        <strong>সর্বশেষ হালনাগাদ:</strong> {new Date().toLocaleDateString("bn-BD")}
+      <p className="mb-4 text-xs text-justify">
+        <strong>Last Updated:</strong> {new Date().toLocaleDateString("en-US")}
       </p>
 
-      <p className="mb-4 text-base">
-        জাগ্রত বার্তা ওয়েবসাইটে প্রবেশ করে বা ব্যবহার করে আপনি আমাদের এই শর্তাবলি মেনে চলতে
-        সম্মত হচ্ছেন। অনুগ্রহ করে এগুলো মনোযোগ সহকারে পড়ুন।
+      <p className="mb-4 text-xs text-justify">
+        Welcome to the Terms of Use of <strong>Jagroto Barta</strong> and its associated
+        websites, services, and applications. By accessing or using our content through
+        any medium (including web, mobile, digital, or social platforms), you agree to
+        these Terms of Use and our Privacy Policy. If you have any concerns about these
+        terms, please contact us at{" "}
+        <a href="mailto:info@jagrotobarta.com" className="text-primary hover:underline">
+          info@jagrotobarta.com
+        </a>.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">১. সেবা ব্যবহার</h2>
-      <p className="mb-4 text-base">
-        আপনি এই ওয়েবসাইট কেবলমাত্র ব্যক্তিগত ও অ-বাণিজ্যিক উদ্দেশ্যে ব্যবহার করতে পারবেন।
-        অবৈধ কার্যকলাপে ওয়েবসাইট ব্যবহার সম্পূর্ণরূপে নিষিদ্ধ।
+      {/* 1. Intellectual Property Rights */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">1. Intellectual Property Rights</h2>
+      <p className="mb-4 text-xs text-justify">
+        All content, logos, trademarks, images, videos, text, graphics, software, and
+        related intellectual property displayed on Jagroto Barta are owned by Jagroto
+        Barta or its licensors. You are not permitted to copy, reproduce, republish,
+        modify, or create derivative works without prior written permission. Violation
+        of these rights may result in legal action.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">২. বিষয়বস্তু অধিকার</h2>
-      <p className="mb-4 text-base">
-        ওয়েবসাইটে প্রকাশিত সমস্ত লেখা, ছবি, ভিডিও এবং অন্যান্য উপকরণ জাগ্রত বার্তার সম্পত্তি বা
-        লাইসেন্সের আওতাভুক্ত। আপনার ব্যক্তিগত ব্যবহারের বাইরে কনটেন্ট কপি, প্রকাশ বা পরিবেশন
-        করা নিষেধ।
+      {/* 2. Use of Our Services */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">2. Use of Our Services</h2>
+      <p className="mb-4 text-xs text-justify">
+        Users must access Jagroto Barta’s content only for lawful and personal purposes.
+        Any attempt to hack, disrupt, or bypass content protection mechanisms is strictly
+        prohibited. Content may be shared on social platforms only with proper credit and
+        without modification.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৩. ব্যবহারকারীর আচরণ</h2>
-      <ul className="list-disc ml-6 mb-4 text-base">
-        <li>আপত্তিকর, মানহানিকর বা ঘৃণামূলক মন্তব্য থেকে বিরত থাকুন</li>
-        <li>মিথ্যা তথ্য বা গুজব ছড়ানো নিষেধ</li>
-        <li>অন্যের গোপনীয়তা লঙ্ঘন করা যাবে না</li>
+      {/* 3. User Behavior */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">3. User Behavior</h2>
+      <ul className="list-disc ml-6 mb-4 text-xs text-justify">
+        <li>Do not use abusive, defamatory, or hateful language.</li>
+        <li>Do not post false information, spam, or misleading material.</li>
+        <li>Respect others’ privacy and refrain from harassment or bullying.</li>
       </ul>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৪. মন্তব্য নীতিমালা</h2>
-      <p className="mb-4 text-base">
-        পাঠকদের মন্তব্য স্বাগত। তবে আমরা অশালীন, বানোয়াট বা হিংসাত্মক মন্তব্য মুছে দেওয়ার অধিকার
-        রাখি।
+      {/* 4. Taking Down Content */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">4. Taking Down Content</h2>
+      <p className="mb-4 text-xs text-justify">
+        Jagroto Barta reserves the right to remove any content at any time, at its sole
+        discretion, without prior notice. Users must comply if asked to remove content or
+        applications from their devices.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৫. বাহ্যিক লিংক</h2>
-      <p className="mb-4 text-base">
-        ওয়েবসাইটে থাকা তৃতীয় পক্ষের লিংক জাগ্রত বার্তার নিয়ন্ত্রণে নয়। আমরা সেইসব সাইটের
-        বিষয়বস্তু বা নিরাপত্তার জন্য দায়ী নই।
+      {/* 5. Unauthorized and Prohibited Activities */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">
+        5. Unauthorized and Prohibited Activities
+      </h2>
+      <p className="mb-4 text-xs text-justify">
+        Users must not associate Jagroto Barta with political parties, racism, sexism, or
+        any activity that could damage its reputation. Posting obscene, offensive, or
+        unlawful materials is strictly forbidden.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৬. দায়বদ্ধতার সীমাবদ্ধতা</h2>
-      <p className="mb-4 text-base">
-        আমরা ওয়েবসাইটের সকল তথ্য নির্ভুল রাখার চেষ্টা করি, তবে কোনো ভুল, তথ্যগত ত্রুটি বা ক্ষতির
-        জন্য জাগ্রত বার্তা দায়ী নয়।
+      {/* 6. Protection of User Devices */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">6. Protection of User Devices</h2>
+      <p className="mb-4 text-xs text-justify">
+        Users are responsible for protecting their devices against viruses or malware.
+        Jagroto Barta bears no responsibility for any damage or contamination caused by
+        accessing third-party content or advertisements.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৭. পরিবর্তন</h2>
-      <p className="mb-4 text-base">
-        এই শর্তাবলি যেকোনো সময় পরিবর্তন করা হতে পারে। পরিবর্তন হলে তা এই পৃষ্ঠায় আপডেট করা হবে।
+      {/* 7. Sharing Marks and Content */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">
+        7. Sharing Marks, Content, and Images
+      </h2>
+      <p className="mb-4 text-xs text-justify">
+        Users may not share or reuse Jagroto Barta’s content, images, or logos for any
+        commercial or personal use without authorization. When sharing is permitted, full
+        credit to Jagroto Barta must be clearly visible.
       </p>
 
-      <h2 className="text-xl font-semibold mt-6 mb-2">৮. যোগাযোগ</h2>
-      <p className="mb-4 text-base">
-        আমাদের শর্তাবলি সম্পর্কে প্রশ্ন বা মতামতের জন্য যোগাযোগ করুন:
+      {/* 8. Third-Party Links and Content */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">8. Third-Party Links and Content</h2>
+      <p className="mb-4 text-xs text-justify">
+        Our site may contain links to external websites. Jagroto Barta is not responsible
+        for their content, privacy policies, or any damages resulting from their use.
+        Third-party content displayed on our platform remains the responsibility of its
+        creators.
       </p>
-      <ul className="list-none mb-6 text-base">
-        <li><strong>ইমেইল:</strong> <a href="mailto:info@jagrotobarta.com" className="text-primary hover:underline">info@jagrotobarta.com</a></li>
+
+      {/* 9. Advertisements */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">9. Advertisements</h2>
+      <p className="mb-4 text-xs text-justify">
+        Advertisements displayed on Jagroto Barta may be provided by third-party
+        companies. We are not liable for any data collection or sharing practices carried
+        out by these advertisers.
+      </p>
+
+      {/* 10. Modification of Terms */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">10. Modification of Terms</h2>
+      <p className="mb-4 text-xs text-justify">
+        Jagroto Barta reserves the right to modify or amend these Terms at any time. Any
+        changes will be updated on this page, and continued use of our services implies
+        acceptance of the revised terms.
+      </p>
+
+      {/* 11. User Generated Content */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">11. User Generated Content</h2>
+      <p className="mb-4 text-xs text-justify">
+        Users may post comments, articles, or media on Jagroto Barta but must ensure such
+        content is lawful, respectful, and free from offensive or defamatory material.
+        Jagroto Barta reserves the right to remove any user content without notice.
+      </p>
+
+      {/* 12. Disclaimer */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">12. Disclaimer</h2>
+      <p className="mb-4 text-xs text-justify">
+        While Jagroto Barta strives to provide accurate and timely news and information,
+        we cannot guarantee absolute accuracy or completeness. All content is provided
+        “as is” and for informational purposes only.
+      </p>
+
+      {/* 13. Governing Law */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">13. Governing Law</h2>
+      <p className="mb-4 text-xs text-justify">
+        These Terms are governed by the laws of Bangladesh. Any disputes shall be settled
+        under the Arbitration Act, 2001, in Dhaka, Bangladesh.
+      </p>
+
+      {/* 14. Opt-Out and Contact */}
+      <h2 className="text-lg font-semibold mt-6 mb-2">14. Opt-Out and Contact</h2>
+      <p className="mb-4 text-xs text-justify">
+        Users who wish to unsubscribe from our emails can do so by following the
+        “unsubscribe” link provided in each email. For further questions or to terminate
+        your account, contact us at:
+      </p>
+
+      <ul className="list-none mb-6 text-xs">
+        <li>
+          <strong>Email:</strong>{" "}
+          <a
+            href="mailto:info@jagrotobarta.com"
+            className="text-primary hover:underline"
+          >
+            info@jagrotobarta.com
+          </a>
+        </li>
+        <li>
+          <strong>Website:</strong>{" "}
+          <a
+            href="https://jagrotobarta.com"
+            className="text-primary hover:underline"
+          >
+            https://jagrotobarta.com
+          </a>
+        </li>
       </ul>
 
-      <p className="text-base italic">
-        ধন্যবাদ, জাগ্রত বার্তা পরিবারের সদস্য হিসেবে যুক্ত থাকার জন্য।
+      <p className="text-xs italic text-justify">
+        Thank you for reading these Terms of Use and for being a part of Jagroto Barta.
       </p>
     </div>
   );
