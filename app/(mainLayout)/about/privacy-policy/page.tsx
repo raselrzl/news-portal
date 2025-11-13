@@ -107,38 +107,7 @@ export default async function PrivacyPolicyPage() {
         policies. We therefore hold no responsibility for the content or
         activities of these linked sites but welcome feedback regarding them.
       </p>
-
-      {/* --- Google Policies --- */}
-      <h2 className="text-lg font-semibold mt-6 mb-2">
-        Google Advertising and Analytics
-      </h2>
-      <p className="text-xs mb-4 text-justify">
-        Google’s advertising requirements are guided by their Advertising
-        Principles designed to provide a positive user experience. We use Google
-        Analytics to understand and improve user interactions with our site.
-        Google may use the collected data to personalize ads across its network.
-        Users can opt out of Google Analytics tracking by installing the
-        browser add-on available at
-        <a
-          href="https://tools.google.com/dlpage/gaoptout"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline"
-        >
-          {" "}
-          this link
-        </a>
-        . For more on Google’s policies, visit{" "}
-        <a
-          href="https://policies.google.com/privacy?hl=en"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline"
-        >
-          Google Privacy & Terms
-        </a>
-        .
-      </p>
+     
 
       {/* --- Fair Information Practices --- */}
       <h2 className="text-lg font-semibold mt-6 mb-2">
