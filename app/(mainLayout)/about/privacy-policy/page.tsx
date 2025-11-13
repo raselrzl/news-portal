@@ -4,7 +4,7 @@ import React from "react";
 export default async function PrivacyPolicyPage() {
   await trackRoute("Privacy Policy");
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 text-foreground">
+    <div className="max-w-7xl mx-auto px-4 py-10 text-foreground">
       <h1 className="text-3xl font-bold mb-6 text-center">
         Privacy Policy of JagrotoBarta.com
       </h1>
