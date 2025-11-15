@@ -11,6 +11,7 @@ import VisitorTracker from "@/components/general/VisitorTracker";
 import Script from "next/script";
 import ScrollToTopButton from "@/components/general/ScrollToTopButton";
 import Poll from "@/components/LivePoll/Poll";
+import NewUserTracker from "@/components/general/NewUserTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,6 +79,7 @@ export default function RootLayout({
          
           <ScrollToTopButton />
           <VisitorTracker />
+          <NewUserTracker />
         </ThemeProvider>
       </body>
     </html>

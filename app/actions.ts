@@ -976,3 +976,36 @@ export async function updateInstagramStatus(
 
   return { success: true };
 }
+
+
+
+export async function registerNewUser(
+  userId: string,
+  browserInfo: {
+    userAgent: string;
+    language?: string;
+    platform?: string;
+    screen?: string;
+  }
+) {
+  // Only create if userId does not exist
+  const existing = await prisma.newUserVisit.findUnique({ where: { userId } });
+  if (!existing) {
+    await prisma.newUserVisit.create({
+      data: {
+        userId,
+        userAgent: browserInfo.userAgent,
+        language: browserInfo.language,
+        platform: browserInfo.platform,
+        screen: browserInfo.screen,
+      },
+    });
+  }
+
+  return { success: true };
+}
+
+export async function getTotalNewUsers() {
+  const count = await prisma.newUserVisit.count();
+  return { count };
+}

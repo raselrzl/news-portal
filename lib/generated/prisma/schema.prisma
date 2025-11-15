@@ -484,3 +484,13 @@ enum igPostStatus {
   DRAFT
   EXPIRED
 }
+
+model NewUserVisit {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  userAgent String
+  language  String?
+  platform  String?
+  screen    String?
+  createdAt DateTime @default(now())
+}
