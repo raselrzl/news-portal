@@ -28,6 +28,9 @@ import { CrimeAndPopularTab } from "@/components/general/CrimeAndPopularTab";
 import LiveUpdate from "@/components/general/PublicSourceNewsLiveUpdate";
 import InstagramPosts from "@/components/instagram/InstagramPosts";
 import WarLatest from "@/components/general/WarLatest";
+import NationalLatest from "@/components/general/nationalNews";
+import InternationalLatest from "@/components/general/worldNews";
+import PoliticalLatest from "@/components/general/politicsNews";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -391,16 +394,18 @@ export default async function Home() {
       <div className="border-y-2 my-2 border-primary"></div>
       <WarLatest />
       <div className="border-y-2 my-2 border-primary"></div>
-
+      <NationalLatest />
       {/*    <Videos /> */}
 
       <InstagramPosts />
+
+      <InternationalLatest />
       {/*  tab section */}
       <div className="my-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
-            <CrimeAndPopularTab />
+            <PoliticalLatest />
           </div>
 
           {/* Right: Premium Ad */}

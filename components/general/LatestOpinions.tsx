@@ -32,7 +32,7 @@ export default async function LatestOpinions() {
   }
 
   return (
-    <section className="md:rounded-xs bg-amber-200 dark:bg-gray-600 py-8 md:py-2">
+    <section className="md:rounded-xs py-8 md:py-2">
       {/* Section Header */}
       <div className="flex items-center justify-between ml-2 mb-2">
         <h1 className="font-bold py-1">OPINIONS</h1>
