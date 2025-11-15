@@ -1,6 +1,7 @@
 // app/server/statistics.tsx (This can be a server component)
 import { prisma } from "@/app/utils/db";
 import { notFound } from "next/navigation";
+import NewUserTracker from "./NewUserTracker";
 
 // Utility function to fetch counts for various models
 async function getStatistics() {
@@ -126,6 +127,17 @@ const Statistics = async () => {
           <p className="text-3xl font-bold mt-4 text-primary">
             {stats.totalRegisteredUsers}
           </p>
+        </div>
+
+
+        {/* Total Registered Users Card */}
+        <div className="p-2 rounded-lg shadow-lg flex flex-col justify-center items-center">
+          <h2 className="text-md font-semibold ">
+             Total Unique Visitor
+          </h2>
+          <div className="text-3xl font-bold mt-4 text-primary">
+            <NewUserTracker />
+          </div>
         </div>
       </div>
     </div>
