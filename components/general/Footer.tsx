@@ -59,7 +59,8 @@ export default function Footer() {
             <div>
               <p>ঢাকা, বাংলাদেশ</p>
               <p>Director</p> <b/>
-              <p>Lisbon, Portugal <b/> Stockholm, Sweden</p>
+              <p>Lisbon, Portugal Stockholm, Sweden</p>
+               <p>Stockholm, Sweden</p>
               <a
                 href="mailto:info@jagrotobarta.com"
                 className="text-primary hover:underline"
