@@ -46,7 +46,7 @@ export default async function InternationalLatest() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="overflow-hidden md:border-r">
+        <div className="overflow-hidden">
           <Link href={`/newsDetails/${featured.id}`}>
             <img
               src={featured.newsPicture}
@@ -62,15 +62,15 @@ export default async function InternationalLatest() {
             </Link>
 
             {/* ✅ JSON parse condition (from your example) */}
-            {isJson(featured.newsDetails) ? (
-              <div className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
+       {/*      {isJson(featured.newsDetails) ? (
+              <div className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-12">
                 <JsonToHtml json={JSON.parse(featured.newsDetails)} />
               </div>
             ) : (
-              <p className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
+              <p className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-12">
                 {featured.newsDetails}
               </p>
-            )}
+            )} */}
           </div>
         </div>
         {/* ✅ Left side - 5 small cards */}
@@ -79,16 +79,17 @@ export default async function InternationalLatest() {
             <Link
               href={`/newsDetails/${article.id}`}
               key={article.id}
-              className="flex items-center gap-3 group border-b border-gray-950/10"
+              className="flex items-center gap-3 group border border-gray-950/10"
             >
-              <img
+           
+              <p className="font-semibold text-sm group-hover:underline line-clamp-3 pl-2">
+                {article.newsHeading}
+              </p>
+                 <img
                 src={article.newsPicture}
                 alt={article.newsPictureHeading}
                 className="w-24 h-20 object-cover rounded-xl"
               />
-              <p className="font-semibold text-sm group-hover:underline line-clamp-3">
-                {article.newsHeading}
-              </p>
             </Link>
           ))}
         </div>
