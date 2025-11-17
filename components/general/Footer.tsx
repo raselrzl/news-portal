@@ -1,4 +1,10 @@
-import { Facebook, Instagram, InstagramIcon, MailIcon, Youtube } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  InstagramIcon,
+  MailIcon,
+  Youtube,
+} from "lucide-react";
 import Link from "next/link";
 import CountryListLinks from "./CountryListLinks";
 
@@ -58,9 +64,9 @@ export default function Footer() {
 
             <div>
               <p>ঢাকা, বাংলাদেশ</p>
-              <p>Director</p> <b/>
+              <p>Director</p> <b />
               <p>Lisbon, Portugal Stockholm, Sweden</p>
-               <p>Stockholm, Sweden</p>
+              <p>Stockholm, Sweden</p>
               <a
                 href="mailto:info@jagrotobarta.com"
                 className="text-primary hover:underline"
@@ -72,9 +78,8 @@ export default function Footer() {
 
           <div className="flex flex-col items-center justify-center">
             <h1 className="font-bold text-2xl mt-6">বিজ্ঞাপন</h1>
-     
             বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
-               <a
+            <a
               href="mailto:info@jagrotobarta.com"
               className="text-primary hover:underline"
             >
@@ -92,7 +97,6 @@ export default function Footer() {
                 ফর্ম
               </a>
             </div>
-         
             <Link href="/" className="flex items-center p-2">
               <div className="w-[160px] h-[60px] md:w-[200px] md:h-[80px] bg-[url('/logoo1.jpg')] dark:bg-[url('/logooo1.jpg')] bg-cover bg-center" />
             </Link>
@@ -119,13 +123,13 @@ export default function Footer() {
                 <MailIcon size={32} />
               </Link>
               <Link
-        href="https://www.instagram.com/jagrotobarta/"
-        target="_blank"
-        rel="noopener noreferrer"
-         className="w-10 h-10 bg-primary p-1 rounded-xl text-white hover:text-pink-700"
-      >
-        <InstagramIcon size={32} />
-      </Link>
+                href="https://www.instagram.com/jagrotobarta/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-primary p-1 rounded-xl text-white hover:text-pink-700"
+              >
+                <InstagramIcon size={32} />
+              </Link>
             </div>
             {/*      <a
               href="https://www.instagram.com"
@@ -145,7 +149,7 @@ export default function Footer() {
             </a> */}
           </div>
         </div>
-          <CountryListLinks />
+        <CountryListLinks />
         <p className="text-xs text-primary py-2 mt-2 bg-accent">
           &copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।
         </p>
