@@ -45,7 +45,7 @@ export default async function LatestOpinions() {
           <Link
             key={item.id}
             href={`/newsDetails/${item.id}`}
-            className="block relative border-l-4 border-primary pl-4 bg-accent-foreground/5 p-4 rounded-3xl min-h-[120px] shadow-sm hover:shadow-md hover:border-primary/70 transition-all duration-300"
+            className="block relative border-l-4 border-primary pl-4 bg-accent-foreground/5 p-4 min-h-[120px] shadow-sm hover:shadow-md hover:border-primary/70 transition-all duration-300"
           >
             <p className="italic mb-10 text-justify">“{item.quotes[0].text}”</p>
             <div className="absolute bottom-3 right-4 flex items-center gap-3">
