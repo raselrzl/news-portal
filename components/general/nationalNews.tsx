@@ -2,6 +2,7 @@ import { prisma } from "@/app/utils/db";
 import Link from "next/link";
 import { isJson } from "@/app/utils/isJson";
 import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
+import { PremiarOne } from "../allAdvertisement/PremiarOne";
 
 type Article = {
   id: string;
@@ -61,9 +62,10 @@ export default async function NationalLatest() {
                 {featured.newsHeading}
               </h3>
             </Link>
+            <PremiarOne />
 
             {/* ✅ JSON parse condition (from your example) */}
-            {isJson(featured.newsDetails) ? (
+           {/*  {isJson(featured.newsDetails) ? (
               <div className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
                 <JsonToHtml json={JSON.parse(featured.newsDetails)} />
               </div>
@@ -71,7 +73,7 @@ export default async function NationalLatest() {
               <p className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
                 {featured.newsDetails}
               </p>
-            )}
+            )} */}
           </div>
         </div>
         {/* ✅ Left side - 5 small cards */}
