@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import { Button } from "@/components/ui/button";
 import html2canvas from "html2canvas-pro";
@@ -7,6 +7,7 @@ import { Download, Loader2 } from "lucide-react";
 import { isJson } from "@/app/utils/isJson";
 import { richTextToPlainText } from "@/app/utils/richTextToPlainText";
 import { toHijri } from 'hijri-converter';
+import Calendar from 'date-bengali-revised';
 
 // --- Bangla months ---
 const bnMonths = [
@@ -38,33 +39,6 @@ const toBanglaNumber = (num: number) => {
   return num.toString().split('').map(d => bnDigits[parseInt(d)]).join('');
 };
 
-// --- Accurate Bangla date conversion from Gregorian ---
-function gregorianToBangla(gDate: Date) {
-  // Using the official Bangla calendar rule: Boishakh starts April 14 (Gregorian)
-  const gYear = gDate.getFullYear();
-  const gMonth = gDate.getMonth(); // 0-indexed
-  const gDay = gDate.getDate();
-
-  let banglaYear = gYear - 593;
-  let banglaMonthIndex = 0;
-  let banglaDay = 0;
-
-  const monthStart = [14,14,15,16,16,16,16,16,15,15,14,14]; // Boishakh starts Apr 14, etc.
-  
-  // Determine Bangla month
-  let tempMonth = gMonth;
-  banglaMonthIndex = (gMonth + 8) % 12; // April->Boishakh=0
-  banglaDay = gDay - monthStart[gMonth];
-  if (banglaDay <= 0) {
-    banglaMonthIndex = (banglaMonthIndex + 11) % 12;
-    banglaDay += 30; // approximate previous month length
-  }
-  // Adjust Bangla year for Jan-Mar
-  if (gMonth < 3 || (gMonth === 3 && gDay < 14)) banglaYear--;
-
-  return { day: toBanglaNumber(banglaDay), month: bnMonths[banglaMonthIndex], year: toBanglaNumber(banglaYear) };
-}
-
 // --- Props ---
 type Quote = { speakerInfo: string; text: string };
 type PrintNewsDetailsClientProps = {
@@ -94,6 +68,17 @@ export function PrintNewsDetailsClient({
 }: PrintNewsDetailsClientProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [banglaDate, setBanglaDate] = useState<{ day: string; month: string; year: string } | null>(null);
+
+  useEffect(() => {
+    const cal = new Calendar();
+    const bd = cal.fromDate(createdAt);
+    setBanglaDate({
+      day: toBanglaNumber(bd.day),
+      month: bnMonths[bd.month - 1],
+      year: toBanglaNumber(bd.year),
+    });
+  }, [createdAt]);
 
   // --- Handle PDF download ---
   const handleDownload = async () => {
@@ -108,20 +93,18 @@ export function PrintNewsDetailsClient({
     setIsLoading(false);
   };
 
-  // --- Time ---
+  // --- Time and weekday ---
   const hour12 = createdAt.getHours() % 12 || 12;
   const ampmBn = createdAt.getHours() >= 12 ? "পিএম" : "এএম";
   const hourBn = toBanglaNumber(hour12);
   const minuteBn = toBanglaNumber(createdAt.getMinutes());
   const weekdayBn = bnWeekdays[createdAt.getDay()];
 
-  // --- Dates ---
+  // --- Gregorian ---
   const dayBn = toBanglaNumber(createdAt.getDate());
   const gregMonthBn = gregMonthsBn[createdAt.getMonth()];
   const gregYearBn = toBanglaNumber(createdAt.getFullYear());
 
-  const banglaDate = gregorianToBangla(createdAt);
-  
   // --- Hijri ---
   const { hy, hm, hd } = toHijri(createdAt.getFullYear(), createdAt.getMonth()+1, createdAt.getDate());
   const hijriDay = toBanglaNumber(hd);
@@ -133,12 +116,7 @@ export function PrintNewsDetailsClient({
 
   return (
     <>
-      <Button
-        onClick={handleDownload}
-        className="overflow-hidden w-10 h-10 bg-black shadow border rounded-xl cursor-pointer"
-        variant="outline"
-        disabled={isLoading}
-      >
+      <Button onClick={handleDownload} className="overflow-hidden w-10 h-10 bg-black shadow border rounded-xl cursor-pointer" variant="outline" disabled={isLoading}>
         {isLoading ? <Loader2 className="animate-spin w-5 h-5 text-primary"/> : <Download className="h-14 w-14 text-white hover:text-black"/>}
       </Button>
 
@@ -163,7 +141,7 @@ export function PrintNewsDetailsClient({
 
           <div style={{display:"flex", justifyContent:"flex-end", gap:"6px", marginTop:"6px", flexWrap:"nowrap", fontSize:"10px"}}>
             <span style={{background:"#ff4d4f", padding:"2px 6px", borderRadius:"6px"}}>{dayBn} {gregMonthBn} {gregYearBn}</span>
-            <span style={{background:"#52c41a", padding:"2px 6px", borderRadius:"6px"}}>{banglaDate.day} {banglaDate.month} {banglaDate.year} বঙ্গাব্দ</span>
+            {banglaDate && <span style={{background:"#52c41a", padding:"2px 6px", borderRadius:"6px"}}>{banglaDate.day} {banglaDate.month} {banglaDate.year} বঙ্গাব্দ</span>}
             <span style={{background:"#1890ff", padding:"2px 6px", borderRadius:"6px"}}>{hijriDay} {hijriMonth} {hijriYear} হিজরী</span>
           </div>
 
@@ -172,7 +150,6 @@ export function PrintNewsDetailsClient({
 
         <article style={{flexGrow:1, overflow:"auto", paddingBottom:"8px"}} className="border-1 p-4">
           <h1 style={{fontSize:"20px", fontWeight:"bold", marginBottom:"8px", borderBottom:"1px solid gray"}}>{newsHeading}</h1>
-
           <div style={{overflow:"hidden", marginBottom:"16px"}}>
             {newsPicture && <img src={newsPicture} alt={newsPictureHeading||"News Image"} style={{float:"left", width:"120px", height:"120px", objectFit:"cover", marginRight:"16px", marginBottom:"16px"}}/>}
             <p className="text-[12px] leading-[1.3] text-justify mb-4 whitespace-pre-line">{firstPart}</p>
