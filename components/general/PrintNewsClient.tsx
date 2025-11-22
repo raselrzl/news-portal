@@ -46,6 +46,7 @@ type PrintNewsDetailsClientProps = {
   newsPictureHeading?: string | null;
   newsDetails: string;
   quotes?: Quote[];
+  createdAt: Date; 
 };
 
 // --- Split text helper ---
