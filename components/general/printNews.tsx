@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import { toast } from "sonner";
 import { NewsDetailsDisplay } from "../richTextEditor/NewsDetailsDisplay";
 import { PrintNewsDetailsClient } from "@/components/general/PrintNewsClient";
@@ -108,8 +107,8 @@ export default function PrintNews({
   id,
 }: PrintNewsProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
   const [articleUrl, setArticleUrl] = useState("");
+  const [isFullImage, setIsFullImage] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -150,8 +149,8 @@ export default function PrintNews({
 
   return (
     <>
+      {/* Share Buttons */}
       <div className="flex justify-end flex-wrap space-x-1 pr-4 mt-6 md:mt-2">
-        {/* Removed the Download button here */}
         <PrintNewsDetailsClient
           newsHeading={newsHeading ?? ""}
           newsPicture={newsPicture ?? null}
@@ -211,43 +210,71 @@ export default function PrintNews({
         </Button>
       </div>
 
-      <div className="mb-10 ">
+      {/* Main Content */}
+      <div className="mb-10">
         <div
           id="printable-content"
           ref={contentRef}
           className="w-full rounded shadow mt-6"
         >
-          <h1 className="text-3xl font-bold my-4  px-2 md:px-6 pt-6">
+          <h1 className="text-3xl font-bold my-4 px-2 md:px-6 pt-6">
             {newsHeading}
           </h1>
-          {newsPicture && (
-            <div className="relative w-full md:px-6 h-[280px] md:h-[550px]">
-              <img
-                src={newsPicture}
-                alt="Description"
-                className="absolute inset-0 w-full h-full object-cover z-0"
-              />
 
-              {/* Text Layer (bottom with background) */}
-              <div className="absolute bottom-0 left-0 w-full z-10 bg-black/60 text-white px-4 py-2 text-center">
-                {newsPictureHeading || newsPictureCredit ? (
-                  <>
-                    {newsPictureHeading && (
-                      <p className="text-sm font-semibold">
-                        {newsPictureHeading}
-                      </p>
-                    )}
-                    {newsPictureCredit && (
-                      <p className="text-xs">{newsPictureCredit}</p>
-                    )}
-                  </>
-                ) : (
-                  <p className="text-sm font-semibold">জাগ্রত প্রতিবেদক</p>
-                )}
+          {/* Image Section */}
+          {newsPicture && (
+            <>
+              <div
+                className="relative w-full md:px-6 h-[280px] md:h-[550px] cursor-pointer"
+                onClick={() => setIsFullImage(true)}
+              >
+                <img
+                  src={newsPicture}
+                  alt="Description"
+                  className="absolute inset-0 w-full h-full object-cover z-0"
+                />
+
+                {/* Text Layer */}
+                <div className="absolute bottom-0 left-0 w-full z-10 bg-black/60 text-white px-4 py-2 text-center">
+                  {newsPictureHeading || newsPictureCredit ? (
+                    <>
+                      {newsPictureHeading && (
+                        <p className="text-sm font-semibold">
+                          {newsPictureHeading}
+                        </p>
+                      )}
+                      {newsPictureCredit && (
+                        <p className="text-xs">{newsPictureCredit}</p>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-sm font-semibold">জাগ্রত প্রতিবেদক</p>
+                  )}
+                </div>
               </div>
-            </div>
+
+              {/* Fullscreen Image Viewer */}
+              {isFullImage && (
+                <div className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4">
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setIsFullImage(false)}
+                    className="absolute top-4 right-4 text-white p-2 bg-black/50 rounded-full hover:bg-black/70"
+                  >
+                    ✕
+                  </button>
+
+                  <img
+                    src={newsPicture}
+                    alt="Fullscreen Image"
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+              )}
+            </>
           )}
 
+          {/* News Details */}
           <div className="whitespace-pre-line text-md mg:text-lg dark:bg-black mt-10">
             <div className="flex flex-row px-3 items-center mb-4 text-xl font-extrabold">
               <MapPin />

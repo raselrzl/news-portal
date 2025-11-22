@@ -9,6 +9,7 @@ import Poll from "@/components/LivePoll/Poll";
 import Footer from "@/components/general/Footer";
 import VisitorTracker from "@/components/general/VisitorTracker";
 import AdsTicker from "@/components/general/AdsTicker";
+import RealBanglaDate from "@/components/general/BanglaDate";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -28,8 +29,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
               calendar="gregorian"
               className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full shadow-sm"
             />
-            <TodayDate
-              calendar="bangla"
+            <RealBanglaDate
               className="bg-green-100 text-green-800 px-3 py-1 rounded-full shadow-sm"
             />
             <TodayDate
