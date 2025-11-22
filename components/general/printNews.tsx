@@ -1,5 +1,12 @@
 "use client";
-import { SquarePlay, LocateIcon, LinkIcon, Copy, Map, MapPin } from "lucide-react";
+import {
+  SquarePlay,
+  LocateIcon,
+  LinkIcon,
+  Copy,
+  Map,
+  MapPin,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -214,12 +221,11 @@ export default function PrintNews({
             {newsHeading}
           </h1>
           {newsPicture && (
-            <div className="relative w-full md:px-6 h-[300px] md:h-[400px] ">
-              {/* Image Layer (underneath) */}
+            <div className="relative w-full md:px-6 h-[280px] md:h-[550px]">
               <img
                 src={newsPicture}
                 alt="Description"
-                className="absolute inset-0 w-full h-full object-fill z-0"
+                className="absolute inset-0 w-full h-full object-cover z-0"
               />
 
               {/* Text Layer (bottom with background) */}
@@ -244,11 +250,12 @@ export default function PrintNews({
 
           <div className="whitespace-pre-line text-md mg:text-lg dark:bg-black mt-10">
             <div className="flex flex-row px-3 items-center mb-4 text-xl font-extrabold">
-  <MapPin />
-  {newsLocation?.trim()
-    ? newsCountryBnMap[newsLocation] || newsLocation
-    : "জাগ্রতবার্তা"} {" "}প্রতিনিধি
-</div>
+              <MapPin />
+              {newsLocation?.trim()
+                ? newsCountryBnMap[newsLocation] || newsLocation
+                : "জাগ্রতবার্তা"}{" "}
+              প্রতিনিধি
+            </div>
 
             <div className="px-3">
               <NewsDetailsDisplay newsDetails={newsDetails} />
