@@ -160,7 +160,14 @@ export const newsCategory: {
   LAW_AND_JUSTICE: 'LAW_AND_JUSTICE',
   ENVIRONMENT: 'ENVIRONMENT',
   SCIENCE: 'SCIENCE',
-  WAR: 'WAR'
+  WAR: 'WAR',
+  TRAVEL: 'TRAVEL',
+  WEATHER: 'WEATHER',
+  RECIPE: 'RECIPE',
+  NOTICE: 'NOTICE',
+  FARMING: 'FARMING',
+  LITERATURE: 'LITERATURE',
+  JOB: 'JOB'
 };
 
 export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]

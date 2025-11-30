@@ -17,4 +17,15 @@
     { id: "16", href: "/environment", label: "পরিবেশ" },
     { id: "17", href: "/science", label: "বিজ্ঞান" },
     { id: "18", href: "/war", label: "যুদ্ধ আপডেট" },
+
+  { id: "19", href: "/travel", label: "ভ্রমণ" },
+  { id: "20", href: "/weather", label: "আবহাওয়া" },
+  { id: "21", href: "/recipe", label: "রেসিপি" },
+  { id: "22", href: "/notice", label: "বিজ্ঞপ্তি" },
+  { id: "23", href: "/farming", label: "কৃষি" },
+  { id: "24", href: "/literature", label: "সাহিত্য" },
+  { id: "25", href: "/job", label: "চাকরি" }
+
+
+
   ];

@@ -138,6 +138,13 @@ enum newsCategory {
   ENVIRONMENT
   SCIENCE
   WAR
+  TRAVEL
+  WEATHER
+  RECIPE
+  NOTICE
+  FARMING
+  LITERATURE
+  JOB
 }
 
 model Advertisement {

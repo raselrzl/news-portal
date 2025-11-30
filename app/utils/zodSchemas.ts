@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const newsReporterSchema = z.object({
-  reporterName:z.string().min(2, "আপনার নাম কমপক্ষে ২ অক্ষরের হতে হবে"),
+  reporterName: z.string().min(2, "আপনার নাম কমপক্ষে ২ অক্ষরের হতে হবে"),
   location: z.string().min(1, "অবস্থান উল্লেখ করা আবশ্যক"),
   bio: z.string().min(10, "আপনার নিজের সম্পর্কে কিছু তথ্য লিখুন"),
   profilePicture: z.string().min(1, "অনুগ্রহ করে একটি ছবি আপলোড করুন"),
@@ -21,14 +21,15 @@ export const AdvertiserSchema = z.object({
 });
 const quoteSchema = z.object({
   text: z.string(),
-  speakerInfo: z.string()
+  speakerInfo: z.string(),
 });
 
 export const newsArticleSchema = z.object({
   newsHeading: z.string().min(6, "সংবাদের শিরোনাম আবশ্যক"),
   newsResource: z.string(),
   newsLocation: z.string().optional(),
-  newsCategory: z.enum([ "LATEST",
+  newsCategory: z.enum([
+    "LATEST",
     "NATIONAL",
     "POLITICS",
     "COUNTRYWIDE",
@@ -45,7 +46,21 @@ export const newsArticleSchema = z.object({
     "WAR",
     "LAW_AND_JUSTICE",
     "ENVIRONMENT",
-    "SCIENCE",]),
+    "SCIENCE",
+
+    "TRAVEL",
+    "WEATHER",
+    "RECIPE",
+    "NOTICE",
+    "FARMING",
+    "LITERATURE",
+    "JOB",
+
+    "WAR",
+    "LAW_AND_JUSTICE",
+    "ENVIRONMENT",
+    "SCIENCE",
+  ]),
   newsPicture: z.string().url("অনুগ্রহ করে একটি ছবি আপলোড করুন"),
   newsPictureHeading: z.string(),
   newsPictureCredit: z.string(),
@@ -59,7 +74,7 @@ export const newsArticleSchema = z.object({
   facebookProfileAddress: z.string().optional(),
   bio: z.string(),
   profilePicture: z.string().url("প্রোফাইল ছবি আবশ্যক"),
-  quotes: z.array(quoteSchema)
+  quotes: z.array(quoteSchema),
 });
 
 export const AdvertiseRequestSchema = z.object({
