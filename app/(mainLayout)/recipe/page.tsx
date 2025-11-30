@@ -4,7 +4,7 @@ import { trackRoute } from "@/app/utils/routeTracker";
 import { List } from "lucide-react";
 import { UltimateTwo } from "@/components/allAdvertisement/UltimateTwo";
 import MoulvibazarNews from "./Moulvibazar";
-import AllRecipeArticles from "../travel/AllTravelsArticle";
+import AllRecipeArticles from "./AllRecipeArticle";
 type SearchParamsProps = {
   searchParams: Promise<{
     page?: string;
