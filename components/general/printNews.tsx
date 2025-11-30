@@ -161,52 +161,50 @@ export default function PrintNews({
         />
         <Button
           onClick={handleShareWhatsApp}
-          className="w-10 h-10 p-0 overflow-hidden cursor-pointer bg-green-600 shadow border rounded-xl"
+          className="w-10 h-10 p-0 cursor-pointer border-none shadow-none"
           variant="outline"
         >
           <img
             src="/whatsapp.svg"
             alt="WhatsApp"
-            width={40}
-            height={40}
             className="object-cover w-full h-full"
           />
         </Button>
 
         <Button
           onClick={handleShareFacebook}
-          className="w-10 h-10 p-0 overflow-hidden cursor-pointer bg-blue-950 shadow border rounded-xl"
+          className="w-10 h-10 p-0 cursor-pointer border-none shadow-none"
           variant="outline"
         >
           <img
             src="/fb.webp"
             alt="Facebook"
-            width={45}
-            height={45}
             className="object-cover w-full h-full"
           />
         </Button>
 
         <Button
           onClick={handleShareMessenger}
-          className="w-10 h-10 p-0 overflow-hidden cursor-pointer bg-blue-800 shadow border rounded-xl"
+          className="w-10 h-10 p-0 cursor-pointer border-none shadow-none"
           variant="outline"
         >
           <img
             src="/messanger.svg"
             alt="Messenger"
-            width={40}
-            height={40}
             className="object-cover w-full h-full"
           />
         </Button>
 
         <Button
           onClick={handleCopyLink}
-          className="p-0 cursor-pointer w-10 h-10 bg-black shadow border rounded-xl text-white"
+          className="w-9 h-9 p-0 cursor-pointer border-none shadow-none"
           variant="outline"
         >
-          <Copy className="h-12 w-12" />
+          <img
+            src="/copylink.png"
+            alt="copyimage"
+            className="object-cover w-full h-full"
+          />
         </Button>
       </div>
 
