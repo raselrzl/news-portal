@@ -1,6 +1,7 @@
 // components/LiveUpdate.tsx
 import { prisma } from "@/app/utils/db";
 import Link from "next/link";
+import NewsImageModal from "./NewsImageModal";
 
 type NewsItem = {
   id: string;
@@ -8,6 +9,7 @@ type NewsItem = {
   sourceIdName: string;
   link: string;
   createdAt: Date;
+  newsPicture: string | null;
 };
 
 async function getLatestNews(): Promise<NewsItem[]> {
@@ -39,15 +41,15 @@ export default async function LiveUpdate() {
   return (
     <div className="mt-4 px-6 py-1">
       <h1 className="text-sm uppercase font-bold mb-4 text-red-800">
-        লাইভ আপডেট
+         🚨 Breaking News
       </h1>
 
       <div className="relative">
         {/* Vertical line */}
         <div className="absolute top-0 bottom-0 left-5 w-[2px] bg-black"></div>
 
-        <div className="flex flex-col">
-          {news.map((item) => (
+      <div className="flex flex-col">
+          {news.map((item, index) => (
             <div key={item.id} className="flex items-start relative">
               {/* Dot aligned with date */}
               <div className="flex-shrink-0 w-10 flex justify-center relative z-10">
@@ -61,7 +63,19 @@ export default async function LiveUpdate() {
                 <span className="text-xs text-gray-500 italic">
                   {formatTimeAgo(new Date(item.createdAt))}
                 </span>
+
                 <div className="font-medium text-sm">{item.headings}</div>
+
+                {/** ONLY show image for the newest news item */}
+                {index === 0 && item.newsPicture && (
+                  <div className="md:w-50 md:flex-shrink-0">
+                    {item.newsPicture && (
+                      <div className="md:w-50 md:flex-shrink-0">
+                        <NewsImageModal src={item.newsPicture} />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}
