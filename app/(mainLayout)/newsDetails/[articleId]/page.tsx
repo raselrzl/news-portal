@@ -13,6 +13,7 @@ import { BesicTwoAdvertise } from "@/components/allAdvertisement/BesicTwo";
 import type { Metadata } from "next";
 import { StandardTwo } from "@/components/allAdvertisement/StandardTwo";
 import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
+import { incrementArticleView } from "@/app/actions";
 
 async function getNewsArticle(articleId: string) {
   const newsArticle = await prisma.newsArticle.findUnique({
@@ -42,6 +43,7 @@ async function getNewsArticle(articleId: string) {
       newsLocation: true,
       newsReporter: true,
       newsArticleStatus: true,
+      viewCount: true,
     },
   });
 
@@ -97,16 +99,23 @@ type Params = Promise<{ articleId: string }>;
 
 export default async function NewsDetailsPage({ params }: { params: Params }) {
   const { articleId } = await params;
-  const data = await getNewsArticle(articleId);
+
+  // Track route
   await trackRoute("NewsDetailsPage");
+
+  // Increment view count BEFORE fetching
+  await incrementArticleView(articleId);
+
+  // Fetch updated article data
+  const data = await getNewsArticle(articleId);
 
   if (!data) {
     return (
       <EmptyState
-         title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-                  description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-                  buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-                  href="/"
+        title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+        description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
+        buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
+        href="/"
       />
     );
   }
@@ -158,6 +167,12 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           createdAt={data.createdAt} // <--- Pass createdAt here
           quotes={data.quotes ?? []}
         />
+
+        
+        {/* View Counter */}
+        <p className="text-sm text-gray-600 mb-3">
+          👁‍🗨{data.viewCount ?? 0} {" "}বার পড়া হয়েছে
+        </p>
 
         {/* Bottom Banner */}
         <div className=" w-full mb-6">

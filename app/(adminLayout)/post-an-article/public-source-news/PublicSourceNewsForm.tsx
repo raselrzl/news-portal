@@ -1,5 +1,5 @@
 "use client";
-
+import { UploadDropzone } from "@/components/general/UploadThingReexported";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import { 
+import { Loader2, XIcon } from "lucide-react";
+import {
   Select,
   SelectTrigger,
   SelectValue,
@@ -30,6 +30,7 @@ const publicSourceNewsSchema = z.object({
   headings: z.string().min(3, "Headline is required"),
   sourceIdName: z.string().min(2, "Source ID name is required"),
   link: z.enum(["FACEBOOK", "INSTAGRAM", "TWITTER"]),
+  newsPicture: z.string(),
 });
 
 type FormData = z.infer<typeof publicSourceNewsSchema>;
@@ -43,6 +44,7 @@ export default function PublicSourceNewsForm() {
       headings: "",
       sourceIdName: "",
       link: "INSTAGRAM",
+      newsPicture:"",
     },
   });
 
@@ -61,7 +63,7 @@ export default function PublicSourceNewsForm() {
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
+    <div className="max-w-lg mx-auto mt-10 shadow-lg rounded-xl p-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* Headline */}
@@ -79,6 +81,49 @@ export default function PublicSourceNewsForm() {
             )}
           />
 
+            <FormField
+                control={form.control}
+                name="newsPicture"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      {field.value ? (
+                        <div className="relative w-fit">
+                          <img
+                            src={field.value}
+                            alt="News"
+                            className="w-32 h-32 object-cover rounded"
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="icon"
+                            className="absolute -top-2 -right-2"
+                            onClick={() => field.onChange("")}
+                          >
+                            <XIcon className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <UploadDropzone
+                          endpoint="imageUploader"
+                          onClientUploadComplete={(res) => {
+                            field.onChange(res[0].url);
+                            toast.success("Image uploaded!");
+                          }}
+                          onUploadError={(error) => {
+                            console.error(error);
+                            toast.error("Upload failed");
+                          }}
+                          className="ut-button:bg-primary ut-button:text-white ut-button:hover:bg-primary/90 ut-label:text-muted-foreground ut-allowed-content:text-muted-foreground border-primary"
+                        />
+                      )}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
           {/* Source ID */}
           <FormField
             control={form.control}
@@ -90,7 +135,7 @@ export default function PublicSourceNewsForm() {
                   <Input placeholder="@news_source" {...field} />
                 </FormControl>
                 <FormMessage />
-              </FormItem>
+              </FormItem> 
             )}
           />
 

@@ -6490,10 +6490,12 @@ export namespace Prisma {
 
   export type NewsArticleAvgAggregateOutputType = {
     duration: number | null
+    viewCount: number | null
   }
 
   export type NewsArticleSumAggregateOutputType = {
     duration: number | null
+    viewCount: number | null
   }
 
   export type NewsArticleMinAggregateOutputType = {
@@ -6512,6 +6514,7 @@ export namespace Prisma {
     newsArticleStatus: $Enums.newsArticleStatus | null
     createdAt: Date | null
     updatedAt: Date | null
+    viewCount: number | null
   }
 
   export type NewsArticleMaxAggregateOutputType = {
@@ -6530,6 +6533,7 @@ export namespace Prisma {
     newsArticleStatus: $Enums.newsArticleStatus | null
     createdAt: Date | null
     updatedAt: Date | null
+    viewCount: number | null
   }
 
   export type NewsArticleCountAggregateOutputType = {
@@ -6548,16 +6552,19 @@ export namespace Prisma {
     newsArticleStatus: number
     createdAt: number
     updatedAt: number
+    viewCount: number
     _all: number
   }
 
 
   export type NewsArticleAvgAggregateInputType = {
     duration?: true
+    viewCount?: true
   }
 
   export type NewsArticleSumAggregateInputType = {
     duration?: true
+    viewCount?: true
   }
 
   export type NewsArticleMinAggregateInputType = {
@@ -6576,6 +6583,7 @@ export namespace Prisma {
     newsArticleStatus?: true
     createdAt?: true
     updatedAt?: true
+    viewCount?: true
   }
 
   export type NewsArticleMaxAggregateInputType = {
@@ -6594,6 +6602,7 @@ export namespace Prisma {
     newsArticleStatus?: true
     createdAt?: true
     updatedAt?: true
+    viewCount?: true
   }
 
   export type NewsArticleCountAggregateInputType = {
@@ -6612,6 +6621,7 @@ export namespace Prisma {
     newsArticleStatus?: true
     createdAt?: true
     updatedAt?: true
+    viewCount?: true
     _all?: true
   }
 
@@ -6717,6 +6727,7 @@ export namespace Prisma {
     newsArticleStatus: $Enums.newsArticleStatus
     createdAt: Date
     updatedAt: Date
+    viewCount: number | null
     _count: NewsArticleCountAggregateOutputType | null
     _avg: NewsArticleAvgAggregateOutputType | null
     _sum: NewsArticleSumAggregateOutputType | null
@@ -6754,6 +6765,7 @@ export namespace Prisma {
     newsArticleStatus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    viewCount?: boolean
     quotes?: boolean | newsArticle$quotesArgs<ExtArgs>
     newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
@@ -6775,6 +6787,7 @@ export namespace Prisma {
     newsArticleStatus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    viewCount?: boolean
     newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
@@ -6794,6 +6807,7 @@ export namespace Prisma {
     newsArticleStatus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    viewCount?: boolean
     newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
@@ -6813,9 +6827,10 @@ export namespace Prisma {
     newsArticleStatus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    viewCount?: boolean
   }
 
-  export type newsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "newsHeading" | "newsResource" | "newsLocation" | "newsCategory" | "newsPicture" | "newsPictureHeading" | "newsPictureCredit" | "isFeatured" | "newsDetails" | "reporterId" | "duration" | "newsArticleStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
+  export type newsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "newsHeading" | "newsResource" | "newsLocation" | "newsCategory" | "newsPicture" | "newsPictureHeading" | "newsPictureCredit" | "isFeatured" | "newsDetails" | "reporterId" | "duration" | "newsArticleStatus" | "createdAt" | "updatedAt" | "viewCount", ExtArgs["result"]["newsArticle"]>
   export type newsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     quotes?: boolean | newsArticle$quotesArgs<ExtArgs>
     newsReporter?: boolean | newsReporterDefaultArgs<ExtArgs>
@@ -6850,6 +6865,7 @@ export namespace Prisma {
       newsArticleStatus: $Enums.newsArticleStatus
       createdAt: Date
       updatedAt: Date
+      viewCount: number | null
     }, ExtArgs["result"]["newsArticle"]>
     composites: {}
   }
@@ -7290,6 +7306,7 @@ export namespace Prisma {
     readonly newsArticleStatus: FieldRef<"newsArticle", 'newsArticleStatus'>
     readonly createdAt: FieldRef<"newsArticle", 'DateTime'>
     readonly updatedAt: FieldRef<"newsArticle", 'DateTime'>
+    readonly viewCount: FieldRef<"newsArticle", 'Int'>
   }
     
 
@@ -20691,6 +20708,7 @@ export namespace Prisma {
     link: $Enums.Link | null
     createdAt: Date | null
     updatedAt: Date | null
+    newsPicture: string | null
   }
 
   export type PublicSourceNewsMaxAggregateOutputType = {
@@ -20700,6 +20718,7 @@ export namespace Prisma {
     link: $Enums.Link | null
     createdAt: Date | null
     updatedAt: Date | null
+    newsPicture: string | null
   }
 
   export type PublicSourceNewsCountAggregateOutputType = {
@@ -20709,6 +20728,7 @@ export namespace Prisma {
     link: number
     createdAt: number
     updatedAt: number
+    newsPicture: number
     _all: number
   }
 
@@ -20720,6 +20740,7 @@ export namespace Prisma {
     link?: true
     createdAt?: true
     updatedAt?: true
+    newsPicture?: true
   }
 
   export type PublicSourceNewsMaxAggregateInputType = {
@@ -20729,6 +20750,7 @@ export namespace Prisma {
     link?: true
     createdAt?: true
     updatedAt?: true
+    newsPicture?: true
   }
 
   export type PublicSourceNewsCountAggregateInputType = {
@@ -20738,6 +20760,7 @@ export namespace Prisma {
     link?: true
     createdAt?: true
     updatedAt?: true
+    newsPicture?: true
     _all?: true
   }
 
@@ -20820,6 +20843,7 @@ export namespace Prisma {
     link: $Enums.Link
     createdAt: Date
     updatedAt: Date
+    newsPicture: string | null
     _count: PublicSourceNewsCountAggregateOutputType | null
     _min: PublicSourceNewsMinAggregateOutputType | null
     _max: PublicSourceNewsMaxAggregateOutputType | null
@@ -20846,6 +20870,7 @@ export namespace Prisma {
     link?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    newsPicture?: boolean
   }, ExtArgs["result"]["publicSourceNews"]>
 
   export type PublicSourceNewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20855,6 +20880,7 @@ export namespace Prisma {
     link?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    newsPicture?: boolean
   }, ExtArgs["result"]["publicSourceNews"]>
 
   export type PublicSourceNewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20864,6 +20890,7 @@ export namespace Prisma {
     link?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    newsPicture?: boolean
   }, ExtArgs["result"]["publicSourceNews"]>
 
   export type PublicSourceNewsSelectScalar = {
@@ -20873,9 +20900,10 @@ export namespace Prisma {
     link?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    newsPicture?: boolean
   }
 
-  export type PublicSourceNewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "headings" | "sourceIdName" | "link" | "createdAt" | "updatedAt", ExtArgs["result"]["publicSourceNews"]>
+  export type PublicSourceNewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "headings" | "sourceIdName" | "link" | "createdAt" | "updatedAt" | "newsPicture", ExtArgs["result"]["publicSourceNews"]>
 
   export type $PublicSourceNewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PublicSourceNews"
@@ -20887,6 +20915,7 @@ export namespace Prisma {
       link: $Enums.Link
       createdAt: Date
       updatedAt: Date
+      newsPicture: string | null
     }, ExtArgs["result"]["publicSourceNews"]>
     composites: {}
   }
@@ -21316,6 +21345,7 @@ export namespace Prisma {
     readonly link: FieldRef<"PublicSourceNews", 'Link'>
     readonly createdAt: FieldRef<"PublicSourceNews", 'DateTime'>
     readonly updatedAt: FieldRef<"PublicSourceNews", 'DateTime'>
+    readonly newsPicture: FieldRef<"PublicSourceNews", 'String'>
   }
     
 
@@ -23811,7 +23841,8 @@ export namespace Prisma {
     duration: 'duration',
     newsArticleStatus: 'newsArticleStatus',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    viewCount: 'viewCount'
   };
 
   export type NewsArticleScalarFieldEnum = (typeof NewsArticleScalarFieldEnum)[keyof typeof NewsArticleScalarFieldEnum]
@@ -23990,7 +24021,8 @@ export namespace Prisma {
     sourceIdName: 'sourceIdName',
     link: 'link',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    newsPicture: 'newsPicture'
   };
 
   export type PublicSourceNewsScalarFieldEnum = (typeof PublicSourceNewsScalarFieldEnum)[keyof typeof PublicSourceNewsScalarFieldEnum]
@@ -24564,6 +24596,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
     createdAt?: DateTimeFilter<"newsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
+    viewCount?: IntNullableFilter<"newsArticle"> | number | null
     quotes?: QuoteListRelationFilter
     newsReporter?: XOR<NewsReporterScalarRelationFilter, newsReporterWhereInput>
   }
@@ -24584,6 +24617,7 @@ export namespace Prisma {
     newsArticleStatus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    viewCount?: SortOrderInput | SortOrder
     quotes?: quoteOrderByRelationAggregateInput
     newsReporter?: newsReporterOrderByWithRelationInput
   }
@@ -24607,6 +24641,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
     createdAt?: DateTimeFilter<"newsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
+    viewCount?: IntNullableFilter<"newsArticle"> | number | null
     quotes?: QuoteListRelationFilter
     newsReporter?: XOR<NewsReporterScalarRelationFilter, newsReporterWhereInput>
   }, "id">
@@ -24627,6 +24662,7 @@ export namespace Prisma {
     newsArticleStatus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    viewCount?: SortOrderInput | SortOrder
     _count?: newsArticleCountOrderByAggregateInput
     _avg?: newsArticleAvgOrderByAggregateInput
     _max?: newsArticleMaxOrderByAggregateInput
@@ -24653,6 +24689,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusWithAggregatesFilter<"newsArticle"> | $Enums.newsArticleStatus
     createdAt?: DateTimeWithAggregatesFilter<"newsArticle"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"newsArticle"> | Date | string
+    viewCount?: IntNullableWithAggregatesFilter<"newsArticle"> | number | null
   }
 
   export type quoteWhereInput = {
@@ -25493,6 +25530,7 @@ export namespace Prisma {
     link?: EnumLinkFilter<"PublicSourceNews"> | $Enums.Link
     createdAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
     updatedAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+    newsPicture?: StringNullableFilter<"PublicSourceNews"> | string | null
   }
 
   export type PublicSourceNewsOrderByWithRelationInput = {
@@ -25502,6 +25540,7 @@ export namespace Prisma {
     link?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsPicture?: SortOrderInput | SortOrder
   }
 
   export type PublicSourceNewsWhereUniqueInput = Prisma.AtLeast<{
@@ -25514,6 +25553,7 @@ export namespace Prisma {
     link?: EnumLinkFilter<"PublicSourceNews"> | $Enums.Link
     createdAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
     updatedAt?: DateTimeFilter<"PublicSourceNews"> | Date | string
+    newsPicture?: StringNullableFilter<"PublicSourceNews"> | string | null
   }, "id">
 
   export type PublicSourceNewsOrderByWithAggregationInput = {
@@ -25523,6 +25563,7 @@ export namespace Prisma {
     link?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsPicture?: SortOrderInput | SortOrder
     _count?: PublicSourceNewsCountOrderByAggregateInput
     _max?: PublicSourceNewsMaxOrderByAggregateInput
     _min?: PublicSourceNewsMinOrderByAggregateInput
@@ -25538,6 +25579,7 @@ export namespace Prisma {
     link?: EnumLinkWithAggregatesFilter<"PublicSourceNews"> | $Enums.Link
     createdAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PublicSourceNews"> | Date | string
+    newsPicture?: StringNullableWithAggregatesFilter<"PublicSourceNews"> | string | null
   }
 
   export type InstagramPostWhereInput = {
@@ -25976,6 +26018,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
     quotes?: quoteCreateNestedManyWithoutArticleInput
     newsReporter: newsReporterCreateNestedOneWithoutNewsArticleInput
   }
@@ -25996,6 +26039,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
     quotes?: quoteUncheckedCreateNestedManyWithoutArticleInput
   }
 
@@ -26014,6 +26058,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     quotes?: quoteUpdateManyWithoutArticleNestedInput
     newsReporter?: newsReporterUpdateOneRequiredWithoutNewsArticleNestedInput
   }
@@ -26034,6 +26079,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     quotes?: quoteUncheckedUpdateManyWithoutArticleNestedInput
   }
 
@@ -26053,6 +26099,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
   }
 
   export type newsArticleUpdateManyMutationInput = {
@@ -26070,6 +26117,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type newsArticleUncheckedUpdateManyInput = {
@@ -26088,6 +26136,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type quoteCreateInput = {
@@ -27005,6 +27054,7 @@ export namespace Prisma {
     link?: $Enums.Link
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsPicture?: string | null
   }
 
   export type PublicSourceNewsUncheckedCreateInput = {
@@ -27014,6 +27064,7 @@ export namespace Prisma {
     link?: $Enums.Link
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsPicture?: string | null
   }
 
   export type PublicSourceNewsUpdateInput = {
@@ -27023,6 +27074,7 @@ export namespace Prisma {
     link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsPicture?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicSourceNewsUncheckedUpdateInput = {
@@ -27032,6 +27084,7 @@ export namespace Prisma {
     link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsPicture?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicSourceNewsCreateManyInput = {
@@ -27041,6 +27094,7 @@ export namespace Prisma {
     link?: $Enums.Link
     createdAt?: Date | string
     updatedAt?: Date | string
+    newsPicture?: string | null
   }
 
   export type PublicSourceNewsUpdateManyMutationInput = {
@@ -27050,6 +27104,7 @@ export namespace Prisma {
     link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsPicture?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicSourceNewsUncheckedUpdateManyInput = {
@@ -27059,6 +27114,7 @@ export namespace Prisma {
     link?: EnumLinkFieldUpdateOperationsInput | $Enums.Link
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsPicture?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InstagramPostCreateInput = {
@@ -27583,10 +27639,12 @@ export namespace Prisma {
     newsArticleStatus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type newsArticleAvgOrderByAggregateInput = {
     duration?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type newsArticleMaxOrderByAggregateInput = {
@@ -27605,6 +27663,7 @@ export namespace Prisma {
     newsArticleStatus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type newsArticleMinOrderByAggregateInput = {
@@ -27623,10 +27682,12 @@ export namespace Prisma {
     newsArticleStatus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type newsArticleSumOrderByAggregateInput = {
     duration?: SortOrder
+    viewCount?: SortOrder
   }
 
   export type EnumNewsCountryNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -28309,6 +28370,7 @@ export namespace Prisma {
     link?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsPicture?: SortOrder
   }
 
   export type PublicSourceNewsMaxOrderByAggregateInput = {
@@ -28318,6 +28380,7 @@ export namespace Prisma {
     link?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsPicture?: SortOrder
   }
 
   export type PublicSourceNewsMinOrderByAggregateInput = {
@@ -28327,6 +28390,7 @@ export namespace Prisma {
     link?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    newsPicture?: SortOrder
   }
 
   export type EnumLinkWithAggregatesFilter<$PrismaModel = never> = {
@@ -29584,6 +29648,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
     quotes?: quoteCreateNestedManyWithoutArticleInput
   }
 
@@ -29602,6 +29667,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
     quotes?: quoteUncheckedCreateNestedManyWithoutArticleInput
   }
 
@@ -29687,6 +29753,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFilter<"newsArticle"> | $Enums.newsArticleStatus
     createdAt?: DateTimeFilter<"newsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"newsArticle"> | Date | string
+    viewCount?: IntNullableFilter<"newsArticle"> | number | null
   }
 
   export type UserUpsertWithoutNewsReporterInput = {
@@ -29950,6 +30017,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
     newsReporter: newsReporterCreateNestedOneWithoutNewsArticleInput
   }
 
@@ -29969,6 +30037,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
   }
 
   export type newsArticleCreateOrConnectWithoutQuotesInput = {
@@ -30002,6 +30071,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     newsReporter?: newsReporterUpdateOneRequiredWithoutNewsArticleNestedInput
   }
 
@@ -30021,6 +30091,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -30371,6 +30442,7 @@ export namespace Prisma {
     newsArticleStatus?: $Enums.newsArticleStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    viewCount?: number | null
   }
 
   export type newsArticleUpdateWithoutNewsReporterInput = {
@@ -30388,6 +30460,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     quotes?: quoteUpdateManyWithoutArticleNestedInput
   }
 
@@ -30406,6 +30479,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     quotes?: quoteUncheckedUpdateManyWithoutArticleNestedInput
   }
 
@@ -30424,6 +30498,7 @@ export namespace Prisma {
     newsArticleStatus?: EnumnewsArticleStatusFieldUpdateOperationsInput | $Enums.newsArticleStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type quoteCreateManyArticleInput = {
