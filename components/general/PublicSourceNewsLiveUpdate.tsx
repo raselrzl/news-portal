@@ -40,8 +40,8 @@ export default async function LiveUpdate() {
 
   return (
     <div className="mt-4 px-6 py-1">
-      <h1 className="text-sm uppercase font-bold mb-4 text-red-800">
-         🚨 Breaking News
+      <h1 className="text-xl uppercase font-bold mb-4 text-red-800">
+         🚨 ব্রেকিং নিউজ
       </h1>
 
       <div className="relative">

@@ -157,7 +157,7 @@ export default async function Home() {
             তহবিলের উপর নির্ভরশীল নয়। আমাদের পাঠকরা সারাবাংলায় ছড়িয়ে আছে।
             অংশীদারিত্ব বা বিজ্ঞাপনের জন্য যোগাযোগ করুন
             <span className="font-semibold underline hover:text-yellow-700 dark:hover:text-yellow-400 cursor-pointer">
-              contact@jagrotobarta.com
+              info@jagrotobarta.com
             </span>
           </p>
         </div>
