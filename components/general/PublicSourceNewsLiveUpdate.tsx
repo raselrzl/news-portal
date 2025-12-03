@@ -114,7 +114,7 @@ export default async function LiveUpdate() {
           href="/breakingnews"
           className="text-primary font-semibold underline"
         >
-          View All
+          আরো দেখুন →
         </Link>
       </div>
     </div>
