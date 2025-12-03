@@ -44,38 +44,59 @@ export default async function LiveUpdate() {
         🚨 ব্রেকিং নিউজ
       </h1>
 
-      {/* ========== FEATURED FIRST NEWS ========== */}
-      {news.length > 0 && (
-        <div className="relative mb-14 flex flex-col items-center px-2 md:px-0">
-          {news[0].newsPicture && (
-            <div className="relative w-full max-w-[720px]">
-              <img
-                src={news[0].newsPicture!}
-                className="w-full h-[300px] md:h-[360px] object-cover"
-                alt=""
-              />
+     {/* ========== FEATURED FIRST NEWS ========== */}
+{news.length > 0 && (
+  <div className="relative mb-14 flex flex-col items-center px-2 md:px-0">
 
-              {/* Overlay box */}
-              <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 w-[85%]">
-                <div className="bg-white dark:bg-gray-900 shadow-xl rounded-md p-4 border text-center">
-                  <div className="flex items-start gap-2">
-                    <div className="rounded-full bg-yellow-500 w-4 h-4 flex items-center justify-center mt-[3.5px]">
-                      <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
-                    </div>
-                    <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
-                      {formatTimeAgo(new Date(news[0].createdAt))}
-                    </span>
-                  </div>
+    {news[0].newsPicture ? (
+      /* ---- IF IMAGE EXISTS ---- */
+      <div className="relative w-full max-w-[720px]">
+        <img
+          src={news[0].newsPicture}
+          className="w-full h-[300px] md:h-[360px] object-cover"
+          alt=""
+        />
 
-                  <div className="font-bold text-lg text-primary leading-tight mt-1">
-                    {news[0].headings}
-                  </div>
-                </div>
+        {/* Overlay box */}
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 w-[85%]">
+          <div className="bg-white dark:bg-gray-900 shadow-xl rounded-md p-4 border text-center">
+            <div className="flex items-start gap-2">
+              <div className="rounded-full bg-yellow-500 w-4 h-4 flex items-center justify-center mt-[3.5px]">
+                <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
               </div>
+              <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
+                {formatTimeAgo(new Date(news[0].createdAt))}
+              </span>
             </div>
-          )}
+
+            <div className="font-bold text-lg text-primary leading-tight mt-1">
+              {news[0].headings}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
+    ) : (
+      /* ---- IF NO IMAGE → SHOW ONLY THE TEXT BOX ---- */
+      <div className="w-full max-w-[720px] mt-4">
+        <div className="bg-white dark:bg-gray-900 shadow-xl rounded-md p-4 border text-center">
+          <div className="flex items-start gap-2">
+            <div className="rounded-full bg-yellow-500 w-4 h-4 flex items-center justify-center mt-[3.5px]">
+              <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
+            </div>
+            <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
+              {formatTimeAgo(new Date(news[0].createdAt))}
+            </span>
+          </div>
+
+          <div className="font-bold text-lg text-primary leading-tight mt-1">
+            {news[0].headings}
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
 
       {/* ========== TIMELINE FOR NEXT 3 NEWS ITEMS ========== */}
       <div className="relative max-w-2xl mx-auto mt-12">
