@@ -41,7 +41,7 @@ export async function PremiumOneAdvertise() {
               <img
                 src={premier1.advertiseBanner}
                 alt={premier1.companyName}
-                  className="w-[360px] h-[170px] rounded-xl  object-fill"
+                  className="rounded-xl  object-fill"
             
               />
                     <span className="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-0.5 rounded">
