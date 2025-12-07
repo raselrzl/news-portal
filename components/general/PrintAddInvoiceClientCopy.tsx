@@ -152,11 +152,11 @@ export default function Invoice({ ad }: { ad: Ad }) {
           {/* Bank Info */}
           <div style={{ border: "1px solid #ddd", padding: 12, borderRadius: 2, background: "#f9f9f9", marginBottom: 12 }}>
             <h4 style={{ fontWeight: 600, marginBottom: 6 }}>পেমেন্ট তথ্য</h4>
-            <p><strong>ব্যাংকের নাম:</strong> ব্যাংক এশিয়া</p>
-            <p><strong>একাউন্ট নম্বর:</strong> 987 654 321</p>
-            <p><strong>একাউন্ট নাম: </strong> জাগ্রত বার্তা লিঃ</p>
-            <p><strong>শাখা:</strong> ঢাকা সদর</p>
-            <p><strong>SWIFT কোড:</strong> HANDSESS</p>
+            <p><strong className="mr-2">ব্যাংকের নাম:</strong> Pubali Bank</p>
+          <p><strong className="mr-2">একাউন্ট নম্বর:</strong>3616901021733</p>
+          <p><strong className="mr-2">একাউন্ট নাম:</strong>Dainik jagrotobarta</p>
+          <p><strong className="mr-2">শাখা:</strong>Chowmuhana Branch, Moulvibazar</p>
+          <p><strong className="mr-2">SWIFT কোড:</strong>PUBABDDH</p>
           </div>
 
           {/* Reference & Due Date */}

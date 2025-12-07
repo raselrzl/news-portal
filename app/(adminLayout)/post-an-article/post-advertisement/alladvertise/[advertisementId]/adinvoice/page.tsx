@@ -144,13 +144,13 @@ export default async function AdvertiseDetailsPage({
 
         {/* Calculation Table */}
         <div className="relative z-10 mb-6">
-          <h2 className="font-semibold mb-2">হিসাব-নিকাশ
+          <h2 className="font-semibold mb-2">পূর্ণ বিবরণ
           </h2>
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="bg-gray-100">
                 <th className="border px-3 py-2 text-left font-semibold">বিবরণ</th>
-                <th className="border px-3 py-2 text-right font-semibold">দর (প্রতি দিন)</th>
+                <th className="border px-3 py-2 text-right font-semibold">মুল্য (প্রতি দিন)</th>
                 <th className="border px-3 py-2 text-right font-semibold">দিন</th>
                 <th className="border px-3 py-2 text-right font-semibold">মোট (BDT)</th>
 
@@ -219,11 +219,11 @@ export default async function AdvertiseDetailsPage({
         {/* Bank Info */}
         <div className="mt-6 text-sm text-gray-700 border-t pt-4 relative z-10">
           <h2 className="font-semibold mb-2">পেমেন্ট তথ্য</h2>
-          <p><strong>ব্যাংকের নাম:</strong> ব্যাংক এশিয়া</p>
-          <p><strong>একাউন্ট নম্বর:</strong> 123 456 789</p>
-          <p><strong>একাউন্ট নাম:</strong> জাগ্রত বার্তা লিঃ</p>
-          <p><strong>শাখা:</strong> ঢাকা সদর</p>
-          <p><strong>SWIFT কোড:</strong> BAESBDDH</p>
+          <p><strong className="mr-2">ব্যাংকের নাম:</strong> Pubali Bank</p>
+          <p><strong className="mr-2">একাউন্ট নম্বর:</strong>3616901021733</p>
+          <p><strong className="mr-2">একাউন্ট নাম:</strong>Dainik jagrotobarta</p>
+          <p><strong className="mr-2">শাখা:</strong>Chowmuhana Branch Moulvibazar</p>
+          <p><strong className="mr-2">SWIFT কোড:</strong>PUBABDDH</p>
 
 
           <div className="mt-3 p-3 border bg-gray-100 rounded-md">
