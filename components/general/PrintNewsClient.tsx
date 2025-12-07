@@ -129,8 +129,21 @@ export function PrintNewsDetailsClient({
 
   return (
     <>
-      <Button onClick={handleDownload} disabled={isLoading} className="overflow-hidden h-11 w-16">
-        {isLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <img src="/printtt.png" />}
+        <Button
+        onClick={handleDownload}
+        className="overflow-hidden h-11 w-16 shadow-none border-none cursor-pointer hover:bg-none"
+        variant="outline"
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <Loader2 className="animate-spin w-5 h-5 text-primary" />
+        ) : (
+          <img
+            src="/printtt.png"
+            alt="WhatsApp"
+            className="object-cover w-full h-full"
+          />
+        )}
       </Button>
 
       {/* PRINT AREA */}
