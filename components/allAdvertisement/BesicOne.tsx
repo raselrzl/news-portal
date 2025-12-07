@@ -39,7 +39,7 @@ export async function BesicOneAdvertise() {
               <img
                 src={ad.advertiseBanner}
                 alt={ad.companyName}
-                className="w-[370px] md:w-[600px] h-[200px] rounded-xl"
+                className="w-[370px] h-[400px] rounded-xl object-fill"
               />
               <span className="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-0.5 rounded">
                 Ad.

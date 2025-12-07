@@ -39,7 +39,7 @@ export async function PremiarTwo() {
   <img
     src={ad.advertiseBanner}
     alt={ad.companyName}
-    className="w-full h-full"
+    className="w-full h-full object-fill"
   />
   {/* ✅ Perfectly centered in the middle of the image */}
   <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs px-3 py-1 rounded shadow-md">
