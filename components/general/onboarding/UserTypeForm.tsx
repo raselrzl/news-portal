@@ -12,9 +12,9 @@ export default function UserTypeSelection({
   onSelect,
 }: UserTypeSelectionProps) {
   return (
-    <div className="space-y-8 px-4 w-[360px] border-1 py-4"> {/* Add padding for mobile view */}
+    <div className="space-y-8 px-4 w-[360px] border py-4"> {/* Add padding for mobile view */}
           <div className="flex items-center justify-center gap-2 mb-10">
-        <img src="/lg1.png" alt="logo image" width={150} height={50} />
+        <img src="/logo.png" alt="logo image" width={150} height={50} />
       </div>
     <div className="text-center space-y-2">
       <h2 className="text-xl font-bold">স্বাগতম, চলুন শুরু করা যাক!</h2>

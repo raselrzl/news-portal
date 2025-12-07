@@ -49,7 +49,7 @@ export default function Invoice({ ad }: { ad: Ad }) {
   const paymentDueDate = useMemo(() => { const d = new Date(start); d.setDate(start.getDate() + 15); return d; }, [start]);
   const formattedDueDate = paymentDueDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
-  const logoUrl = "/lg1.png";
+  const logoUrl = "/logo.png";
   const invoiceRef = ad.id.slice(-8).toUpperCase();
   const filename = `INV-${invoiceRef}.pdf`;
 

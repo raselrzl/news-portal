@@ -25,6 +25,7 @@ interface PrintNewsProps {
   id: string | null;
   createdAt: Date;
   quotes?: quote[];
+  newsReporter: string | null;
 }
 
 const newsCountryBnMap: Record<string, string> = {
@@ -104,6 +105,7 @@ export default function PrintNews({
   newsHeading,
   createdAt,
   quotes = [],
+  newsReporter,
   id,
 }: PrintNewsProps) {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -158,6 +160,7 @@ export default function PrintNews({
           newsDetails={newsDetails}
           createdAt={createdAt}
           quotes={quotes}
+          newsReporter={newsReporter ?? "জাগ্রত বার্তা প্রতিবেদক"}
         />
         <Button
           onClick={handleShareWhatsApp}
@@ -253,7 +256,7 @@ export default function PrintNews({
 
               {/* Fullscreen Image Viewer */}
               {isFullImage && (
-                <div className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4">
+                <div className="fixed inset-0 bg-black/90 z-9999 flex items-center justify-center p-4">
                   {/* Close Button */}
                   <button
                     onClick={() => setIsFullImage(false)}

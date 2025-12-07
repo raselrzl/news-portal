@@ -67,7 +67,7 @@ export default function PrintInvoiceClient({
 
   // ----- Assets & refs -----
   const filename = `INV-${ad.id.slice(0, 6).toUpperCase()}.pdf`;
-  const logoUrl = "/lg1.png";
+  const logoUrl = "/logo.png";
   const bannerUrl = ad.advertiseBanner || "";
 
   const contentRef = useRef<HTMLDivElement>(null);

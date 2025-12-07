@@ -8,7 +8,6 @@ import NewsTicker from "@/components/general/NewsTicker";
 import Poll from "@/components/LivePoll/Poll";
 import Footer from "@/components/general/Footer";
 import VisitorTracker from "@/components/general/VisitorTracker";
-import AdsTicker from "@/components/general/AdsTicker";
 import RealBanglaDate from "@/components/general/BanglaDate";
 
 export default function MainLayout({ children }: { children: ReactNode }) {

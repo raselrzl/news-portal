@@ -98,7 +98,7 @@ export default function Footer() {
               </a>
             </div>
             <Link href="/" className="flex items-center p-2">
-              <div className="w-[160px] h-[60px] md:w-[200px] md:h-[80px] bg-[url('/logoo1.jpg')] dark:bg-[url('/logooo1.jpg')] bg-cover bg-center" />
+              <div className="w-40 h-[60px] md:w-[200px] md:h-20 bg-[url('/logo.png')] dark:bg-[url('/logo.png')] bg-cover bg-center" />
             </Link>
           </div>
           <div className="flex flex-col items-center  justify-center gap-4 mt-6 md:mt-0">

@@ -21,7 +21,7 @@ export default async function LoginForm() {
       <Card>
       <Link href="/" className="flex items-center gap-2 self-center">
         <img
-            src="/lg1.png"
+            src="/logo.png"
             height={120}
             width={270}
             alt="logo image"

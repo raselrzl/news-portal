@@ -166,12 +166,14 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           newsHeading={data.newsHeading}
           createdAt={data.createdAt} // <--- Pass createdAt here
           quotes={data.quotes ?? []}
+          newsReporter={
+            data.newsReporter?.reporterName ?? "জাগ্রত বার্তা প্রতিবেদক"
+          }
         />
 
-        
         {/* View Counter */}
         <p className="text-sm text-gray-600 mb-3">
-          👁‍🗨{data.viewCount ?? 0} {" "}বার পড়া হয়েছে
+          👁‍🗨{data.viewCount ?? 0} বার পড়া হয়েছে
         </p>
 
         {/* Bottom Banner */}
@@ -206,7 +208,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           <div className="mt-16">
             <RecentNews />
           </div>
-          <div className="block md:hidden mt-10 border-t-1 p-2">
+          <div className="block md:hidden mt-10 border-t p-2">
             <ShirShoNewsHeadings />
           </div>
           <EnterPrizeTwo />
