@@ -14,6 +14,7 @@ import type { Metadata } from "next";
 import { StandardTwo } from "@/components/allAdvertisement/StandardTwo";
 import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
 import { incrementArticleView } from "@/app/actions";
+import NewUserTracker from "@/components/general/NewUserTracker";
 
 async function getNewsArticle(articleId: string) {
   const newsArticle = await prisma.newsArticle.findUnique({
@@ -153,6 +154,8 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             <p className="font-bold">{formattedCreatedAt}</p>
           </div>
         </div>
+
+          <NewUserTracker />
 
         {/* News Content using PrintNews component */}
         <PrintNews
