@@ -155,7 +155,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           </div>
         </div>
 
-          <NewUserTracker />
+        
 
         {/* News Content using PrintNews component */}
         <PrintNews
@@ -203,6 +203,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             )}
           </div>
         </div>
+          <NewUserTracker />
       </div>
 
       {/* Right Sidebar */}

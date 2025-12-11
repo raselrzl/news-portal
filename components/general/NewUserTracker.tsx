@@ -25,5 +25,5 @@ export default function NewUserTracker() {
     getTotalNewUsers().then((res) => setTotalUsers(res.count));
   }, []);
 
-  return <div></div>;
+  return <div>{totalUsers}</div>;
 }
