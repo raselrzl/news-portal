@@ -40,7 +40,7 @@ export async function DeluxeTwoAdvertise() {
               <img
                 src={pro1.advertiseBanner}
                 alt={pro1.companyName}
-                className="w-[400px] h-[200px] md:h-[180px] rounded-xl object-fill"
+                className="px-4 md:px-0"
               />
               <span className="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-0.5 rounded">
                 Ad.
