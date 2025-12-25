@@ -991,8 +991,23 @@ export async function registerNewUser(
     screen?: string;
   }
 ) {
-  // Only create if userId does not exist
-  const existing = await prisma.newUserVisit.findUnique({ where: { userId } });
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+
+  // Check if this user already visited today
+  const existing = await prisma.newUserVisit.findFirst({
+    where: {
+      userId,
+      createdAt: {
+        gte: startOfDay,
+        lte: endOfDay,
+      },
+    },
+  });
+
   if (!existing) {
     await prisma.newUserVisit.create({
       data: {
@@ -1007,6 +1022,7 @@ export async function registerNewUser(
 
   return { success: true };
 }
+
 
 export async function getTotalNewUsers() {
   const count = await prisma.newUserVisit.count();
@@ -1025,4 +1041,27 @@ export async function incrementArticleView(articleId: string) {
     console.error("Error incrementing view count:", error);
     return { success: false };
   }
+}
+
+
+
+
+export async function getTodayVisitors() {
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+
+  const end = new Date();
+  end.setHours(23, 59, 59, 999);
+
+  const visitors = await prisma.newUserVisit.findMany({
+    where: {
+      createdAt: {
+        gte: start,
+        lte: end,
+      },
+    },
+    distinct: ["userId"],
+  });
+
+  return { count: visitors.length };
 }

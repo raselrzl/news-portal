@@ -506,12 +506,16 @@ enum igPostStatus {
 
 model NewUserVisit {
   id        Int      @id @default(autoincrement())
-  userId    String   @unique
+  userId    String
   userAgent String
   language  String?
   platform  String?
   screen    String?
   createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
 }
+
 
 
