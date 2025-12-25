@@ -31,9 +31,10 @@ const RealBanglaDate: React.FC<{ className?: string }> = ({ className }) => {
       const month = bnMonths[bd.month - 1]; 
       const day = bd.day - 1;
 
-      setBanglaDate(`${weekday}, ${toBanglaNumber(day)} ${month} ${toBanglaNumber(banglaYear)} বঙ্গাব্দ`);
+      setBanglaDate(`${weekday}, ${toBanglaNumber(day)} ${month} ${toBanglaNumber(banglaYear)} `);
     };
 
+    /* বঙ্গাব্দ */
     updateDate();
     const timer = setInterval(updateDate, 60 * 1000);
     return () => clearInterval(timer);

@@ -10,14 +10,61 @@ import { toHijri } from "hijri-converter";
 import Calendar from "date-bengali-revised";
 
 // Bangla helpers
-const bnMonths = ["বৈশাখ","জ্যৈষ্ঠ","আষাঢ়","শ্রাবণ","ভাদ্র","আশ্বিন","কার্তিক","অগ্রহায়ণ","পৌষ","মাঘ","ফাল্গুন","চৈত্র"];
-const hijriMonths = ["মুহররম","সফর","রবিউল আউয়াল","রবিউস সানি","জমাদিউল আউয়াল","জমাদিউস সানি","রজব","শাবান","রমজান","শাওয়াল","জিলক্বদ","জিলহজ"];
-const gregMonthsBn = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
-const bnWeekdays = ["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
+const bnMonths = [
+  "বৈশাখ",
+  "জ্যৈষ্ঠ",
+  "আষাঢ়",
+  "শ্রাবণ",
+  "ভাদ্র",
+  "আশ্বিন",
+  "কার্তিক",
+  "অগ্রহায়ণ",
+  "পৌষ",
+  "মাঘ",
+  "ফাল্গুন",
+  "চৈত্র",
+];
+const hijriMonths = [
+  "মুহররম",
+  "সফর",
+  "রবিউল আউয়াল",
+  "রবিউস সানি",
+  "জমাদিউল আউয়াল",
+  "জমাদিউস সানি",
+  "রজব",
+  "শাবান",
+  "রমজান",
+  "শাওয়াল",
+  "জিলক্বদ",
+  "জিলহজ",
+];
+const gregMonthsBn = [
+  "জানুয়ারি",
+  "ফেব্রুয়ারি",
+  "মার্চ",
+  "এপ্রিল",
+  "মে",
+  "জুন",
+  "জুলাই",
+  "আগস্ট",
+  "সেপ্টেম্বর",
+  "অক্টোবর",
+  "নভেম্বর",
+  "ডিসেম্বর",
+];
+const bnWeekdays = [
+  "রবিবার",
+  "সোমবার",
+  "মঙ্গলবার",
+  "বুধবার",
+  "বৃহস্পতিবার",
+  "শুক্রবার",
+  "শনিবার",
+];
 
 // ✅ Full Bangla number conversion
 const toBanglaNumber = (input: number | string): string => {
-  const bnDigits = ["০","১","২","৩","৪","৫","৬","৭","৮","৯"];
+  const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   return input
     .toString()
     .split("")
@@ -48,7 +95,6 @@ export function PrintNewsDetailsClient({
   quotes = [],
   newsReporter,
 }: PrintNewsDetailsClientProps) {
-
   const contentRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -75,7 +121,11 @@ export function PrintNewsDetailsClient({
     const updateAll = () => {
       const now = new Date();
       const bd = cal.fromDate(now);
-      const { hy, hm, hd } = toHijri(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      const { hy, hm, hd } = toHijri(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        now.getDate()
+      );
 
       setCurrentTime({
         hour: toBanglaNumber(now.getHours() % 12 || 12),
@@ -115,7 +165,14 @@ export function PrintNewsDetailsClient({
       format: [canvas.width, canvas.height],
     });
 
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, canvas.width, canvas.height);
+    pdf.addImage(
+      canvas.toDataURL("image/png"),
+      "PNG",
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
     window.open(URL.createObjectURL(pdf.output("blob")), "_blank");
 
     setIsLoading(false);
@@ -129,7 +186,7 @@ export function PrintNewsDetailsClient({
 
   return (
     <>
-        <Button
+      <Button
         onClick={handleDownload}
         className="overflow-hidden h-11 w-16 shadow-none border-none cursor-pointer hover:bg-none"
         variant="outline"
@@ -160,27 +217,47 @@ export function PrintNewsDetailsClient({
         }}
       >
         {/* HEADER (unchanged design) */}
-        <header style={{ padding: 12, marginBottom: 16, border: "1px solid #ccc", boxShadow: "0 2px 4px #0002" }}>
+        <header
+          style={{
+            padding: 12,
+            marginBottom: 16,
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 4px #0002",
+          }}
+        >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <img src="/logo.png" style={{ height: 40 }} />
-              <span style={{ fontSize: 12 }}>“কারও তাঁবেদারি নয়, সত্যের প্রতি দায়বদ্ধ।”</span>
+              <span style={{ fontSize: 12 }}>
+                “কারও তাঁবেদারি নয়, সত্যের প্রতি দায়বদ্ধ।”
+              </span>
             </div>
 
             <div style={{ fontSize: 10 }}>
-              {currentTime.weekday} {currentTime.hour}:{currentTime.minute} {currentTime.ampm}
+              {currentTime.weekday} {currentTime.hour}:{currentTime.minute}{" "}
+              {currentTime.ampm}
             </div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: 6, marginTop: 6, fontSize: 10 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 6,
+              marginTop: 6,
+              fontSize: 10,
+            }}
+          >
             <span style={{ background: "#ff4d4f", padding: "2px 6px" }}>
               {currentTime.day} {currentTime.month} {currentTime.year}
             </span>
             <span style={{ background: "#52c41a", padding: "2px 6px" }}>
-              {currentTime.banglaDay} {currentTime.banglaMonth} {currentTime.banglaYear} বঙ্গাব্দ
+              {currentTime.banglaDay} {currentTime.banglaMonth}{" "}
+              {currentTime.banglaYear} বঙ্গাব্দ
             </span>
             <span style={{ background: "#1890ff", padding: "2px 6px" }}>
-              {currentTime.hijriDay} {currentTime.hijriMonth} {currentTime.hijriYear} হিজরী
+              {currentTime.hijriDay} {currentTime.hijriMonth}{" "}
+              {currentTime.hijriYear} হিজরী
             </span>
           </div>
         </header>
@@ -188,7 +265,12 @@ export function PrintNewsDetailsClient({
         {/* ARTICLE */}
         <article style={{ border: "1px solid #ddd", padding: 12 }}>
           <div style={{ fontSize: 14, marginBottom: 6 }}>
-            প্রতিবেদক: {newsReporter === "Mamun" ? "তারফদার মামুন" : newsReporter || "জাগ্রত বার্তা প্রতিবেদক"}
+            প্রতিবেদক:{" "}
+            {newsReporter === "Mamun"
+              ? "তারফদার মামুন"
+              : newsReporter === "Rasel"
+              ? "জাগ্রত বার্তা প্রতিবেদক"
+              : newsReporter || "জাগ্রত বার্তা প্রতিবেদক"}
           </div>
 
           <h1 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>
@@ -246,7 +328,9 @@ export function PrintNewsDetailsClient({
                 }}
               >
                 <p>"{q.text}"</p>
-                <footer style={{ textAlign: "right", fontSize: 10 }}>— {q.speakerInfo}</footer>
+                <footer style={{ textAlign: "right", fontSize: 10 }}>
+                  — {q.speakerInfo}
+                </footer>
               </blockquote>
             ))}
           </section>

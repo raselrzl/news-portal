@@ -38,6 +38,15 @@ async function getAllUsers(page: number = 1, pageSize: number = 10) {
         onboardingCompleted: true,
         createdAt: true,
         approvalStatus: true,
+        newsReporter: {
+          select: {
+            newsArticle: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
       },
       orderBy: {
         createdAt: "desc",
@@ -46,8 +55,14 @@ async function getAllUsers(page: number = 1, pageSize: number = 10) {
     prisma.user.count(),
   ]);
 
+  // Map users to include article count
+  const mappedUsers = users.map((user) => ({
+    ...user,
+    articleCount: user.newsReporter?.newsArticle.length ?? 0,
+  }));
+
   return {
-    users,
+    users: mappedUsers,
     totalCount,
     totalPages: Math.ceil(totalCount / pageSize),
   };
@@ -99,6 +114,7 @@ export default async function AllUsersTable({
                     <TableHead>Onboarding</TableHead>
                     <TableHead>Joined</TableHead>
                     <TableHead>Approval Status</TableHead>
+                    <TableHead>Articles</TableHead> {/* New column */}
                     <TableHead>Action</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -137,6 +153,7 @@ export default async function AllUsersTable({
                           ? null
                           : user.approvalStatus ?? "Pending"}
                       </TableCell>
+                      <TableCell>{user.articleCount}</TableCell> {/* Article count */}
                       <TableCell className="text-right">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>

@@ -147,7 +147,7 @@ export default async function Home() {
         </div>
 
         {/* Desktop-only Advertisement Banner */}
-        <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-gradient-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
+        <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
           <p className="text-xs md:text-sm text-gray-800 dark:text-gray-200 text-center leading-snug">
             <strong className="text-yellow-700 dark:text-yellow-400">
               বিজ্ঞপ্তি:
@@ -163,7 +163,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-4">
-        <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
+        <div className="order-3 md:order-1 md:col-span-1 p-2 border">
           <div className="flex flex-row gap-2 text-center items-center justify-center">
             <Clock />
             <h1 className="text-xl font-bold pt-2 uppercase">অপরাধমূলক</h1>
@@ -283,7 +283,7 @@ export default async function Home() {
                 )}
 
                 {/* Gradient & Scroll Hint */}
-                <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-amber-100 dark:from-gray-700 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full h-10 bg-linear-to-t from-amber-100 dark:from-gray-700 to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-gray-500 dark:text-gray-300 animate-bounce">
                   <svg
                     className="w-5 h-5"
@@ -302,18 +302,18 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center pt-4 border-t-1">
+          <div className="flex justify-center items-center pt-4 border-t">
             <DeluxeTwoAdvertise />
           </div>
         </div>
         <div className="order-1 md:order-3 md:col-span-3">
           {lastFeaturedArticle &&
           Object.keys(lastFeaturedArticle).length > 0 ? (
-            <div className="mb-6 max-h-[250px] md:max-h-[290px] md:border-1 md:p-2">
+            <div className="mb-6 max-h-[250px] md:max-h-[290px] md:border md:p-2">
               {lastFeaturedArticle && (
                 <Link href={`/newsDetails/${lastFeaturedArticle[0].id}`}>
                   <div className="grid grid-cols-5 px-2">
-                    <div className="w-full max-h-[240px] md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
+                    <div className="w-full max-h-60 md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
                       <img
                         src={lastFeaturedArticle[0].newsPicture}
                         alt="picture"
@@ -357,11 +357,11 @@ export default async function Home() {
 
           {lastFeaturedArticle &&
           Object.keys(lastFeaturedArticle).length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border-1 mt-23 md:mt-4 border-t-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border mt-23 md:mt-4 border-t-2">
               {lastFeaturedArticle.slice(1, 10).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
                   <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
-                    <div className="w-auto h-[110px] md:h-[150px] border-1 rounded-xl overflow-hidden">
+                    <div className="w-auto h-[110px] md:h-[150px] border rounded-xl overflow-hidden">
                       <img
                         src={article.newsPicture}
                         alt="picture"
@@ -372,7 +372,7 @@ export default async function Home() {
                     </div>
 
                     <div className="pt-4">
-                      <h2 className="text-[17px] font-semibold leading-[1.5] px-1 font-stretch-extra-condensed">
+                      <h2 className="text-[17px] font-semibold leading-normal px-1 font-stretch-extra-condensed">
                         {article.newsHeading}
                       </h2>
                     </div>

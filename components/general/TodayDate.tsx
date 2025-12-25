@@ -71,8 +71,8 @@ const TodayDate: React.FC<TodayDateProps> = ({ calendar = 'gregorian', className
 
   } else if (calendar === 'hijri') {
     const { hy, hm, hd } = toHijri(today.getFullYear(), today.getMonth() + 1, today.getDate());
-    dateString = `${toBanglaNumber(hd)} ${hijriMonths[hm - 1]} ${toBanglaNumber(hy)} হিজরী`;
-
+    dateString = `${toBanglaNumber(hd)} ${hijriMonths[hm - 1]} ${toBanglaNumber(hy)} `;
+/* হিজরী */
   } else {
     const day = toBanglaNumber(today.getDate());
     const month = gregorianMonthsBn[today.getMonth()];

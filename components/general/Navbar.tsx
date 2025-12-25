@@ -14,8 +14,8 @@ export default async function Navbar() {
   const user = await auth();
 
   return (
-    <nav className="flex items-center justify-between pr-4">
-      <Link href="/" className="flex items-center p-2">
+    <nav className="flex items-center justify-between pr-2">
+      <Link href="/" className="flex items-center">
         <div className="w-[130px] h-[45px] md:w-[200px] md:h-20 bg-[url('/logo.png')] dark:bg-[url('/logo.png')] bg-cover bg-center" />
       </Link>
 
@@ -27,7 +27,7 @@ export default async function Navbar() {
 
       {/*  desktop navigation */}
 
-      <div className="hidden md:flex items-center gap-5">
+      <div className="hidden md:flex items-center gap-2">
         <ThemeToggle />
         <DropDownCountryList />
 

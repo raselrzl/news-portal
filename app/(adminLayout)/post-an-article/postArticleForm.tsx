@@ -112,10 +112,11 @@ export function CreateNewsArticleForm({
                 name="newsHeading"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>News Headline</FormLabel>
+                    <FormLabel>সংবাদ শিরোনাম</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Example: Life disrupted in the capital due to storm and rain"
+                        required
+                        placeholder=""
                         {...field}
                         className="placeholder:text-xs"
                       />
@@ -132,7 +133,7 @@ export function CreateNewsArticleForm({
                     onCheckedChange={setUseEditor}
                   />
                   <Label htmlFor="toggle-editor">
-                    Do you want to use the editor?
+                    আপনি কি স্টাইল এডিটর ব্যবহার করতে চান?
                   </Label>
                 </div>
 
@@ -141,14 +142,15 @@ export function CreateNewsArticleForm({
                   name="newsDetails"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>News Details</FormLabel>
+                      <FormLabel>সংবাদ বিবরণ</FormLabel>
                       <FormControl>
                         {useEditor ? (
                           <NewsDescriptionEditor field={field} />
                         ) : (
                           <Textarea
-                            placeholder="Example: On Tuesday morning in the Norrköping area..."
-                            className="min-h-[160px] md:min-h-[350px] placeholder:text-xs"
+                            required
+                            placeholder=""
+                            className="min-h-40 md:min-h-[350px] placeholder:text-xs"
                             {...field}
                           />
                         )}
@@ -168,9 +170,7 @@ export function CreateNewsArticleForm({
                   name="newsResource"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Will you select the source of the news?
-                      </FormLabel>
+                      <FormLabel>আপনি কি খবরের উৎস নির্বাচন করবেন?</FormLabel>
                       <FormControl>
                         <div className="flex gap-2">
                           {["Online Edition", "Print Edition"].map((option) => (
@@ -196,14 +196,14 @@ export function CreateNewsArticleForm({
                   name="newsLocation"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location</FormLabel>
+                      <FormLabel>অবস্থান অথবা ঠিকানা</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select A Location" />
+                            <SelectValue placeholder="একটি ঠিকানা নির্বাচন করুন" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -227,7 +227,7 @@ export function CreateNewsArticleForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        Do you want to feature this news on the front page?
+                        আপনি কি চান এই সংবাদটি প্রধান পৃষ্ঠায় দেখানো হোক?
                       </FormLabel>
 
                       <FormControl>
@@ -248,8 +248,8 @@ export function CreateNewsArticleForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      Which category does your article belong to? Please select
-                      one.
+                      আপনার প্রবন্ধ কোন বিভাগে পড়ে? অনুগ্রহ করে একটি নির্বাচন
+                      করুন।
                     </FormLabel>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -295,7 +295,7 @@ export function CreateNewsArticleForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      How many days do you want the news to be displayed?
+                      আপনি কতদিন পর্যন্ত এই সংবাদটি প্রদর্শিত রাখতে চান?
                     </FormLabel>
 
                     <FormControl>
@@ -329,7 +329,7 @@ export function CreateNewsArticleForm({
           <Card className="rounded-xs">
             <CardContent className="space-y-6">
               <CardHeader>
-                <CardTitle>Upload a small image for the news?</CardTitle>
+                <CardTitle>সংবাদের জন্য একটি ছবি আপলোড করুন?</CardTitle>
               </CardHeader>
               <FormField
                 control={form.control}
@@ -378,10 +378,11 @@ export function CreateNewsArticleForm({
                 name="newsPictureHeading"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Provide a description for the image</FormLabel>
+                    <FormLabel>এই ছবির একটি বিবরণ লিখুন।</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Example: Scene of the incident"
+                        required
+                        placeholder=""
                         className="placeholder:text-xs"
                         {...field}
                       />
@@ -396,10 +397,11 @@ export function CreateNewsArticleForm({
                 name="newsPictureCredit"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Image Credit</FormLabel>
+                    <FormLabel>ছবির ক্রেডিট লিখুন।</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Example: Daily Times"
+                        required
+                        placeholder=""
                         className="placeholder:text-xs"
                         {...field}
                       />
@@ -414,9 +416,7 @@ export function CreateNewsArticleForm({
 
           <Card className="rounded-xs">
             <CardHeader>
-              <CardTitle>
-                Has anyone made any special comments on this news?
-              </CardTitle>
+              <CardTitle>আপনি কি এই সংবাদে কোনো মন্তব্য দিতে চান?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {fields.map((field, index) => (
@@ -444,7 +444,7 @@ export function CreateNewsArticleForm({
                     name={`quotes.${index}.speakerInfo`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Commenter's Name</FormLabel>
+                        <FormLabel>কে মন্তব্য করেছেন, তার নাম দিন।</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Prime Minister"
@@ -466,7 +466,7 @@ export function CreateNewsArticleForm({
                 type="button"
                 onClick={() => append({ text: "", speakerInfo: "" })}
               >
-                + Add More
+                + আরও…
               </Button>
             </CardContent>
           </Card>
@@ -474,7 +474,9 @@ export function CreateNewsArticleForm({
           <div className="pointer-events-none cursor-not-allowed ">
             <Card className="bg-red-700 border-2 border-red-700">
               <CardHeader>
-                <CardTitle>My Profile, Who Posting that News!</CardTitle>
+                <CardTitle>
+                  আমার প্রোফাইল, কে সেই সংবাদটি পোস্ট করছেন!
+                </CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
@@ -482,7 +484,7 @@ export function CreateNewsArticleForm({
                   name="reporterName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Reporter's Name</FormLabel>
+                      <FormLabel>প্রতিবেদকের নাম</FormLabel>
                       <FormControl>
                         <Input
                           placeholder={reporterName}
@@ -500,7 +502,7 @@ export function CreateNewsArticleForm({
                   name="phoneNumber"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Mobile Number</FormLabel>
+                      <FormLabel>মোবাইল নম্বর</FormLabel>
                       <FormControl>
                         <Input placeholder="01712000000" {...field} readOnly />
                       </FormControl>
@@ -513,7 +515,7 @@ export function CreateNewsArticleForm({
                   name="location"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location / Country</FormLabel>
+                      <FormLabel>ঠিকানা</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -526,7 +528,7 @@ export function CreateNewsArticleForm({
 
                         <SelectContent>
                           <SelectGroup>
-                            <SelectLabel>Address / Country</SelectLabel>
+                            <SelectLabel>জেলা/বিভাগ</SelectLabel>
                             {districts.map((district) => (
                               <SelectItem
                                 value={district.name}
@@ -553,7 +555,7 @@ export function CreateNewsArticleForm({
                   name="facebookProfileAddress"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Facebook Profile or Address</FormLabel>
+                      <FormLabel>অনলাইন ঠিকানা</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="https://www.facebook.com/"
@@ -570,7 +572,7 @@ export function CreateNewsArticleForm({
                   name="bio"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>About</FormLabel>
+                      <FormLabel>সম্পর্কে</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="I am a news reporter from Sweden..."
@@ -587,7 +589,7 @@ export function CreateNewsArticleForm({
                   name="profilePicture"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="">Profile Picture</FormLabel>
+                      <FormLabel className="">প্রোফাইল ছবি</FormLabel>
                       <FormControl>
                         <div>
                           {field.value ? (
@@ -642,7 +644,7 @@ export function CreateNewsArticleForm({
                 name="newsArticleStatus"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>News Status</FormLabel>
+                    <FormLabel>আপনি কি এখনই সংবাদটি প্রকাশ করতে চান?</FormLabel>
 
                     <Select
                       onValueChange={field.onChange}
@@ -654,8 +656,8 @@ export function CreateNewsArticleForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="DRAFT">DRAFT</SelectItem>
-                        <SelectItem value="ACTIVE">ACTIVE</SelectItem>
+                        <SelectItem value="DRAFT">ড্রাফট</SelectItem>
+                        <SelectItem value="ACTIVE">প্রকাশ</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -674,10 +676,10 @@ export function CreateNewsArticleForm({
           {pending ? (
             <>
               <Loader2 className="animate-spin w-4 h-4 mr-2" />
-              Publishing...
+              প্রকাশিত হচ্ছে...
             </>
           ) : (
-            "Publish"
+            "প্রকাশ করতে ক্লিক করুন"
           )}
         </Button>
       </form>

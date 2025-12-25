@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ChevronDown, Globe } from "lucide-react";
+import { ChevronDown, Globe, Menu } from "lucide-react";
 
 const locations = [
   { name: "বাগেরহাট", link: "/diffrentCountry?country=bagerhat" },
@@ -76,19 +76,15 @@ const locations = [
   { name: "সুনামগঞ্জ", link: "/diffrentCountry?country=sunamganj" },
   { name: "সিলেট", link: "/diffrentCountry?country=sylhet" },
   { name: "টাঙ্গাইল", link: "/diffrentCountry?country=tangail" },
-  { name: "ঠাকুরগাঁও", link: "/diffrentCountry?country=thakurgaon" }
+  { name: "ঠাকুরগাঁও", link: "/diffrentCountry?country=thakurgaon" },
 ];
-
-
 
 export default function DropDownCountryList() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="mr-1">
-          <Globe /> <p className="font-bold text-md">জেলা
-</p>
-          <ChevronDown className="h-6 w-6" />
+        <Button variant="outline" size="sm" className="">
+          <Menu />
         </Button>
       </DropdownMenuTrigger>
 
@@ -105,7 +101,7 @@ export default function DropDownCountryList() {
                 </div>
               </Link>
             </DropdownMenuItem>
-          {/*   {index < locations.length - 1 && <DropdownMenuSeparator />} */}
+            {/*   {index < locations.length - 1 && <DropdownMenuSeparator />} */}
           </div>
         ))}
       </DropdownMenuContent>

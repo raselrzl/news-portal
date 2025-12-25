@@ -29,7 +29,7 @@ export default function BanglaNavMenu() {
     }
   }, [pathname]);
 
-  // Track scroll arrows
+  // Track scroll arrows visibility
   useEffect(() => {
     const handleScroll = () => {
       const container = containerRef.current;
@@ -40,11 +40,13 @@ export default function BanglaNavMenu() {
         );
       }
     };
+
     const container = containerRef.current;
     if (container) {
       container.addEventListener('scroll', handleScroll);
     }
     handleScroll();
+
     return () => {
       if (container) {
         container.removeEventListener('scroll', handleScroll);
@@ -52,12 +54,26 @@ export default function BanglaNavMenu() {
     };
   }, []);
 
+  // Scroll handlers
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="flex items-center gap-2 py-2 border-b-2 border-primary light:bg-primary-foreground">
+    <div className="flex items-center gap-1 border-l-12 border-b border-r-12 border-primary light:bg-primary-foreground">
       {canScrollLeft && (
         <ArrowLeft
           className="text-primary dark:text-white cursor-pointer"
           size={24}
+          onClick={scrollLeft}
         />
       )}
       <div
@@ -72,7 +88,7 @@ export default function BanglaNavMenu() {
               key={id}
               href={href}
               ref={isActive ? activeLinkRef : null}
-              className={`px-3 py-2 text-md font-bold transition-colors rounded-4xl border shadow ${
+              className={`px-2 py-0.5 text-xs md:text-sm font-bold transition-colors ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "text-accent-foreground dark:text-white hover:bg-accent hover:text-accent-foreground"
@@ -87,6 +103,7 @@ export default function BanglaNavMenu() {
         <ArrowRight
           className="text-primary dark:text-white cursor-pointer"
           size={24}
+          onClick={scrollRight}
         />
       )}
     </div>

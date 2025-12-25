@@ -103,7 +103,7 @@ model newsArticle {
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 
-  viewCount         Int?              @default(12)
+  viewCount         Int?              @default(301)
 }
 
 enum newsArticleStatus {
@@ -125,7 +125,7 @@ enum newsCategory {
   LATEST
   NATIONAL
   POLITICS
-  COUNTRYWIDE
+  COUNTRYWIDE 
   INTERNATIONAL
   SPORTS
   EDUCATION
@@ -147,7 +147,15 @@ enum newsCategory {
   FARMING
   LITERATURE
   JOB
-
+  FOREIGN
+  LIFESTYLE
+  SOCIALMEDIA
+  WOMENKIDS
+  ELECTIONS
+  OTHERS
+  BADNEWS
+  GOODNEWS
+  PROCCHOD
 }
 
 model Advertisement {

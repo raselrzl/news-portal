@@ -167,7 +167,16 @@ export const newsCategory: {
   NOTICE: 'NOTICE',
   FARMING: 'FARMING',
   LITERATURE: 'LITERATURE',
-  JOB: 'JOB'
+  JOB: 'JOB',
+  FOREIGN: 'FOREIGN',
+  LIFESTYLE: 'LIFESTYLE',
+  SOCIALMEDIA: 'SOCIALMEDIA',
+  WOMENKIDS: 'WOMENKIDS',
+  ELECTIONS: 'ELECTIONS',
+  OTHERS: 'OTHERS',
+  BADNEWS: 'BADNEWS',
+  GOODNEWS: 'GOODNEWS',
+  PROCCHOD: 'PROCCHOD'
 };
 
 export type newsCategory = (typeof newsCategory)[keyof typeof newsCategory]
