@@ -24,7 +24,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="flex">
       {/* Sidebar (Server Component) */}
-      <Card className="hidden md:flex sticky top-34 h-[80%] pt-6 pb-0 rounded-none">
+      <Card className="hidden md:flex sticky top-20 h-[80%] pt-6 pb-0 rounded-none">
         {user?.user ? (
           <SidebarServer
             email={user.user.email as string}
@@ -66,7 +66,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
           </h1>
         </div>
         <div className="mt-34"></div>
-        <div className="p-2 md:px-4 border-1 mb-10 shadow min-h-[669px]">{children}</div>
+        <div className="p-2 md:px-4 border mb-10 shadow min-h-[669px]">{children}</div>
       </div>
     </div>
   );

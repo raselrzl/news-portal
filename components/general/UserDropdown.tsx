@@ -43,7 +43,8 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
   const userType = currentUser?.userType ?? null;
   const approvalStatus = currentUser?.approvalStatus ?? null;
 
-  const isNewsReporter = userType === "NEWSREPORTER" && approvalStatus === "APPROVED";
+  const isNewsReporter =
+    userType === "NEWSREPORTER" && approvalStatus === "APPROVED";
   const isEditor = userType === "EDITOR";
   const isSuperAdmin = userType === "SUPERADMIN";
 
@@ -54,36 +55,111 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
 
   // Links for NEWSREPORTER approved
   const linksNewsReporter = [
-    { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
-    { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
+    { href: "/post-an-article", icon: BookPlus, label: "সংবাদ নিবন্ধ লিখুন" }, // Write News Article
+    {
+      href: "/post-an-article/my-article",
+      icon: Newspaper,
+      label: "আমার প্রকাশিত সংবাদ",
+    }, // My Published Articles
   ];
 
   // Links for SOMPADOK and SUPERADMIN
   const linksSompadokSuperAdmin = [
-    { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
-    { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
-    { href: "/post-an-article/poll", icon: FileQuestion, label: "Write Poll Question" },
-    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },
-    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A Live Update" },
-    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "Manage All Live Updates" },
-    { href: "/post-an-article/alaarticles", icon: Layers2, label: "Manage All Articles" },
-    { href: "/post-an-article/post-advertisement", icon: Megaphone, label: "Post Advertisement" },
-    { href: "/post-an-article/post-advertisement/alladvertise", icon: PoundSterling, label: "Manage Advertisements" },
-    { href: "/post-an-article/advertise/allcontactinfo", icon: MessagesSquare, label: "All Advertisement Requests" },
-    { href: "/post-an-article/post-a-video", icon: Settings2, label: "Post a YouTube Video" },
-    { href: "/post-an-article/post-an-instagram", icon: Settings2, label: "Post a Instagram Link" },
-     { href: "/post-an-article/post-an-instagram/allinstagrampost", icon: Settings2, label: "Manage all instagram post" },
-    { href: "/post-an-article/post-a-video/allvideos", icon: BarChart, label: "Manage All Videos" },
-    { href: "/post-an-article/allusers", icon: Users, label: "Users" },
+    { href: "/post-an-article", icon: BookPlus, label: "সংবাদ নিবন্ধ লিখুন" },
+    {
+      href: "/post-an-article/my-article",
+      icon: Newspaper,
+      label: "আমার প্রকাশিত সংবাদ",
+    },
+    {
+      href: "/post-an-article/poll",
+      icon: FileQuestion,
+      label: "পোল প্রশ্ন লিখুন",
+    }, // Write Poll Question
+    {
+      href: "/post-an-article/alluseropinion/opiniontable",
+      icon: Settings2,
+      label: "সব অভিযোগ পরিচালনা করুন",
+    }, // Manage All Complaints
+    {
+      href: "/post-an-article/public-source-news",
+      icon: FlameIcon,
+      label: "লাইভ আপডেট পোস্ট করুন",
+    }, // Post A Live Update
+    {
+      href: "/post-an-article/public-source-news/all-public-source-news",
+      icon: FlameIcon,
+      label: "সব লাইভ আপডেট পরিচালনা করুন",
+    }, // Manage All Live Updates
+    {
+      href: "/post-an-article/alaarticles",
+      icon: Layers2,
+      label: "সব নিবন্ধ পরিচালনা করুন",
+    }, // Manage All Articles
+    {
+      href: "/post-an-article/post-advertisement",
+      icon: Megaphone,
+      label: "বিজ্ঞাপন পোস্ট করুন",
+    }, // Post Advertisement
+    {
+      href: "/post-an-article/post-advertisement/alladvertise",
+      icon: PoundSterling,
+      label: "বিজ্ঞাপন পরিচালনা করুন",
+    }, // Manage Advertisements
+    {
+      href: "/post-an-article/advertise/allcontactinfo",
+      icon: MessagesSquare,
+      label: "সব বিজ্ঞাপন অনুরোধ",
+    }, // All Advertisement Requests
+    {
+      href: "/post-an-article/post-a-video",
+      icon: Settings2,
+      label: "ইউটিউব ভিডিও পোস্ট করুন",
+    }, // Post a YouTube Video
+    {
+      href: "/post-an-article/post-an-instagram",
+      icon: Settings2,
+      label: "ইনস্টাগ্রাম লিঙ্ক পোস্ট করুন",
+    }, // Post an Instagram Link
+    {
+      href: "/post-an-article/post-an-instagram/allinstagrampost",
+      icon: Settings2,
+      label: "সব ইনস্টাগ্রাম পোস্ট পরিচালনা করুন",
+    }, // Manage all Instagram posts
+    {
+      href: "/post-an-article/post-a-video/allvideos",
+      icon: BarChart,
+      label: "সব ভিডিও পরিচালনা করুন",
+    }, // Manage All Videos
+    { href: "/post-an-article/allusers", icon: Users, label: "ইউজার" }, // Users
   ];
 
   // SUPERADMIN-only links
   const linksSuperAdmin = [
-    { href: "/post-an-article/dailyvisitors", icon: Users, label: "Daily Visitors" },
-    { href: "/post-an-article/post-advertisement/advertisementPackage", icon: Package, label: "Add Advertisement Package" },
-    { href: "/post-an-article/post-advertisement/adanalysis", icon: TableProperties, label: "Economy" },
-    { href: "/post-an-article/routeTrack", icon: ChartColumnBig, label: "Statistics" },
+    {
+      href: "/post-an-article/dailyvisitors",
+      icon: Users,
+      label: "দৈনিক ভিজিটর",
+    }, // Daily Visitors
+    {
+      href: "/post-an-article/post-advertisement/advertisementPackage",
+      icon: Package,
+      label: "বিজ্ঞাপন প্যাকেজ যোগ করুন",
+    }, // Add Advertisement Package
+    {
+      href: "/post-an-article/post-advertisement/adanalysis",
+      icon: TableProperties,
+      label: "অর্থনীতি",
+    }, // Economy
+    {
+      href: "/post-an-article/routeTrack",
+      icon: ChartColumnBig,
+      label: "পরিসংখ্যান",
+    }, // Statistics
   ];
+
+  // Logout button
+  <span>লগ আউট</span>;
 
   // ✅ Helper function to merge and remove duplicates
   function mergeLinks(...groups: any[][]) {
@@ -96,8 +172,8 @@ export async function UserDropdown({ email, name, image }: iAppProps) {
   // Combine links based on user type
   const allLinks = mergeLinks(
     linksCommon,
-    (isNewsReporter || mkr) ? linksNewsReporter : [],
-    (isEditor || isSuperAdmin) ? linksSompadokSuperAdmin : [],
+    isNewsReporter || mkr ? linksNewsReporter : [],
+    isEditor || isSuperAdmin ? linksSompadokSuperAdmin : [],
     isSuperAdmin ? linksSuperAdmin : []
   );
 

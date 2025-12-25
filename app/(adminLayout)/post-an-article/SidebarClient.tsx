@@ -17,7 +17,6 @@ import {
   Package,
   PoundSterling,
   Settings2,
-  Table,
   TableProperties,
   Users,
 } from "lucide-react";
@@ -40,41 +39,40 @@ export default function SidebarClient({ email, name, userType, approvalStatus, m
 
   // Everyone sees
   const linksCommon = [
-    { href: "/alluseropinion", icon: MessagesSquare, label: "Complaints" },
+    { href: "/alluseropinion", icon: MessagesSquare, label: "অভিযোগ" },
   ];
 
   // NEWSREPORTER approved only
   const linksNewsReporter = [
-    { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
-    { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
+    { href: "/post-an-article", icon: BookPlus, label: "নিউজ আর্টিকেল লিখুন" },
+    { href: "/post-an-article/my-article", icon: Newspaper, label: "আমার প্রকাশিত সংবাদ" },
   ];
 
   // SOMPADOK + SUPERADMIN (common links)
   const linksSompadokSuperAdmin = [
-    { href: "/post-an-article", icon: BookPlus, label: "Write News Article" },
-    { href: "/post-an-article/my-article", icon: Newspaper, label: "My Published Articles" },
-    { href: "/post-an-article/poll", icon: FileQuestion, label: "Write Poll Question" },
-    
-    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "Post A live Update" },
-    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "Manage All Live Update" },
-    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "Manage All Complaints" },
-    { href: "/post-an-article/alaarticles", icon: Layers2, label: "Manage All Articles" },
-    { href: "/post-an-article/post-advertisement", icon: Megaphone, label: "Post Advertisement" },
-    { href: "/post-an-article/post-advertisement/alladvertise", icon: PoundSterling, label: "Manage Advertisements" },
-    { href: "/post-an-article/advertise/allcontactinfo", icon: MessagesSquare, label: "All Advertisement Requests" },
-    { href: "/post-an-article/post-a-video", icon: Settings2, label: "Post a YouTube Video" },
-    { href: "/post-an-article/post-an-instagram", icon: Settings2, label: "Post a Instagram Link" },
-     { href: "/post-an-article/post-an-instagram/allinstagrampost", icon: Settings2, label: "Manage all instagram post" },
-    { href: "/post-an-article/post-a-video/allvideos", icon: BarChart, label: "Manage All Videos" },
-    { href: "/post-an-article/allusers", icon: Users, label: "Users" },
+    { href: "/post-an-article", icon: BookPlus, label: "নিউজ আর্টিকেল লিখুন" },
+    { href: "/post-an-article/my-article", icon: Newspaper, label: "আমার প্রকাশিত সংবাদ" },
+    { href: "/post-an-article/poll", icon: FileQuestion, label: "পোল প্রশ্ন লিখুন" },
+    { href: "/post-an-article/public-source-news", icon: FlameIcon, label: "লাইভ আপডেট পোস্ট করুন" },
+    { href: "/post-an-article/public-source-news/all-public-source-news", icon: FlameIcon, label: "সব লাইভ আপডেট পরিচালনা করুন" },
+    { href: "/post-an-article/alluseropinion/opiniontable", icon: Settings2, label: "সব অভিযোগ পরিচালনা করুন" },
+    { href: "/post-an-article/alaarticles", icon: Layers2, label: "সব আর্টিকেল পরিচালনা করুন" },
+    { href: "/post-an-article/post-advertisement", icon: Megaphone, label: "বিজ্ঞাপন পোস্ট করুন" },
+    { href: "/post-an-article/post-advertisement/alladvertise", icon: PoundSterling, label: "বিজ্ঞাপন পরিচালনা করুন" },
+    { href: "/post-an-article/advertise/allcontactinfo", icon: MessagesSquare, label: "সব বিজ্ঞাপন অনুরোধ" },
+    { href: "/post-an-article/post-a-video", icon: Settings2, label: "ইউটিউব ভিডিও পোস্ট করুন" },
+    { href: "/post-an-article/post-an-instagram", icon: Settings2, label: "ইনস্টাগ্রাম লিঙ্ক পোস্ট করুন" },
+    { href: "/post-an-article/post-an-instagram/allinstagrampost", icon: Settings2, label: "সব ইনস্টাগ্রাম পোস্ট পরিচালনা করুন" },
+    { href: "/post-an-article/post-a-video/allvideos", icon: BarChart, label: "সব ভিডিও পরিচালনা করুন" },
+    { href: "/post-an-article/allusers", icon: Users, label: "ব্যবহারকারীরা" },
   ];
 
   // SUPERADMIN only
   const linksSuperAdmin = [
-    { href: "/post-an-article/dailyvisitors", icon: Users, label: "Daily Visitors" },
-    { href: "/post-an-article/post-advertisement/advertisementPackage", icon: Package, label: "Add Advertisement Package" },
-    { href: "/post-an-article/post-advertisement/adanalysis", icon: TableProperties, label: "Economy" },
-    { href: "/post-an-article/routeTrack", icon: ChartColumnBig, label: "Dashboard" },
+    { href: "/post-an-article/dailyvisitors", icon: Users, label: "দৈনিক ভিজিটর" },
+    { href: "/post-an-article/post-advertisement/advertisementPackage", icon: Package, label: "বিজ্ঞাপন প্যাকেজ যোগ করুন" },
+    { href: "/post-an-article/post-advertisement/adanalysis", icon: TableProperties, label: "অর্থনীতি" },
+    { href: "/post-an-article/routeTrack", icon: ChartColumnBig, label: "ড্যাশবোর্ড" },
   ];
 
   // Compose final links
