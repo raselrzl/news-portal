@@ -5,6 +5,7 @@ import Statistics from "@/components/general/Statistics";
 import { UserLinks } from "@/components/general/UserLinks";
 import { notFound } from "next/navigation";
 import { requireRoleAccess } from "../roleBaseAccess";
+import NewsStatsTable from "@/components/general/MostViewedNews";
 
 async function getRouteHits() {
 
@@ -75,6 +76,7 @@ const Dashboard = async () => {
         <Statistics />
       </div>
     </div>
+    <NewsStatsTable />
     </>
   );
 };
