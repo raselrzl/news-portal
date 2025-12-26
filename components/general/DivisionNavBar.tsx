@@ -16,7 +16,7 @@ export default function DivisionFlexNav() {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center gap-2 border-r-8 border-primary justify-center md:justify-end flex-wrap">
+    <div className="flex items-center gap-1 border-r-8 border-primary justify-center md:justify-end flex-wrap">
       {divisionLinks.map(({ id, href, label }) => {
         const isActive = pathname === href;
         return (

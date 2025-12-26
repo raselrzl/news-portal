@@ -9,6 +9,7 @@ import { Loader2, User2 } from "lucide-react";
 import { Suspense } from "react";
 import { DeluxeOneAdvertise } from "../allAdvertisement/DeluxeOne";
 import DropDownCountryList from "./DropDownCountryList";
+import MegaMenu from "./MegaMenu";
 
 export default async function Navbar() {
   const user = await auth();
@@ -20,15 +21,16 @@ export default async function Navbar() {
       </Link>
 
       <div className="hidden md:block w-full">
-       <Suspense fallback={<Loader2 className="mx-auto animate-spin" />}>
-            <DeluxeOneAdvertise />
-          </Suspense>
+        <Suspense fallback={<Loader2 className="mx-auto animate-spin" />}>
+          <DeluxeOneAdvertise />
+        </Suspense>
       </div>
 
       {/*  desktop navigation */}
 
       <div className="hidden md:flex items-center gap-2">
         <ThemeToggle />
+        <MegaMenu />
         <DropDownCountryList />
 
         <div className="pr-4">
@@ -58,7 +60,8 @@ export default async function Navbar() {
         <div className="size-sm">
           <ThemeToggle />
         </div>
-       <DropDownCountryList />
+        <MegaMenu />
+        <DropDownCountryList />
         {user?.user ? (
           <UserDropdown
             email={user.user.email as string}
