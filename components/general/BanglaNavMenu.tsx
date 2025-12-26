@@ -68,7 +68,7 @@ export default function BanglaNavMenu() {
   };
 
   return (
-    <div className="flex items-center gap-1 border-l-12 border-b border-r-12 border-primary light:bg-primary-foreground">
+    <div className="flex items-center gap-1 border-l-8 border-b border-r-8 border-primary light:bg-primary-foreground">
       {canScrollLeft && (
         <ArrowLeft
           className="text-primary dark:text-white cursor-pointer"
@@ -88,7 +88,7 @@ export default function BanglaNavMenu() {
               key={id}
               href={href}
               ref={isActive ? activeLinkRef : null}
-              className={`px-2 py-0.5 text-xs md:text-sm font-bold transition-colors ${
+              className={`px-2 py-1 text-xs md:text-sm font-bold transition-colors ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "text-accent-foreground dark:text-white hover:bg-accent hover:text-accent-foreground"
