@@ -63,8 +63,8 @@ export default function Footer() {
             </p>
 
             <div>
-              <p>ঢাকা, বাংলাদেশ</p>
-              <p>MAnaged By</p> <b />
+              <p className="">ঢাকা, বাংলাদেশ</p>
+              <p>Managed By</p> <b />
               <p>Lisbon, Portugal</p>
               <p>Stockholm, Sweden</p>
               <p>Cyprus</p>
