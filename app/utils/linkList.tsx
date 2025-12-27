@@ -4,7 +4,7 @@ export const links = [
   { id: "03", href: "/politics", label: "রাজনীতি" },
   { id: "04", href: "/countrywide", label: "সারাদেশ" },
   { id: "05", href: "/international", label: "আন্তর্জাতিক" },
-  { id: "06", href: "/sports", label: "খেলা-দুলা" },
+  { id: "06", href: "/sports", label: "খেলা-ধুলা" },
   { id: "07", href: "/education", label: "শিক্ষা" },
   { id: "08", href: "/health", label: "স্বাস্থ্য" },
   { id: "09", href: "/opinion", label: "মতামত" },
