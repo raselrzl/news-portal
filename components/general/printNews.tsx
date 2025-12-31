@@ -249,7 +249,7 @@ export default function PrintNews({
                       )}
                     </>
                   ) : (
-                    <p className="text-sm font-semibold">জাগ্রত প্রতিবেদক</p>
+                    <p className="text-sm font-semibold">জাগ্রত বার্তা</p>
                   )}
                 </div>
               </div>
@@ -277,13 +277,13 @@ export default function PrintNews({
 
           {/* News Details */}
           <div className="whitespace-pre-line text-md mg:text-lg dark:bg-black mt-10">
-            <div className="flex flex-row px-3 items-center mb-4 text-xl font-extrabold">
+            {/* <div className="flex flex-row px-3 items-center mb-4 text-xl font-extrabold">
               <MapPin />
               {newsLocation?.trim()
                 ? newsCountryBnMap[newsLocation] || newsLocation
                 : "জাগ্রতবার্তা"}{" "}
-              প্রতিনিধি
-            </div>
+              প্রতিবেদক
+            </div> */}
 
             <div className="px-3">
               <NewsDetailsDisplay newsDetails={newsDetails} />

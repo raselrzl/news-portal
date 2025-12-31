@@ -42,7 +42,7 @@ export default function MegaMenu() {
         >
           <div
             className="
-              pointer-events-auto bg-white shadow-lg overflow-y-auto
+              pointer-events-auto bg-white dark:bg-black shadow-lg overflow-y-auto
 
               /* Mobile */
               fixed left-0 right-0 top-[37px]
