@@ -381,7 +381,7 @@ export function CreateNewsArticleForm({
                     <FormLabel>এই ছবির একটি বিবরণ লিখুন।</FormLabel>
                     <FormControl>
                       <Input
-                        required
+                        
                         placeholder=""
                         className="placeholder:text-xs"
                         {...field}
@@ -400,7 +400,7 @@ export function CreateNewsArticleForm({
                     <FormLabel>ছবির ক্রেডিট লিখুন।</FormLabel>
                     <FormControl>
                       <Input
-                        required
+                        
                         placeholder=""
                         className="placeholder:text-xs"
                         {...field}

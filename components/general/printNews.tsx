@@ -236,20 +236,20 @@ export default function PrintNews({
                 />
 
                 {/* Text Layer */}
-                <div className="absolute bottom-0 left-0 w-full z-10 bg-black/60 text-white px-4 py-2 text-center">
+                <div className="absolute bottom-0 left-0 w-full z-10 bg-black/20 text-white text-[10px] px-4 py-2 text-center">
                   {newsPictureHeading || newsPictureCredit ? (
                     <>
                       {newsPictureHeading && (
-                        <p className="text-sm font-semibold">
+                        <p className="text-[10px] font-semibold">
                           {newsPictureHeading}
                         </p>
                       )}
                       {newsPictureCredit && (
-                        <p className="text-xs">{newsPictureCredit}</p>
+                        <p className="text-[8px]">{newsPictureCredit}</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-sm font-semibold">জাগ্রত বার্তা</p>
+                    <p className="text-[8px] font-semibold">জাগ্রত বার্তা</p>
                   )}
                 </div>
               </div>
