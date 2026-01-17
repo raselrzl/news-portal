@@ -49,8 +49,13 @@ export default function Footer() {
         </div>
         <div className="md:grid md:grid-cols-3">
           <div>
-            <h1 className="font-bold text-2xl mt-6">প্রকাশনা ও যোগাযোগ</h1>
-            <h3 className="font-bold">সম্পাদক & প্রকাশক: শাহাব উদ্দিন</h3>
+            <h1 className="font-bold text-2xl mt-6">প্রকাশনা ও যোগাযোগ </h1>
+            <h3 className="font-bold">
+              সম্পাদক এবং প্রকাশকমণ্ডলী <br />
+              মো: মোশাররফ হোসেন <br />
+              হাজেরা আক্তার পলি <br />
+              শাহাব উদ্দিন
+            </h3>
 
             <p className="mb-1 text-sm text-muted-foreground">
               <a
