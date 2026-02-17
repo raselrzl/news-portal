@@ -40,8 +40,8 @@ export default async function LiveUpdate() {
 
   return (
     <div className="py-3 rounded-md mx-auto max-w-[720px]">
-      <h1 className="uppercase font-bold text-white text-xl py-2 bg-primary max-w-[720px] ml-2 md:mx-0">
-        🚨 ব্রেকিং নিউজ
+      <h1 className="uppercase font-bold text-white text-xl py-2 bg-red-600 max-w-[720px] ml-2 pl-4 md:mx-0">
+        ব্রেকিং নিউজ
       </h1>
 
       {/* ========== FEATURED FIRST NEWS ========== */}
@@ -64,7 +64,7 @@ export default async function LiveUpdate() {
                       <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
                     </div>
                     <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
-                      {formatTimeAgo(new Date(news[0].createdAt))}
+                      {/* {formatTimeAgo(new Date(news[0].createdAt))} */}
                     </span>
                   </div>
 
@@ -113,7 +113,7 @@ export default async function LiveUpdate() {
               {/* Content */}
               <div className="flex-1">
                 <span className="text-xs text-gray-500 italic">
-                  {formatTimeAgo(new Date(item.createdAt))}
+                  {/* {formatTimeAgo(new Date(item.createdAt))} */}
                 </span>
 
                 <div className="font-medium text-sm mt-1">{item.headings}</div>

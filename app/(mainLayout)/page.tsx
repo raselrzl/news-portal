@@ -140,7 +140,7 @@ export default async function Home() {
   const session = await aauth();
   return (
     <>
-      <div className="bg-red-50 dark:bg-black mb-2 grid grid-cols-3 items-center px-2">
+      <div className=" dark:bg-black mb-2 grid grid-cols-3 items-center px-2">
         {/* Live Updates */}
         <div className="col-span-3 md:col-span-2">
           <LiveUpdate />

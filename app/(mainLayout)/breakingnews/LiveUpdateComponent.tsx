@@ -69,8 +69,8 @@ export default async function LiveUpdateComponent({
 
   return (
     <div className=" py-3 rounded-md mx-auto max-w-7xl">
-      <h1 className="uppercase font-bold text-white text-xl ml-2 md:ml-70 py-2 bg-primary">
-        🚨 ব্রেকিং নিউজ
+      <h1 className="uppercase font-bold text-white text-xl ml-2 md:ml-70 py-2 pl-4 bg-red-600">
+        ব্রেকিং নিউজ
       </h1>
 
       {/* ========== FEATURED FIRST NEWS ========== */}
@@ -93,7 +93,7 @@ export default async function LiveUpdateComponent({
                       <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
                     </div>
                     <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
-                      {formatTimeAgo(new Date(news[0].createdAt))}
+                      {/* {formatTimeAgo(new Date(news[0].createdAt))} */}
                     </span>
                   </div>
 
@@ -112,7 +112,7 @@ export default async function LiveUpdateComponent({
                     <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
                   </div>
                   <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
-                    {formatTimeAgo(new Date(news[0].createdAt))}
+                    {/* {formatTimeAgo(new Date(news[0].createdAt))} */}
                   </span>
                 </div>
 
@@ -140,7 +140,7 @@ export default async function LiveUpdateComponent({
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4">
                 <div className="flex-1">
                   <span className="text-xs text-gray-500 italic">
-                    {formatTimeAgo(new Date(item.createdAt))}
+                    {/* {formatTimeAgo(new Date(item.createdAt))} */}
                   </span>
                   <div className="font-medium text-sm mt-1">
                     {item.headings}
