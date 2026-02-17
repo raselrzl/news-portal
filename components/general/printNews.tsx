@@ -20,6 +20,7 @@ interface PrintNewsProps {
   newsPictureCredit: string | null;
   newsLocation: string | null;
   newsDetails: string | "...";
+  reporterPublicName: string| null;
   newsResource: string | null;
   newsHeading: string | null;
   id: string | null;
@@ -101,6 +102,7 @@ export default function PrintNews({
   newsPictureCredit,
   newsLocation,
   newsDetails,
+  reporterPublicName,
   newsResource,
   newsHeading,
   createdAt,
@@ -160,7 +162,7 @@ export default function PrintNews({
           newsDetails={newsDetails}
           createdAt={createdAt}
           quotes={quotes}
-          newsReporter={newsReporter ?? "জাগ্রত বার্তা প্রতিবেদক"}
+          reporterPublicName={reporterPublicName ?? "জাগ্রত বার্তা প্রতিবেদক"}
         />
         <Button
           onClick={handleShareWhatsApp}

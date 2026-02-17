@@ -155,6 +155,7 @@ export async function createAnArticle(data: z.infer<typeof newsArticleSchema>) {
     data: {
       newsHeading: validateData.newsHeading,
       newsDetails: validateData.newsDetails,
+      reporterPublicName: validateData.reporterPublicName,
       newsResource: validateData.newsResource,
       newsLocation: dbCountry ? NewsCountry[dbCountry] : undefined,
       newsCategory: validateData.newsCategory,

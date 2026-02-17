@@ -26,6 +26,7 @@ async function getNewsArticle(articleId: string) {
       createdAt: true,
       isFeatured: true,
       newsCategory: true,
+      reporterPublicName: true,
       newsDetails: true,
       newsHeading: true,
       newsPicture: true,
@@ -147,7 +148,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
         <div className="flex flex-col font-bold mb-1 text-xl">
           <div className="flex flex-row pl-2 items-center">
             <User2 className="size-5 mr-1" />
-            <p>জাগ্রত বার্তা প্রতিবেদক</p>
+            <p>{data.reporterPublicName || "জাগ্রত বার্তা প্রতিবেদক"}</p>
           </div>
           <div className="flex flex-row  pl-2 items-center">
             <Clock className="size-5 mr-1" />
@@ -155,13 +156,12 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           </div>
         </div>
 
-        
-
         {/* News Content using PrintNews component */}
         <PrintNews
           id={data.id}
           newsDetails={data.newsDetails}
           newsResource={data.newsResource}
+          reporterPublicName={data.reporterPublicName}
           newsPicture={data.newsPicture}
           newsLocation={data.newsLocation}
           newsPictureHeading={data.newsPictureHeading}
@@ -203,7 +203,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
             )}
           </div>
         </div>
-          <NewUserTracker />
+        <NewUserTracker />
       </div>
 
       {/* Right Sidebar */}

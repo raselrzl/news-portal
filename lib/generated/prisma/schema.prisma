@@ -87,6 +87,7 @@ model newsArticle {
   newsHeading        String
   newsResource       String
   newsLocation       NewsCountry?
+  reporterPublicName String?
   newsCategory       newsCategory
   newsPicture        String
   newsPictureHeading String

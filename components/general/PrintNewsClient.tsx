@@ -80,7 +80,7 @@ type PrintNewsDetailsClientProps = {
   newsDetails: string;
   quotes?: Quote[];
   createdAt: Date;
-  newsReporter: string | null;
+  reporterPublicName: string | null;
 };
 
 function splitTextByLength(text: string, first: number = 350) {
@@ -93,7 +93,7 @@ export function PrintNewsDetailsClient({
   newsPictureHeading,
   newsDetails,
   quotes = [],
-  newsReporter,
+  reporterPublicName,
 }: PrintNewsDetailsClientProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -266,11 +266,7 @@ export function PrintNewsDetailsClient({
         <article style={{ border: "1px solid #ddd", padding: 12 }}>
           <div style={{ fontSize: 14, marginBottom: 6 }}>
             প্রতিবেদক:{" "}
-            {newsReporter === "Mamun"
-              ? "তারফদার মামুন"
-              : newsReporter === "Rasel"
-              ? "জাগ্রত বার্তা প্রতিবেদক"
-              : newsReporter || "জাগ্রত বার্তা প্রতিবেদক"}
+            {reporterPublicName || "জাগ্রত বার্তা প্রতিবেদক"}
           </div>
 
           <h1 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>

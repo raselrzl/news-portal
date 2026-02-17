@@ -28,6 +28,7 @@ export const newsArticleSchema = z.object({
   newsHeading: z.string().min(6, "সংবাদের শিরোনাম আবশ্যক"),
   newsResource: z.string(),
   newsLocation: z.string().optional(),
+  reporterPublicName:z.string().optional(),
   newsCategory: z.enum([
     "LATEST",
     "NATIONAL",

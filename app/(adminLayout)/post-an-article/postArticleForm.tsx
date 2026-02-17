@@ -65,6 +65,7 @@ export function CreateNewsArticleForm({
       newsHeading: "",
       newsResource: "online",
       newsLocation: "",
+      reporterPublicName:"",
       newsCategory: "LATEST",
       newsPicture: "",
       newsPictureHeading: "",
@@ -107,6 +108,25 @@ export function CreateNewsArticleForm({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="rounded-xs">
             <CardContent className="space-y-6">
+              <FormField
+                control={form.control}
+                name="reporterPublicName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>প্রতিবেদক</FormLabel>
+                    <FormControl>
+                      <Input
+                        
+                        placeholder=""
+                        className="placeholder:text-xs"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="newsHeading"
