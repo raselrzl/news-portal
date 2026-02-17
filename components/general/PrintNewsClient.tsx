@@ -265,7 +265,6 @@ export function PrintNewsDetailsClient({
         {/* ARTICLE */}
         <article style={{ border: "1px solid #ddd", padding: 12 }}>
           <div style={{ fontSize: 14, marginBottom: 6 }}>
-            প্রতিবেদক:{" "}
             {reporterPublicName || "জাগ্রত বার্তা প্রতিবেদক"}
           </div>
 
