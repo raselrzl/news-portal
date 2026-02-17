@@ -71,7 +71,7 @@ export default async function LoginForm() {
           href="/"
           className="text-center gap-2 text-primary underline"
         >
-          শুরুরে যান
+          শুরুতে যান
         </Link>
       </Card>
     </div>
