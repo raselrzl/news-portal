@@ -135,9 +135,9 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
     <div className="grid grid-cols-5 gap-4 my-10">
       {/* Left Sidebar */}
       <div className="col-span-5 md:col-span-1">
-      {/*   <BesicTwoAdvertise /> */}
+        {/*   <BesicTwoAdvertise /> */}
 
-        <div className="hidden md:block mt-10">
+        <div className="hidden md:block mt-30">
           <ShirShoNewsHeadings />
         </div>
       </div>
