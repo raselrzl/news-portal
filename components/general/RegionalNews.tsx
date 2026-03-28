@@ -6,7 +6,6 @@ import Link from "next/link";
 // Only the 7 cities we want, in Bangla
 const banglaRegionNames: Partial<Record<NewsCountry, string>> = {
   sylhet: "সিলেট",
-  dhaka: "ঢাকা",
   rajshahi: "রাজশাহী",
   khulna: "খুলনা",
   chattogram: "চট্টগ্রাম",
@@ -18,7 +17,6 @@ const banglaRegionNames: Partial<Record<NewsCountry, string>> = {
 export async function getRegionalNews() {
   const regions: NewsCountry[] = [
     "sylhet",
-    "dhaka",
     "rajshahi",
     "khulna",
     "chattogram",
@@ -41,11 +39,10 @@ export async function getRegionalNews() {
           newsLocation: true,
           createdAt: true,
         },
-      })
-    )
+      }),
+    ),
   );
 
-  // Remove nulls
   return results.filter((n): n is NonNullable<typeof n> => n !== null);
 }
 
@@ -57,36 +54,51 @@ export default async function RegionalNews() {
 
   return (
     <section className="px-4 md:px-0 my-10">
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-2">
         {news.map((item) => (
           <Link
             key={item.id}
             href={`/newsDetails/${item.id}`}
             className="group block rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-transform duration-300 hover:scale-[1.02]"
           >
-            {/* Image */}
-            <div className="relative w-full h-40">
+            {/* Image wrapper */}
+            <div className="relative w-full h-50 md:h-40">
               <Image
                 src={item.newsPicture}
                 alt={item.newsHeading}
                 fill
                 className="object-cover"
               />
+
+              {/* Semi-transparent dark overlay for mobile */}
+              <div className="absolute inset-0 bg-black/30 md:hidden"></div>
+
+              {/* Overlay content on mobile */}
+              <div className="absolute bottom-3 left-3 right-3 md:hidden text-white">
+                <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full mb-2 inline-block">
+                  {item.newsLocation
+                    ? banglaRegionNames[item.newsLocation] || "অজানা"
+                    : "অজানা"}
+                </span>
+                <h3 className="text-sm font-semibold line-clamp-2">
+                  {item.newsHeading}
+                </h3>
+                <p className="text-xs mt-1">
+                  {new Date(item.createdAt).toLocaleDateString("bn-BD")}
+                </p>
+              </div>
             </div>
 
-            {/* Content */}
-            <div className="p-3 bg-white dark:bg-gray-900">
+            {/* Desktop content below image */}
+            <div className="hidden md:block p-3 bg-white dark:bg-gray-900">
               <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">
                 {item.newsLocation
                   ? banglaRegionNames[item.newsLocation] || "অজানা"
                   : "অজানা"}
               </span>
-
               <h3 className="text-sm md:text-base font-semibold mt-2 line-clamp-2">
                 {item.newsHeading}
               </h3>
-
               <p className="text-xs text-gray-500 mt-1">
                 {new Date(item.createdAt).toLocaleDateString("bn-BD")}
               </p>
