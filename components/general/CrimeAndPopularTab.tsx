@@ -7,8 +7,11 @@ import { EconomyNews } from "../NewsCategory/EconomyNews";
 export function CrimeAndPopularTab() {
   return (
     <div className="">
-      <Tabs defaultValue="politics" className="w-full border-1 border-gray-950/10">
-        <TabsList className="grid w-full grid-cols-2 bg-amber-800">
+      <Tabs
+        defaultValue="politics"
+        className="w-full border border-gray-950/10"
+      >
+        <TabsList className="grid w-full grid-cols-2 bg-gray-100">
           <TabsTrigger className=" font-bold" value="politics">
             রাজনীতি
           </TabsTrigger>
@@ -17,19 +20,15 @@ export function CrimeAndPopularTab() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="politics">
-         
-            <CardContent className="space-y-1 px-1">
-              <JonoprioNews />
-            </CardContent>
-        
+          <CardContent className="space-y-1 px-1">
+            <JonoprioNews />
+          </CardContent>
         </TabsContent>
 
         <TabsContent value="economy">
-        
-            <CardContent className="space-y-1 px-1">
-              <EconomyNews />
-            </CardContent>
-         
+          <CardContent className="space-y-1 px-1">
+            <EconomyNews />
+          </CardContent>
         </TabsContent>
       </Tabs>
     </div>

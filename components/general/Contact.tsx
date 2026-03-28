@@ -10,13 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  CrimeHEadings,
-  GututtoPurnoAlochito,
-  SamprotikBisoy,
-  ShirShoNewsHeadings,
-  SirshoNewsList,
-} from "./homepageArticleList";
+
 import { OpinionForm } from "./OpinionForm";
 import { ContactForm } from "./ContactForm";
 
@@ -31,7 +25,7 @@ export function Contact() {
         <TabsTrigger value="samprotik">যোগাযোগ</TabsTrigger>
       </TabsList> */}
       <TabsContent value="ovijug">
-        <Card className="min-h-[400px] rounded-none">
+        <Card className="min-h-[400px] rounded-none border-none shadow-none">
           <CardHeader>
             <OpinionForm />
           </CardHeader>

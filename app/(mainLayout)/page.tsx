@@ -306,8 +306,8 @@ export default async function Home() {
                 <div className="flex flex-col px-2">
                   {/* 📝 Heading FIRST */}
                   <h2
-                    className="text-lg md:text-2xl font-semibold mb-4 
-                         line-clamp-2 md:line-clamp-3"
+                    className="text-2xl md:text-4xl font-semibold mb-4 text-center
+                         line-clamp-2 md:line-clamp-3 p-4"
                   >
                     {lastFeaturedArticle[0].newsHeading}
                   </h2>
@@ -379,19 +379,19 @@ export default async function Home() {
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
             <PoliticalLatest />
-          </div>
-
-          {/* Right: Premium Ad */}
-       {/*    <div className="py-4">
-            <Suspense fallback={<Loader2 className="animate-spin" />}>
-              <PremiarOne />
-            </Suspense>
-          </div> */}
+          </div>          
           <div className="py-4">
             <LatestOpinions />
           </div>
         </div>
       </div>
+
+      {/* Right: Premium Ad */}
+          <div className="py-4">
+            <Suspense fallback={<Loader2 className="animate-spin" />}>
+              <PremiarOne />
+            </Suspense>
+          </div>
 
       {/*  Science section */}
       <div className="border-y-4 my-10 py-6 border-primary">

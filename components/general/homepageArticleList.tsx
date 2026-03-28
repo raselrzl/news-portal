@@ -301,8 +301,6 @@ export async function getLatestNews() {
   });
 }
 
-
-
 export async function getScienceTechNews() {
   return await prisma.newsArticle.findMany({
     where: {
@@ -337,7 +335,6 @@ export async function getScienceTechNews() {
     take: 6, // latest 6 articles
   });
 }
-
 
 export async function getScienceTechNewsHead() {
   return await prisma.newsArticle.findMany({
@@ -439,8 +436,6 @@ export async function getPoliticsNews() {
   });
 }
 
-
-
 export default async function AllArticleList() {
   const allArticles = await getAllArticles();
   const lastFeaturedArticle = await getLastFeaturedArticle();
@@ -469,19 +464,21 @@ export default async function AllArticleList() {
                     {lastFeaturedArticle.newsHeading}
                     <span className="md:hidden sm:block">বিস্তরিত....</span>
                   </h2>
-              {/*     <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                  {/*     <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
                     {lastFeaturedArticle.newsDetails}
                   </p> */}
 
-                   {isJson(lastFeaturedArticle.newsDetails) ? (
-                                          <div className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                                            <JsonToHtml json={JSON.parse(lastFeaturedArticle.newsDetails)} />
-                                          </div>
-                                          ) : (
-                                            <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
-                                              {lastFeaturedArticle.newsDetails}
-                                            </p>
-                                          )}
+                  {isJson(lastFeaturedArticle.newsDetails) ? (
+                    <div className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                      <JsonToHtml
+                        json={JSON.parse(lastFeaturedArticle.newsDetails)}
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-sm md:text-lg text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-3 pl-2 md:p">
+                      {lastFeaturedArticle.newsDetails}
+                    </p>
+                  )}
                 </div>
               </div>
             </Link>
@@ -755,13 +752,12 @@ export async function ScienceNews() {
   );
 }
 
-
 export async function ScienceNewsHeadPost() {
   const scienceheadpost = await getScienceTechNewsHead();
 
   return (
     <>
-    <div className="flex flex-row items-center space-x-2">
+      <div className="flex flex-row items-center space-x-2">
         <img
           src="/clock.gif"
           alt="YouTube GIF"
@@ -769,24 +765,24 @@ export async function ScienceNewsHeadPost() {
           height={50}
           className="object-contain"
         />
-        <p className="font-bold text-2xl">বিজ্ঞান ও গবেষণা</p>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4 relative">
+          বিজ্ঞান ও গবেষণা
+          <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
+        </h2>
       </div>
       {scienceheadpost && scienceheadpost.length > 0 ? (
         scienceheadpost.map((item) => (
           <Link key={item.id} href={`/newsDetails/${item.id}`}>
- 
             <div className="max-w-sm rounded-lg overflow-hidden shadow-md border mt-2">
-            <div className="p-1">
-              <h2 className="text-lg font-semibold ">
-                {item.newsHeading}
-              </h2>
+              <div className="p-1">
+                <h2 className="text-lg font-semibold ">{item.newsHeading}</h2>
+              </div>
+              <img
+                src={item.newsPicture}
+                alt="Card image"
+                className="w-full h-40 object-cover"
+              />
             </div>
-            <img
-              src={item.newsPicture}
-              alt="Card image"
-              className="w-full h-40 object-cover"
-            />
-          </div>
           </Link>
         ))
       ) : (
@@ -800,7 +796,6 @@ export async function ScienceNewsHeadPost() {
     </>
   );
 }
-
 
 export async function Bachaikreto() {
   const Bachaikreto = await getEnvironmentNews();
@@ -847,31 +842,31 @@ export async function Binodon() {
   const Binodon = await getBinodonNews();
   return (
     <>
-    <div className="flex flex-row items-center justify-between">
-    <div className="flex flex-row items-center space-x-2">
-        <img
-          src="/binodon.gif"
-          alt="YouTube GIF"
-          width={50} // adjust as needed
-          height={50}
-          className="object-contain"
-        />
-        <p className="font-bold text-2xl">বিনোদন</p>
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center space-x-2">
+          <img
+            src="/binodon.gif"
+            alt="YouTube GIF"
+            width={50} // adjust as needed
+            height={50}
+            className="object-contain"
+          />
 
-      
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
+            বিনোদন
+            <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
+          </h2>
+        </div>
+        <div className="md:block hidden">
+          <img
+            src="/arrow.gif"
+            alt="YouTube GIF"
+            width={50} // adjust as needed
+            height={50}
+            className="object-contain "
+          />
+        </div>
       </div>
-      <div className="md:block hidden">
-      
-      <img
-          src="/arrow.gif"
-          alt="YouTube GIF"
-          width={50} // adjust as needed
-          height={50}
-          className="object-contain "
-        />
-      </div>
-
-    </div>
       {Binodon && Object.keys(Binodon).length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-6 px-2 border-y-1 md:border-1 my-10">
           {Binodon.map((article) => (
@@ -908,7 +903,6 @@ export async function Binodon() {
   );
 }
 
-
 // getsorboseshnews
 export async function getSorboseshNews() {
   return await prisma.newsArticle.findMany({
@@ -944,8 +938,12 @@ export async function SorboseshNews() {
   const sorbosesh = await getSorboseshNews();
 
   const convertToBanglaNumber = (number: number): string => {
-    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return number.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
+    const banglaDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+    return number
+      .toString()
+      .split("")
+      .map((digit) => banglaDigits[parseInt(digit)])
+      .join("");
   };
 
   return (
@@ -978,15 +976,6 @@ export async function SorboseshNews() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
 
 // getsorboseshnews
 export async function getJonoprioNews() {
@@ -1023,22 +1012,26 @@ export async function JonoprioNews() {
   const sorbosesh = await getJonoprioNews();
 
   const convertToBanglaNumber = (number: number): string => {
-    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return number.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
+    const banglaDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+    return number
+      .toString()
+      .split("")
+      .map((digit) => banglaDigits[parseInt(digit)])
+      .join("");
   };
 
   return (
     <>
       <div className="py-2 min-h-[450px] overflow-y-auto">
         {sorbosesh && sorbosesh.length > 0 ? (
-          sorbosesh.slice(0, 10).map((item, index) => (
+          sorbosesh.slice(0, 5).map((item, index) => (
             <Link key={item.id} href={`/newsDetails/${item.id}`}>
               <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
                 <div className="p-1 flex gap-2 items-start">
                   <span className="text-lg font-bold text-primary">
                     {convertToBanglaNumber(index + 1)}.
                   </span>
-                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                  <h2 className="text-lg text-accent-foreground line-clamp-3">
                     {item.newsHeading}
                   </h2>
                 </div>
@@ -1058,44 +1051,43 @@ export async function JonoprioNews() {
   );
 }
 
-
 export async function RecentNews() {
   const latestNews = await getLatestNews();
 
   return (
     <>
-      <div className="order-3 md:order-1 md:col-span-1 p-2 border">
-          <div className="font-extrabold pl-2 mb-2 flex items-center text-2xl my-4">
-            <List className="h-7 w-7 mr-2" />
-            শীর্ষ সংবাদ
-          </div>
+      <div className="order-3 md:order-1 md:col-span-1 p-2 border my-20">
+        <div className="font-extrabold pl-2 mb-2 flex items-center text-2xl my-4">
+          <List className="h-7 w-7 mr-2" />
+          শীর্ষ সংবাদ
+        </div>
         {latestNews && latestNews.length > 0 ? (
           latestNews.map((item) => (
             <Link key={item.id} href={`/newsDetails/${item.id}`}>
-  <div className="border-b py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer rounded-lg overflow-hidden">
-    <div className="flex flex-col gap-3">
-      {/* Image */}
-      {item.newsPicture && (
-        <img
-          src={item.newsPicture}
-          alt={item.newsHeading}
-          className="w-full object-cover rounded-md border"
-        />
-      )}
+              <div className="border-b py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer rounded-lg overflow-hidden">
+                <div className="flex flex-col gap-3">
+                  {/* Image */}
+                  {item.newsPicture && (
+                    <img
+                      src={item.newsPicture}
+                      alt={item.newsHeading}
+                      className="w-full object-cover rounded-md border"
+                    />
+                  )}
 
-      {/* Heading */}
-      <div className="flex items-center">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 line-clamp-2">
-          {item.newsHeading}
-        </h3>
-      </div>
-    </div>
-  </div>
-</Link>
+                  {/* Heading */}
+                  <div className="flex items-center">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 line-clamp-2">
+                      {item.newsHeading}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))
         ) : (
           <EmptyState
-             title="উফ! এখনো কিছু দেখানোর মতো নেই।"
+            title="উফ! এখনো কিছু দেখানোর মতো নেই।"
             description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
             buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
             href="/"

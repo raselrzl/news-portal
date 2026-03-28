@@ -29,14 +29,14 @@ export async function getEconomyNews() {
     orderBy: {
       createdAt: "desc",
     },
-    take: 10,
+    take: 5,
   });
 }
 export async function EconomyNews() {
   const economy = await getEconomyNews();
 
   const convertToBanglaNumber = (number: number): string => {
-    const banglaDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const banglaDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
     return number
       .toString()
       .split("")
@@ -55,7 +55,7 @@ export async function EconomyNews() {
                   <span className="text-lg font-bold text-primary">
                     {convertToBanglaNumber(index + 1)}.
                   </span>
-                  <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                  <h2 className="text-lg text-accent-foreground line-clamp-3">
                     {item.newsHeading}
                   </h2>
                 </div>

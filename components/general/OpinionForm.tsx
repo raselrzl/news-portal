@@ -73,7 +73,7 @@ export function OpinionForm() {
 
   return (
     <div className="w-full mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">আপনার অভিযোগ লিখুন</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center border-b-2">আপনার অভিযোগ লিখুন</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {/* Name */}
