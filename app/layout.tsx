@@ -12,6 +12,7 @@ import Script from "next/script";
 import ScrollToTopButton from "@/components/general/ScrollToTopButton";
 import Poll from "@/components/LivePoll/Poll";
 import NewUserTracker from "@/components/general/NewUserTracker";
+import RegionalNews from "@/components/general/RegionalNews";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ const tiroBangla = Tiro_Bangla({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://jagrotobarta.com"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://jagrotobarta.com",
   ),
   title: { default: "জাগ্রত বার্তা", template: "%s | জাগ্রত সংবাদ আপডেট তথ্য" },
   description:
@@ -56,8 +57,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Tiro+Bangla&display=swap"
           rel="stylesheet"
         />
-      {/*   google adsense */}
-      <meta name="google-adsense-account" content="ca-pub-5945782633100386"></meta>
+        {/*   google adsense */}
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-5945782633100386"
+        ></meta>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
@@ -75,7 +79,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="max-w-7xl mx-auto">{children}</div>
-          
+
          
           <ScrollToTopButton />
           <VisitorTracker />

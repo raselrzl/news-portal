@@ -10,6 +10,7 @@ import Footer from "@/components/general/Footer";
 import VisitorTracker from "@/components/general/VisitorTracker";
 import RealBanglaDate from "@/components/general/BanglaDate";
 import DivisionNavBar from "@/components/general/DivisionNavBar";
+import RegionalNews from "@/components/general/RegionalNews";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -45,7 +46,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       </div>
 
       {children}
+
       <Poll />
+      <RegionalNews />
       <Footer />
       <VisitorTracker />
       <Toaster closeButton richColors />

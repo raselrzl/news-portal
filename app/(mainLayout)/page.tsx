@@ -32,6 +32,7 @@ import NationalLatest from "@/components/general/nationalNews";
 import InternationalLatest from "@/components/general/worldNews";
 import PoliticalLatest from "@/components/general/politicsNews";
 import SportsNews from "@/components/general/SportsNews";
+import RegionalNews from "@/components/general/RegionalNews";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -371,7 +372,6 @@ export default async function Home() {
 
       <InstagramPosts />
 
-     
       {/*  tab section */}
       <div className="my-14">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

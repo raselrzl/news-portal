@@ -6,7 +6,7 @@ import { BesicOneAdvertise } from "../allAdvertisement/BesicOne";
 export default function Poll() {
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="border-y-2 my-2 border-primary"></div>
+      <div className="my-2"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
         <div className="order-1 md:order-1 col-span-2 md:col-span-1 py-10 px-4 md:px-0">
           <LivePoll />
