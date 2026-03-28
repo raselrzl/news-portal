@@ -1,34 +1,19 @@
 import { Facebook, InstagramIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import CountryListLinks from "./CountryListLinks";
+import FooterLinks from "./FooterLink";
 
 export default function Footer() {
   return (
-    <footer className="mt-10 w-full bg-gradient-to-t from-gray-900 via-gray-950 to-gray-900 text-gray-100">
+    <footer className="mt-10 w-full bg-linear-to-t from-gray-900 via-gray-950 to-gray-900 text-gray-100">
       <div className="w-full max-w-7xl mx-auto px-6 py-12">
         {/* Top Quick Links */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10 text-sm md:text-base">
-          <Link href="/about" className="hover:text-orange-400 transition">
-            জাগ্রত বার্তা
-          </Link>
-          <Link href="/about/privacy-policy" className="hover:text-orange-400 transition">
-            গোপনীয়তার নীতি
-          </Link>
-          <Link href="/about/terms" className="hover:text-orange-400 transition">
-            শর্তাবলি
-          </Link>
-          <Link href="/about/comment-policy" className="hover:text-orange-400 transition">
-            মন্তব্য প্রকাশের নীতিমালা
-          </Link>
-          <Link href="/about/advertise" className="hover:text-orange-400 transition">
-            বিজ্ঞাপন
-          </Link>
-        </div>
+        <FooterLinks />
 
         {/* Three Column Section */}
-        <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <div className="grid md:grid-cols-3 gap-8 text-left">
           {/* Column 1: Editors */}
-          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+          <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="font-bold text-xl md:text-2xl mb-2 text-orange-400">প্রকাশনা ও যোগাযোগ</h2>
             <h3 className="font-semibold mb-2">
               সম্পাদক এবং প্রকাশকমণ্ডলী <br />
@@ -51,7 +36,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Ads & Logo */}
-          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
+          <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col">
             <h2 className="font-bold text-xl md:text-2xl text-orange-400 mb-2">বিজ্ঞাপন</h2>
             <p className="mb-2">
               বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
@@ -69,7 +54,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Social Media */}
-          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
+          <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
             <p className="mb-2">সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য ফলো করুন:</p>
             <div className="flex gap-4 mt-2">
               <a

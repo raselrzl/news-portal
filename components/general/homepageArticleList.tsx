@@ -297,7 +297,7 @@ export async function getLatestNews() {
     orderBy: {
       createdAt: "desc",
     },
-    take: 7,
+    take: 5,
   });
 }
 
@@ -634,7 +634,7 @@ export async function ShirShoNewsHeadings() {
               <Link href={`/newsDetails/${article.id}`} key={article.id}>
                 <div className="max-w-sm rounded-lg overflow-hidden shadow-md border m-2 px-2 py-1 hover:bg-accent-foreground/5 transition-opacity">
                   <div className="p-1">
-                    <h2 className="text-lg text-accent-foreground font-semibold line-clamp-1">
+                    <h2 className="text-lg text-accent-foreground font-semibold line-clamp-4">
                       {article.newsHeading}
                     </h2>
                   </div>
@@ -1064,7 +1064,7 @@ export async function RecentNews() {
 
   return (
     <>
-      <div className="order-3 md:order-1 md:col-span-1 p-2 border-1">
+      <div className="order-3 md:order-1 md:col-span-1 p-2 border">
           <div className="font-extrabold pl-2 mb-2 flex items-center text-2xl my-4">
             <List className="h-7 w-7 mr-2" />
             শীর্ষ সংবাদ
@@ -1072,21 +1072,26 @@ export async function RecentNews() {
         {latestNews && latestNews.length > 0 ? (
           latestNews.map((item) => (
             <Link key={item.id} href={`/newsDetails/${item.id}`}>
-              <div className="grid grid-cols-3 border-b py-2">
-                <div className="col-span-1">
-                  <img
-                    src={item.newsPicture}
-                    alt="Card Image"
-                    className="w-32 h-16 object-cover border"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <h3 className="text-lg font-semibold ml-2">
-                    {item.newsHeading}
-                  </h3>
-                </div>
-              </div>
-            </Link>
+  <div className="border-b py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer rounded-lg overflow-hidden">
+    <div className="flex flex-col gap-3">
+      {/* Image */}
+      {item.newsPicture && (
+        <img
+          src={item.newsPicture}
+          alt={item.newsHeading}
+          className="w-full object-cover rounded-md border"
+        />
+      )}
+
+      {/* Heading */}
+      <div className="flex items-center">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 line-clamp-2">
+          {item.newsHeading}
+        </h3>
+      </div>
+    </div>
+  </div>
+</Link>
           ))
         ) : (
           <EmptyState
