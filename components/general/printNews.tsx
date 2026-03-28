@@ -107,8 +107,6 @@ export default function PrintNews({
   newsHeading,
   createdAt,
   quotes = [],
-  newsReporter,
-  id,
 }: PrintNewsProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [articleUrl, setArticleUrl] = useState("");
@@ -220,7 +218,7 @@ export default function PrintNews({
           ref={contentRef}
           className="w-full rounded shadow mt-6"
         >
-          <h1 className="text-3xl font-bold my-4 px-2 md:px-6 pt-6">
+          <h1 className="text-3xl font-extrabold my-4 px-2 md:px-6 pt-6">
             {newsHeading}
           </h1>
 
