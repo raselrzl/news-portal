@@ -36,16 +36,15 @@ export default async function NationalLatest() {
 
   return (
     <section className="px-3 md:px-0 my-16 max-w-7xl mx-auto">
-      
       {/* 🟥 Header */}
-      <div className="flex justify-between items-end border-b pb-3 mb-8">
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+      <div className="flex justify-between items-end pb-3 mb-8">
+        <h2 className="text-2xl  md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
           জাতীয়
+          <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
         </h2>
-
         <Link
           href="/national"
-          className="text-sm text-gray-500 hover:text-red-600 transition"
+          className="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
         >
           আরও পড়ুন →
         </Link>
@@ -54,7 +53,6 @@ export default async function NationalLatest() {
       {/* 🟡 FEATURED (Text Left, Image Right) */}
       <Link href={`/newsDetails/${featured.id}`}>
         <div className="grid md:grid-cols-2 gap-6 mb-10 group">
-          
           {/* 📝 Text */}
           <div className="flex flex-col justify-center">
             <h3 className="text-2xl md:text-3xl font-bold leading-snug group-hover:text-red-600 transition">
@@ -75,7 +73,6 @@ export default async function NationalLatest() {
               className="object-cover group-hover:scale-105 transition duration-500"
             />
           </div>
-
         </div>
       </Link>
 
@@ -83,9 +80,7 @@ export default async function NationalLatest() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {others.map((article) => (
           <Link key={article.id} href={`/newsDetails/${article.id}`}>
-            
             <div className="group border-b pb-4">
-              
               {/* Image */}
               <div className="relative h-40 mb-3 overflow-hidden rounded-md">
                 <Image
@@ -105,9 +100,7 @@ export default async function NationalLatest() {
               <p className="text-xs text-gray-400 mt-2">
                 {new Date(article.createdAt).toLocaleDateString("bn-BD")}
               </p>
-
             </div>
-
           </Link>
         ))}
       </div>
