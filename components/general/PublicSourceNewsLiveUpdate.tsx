@@ -83,7 +83,7 @@ export default async function LiveUpdate() {
                     <div className="bg-primary rounded-full animate-ping w-4 h-4"></div>
                   </div>
                   <span className="text-xs text-gray-500 italic pt-1.5 block text-left">
-                    {formatTimeAgo(new Date(news[0].createdAt))}
+                   {/*  {formatTimeAgo(new Date(news[0].createdAt))} */}
                   </span>
                 </div>
 
