@@ -391,7 +391,7 @@ export default async function Home() {
           <PremiarOne />
         </Suspense>
       </div>
-      <SportsNews />
+      <div className="p-2"><SportsNews /></div>
       {/*  Science section */}
       <div className="my-10 py-6">
         <div className="grid grid-cols-3 border-primary my-4">
