@@ -759,13 +759,7 @@ export async function ScienceNewsHeadPost() {
   return (
     <>
       <div className="flex flex-row items-center space-x-2">
-        <img
-          src="/clock.gif"
-          alt="YouTube GIF"
-          width={50} // adjust as needed
-          height={50}
-          className="object-contain"
-        />
+        
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4 relative">
           বিজ্ঞান ও গবেষণা
           <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
@@ -845,13 +839,7 @@ export async function Binodon() {
     <>
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center space-x-2">
-          <img
-            src="/binodon.gif"
-            alt="YouTube GIF"
-            width={50} // adjust as needed
-            height={50}
-            className="object-contain"
-          />
+          
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
             বিনোদন

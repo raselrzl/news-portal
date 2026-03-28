@@ -1,8 +1,6 @@
 import { prisma } from "@/app/utils/db";
 import Link from "next/link";
-import { isJson } from "@/app/utils/isJson";
-import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
-import { PremiarOne } from "../allAdvertisement/PremiarOne";
+import Image from "next/image";
 
 type Article = {
   id: string;
@@ -14,10 +12,10 @@ type Article = {
 };
 
 async function getLatestNationalNews(): Promise<Article[]> {
-  const articles = await prisma.newsArticle.findMany({
+  return await prisma.newsArticle.findMany({
     where: { newsArticleStatus: "ACTIVE", newsCategory: "NATIONAL" },
     orderBy: { createdAt: "desc" },
-    take: 13,
+    take: 9,
     select: {
       id: true,
       newsHeading: true,
@@ -27,98 +25,91 @@ async function getLatestNationalNews(): Promise<Article[]> {
       createdAt: true,
     },
   });
-  return articles;
 }
 
 export default async function NationalLatest() {
   const articles = await getLatestNationalNews();
-
   if (articles.length === 0) return null;
 
   const featured = articles[0];
   const others = articles.slice(1);
 
-  const leftArticles = others.slice(0, 6);
-  const rightArticles = others.slice(6, 12);
-
   return (
-    <section className="px-2 md:px-0 my-10">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
+    <section className="px-3 md:px-0 my-16 max-w-7xl mx-auto">
+      
+      {/* 🟥 Header */}
+      <div className="flex justify-between items-end border-b pb-3 mb-8">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
           জাতীয়
-          <span className="absolute left-0 -bottom-2 w-12 h-1 bg-red-600 rounded-full md:w-20"></span>
         </h2>
+
         <Link
           href="/national"
-          className="text-sm md:text-base px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
+          className="text-sm text-gray-500 hover:text-red-600 transition"
         >
-          আরও দেখুন →
+          আরও পড়ুন →
         </Link>
       </div>
 
-      {/* Grid Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Featured Article */}
-        <div className="overflow-hidden rounded-xl shadow-lg group">
-          <Link href={`/newsDetails/${featured.id}`}>
-            <div className="relative overflow-hidden">
-              <img
-                src={featured.newsPicture}
-                alt={featured.newsPictureHeading}
-                className="w-full h-64 md:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
-                <h3 className="text-lg md:text-2xl font-bold text-white line-clamp-2">
-                  {featured.newsHeading}
-                </h3>
-              </div>
-            </div>
-          </Link>
-          <div className="p-2">
-            <PremiarOne />
+      {/* 🟡 FEATURED (Text Left, Image Right) */}
+      <Link href={`/newsDetails/${featured.id}`}>
+        <div className="grid md:grid-cols-2 gap-6 mb-10 group">
+          
+          {/* 📝 Text */}
+          <div className="flex flex-col justify-center">
+            <h3 className="text-2xl md:text-3xl font-bold leading-snug group-hover:text-red-600 transition">
+              {featured.newsHeading}
+            </h3>
+
+            <span className="text-xs text-gray-400 mt-4">
+              {new Date(featured.createdAt).toLocaleDateString("bn-BD")}
+            </span>
           </div>
-        </div>
 
-        {/* Left Side Small Articles */}
-        <div className="flex flex-col gap-4">
-          {leftArticles.map((article) => (
-            <Link
-              href={`/newsDetails/${article.id}`}
-              key={article.id}
-              className="flex items-center gap-3 group overflow-hidden rounded-lg shadow hover:shadow-md transition-all"
-            >
-              <img
-                src={article.newsPicture}
-                alt={article.newsPictureHeading}
-                className="w-24 h-20 object-cover rounded-lg flex-shrink-0"
-              />
-              <p className="font-semibold text-sm md:text-base line-clamp-3 group-hover:text-red-600 transition-colors">
-                {article.newsHeading}
-              </p>
-            </Link>
-          ))}
-        </div>
+          {/* 🖼️ Image */}
+          <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
+            <Image
+              src={featured.newsPicture}
+              alt={featured.newsPictureHeading}
+              fill
+              className="object-cover group-hover:scale-105 transition duration-500"
+            />
+          </div>
 
-        {/* Right Side Small Articles */}
-        <div className="flex flex-col gap-4">
-          {rightArticles.map((article) => (
-            <Link
-              href={`/newsDetails/${article.id}`}
-              key={article.id}
-              className="flex items-center gap-3 group overflow-hidden rounded-lg shadow hover:shadow-md transition-all"
-            >
-              <img
-                src={article.newsPicture}
-                alt={article.newsPictureHeading}
-                className="w-24 h-20 object-cover rounded-lg flex-shrink-0"
-              />
-              <p className="font-semibold text-sm md:text-base line-clamp-2 group-hover:text-red-600 transition-colors">
-                {article.newsHeading}
-              </p>
-            </Link>
-          ))}
         </div>
+      </Link>
+
+      {/* 🟢 GRID NEWS (Magazine Cards) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {others.map((article) => (
+          <Link key={article.id} href={`/newsDetails/${article.id}`}>
+            
+            <div className="group border-b pb-4">
+              
+              {/* Image */}
+              <div className="relative h-40 mb-3 overflow-hidden rounded-md">
+                <Image
+                  src={article.newsPicture}
+                  alt={article.newsPictureHeading}
+                  fill
+                  className="object-cover group-hover:scale-105 transition duration-300"
+                />
+              </div>
+
+              {/* Heading */}
+              <h4 className="text-sm md:text-base font-semibold leading-snug line-clamp-3 group-hover:text-red-600 transition">
+                {article.newsHeading}
+              </h4>
+
+              {/* Date */}
+              <p className="text-xs text-gray-400 mt-2">
+                {new Date(article.createdAt).toLocaleDateString("bn-BD")}
+              </p>
+
+            </div>
+
+          </Link>
+        ))}
       </div>
     </section>
   );

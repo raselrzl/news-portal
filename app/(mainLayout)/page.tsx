@@ -31,6 +31,7 @@ import WarLatest from "@/components/general/WarLatest";
 import NationalLatest from "@/components/general/nationalNews";
 import InternationalLatest from "@/components/general/worldNews";
 import PoliticalLatest from "@/components/general/politicsNews";
+import SportsNews from "@/components/general/SportsNews";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -147,7 +148,7 @@ export default async function Home() {
         </div>
 
         {/* Desktop-only Advertisement Banner */}
-      {/*   <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
+        {/*   <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
           <p className="text-xs md:text-sm text-gray-800 dark:text-gray-200 text-center leading-snug">
             <strong className="text-yellow-700 dark:text-yellow-400">
               বিজ্ঞপ্তি:
@@ -363,23 +364,21 @@ export default async function Home() {
       <div className="flex justify-center items-center pt-4">
         <DeluxeTwoAdvertise />
       </div>
-      <div className="border-y-2 my-2 border-primary"></div>
+      <InternationalLatest />
       <WarLatest />
-      <div className="border-y-2 my-2 border-primary"></div>
       <NationalLatest />
       {/*    <Videos /> */}
 
       <InstagramPosts />
 
-      <InternationalLatest />
-      <div className="border-y-2 my-2 border-primary"></div>
+     
       {/*  tab section */}
       <div className="my-14">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
             <PoliticalLatest />
-          </div>          
+          </div>
           <div className="py-4">
             <LatestOpinions />
           </div>
@@ -387,18 +386,17 @@ export default async function Home() {
       </div>
 
       {/* Right: Premium Ad */}
-          <div className="py-4">
-            <Suspense fallback={<Loader2 className="animate-spin" />}>
-              <PremiarOne />
-            </Suspense>
-          </div>
-
+      <div className="py-4">
+        <Suspense fallback={<Loader2 className="animate-spin" />}>
+          <PremiarOne />
+        </Suspense>
+      </div>
+      <SportsNews />
       {/*  Science section */}
-      <div className="border-y-4 my-10 py-6 border-primary">
+      <div className="my-10 py-6">
         <div className="grid grid-cols-3 border-primary my-4">
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between w-full max-w-sm mx-auto md:mx-0">
             <ScienceNewsHeadPost />
-          
           </div>
 
           <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
@@ -406,7 +404,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-        <PremiumTwoAdvertise />
+      <PremiumTwoAdvertise />
       {/* binodonsection */}
       <div className="mb-4">
         <div className=" grid grid-cols-1 md:grid-cols-3">
