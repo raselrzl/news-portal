@@ -31,7 +31,7 @@ export async function BesicTwoAdvertise() {
          <div className="flex flex-col items-center justify-center rounded-xl">
           {Advertise.map((ad) => (
             <Link
-              href={`https://${ad.websiteLink}`}
+              href={`${ad.websiteLink}`}
               key={ad.id}
               target="_blank"
               rel="noopener noreferrer"

@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/general/EmptyState";
 import Link from "next/link";
 import Image from "next/image";
 import SocialLinks from "@/components/general/socialLink";
-import { Clock, Flame, Loader2 } from "lucide-react";
+import { Clock, Earth, Flame, Loader2 } from "lucide-react";
 import { aauth } from "../actions";
 import { Contact } from "@/components/general/Contact";
 import {
@@ -65,7 +65,7 @@ async function getData() {
         orderBy: {
           createdAt: "desc",
         },
-        take: 10,
+        take: 7,
       }),
 
       prisma.newsArticle.findMany({
@@ -147,7 +147,7 @@ export default async function Home() {
         </div>
 
         {/* Desktop-only Advertisement Banner */}
-        <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
+      {/*   <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
           <p className="text-xs md:text-sm text-gray-800 dark:text-gray-200 text-center leading-snug">
             <strong className="text-yellow-700 dark:text-yellow-400">
               বিজ্ঞপ্তি:
@@ -160,13 +160,14 @@ export default async function Home() {
               info@jagrotobarta.com
             </span>
           </p>
-        </div>
+        </div> */}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-4">
-        <div className="order-3 md:order-1 md:col-span-1 p-2 border">
-          <div className="flex flex-row gap-2 text-center items-center justify-center">
-            <Clock />
-            <h1 className="text-xl font-bold pt-2 uppercase">অপরাধমূলক</h1>
+        <div className="order-3 md:order-1 md:col-span-1 p-2">
+          <div className="w-full mb-4">
+            <h2 className="w-full rounded-xs text-center bg-red-600 text-white py-2 text-lg font-semibold tracking-wide">
+              অপরাধসংক্রান্ত
+            </h2>
           </div>
           {latestUSANews && latestUSANews.length > 0 ? (
             latestUSANews.map((item) => (
@@ -180,7 +181,7 @@ export default async function Home() {
                     />
                   </div>
                   <div className="col-span-2">
-                    <h3 className="text-md font-semibold ml-2 line-clamp-3">
+                    <h3 className="text-sm font-semibold ml-2 line-clamp-4">
                       {item.newsHeading}
                     </h3>
                   </div>
@@ -200,15 +201,6 @@ export default async function Home() {
           <Suspense fallback={<Loader2 className="mx-auto animate-spin" />}>
             <ProOneAdvertise />
           </Suspense>
-
-          <div className="mt-10 text-left flex-col hidden sm:block">
-            <p className="text-sm font-semibold text-justify">
-              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল
-              মিডিয়া একাউন্টে ফলো করুন।
-            </p>
-
-            <SocialLinks />
-          </div>
         </div>
         <div className="order-2 md:order-2 md:col-span-1">
           <div className=" grid grid-cols-1">
@@ -248,9 +240,9 @@ export default async function Home() {
             <div className="bg-primary/55 dark:bg-gray-700 mt-6 rounded-xl border border-primary/55 dark:border-gray-600 shadow-md mx-2 md:mx-0">
               {/* Header */}
               <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
-                <Flame className="text-red-600 dark:text-amber-400 w-6 h-6" />
-                <h1 className="font-bold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
-                  বিশ্বজুড়ে
+                <Earth className="text-red-600 dark:text-amber-400 w-6 h-6" />
+                <h1 className="font-extrabold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
+                  বিশ্ব
                 </h1>
               </div>
 
@@ -302,47 +294,34 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center pt-4 border-t">
-            <DeluxeTwoAdvertise />
-          </div>
         </div>
         <div className="order-1 md:order-3 md:col-span-3">
-          {lastFeaturedArticle &&
-          Object.keys(lastFeaturedArticle).length > 0 ? (
-            <div className="mb-6 max-h-[250px] md:max-h-[290px] md:border md:p-2">
-              {lastFeaturedArticle && (
-                <Link href={`/newsDetails/${lastFeaturedArticle[0].id}`}>
-                  <div className="grid grid-cols-5 px-2">
-                    <div className="w-full max-h-60 md:max-h-[270px] border md:rounded-xl overflow-hidden col-span-5 md:col-span-3">
-                      <img
-                        src={lastFeaturedArticle[0].newsPicture}
-                        alt="picture"
-                        width={500}
-                        height={270}
-                        className="w-full h-full object-fill"
-                      />
-                    </div>
-                    <div className="pl-1 md:pl-4 col-span-5 md:col-span-2">
-                      <h2 className="text-lg md:text-2xl font-semibold mt-2 pl-2 md:pl-0 line-clamp-2 md:line-clamp-5">
-                        {lastFeaturedArticle[0].newsHeading}
-                      </h2>
-                      {isJson(lastFeaturedArticle[0].newsDetails) ? (
-                        <div className="text-sm md:text-md text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-5 pl-2 md:pl-1">
-                          <JsonToHtml
-                            json={JSON.parse(
-                              lastFeaturedArticle[0].newsDetails
-                            )}
-                          />
-                        </div>
-                      ) : (
-                        <p className="text-sm md:text-md text-accent-foreground/80 mb-2 md:mt-2 line-clamp-1 md:line-clamp-5 pl-2 md:pl-1">
-                          {lastFeaturedArticle[0].newsDetails}
-                        </p>
-                      )}
-                    </div>
+          {/* 🔴 FIRST FEATURED NEWS */}
+          {lastFeaturedArticle && lastFeaturedArticle.length > 0 ? (
+            <div className="mb-6 md:border md:p-3 rounded-xl">
+              <Link
+                href={`/newsDetails/${lastFeaturedArticle[0].id}`}
+                className="block"
+              >
+                <div className="flex flex-col px-2">
+                  {/* 📝 Heading FIRST */}
+                  <h2
+                    className="text-lg md:text-2xl font-semibold mb-4 
+                         line-clamp-2 md:line-clamp-3"
+                  >
+                    {lastFeaturedArticle[0].newsHeading}
+                  </h2>
+
+                  {/* 🖼️ Big Image */}
+                  <div className="w-full h-[220px] md:h-80 border rounded-xl overflow-hidden">
+                    <img
+                      src={lastFeaturedArticle[0].newsPicture}
+                      alt="picture"
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
                   </div>
-                </Link>
-              )}
+                </div>
+              </Link>
             </div>
           ) : (
             <EmptyState
@@ -353,26 +332,24 @@ export default async function Home() {
             />
           )}
 
-          {/* <DeluxeTwoAdvertise /> */}
-
-          {lastFeaturedArticle &&
-          Object.keys(lastFeaturedArticle).length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border mt-23 md:mt-4 border-t-2">
-              {lastFeaturedArticle.slice(1, 10).map((article) => (
+          {/* 🔽 OTHER NEWS (UNCHANGED STYLE, JUST FIXED) */}
+          {lastFeaturedArticle && lastFeaturedArticle.length > 1 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border mt-6 border-t-2">
+              {lastFeaturedArticle.slice(1, 7).map((article) => (
                 <Link href={`/newsDetails/${article.id}`} key={article.id}>
-                  <div className="max-w-md w-full mx-auto my-1 sm:max-w-xs md:max-w-md lg:max-w-lg">
-                    <div className="w-auto h-[110px] md:h-[150px] border rounded-xl overflow-hidden">
+                  <div className="w-full mx-auto my-1">
+                    {/* Image */}
+                    <div className="w-full h-[110px] md:h-[150px] border rounded-xl overflow-hidden">
                       <img
                         src={article.newsPicture}
                         alt="picture"
-                        width={190}
-                        height={140}
-                        className="w-full h-full md:h-[150px] object-fit"
+                        className="w-full h-full object-cover"
                       />
                     </div>
 
-                    <div className="pt-4">
-                      <h2 className="text-[17px] font-semibold leading-normal px-1 font-stretch-extra-condensed">
+                    {/* Heading */}
+                    <div className="pt-2">
+                      <h2 className="text-[15px] md:text-[17px] font-semibold leading-snug px-1 line-clamp-3">
                         {article.newsHeading}
                       </h2>
                     </div>
@@ -380,17 +357,12 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
-          ) : (
-            <EmptyState
-              title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-              description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-              buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-              href="/"
-            />
-          )}
+          ) : null}
         </div>
       </div>
-
+      <div className="flex justify-center items-center pt-4">
+        <DeluxeTwoAdvertise />
+      </div>
       <div className="border-y-2 my-2 border-primary"></div>
       <WarLatest />
       <div className="border-y-2 my-2 border-primary"></div>
@@ -400,20 +372,21 @@ export default async function Home() {
       <InstagramPosts />
 
       <InternationalLatest />
+      <div className="border-y-2 my-2 border-primary"></div>
       {/*  tab section */}
-      <div className="my-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <div className="my-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
             <PoliticalLatest />
           </div>
 
           {/* Right: Premium Ad */}
-          <div className="py-4">
+       {/*    <div className="py-4">
             <Suspense fallback={<Loader2 className="animate-spin" />}>
               <PremiarOne />
             </Suspense>
-          </div>
+          </div> */}
           <div className="py-4">
             <LatestOpinions />
           </div>
@@ -421,11 +394,11 @@ export default async function Home() {
       </div>
 
       {/*  Science section */}
-      <div className="border-y-4 my-2 py-6 border-primary">
+      <div className="border-y-4 my-10 py-6 border-primary">
         <div className="grid grid-cols-3 border-primary my-4">
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between w-full max-w-sm mx-auto md:mx-0">
             <ScienceNewsHeadPost />
-            <PremiumTwoAdvertise />
+          
           </div>
 
           <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
@@ -433,6 +406,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
+        <PremiumTwoAdvertise />
       {/* binodonsection */}
       <div className="mb-4">
         <div className=" grid grid-cols-1 md:grid-cols-3">

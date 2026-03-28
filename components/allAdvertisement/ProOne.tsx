@@ -55,7 +55,7 @@ export async function ProOneAdvertise() {
           // Make sure protocol is present
           const href = pro1.websiteLink?.startsWith("http")
             ? pro1.websiteLink
-            : `https://${pro1.websiteLink}`;
+            : `${pro1.websiteLink}`;
 
           return (
             <Link

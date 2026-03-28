@@ -29,7 +29,7 @@ export async function DeluxeOneAdvertise() {
         <div className="w-[600px] h-[80px] flex items-center justify-center">
           {Advertise.map((pro1) => (
             <Link
-              href={`https://${pro1.websiteLink}`}
+              href={`${pro1.websiteLink}`}
               key={pro1.id}
               target="_blank"
               rel="noopener noreferrer"

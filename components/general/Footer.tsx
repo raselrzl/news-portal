@@ -1,164 +1,120 @@
-import {
-  Facebook,
-  Instagram,
-  InstagramIcon,
-  MailIcon,
-  Youtube,
-} from "lucide-react";
+import { Facebook, InstagramIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import CountryListLinks from "./CountryListLinks";
 
 export default function Footer() {
   return (
-    <footer className="mt-10 w-full flex justify-center">
-      <div className=" w-full max-w-7xl text-center">
-        <div className="flex flex-wrap justify-center gap-4 mb-2 py-2 border-2">
-          <Link
-            href="/about"
-            className="hover:underline font-semibold text-foreground/90 text-md md:text-2xl px-2"
-          >
+    <footer className="mt-10 w-full bg-gradient-to-t from-gray-900 via-gray-950 to-gray-900 text-gray-100">
+      <div className="w-full max-w-7xl mx-auto px-6 py-12">
+        {/* Top Quick Links */}
+        <div className="flex flex-wrap justify-center gap-6 mb-10 text-sm md:text-base">
+          <Link href="/about" className="hover:text-orange-400 transition">
             জাগ্রত বার্তা
           </Link>
-          <Link
-            href="/about/privacy-policy"
-            className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2"
-          >
+          <Link href="/about/privacy-policy" className="hover:text-orange-400 transition">
             গোপনীয়তার নীতি
           </Link>
-          <Link
-            href="/about/terms"
-            className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2"
-          >
+          <Link href="/about/terms" className="hover:text-orange-400 transition">
             শর্তাবলি
           </Link>
-          <Link
-            href="/about/comment-policy"
-            className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2"
-          >
+          <Link href="/about/comment-policy" className="hover:text-orange-400 transition">
             মন্তব্য প্রকাশের নীতিমালা
           </Link>
-          <Link
-            href="/about/advertise"
-            className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2"
-          >
+          <Link href="/about/advertise" className="hover:text-orange-400 transition">
             বিজ্ঞাপন
           </Link>
-          {/*  <Link href="/about/contact" className="hover:underline font-semibold text-foreground/90 text-md md:text-xl px-2">
-            যোগাযোগ
-          </Link> */}
         </div>
-        <div className="md:grid md:grid-cols-3">
-          <div>
-            <h1 className="font-bold text-2xl mt-6">প্রকাশনা ও যোগাযোগ </h1>
-            <h3 className="font-bold">
+
+        {/* Three Column Section */}
+        <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+          {/* Column 1: Editors */}
+          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+            <h2 className="font-bold text-xl md:text-2xl mb-2 text-orange-400">প্রকাশনা ও যোগাযোগ</h2>
+            <h3 className="font-semibold mb-2">
               সম্পাদক এবং প্রকাশকমণ্ডলী <br />
               মো: মোশাররফ হোসেন <br />
               হাজেরা আক্তার পলি <br />
-              শাহাব উদ্দিন
+              মো: শাহাব উদ্দিন
             </h3>
-
-            <p className="mb-1 text-sm text-muted-foreground">
-              <a
-                href="mailto:sompadok@jagrotobarta.com"
-                className="text-orange-600 hover:underline"
-              >
+            <p className="text-sm mb-2">
+              <a href="mailto:sompadok@jagrotobarta.com" className="hover:underline text-orange-300">
                 sompadok@jagrotobarta.com
               </a>
-              <br />
             </p>
-
-            <div>
-              <p className="">ঢাকা, বাংলাদেশ</p>
-              <p>Managed By</p> <b />
-              <p>Lisbon, Portugal</p>
-              <p>Stockholm, Sweden</p>
-              <p>Cyprus</p>
-              <a
-                href="mailto:info@jagrotobarta.com"
-                className="text-primary hover:underline"
-              >
+            <div className="text-sm space-y-1">
+              <p>ঢাকা, বাংলাদেশ</p>
+              <p>Managed By: Lisbon, Portugal / Stockholm, Sweden / Cyprus</p>
+              <a href="mailto:info@jagrotobarta.com" className="hover:underline text-orange-300">
                 info@jagrotobarta.com
               </a>
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="font-bold text-2xl mt-6">বিজ্ঞাপন</h1>
-            বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
-            <a
-              href="mailto:info@jagrotobarta.com"
-              className="text-primary hover:underline"
-            >
-              info@jagrotobarta.com
-            </a>
-            <div className="max-w-2xl mx-auto px-4 py-4 text-foreground text-center">
-              <p className="mb-4 inline">
-                অথবা সরাসরি ফর্ম পূরণ করে যোগাযোগ করুন।
-              </p>
-              <a
-                href="/about/advertise#advertiseForm"
-                aria-label="Form"
-                className="text-primary hover:underline"
-              >
-                ফর্ম
+          {/* Column 2: Ads & Logo */}
+          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
+            <h2 className="font-bold text-xl md:text-2xl text-orange-400 mb-2">বিজ্ঞাপন</h2>
+            <p className="mb-2">
+              বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
+              <a href="mailto:info@jagrotobarta.com" className="hover:underline text-orange-300">
+                info@jagrotobarta.com
               </a>
-            </div>
-            <Link href="/" className="flex items-center p-2">
-              <div className="w-40 h-[60px] md:w-[200px] md:h-20 bg-[url('/logo.png')] dark:bg-[url('/logo.png')] bg-cover bg-center" />
+            </p>
+            <p className="mb-2">অথবা সরাসরি ফর্ম পূরণ করুন:</p>
+            <a href="/about/advertise#advertiseForm" className="font-semibold hover:underline text-orange-300 mb-4">
+              ফর্ম
+            </a>
+            <Link href="/">
+              <div className="w-40 h-16 md:w-48 md:h-20 bg-[url('/logo.png')] bg-cover bg-center rounded-lg shadow-md hover:shadow-xl transition" />
             </Link>
           </div>
-          <div className="flex flex-col items-center  justify-center gap-4 mt-6 md:mt-0">
-            <p>
-              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য আমাদের সোশ্যাল
-              মিডিয়া একাউন্টে ফলো করুন।
-            </p>
-            <div className="flex gap-3">
-              {" "}
+
+          {/* Column 3: Social Media */}
+          <div className="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
+            <p className="mb-2">সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য ফলো করুন:</p>
+            <div className="flex gap-4 mt-2">
               <a
                 href="https://www.facebook.com/share/1DYukWKHKy/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
+                className="w-10 h-10 bg-blue-600 p-2 rounded-full text-white hover:bg-blue-700 transition"
               >
-                <Facebook className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-blue-600" />
+                <Facebook size={24} />
               </a>
-              <Link
+              <a
                 href="mailto:info@jagrotobarta.com"
-                className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-blue-600"
+                className="w-10 h-10 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
               >
-                <MailIcon size={32} />
-              </Link>
-              <Link
+                <MailIcon size={24} />
+              </a>
+              <a
                 href="https://www.instagram.com/jagrotobarta/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-primary p-1 rounded-xl text-white hover:text-pink-700"
+                className="w-10 h-10 bg-pink-500 p-2 rounded-full text-white hover:bg-pink-600 transition"
               >
-                <InstagramIcon size={32} />
-              </Link>
+                <InstagramIcon size={24} />
+              </a>
             </div>
-            {/*      <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-pink-500" />
-            </a> */}
-            {/*   <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <Youtube className="w-10 h-10 bg-primary p-1 rounded-xl text-accent hover:text-red-600" />
-            </a> */}
           </div>
         </div>
-        <CountryListLinks />
-        <p className="text-xs text-primary py-2 mt-2 bg-accent">
-          &copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।
-        </p>
+
+        {/* Country Links */}
+        <div className="mt-10">
+          <CountryListLinks />
+        </div>
+
+        {/* Bottom Footer */}
+        <div className="mt-10 border-t border-gray-700 pt-4 text-center text-sm flex flex-col md:flex-row justify-center gap-3 items-center">
+          <p>&copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।</p>
+          <a
+            href="https://souveral.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold text-orange-400 hover:text-orange-300"
+          >
+            IT and Technical Support
+          </a>
+        </div>
       </div>
     </footer>
   );

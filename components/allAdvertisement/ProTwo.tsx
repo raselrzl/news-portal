@@ -30,7 +30,7 @@ export async function ProTwoAdvertise() {
         <div className="flex items-center justify-center">
           {ProOneAdvertise.map((pro1) => (
             <Link
-              href={`https://${pro1.websiteLink}`}
+              href={`${pro1.websiteLink}`}
               key={pro1.id}
               target="_blank"
               rel="noopener noreferrer"

@@ -303,9 +303,13 @@ export async function getLatestNews() {
 
 
 
-export async function getScienceNews() {
+export async function getScienceTechNews() {
   return await prisma.newsArticle.findMany({
-    where: { newsCategory: "SCIENCE" },
+    where: {
+      newsCategory: {
+        in: ["SCIENCE", "TECHNOLOGY"], // fetch both categories
+      },
+    },
     select: {
       id: true,
       createdAt: true,
@@ -330,14 +334,18 @@ export async function getScienceNews() {
     orderBy: {
       createdAt: "desc",
     },
-    take: 6,
+    take: 6, // latest 6 articles
   });
 }
 
 
-export async function getScienceNewsHead() {
+export async function getScienceTechNewsHead() {
   return await prisma.newsArticle.findMany({
-    where: { newsCategory: "SCIENCE" },
+    where: {
+      newsCategory: {
+        in: ["SCIENCE", "TECHNOLOGY"], // include both categories
+      },
+    },
     select: {
       id: true,
       createdAt: true,
@@ -362,7 +370,7 @@ export async function getScienceNewsHead() {
     orderBy: {
       createdAt: "desc",
     },
-    take: 1,
+    take: 1, // latest featured article
   });
 }
 // getEnvironmentNews.ts
@@ -710,7 +718,7 @@ export async function SamprotikBisoy() {
 }
 
 export async function ScienceNews() {
-  const science = await getScienceNews();
+  const science = await getScienceTechNews();
 
   return (
     <>
@@ -749,7 +757,7 @@ export async function ScienceNews() {
 
 
 export async function ScienceNewsHeadPost() {
-  const scienceheadpost = await getScienceNewsHead();
+  const scienceheadpost = await getScienceTechNewsHead();
 
   return (
     <>

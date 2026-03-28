@@ -17,7 +17,7 @@ async function getLatestWarNews(): Promise<Article[]> {
   const articles = await prisma.newsArticle.findMany({
     where: { newsArticleStatus: "ACTIVE", newsCategory: "WAR" },
     orderBy: { createdAt: "desc" },
-    take: 13,
+    take: 9,
     select: {
       id: true,
       newsHeading: true,
@@ -38,16 +38,23 @@ export default async function WarLatest() {
   const featured = articles[0];
   const others = articles.slice(1);
 
-  const leftArticles = others.slice(0, 6);
-  const rightArticles = others.slice(6, 12);
+  const leftArticles = others.slice(0, 4);
+  const rightArticles = others.slice(4, 8);
 
   return (
     <section className="px-2 md:px-0 my-10">
-      <div className="flex justify-between">
-        <h2 className="text-xl font-extrabold mb-4 flex items-center">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4 relative">
           যুদ্ধ ও সংকট
+          <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
         </h2>
-        <Link href="/war" className="text-sm font-bold hover:underline">আরো দেখুন →</Link>
+
+        <Link
+          href="/war"
+          className="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all whitespace-nowrap"
+        >
+          আরো দেখুন →
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -86,26 +93,12 @@ export default async function WarLatest() {
                 {featured.newsHeading}
               </h3>
             </Link>
-         
 
-             <img
-                src="/jewish.webp"
-                alt="JEwish"
-                className="w-full h-full object-cover rounded-md border shadow-2xl mt-6"
-              />
-
-            {/* ✅ JSON parse condition (from your example) */}
-           {/*  {isJson(featured.newsDetails) ? (
-              <div className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
-                <JsonToHtml json={JSON.parse(featured.newsDetails)} />
-              </div>
-            ) : (
-              <p className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
-                {featured.newsDetails}
-              </p>
-            )} */}
-
-            
+            <img
+              src="/jewish.webp"
+              alt="JEwish"
+              className="w-full h-full object-cover rounded-md border shadow-2xl mt-6"
+            />
           </div>
         </div>
 
@@ -117,11 +110,10 @@ export default async function WarLatest() {
               key={article.id}
               className="flex items-center gap-3 group border-t border-gray-950/10"
             >
-            
               <p className="font-semibold text-md group-hover:underline line-clamp-2">
                 {article.newsHeading}
               </p>
-                <img
+              <img
                 src={article.newsPicture}
                 alt={article.newsPictureHeading}
                 className="w-24 h-20 object-cover rounded-md"

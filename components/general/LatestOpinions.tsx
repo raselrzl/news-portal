@@ -35,7 +35,7 @@ export default async function LatestOpinions() {
     <section className="md:rounded-xs py-8 md:py-2">
       {/* Section Header */}
       <div className="flex items-center justify-between ml-2 mb-2">
-        <h1 className="font-bold py-1">OPINIONS</h1>
+        <h1 className="font-bold py-1">মতামত</h1>
         <ChevronRight className="block md:hidden" />
       </div>
 

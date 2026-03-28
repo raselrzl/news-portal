@@ -32,7 +32,7 @@ export async function PremiumOneAdvertise() {
         <div className="flex items-center justify-center px-2 md:px-0">
           {PremiarOneAdvertise.map((premier1) => (
             <Link
-              href={`https://${premier1.websiteLink}`}
+              href={`${premier1.websiteLink}`}
               key={premier1.id}
               target="_blank"
               rel="noopener noreferrer"

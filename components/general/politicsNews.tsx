@@ -1,8 +1,5 @@
 import { prisma } from "@/app/utils/db";
 import Link from "next/link";
-import { isJson } from "@/app/utils/isJson";
-import { JsonToHtml } from "@/components/richTextEditor/JsonToHtml";
-import { CrimeAndPopularTab } from "./CrimeAndPopularTab";
 
 type Article = {
   id: string;
@@ -17,7 +14,7 @@ async function getLatestPoliticalNews(): Promise<Article[]> {
   const articles = await prisma.newsArticle.findMany({
     where: { newsArticleStatus: "ACTIVE", newsCategory: "POLITICS" },
     orderBy: { createdAt: "desc" },
-    take: 5,
+    take: 4,
     select: {
       id: true,
       newsHeading: true,
@@ -34,39 +31,43 @@ export default async function PoliticalLatest() {
   const articles = await getLatestPoliticalNews();
 
   return (
-    <section className="px-2">
-      <div className="flex justify-between">
-        <h2 className="text-xl font-extrabold mb-4 flex items-center">
+    <section className="px-2 md:px-0 my-10">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
           রাজনীতি
+          <span className="absolute left-0 -bottom-2 w-16 h-1 bg-red-600 rounded-full md:w-24 lg:w-32"></span>
         </h2>
+        <Link
+          href="/politics"
+          className="text-sm md:text-base px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
+        >
+          আরও দেখুন →
+        </Link>
       </div>
 
-      <div className="flex flex-col gap-4">
+      {/* News Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
         {articles.map((article) => (
           <Link
             href={`/newsDetails/${article.id}`}
             key={article.id}
-            className="flex items-center gap-3 group border-b border-gray-950/10 pb-3"
+            className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all"
           >
-            <img
-              src={article.newsPicture}
-              alt={article.newsPictureHeading}
-              className="w-24 h-20 object-cover rounded-xl"
-            />
-            <div>
-              <p className="font-semibold text-sm group-hover:underline line-clamp-2">
-                {article.newsHeading}
-              </p>
+            {/* Image */}
+            <div className="relative w-full h-48 md:h-56 lg:h-60 overflow-hidden rounded-xl">
+              <img
+                src={article.newsPicture}
+                alt={article.newsPictureHeading}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
 
-              {isJson(article.newsDetails) ? (
-                <div className="text-sm text-accent-foreground/80 mt-3 overflow-hidden line-clamp-1 md:line-clamp-2">
-                  <JsonToHtml json={JSON.parse(article.newsDetails)} />
-                </div>
-              ) : (
-                <p className="text-sm text-accent-foreground/80 mt-3 overflow-hidden  line-clamp-1 md:line-clamp-2">
-                  {article.newsDetails}
-                </p>
-              )}
+            {/* Heading */}
+            <div className="p-3">
+              <h3 className="text-sm md:text-base lg:text-lg font-semibold line-clamp-2 group-hover:text-red-600 transition-colors">
+                {article.newsHeading}
+              </h3>
             </div>
           </Link>
         ))}

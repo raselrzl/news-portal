@@ -128,10 +128,10 @@ export default async function LiveUpdate() {
           ))}
         </div>
       </div>
-      <div className="text-right mt-4 pr-2">
+      <div className="flex justify-end mt-3 pr-2">
         <Link
           href="/breakingnews"
-          className="text-primary font-semibold underline"
+          className="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
         >
           আরো দেখুন →
         </Link>

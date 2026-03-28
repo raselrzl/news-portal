@@ -51,7 +51,7 @@ export async function SuperOne({ country }: { country: string }) {
         <div className="flex items-center justify-center">
           {Advertise.map((ad) => (
             <Link
-              href={`https://${ad.websiteLink}`}
+              href={`${ad.websiteLink}`}
               key={ad.id}
               target="_blank"
               rel="noopener noreferrer"

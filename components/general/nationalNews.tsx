@@ -43,73 +43,77 @@ export default async function NationalLatest() {
 
   return (
     <section className="px-2 md:px-0 my-10">
-      <div className="flex justify-between">
-        <h2 className="text-xl font-extrabold mb-4 flex items-center">জাতীয়</h2>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight relative">
+          জাতীয়
+          <span className="absolute left-0 -bottom-2 w-12 h-1 bg-red-600 rounded-full md:w-20"></span>
+        </h2>
+        <Link
+          href="/national"
+          className="text-sm md:text-base px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
+        >
+          আরও দেখুন →
+        </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="overflow-hidden shadow-lg">
+      {/* Grid Section */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Featured Article */}
+        <div className="overflow-hidden rounded-xl shadow-lg group">
           <Link href={`/newsDetails/${featured.id}`}>
-            <img
-              src={featured.newsPicture}
-              alt={featured.newsPictureHeading}
-              className="w-full h-64 object-cover"
-            />
+            <div className="relative overflow-hidden">
+              <img
+                src={featured.newsPicture}
+                alt={featured.newsPictureHeading}
+                className="w-full h-64 md:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                <h3 className="text-lg md:text-2xl font-bold text-white line-clamp-2">
+                  {featured.newsHeading}
+                </h3>
+              </div>
+            </div>
           </Link>
           <div className="p-2">
-            <Link href={`/newsDetails/${featured.id}`}>
-              <h3 className="text-xl md:text-xl font-bold hover:underline">
-                {featured.newsHeading}
-              </h3>
-            </Link>
             <PremiarOne />
-
-            {/* ✅ JSON parse condition (from your example) */}
-           {/*  {isJson(featured.newsDetails) ? (
-              <div className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
-                <JsonToHtml json={JSON.parse(featured.newsDetails)} />
-              </div>
-            ) : (
-              <p className="text-sm md:text-md text-accent-foreground/80 mt-2 line-clamp-1 md:line-clamp-6">
-                {featured.newsDetails}
-              </p>
-            )} */}
           </div>
         </div>
-        {/* ✅ Left side - 5 small cards */}
+
+        {/* Left Side Small Articles */}
         <div className="flex flex-col gap-4">
           {leftArticles.map((article) => (
             <Link
               href={`/newsDetails/${article.id}`}
               key={article.id}
-              className="flex items-center gap-3 group shadow-lg border-gray-950/10"
+              className="flex items-center gap-3 group overflow-hidden rounded-lg shadow hover:shadow-md transition-all"
             >
               <img
                 src={article.newsPicture}
                 alt={article.newsPictureHeading}
-                className="w-24 h-20 object-cover rounded-xl"
+                className="w-24 h-20 object-cover rounded-lg flex-shrink-0"
               />
-              <p className="font-semibold text-sm group-hover:underline line-clamp-3">
+              <p className="font-semibold text-sm md:text-base line-clamp-3 group-hover:text-red-600 transition-colors">
                 {article.newsHeading}
               </p>
             </Link>
           ))}
         </div>
 
-        {/* ✅ Right side - 5 small cards */}
+        {/* Right Side Small Articles */}
         <div className="flex flex-col gap-4">
           {rightArticles.map((article) => (
             <Link
               href={`/newsDetails/${article.id}`}
               key={article.id}
-              className="flex items-center gap-3 group shadow-lg border-gray-950/10"
+              className="flex items-center gap-3 group overflow-hidden rounded-lg shadow hover:shadow-md transition-all"
             >
               <img
                 src={article.newsPicture}
                 alt={article.newsPictureHeading}
-                className="w-24 h-20 object-cover rounded-md"
+                className="w-24 h-20 object-cover rounded-lg flex-shrink-0"
               />
-              <p className="font-semibold text-md group-hover:underline line-clamp-2">
+              <p className="font-semibold text-sm md:text-base line-clamp-2 group-hover:text-red-600 transition-colors">
                 {article.newsHeading}
               </p>
             </Link>

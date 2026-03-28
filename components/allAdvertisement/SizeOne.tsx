@@ -45,7 +45,7 @@ export async function SizeOneAdvertise({ country }: { country: string }) {
         <div className="flex items-center justify-center rounded-xl">
           {Advertise.map((ad) => (
             <Link
-              href={`https://${ad.websiteLink}`}
+              href={`${ad.websiteLink}`}
               key={ad.id}
               target="_blank"
               rel="noopener noreferrer"
