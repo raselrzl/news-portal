@@ -80,7 +80,6 @@ export default function RootLayout({
         >
           <div className="max-w-7xl mx-auto">{children}</div>
 
-         
           <ScrollToTopButton />
           <VisitorTracker />
           <NewUserTracker />
