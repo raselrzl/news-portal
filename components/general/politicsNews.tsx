@@ -40,7 +40,7 @@ export default async function PoliticalLatest() {
         </h2>
         <Link
           href="/politics"
-          className="text-sm md:text-base px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
+          className="text-xs px-3 py-1 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-all"
         >
           আরও দেখুন →
         </Link>
@@ -52,10 +52,10 @@ export default async function PoliticalLatest() {
           <Link
             href={`/newsDetails/${article.id}`}
             key={article.id}
-            className="group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all"
+            className="group overflow-hidden rounded-xs shadow-lg hover:shadow-xl transition-all"
           >
             {/* Image */}
-            <div className="relative w-full h-48 md:h-56 lg:h-60 overflow-hidden rounded-xl">
+            <div className="relative w-full h-48 md:h-56 lg:h-56 overflow-hidden rounded-xs">
               <img
                 src={article.newsPicture}
                 alt={article.newsPictureHeading}

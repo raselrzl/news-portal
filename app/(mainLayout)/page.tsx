@@ -33,6 +33,7 @@ import InternationalLatest from "@/components/general/worldNews";
 import PoliticalLatest from "@/components/general/politicsNews";
 import SportsNews from "@/components/general/SportsNews";
 import RegionalNews from "@/components/general/RegionalNews";
+import BanglaDistrictNewsSlider from "@/components/general/BanglaDistrictNewsSlider";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -362,9 +363,11 @@ export default async function Home() {
           ) : null}
         </div>
       </div>
+
       <div className="flex justify-center items-center pt-4">
         <DeluxeTwoAdvertise />
       </div>
+      <BanglaDistrictNewsSlider />
       <InternationalLatest />
       <WarLatest />
       <NationalLatest />
@@ -372,7 +375,6 @@ export default async function Home() {
 
       <InstagramPosts />
 
-      {/*  tab section */}
       <div className="my-14">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
@@ -391,7 +393,9 @@ export default async function Home() {
           <PremiarOne />
         </Suspense>
       </div>
-      <div className="p-2"><SportsNews /></div>
+      <div className="p-2">
+        <SportsNews />
+      </div>
       {/*  Science section */}
       <div className="my-10 py-6">
         <div className="grid grid-cols-3 border-primary my-4">
