@@ -63,7 +63,7 @@ export default async function LatestOpinions() {
               )}
 
               <p className="text-sm text-accent-foreground/80 font-medium">
-                — {item.reporterPublicName || "অজ্ঞাত"}
+                — {item.reporterPublicName || "জাগ্রত বার্তা সম্পাদক"}
               </p>
             </div>
           </Link>
