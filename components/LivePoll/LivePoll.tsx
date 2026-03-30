@@ -23,7 +23,7 @@ export default function LivePoll() {
 
   if (!poll) {
     return (
-      <div className="p-6 border rounded-lg max-w-md mx-auto text-center bg-white shadow">
+      <div className="p-6 border rounded-lg max-w-md mx-auto text-center">
         <h3 className="text-lg font-semibold mb-2 text-primary">
           দুঃখিত — কোন পোল নেই
         </h3>
@@ -63,7 +63,7 @@ export default function LivePoll() {
   const totalVotes = results.YES + results.NO + results.NO_OPINION || 1;
 
   return (
-    <div className="mx-auto  p-6 shadow-lg rounded-lg border bg-white">
+    <div className="mx-auto  p-6">
       <h2 className="text-lg font-bold mb-4 text-left text-primary">
         🗳️ {poll.question}
       </h2>

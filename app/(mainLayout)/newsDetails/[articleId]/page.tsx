@@ -15,6 +15,7 @@ import { StandardTwo } from "@/components/allAdvertisement/StandardTwo";
 import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
 import { incrementArticleView } from "@/app/actions";
 import NewUserTracker from "@/components/general/NewUserTracker";
+import PoolPopupComponent from "@/components/general/PoolPopupComponent";
 
 async function getNewsArticle(articleId: string) {
   const newsArticle = await prisma.newsArticle.findUnique({
@@ -204,6 +205,7 @@ export default async function NewsDetailsPage({ params }: { params: Params }) {
           </div>
         </div>
         <NewUserTracker />
+         <PoolPopupComponent />
       </div>
 
       {/* Right Sidebar */}

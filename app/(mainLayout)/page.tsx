@@ -34,6 +34,7 @@ import PoliticalLatest from "@/components/general/politicsNews";
 import SportsNews from "@/components/general/SportsNews";
 import RegionalNews from "@/components/general/RegionalNews";
 import BanglaDistrictNewsSlider from "@/components/general/BanglaDistrictNewsSlider";
+import PoolPopupComponent from "@/components/general/PoolPopupComponent";
 
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
@@ -367,6 +368,7 @@ export default async function Home() {
       <div className="flex justify-center items-center pt-4">
         <DeluxeTwoAdvertise />
       </div>
+      <PoolPopupComponent />
       <BanglaDistrictNewsSlider />
       <InternationalLatest />
       <WarLatest />
