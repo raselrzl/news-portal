@@ -72,6 +72,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoBengali.variable} ${tiroBangla.variable} antialiased`}
       >
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
+          crossOrigin="anonymous"
+        ></Script>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

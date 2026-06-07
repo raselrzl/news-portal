@@ -11,10 +11,16 @@ import VisitorTracker from "@/components/general/VisitorTracker";
 import RealBanglaDate from "@/components/general/BanglaDate";
 import DivisionNavBar from "@/components/general/DivisionNavBar";
 import RegionalNews from "@/components/general/RegionalNews";
+import Script from "next/script";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className=" mx-auto">
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
+        crossOrigin="anonymous"
+      ></Script>
       <div className="fixed top-0 left-0 right-0 z-50 bg-background shadow-md max-w-7xl mx-auto">
         {/*      <AdsTicker /> */}
         <Navbar />
