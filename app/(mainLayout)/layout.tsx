@@ -15,7 +15,7 @@ import Script from "next/script";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <div className=" mx-auto">
+    <div className=" mx-auto"> 
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
