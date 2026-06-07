@@ -57,17 +57,16 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Tiro+Bangla&display=swap"
           rel="stylesheet"
         />
-        {/*   google adsense */}
         <meta
           name="google-adsense-account"
           content="ca-pub-5945782633100386"
         ></meta>
-        <Script
+     {/*    <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
           crossOrigin="anonymous"
           strategy="afterInteractive"
-        />
+        /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoBengali.variable} ${tiroBangla.variable} antialiased`}
