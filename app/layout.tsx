@@ -59,7 +59,7 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-5945782633100386"
         ></meta>
-<meta name='impact-site-verification' content='637c7dc5-ceb8-4da5-b9f1-96b4eea5a637'></meta>
+<meta name='impact-site-verification' content='50a0f160-79a9-4319-8e47-9ec541af4f41'></meta>
         <meta name='impact-site-verification' content='0fc89d34-894a-41a8-8596-2180f689df27'></meta>
      {/*    <Script
           async
