@@ -59,6 +59,8 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-5945782633100386"
         ></meta>
+
+        <meta name='impact-site-verification' content='0fc89d34-894a-41a8-8596-2180f689df27'></meta>
      {/*    <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5945782633100386"
