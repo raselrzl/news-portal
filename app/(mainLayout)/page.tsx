@@ -310,8 +310,8 @@ export default async function Home() {
                 <div className="flex flex-col px-2">
                   {/* 📝 Heading FIRST */}
                   <h2
-                    className="text-2xl md:text-4xl font-semibold mb-4 text-center
-                         line-clamp-2 md:line-clamp-3 p-4"
+                    className="text-xl md:text-4xl font-semibold mb-4 text-center
+                         line-clamp-2 p-4"
                   >
                     {lastFeaturedArticle[0].newsHeading}
                   </h2>
