@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { after } from "next/server";
 import { prisma } from "../utils/db";
 import { EmptyState } from "@/components/general/EmptyState";
 import Link from "next/link";
@@ -39,6 +40,7 @@ import PoolPopupComponent from "@/components/general/PoolPopupComponent";
 async function getData() {
   const [lastFeaturedArticle, latestUSANews, InternationalAll] =
     await Promise.all([
+      // Featured articles: fetch only fields used on this page.
       prisma.newsArticle.findMany({
         where: {
           newsArticleStatus: "ACTIVE",
@@ -46,54 +48,8 @@ async function getData() {
         },
         select: {
           id: true,
-          createdAt: true,
-          isFeatured: true,
-          newsCategory: true,
-          newsDetails: true,
           newsHeading: true,
           newsPicture: true,
-          quotes: {
-            select: {
-              speakerInfo: true,
-              text: true,
-            },
-          },
-          newsResource: true,
-          newsPictureHeading: true,
-          newsPictureCredit: true,
-          newsLocation: true,
-          newsReporter: true,
-          newsArticleStatus: true,
-        },
-
-        orderBy: {
-          createdAt: "desc",
-        },
-        take: 7,
-      }),
-
-      prisma.newsArticle.findMany({
-        where: { newsCategory: "CRIME" },
-        select: {
-          id: true,
-          createdAt: true,
-          isFeatured: true,
-          newsCategory: true,
-          newsDetails: true,
-          newsHeading: true,
-          newsPicture: true,
-          quotes: {
-            select: {
-              speakerInfo: true,
-              text: true,
-            },
-          },
-          newsResource: true,
-          newsPictureHeading: true,
-          newsPictureCredit: true,
-          newsLocation: true,
-          newsReporter: true,
-          newsArticleStatus: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -101,28 +57,31 @@ async function getData() {
         take: 7,
       }),
 
+      // Crime articles: preserve the original category filter.
       prisma.newsArticle.findMany({
-        where: { newsCategory: "INTERNATIONAL" },
+        where: {
+          newsCategory: "CRIME",
+        },
         select: {
           id: true,
-          createdAt: true,
-          isFeatured: true,
-          newsCategory: true,
-          newsDetails: true,
           newsHeading: true,
           newsPicture: true,
-          quotes: {
-            select: {
-              speakerInfo: true,
-              text: true,
-            },
-          },
-          newsResource: true,
-          newsPictureHeading: true,
-          newsPictureCredit: true,
-          newsLocation: true,
-          newsReporter: true,
-          newsArticleStatus: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: 7,
+      }),
+
+      // International articles: preserve the original category filter.
+      prisma.newsArticle.findMany({
+        where: {
+          newsCategory: "INTERNATIONAL",
+        },
+        select: {
+          id: true,
+          newsHeading: true,
+          newsPicture: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -137,42 +96,41 @@ async function getData() {
     InternationalAll,
   };
 }
+
 export default async function Home() {
-  const { lastFeaturedArticle, latestUSANews, InternationalAll } =
-    await getData();
-  await trackRoute("Home");
-  const session = await aauth();
+  // Run the homepage queries and authentication concurrently.
+  // Keep aauth() because it may perform authentication-related side effects.
+  const [data] = await Promise.all([getData(), aauth()]);
+
+  const { lastFeaturedArticle, latestUSANews, InternationalAll } = data;
+
+  // Route tracking no longer blocks the homepage response.
+  after(async () => {
+    try {
+      await trackRoute("Home");
+    } catch (error) {
+      console.error("Failed to track homepage visit:", error);
+    }
+  });
+
   return (
     <>
-      <div className=" dark:bg-black mb-2 grid grid-cols-3 items-center px-2">
-        {/* Live Updates */}
+      {/* Live Updates */}
+      <div className="dark:bg-black mb-2 grid grid-cols-3 items-center px-2">
         <div className="col-span-3 md:col-span-2">
           <LiveUpdate />
         </div>
-
-        {/* Desktop-only Advertisement Banner */}
-        {/*   <div className=" md:flex items-center col-span-3 md:col-span-1 justify-center gap-2 rounded-md border border-yellow-400 bg-linear-to-r from-yellow-50 via-white to-yellow-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-2 shadow-sm">
-          <p className="text-xs md:text-sm text-gray-800 dark:text-gray-200 text-center leading-snug">
-            <strong className="text-yellow-700 dark:text-yellow-400">
-              বিজ্ঞপ্তি:
-            </strong>{" "}
-            আমরা স্থানীয়, কর্পোরেট, পণ্য এবং সামাজিক যোগাযোগ মাধ্যমের বিজ্ঞাপন
-            প্রচার করি, সম্পূর্ণ স্বতন্ত্র এবং কোনো প্রতিষ্ঠান বা ব্যক্তির
-            তহবিলের উপর নির্ভরশীল নয়। আমাদের পাঠকরা সারাবাংলায় ছড়িয়ে আছে।
-            অংশীদারিত্ব বা বিজ্ঞাপনের জন্য যোগাযোগ করুন
-            <span className="font-semibold underline hover:text-yellow-700 dark:hover:text-yellow-400 cursor-pointer">
-              info@jagrotobarta.com
-            </span>
-          </p>
-        </div> */}
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-4">
+        {/* LEFT COLUMN */}
         <div className="order-3 md:order-1 md:col-span-1 p-2">
           <div className="w-full mb-4">
             <h2 className="w-full rounded-xs text-center bg-red-600 text-white py-2 text-lg font-semibold tracking-wide">
               অপরাধসংক্রান্ত
             </h2>
           </div>
+
           {latestUSANews && latestUSANews.length > 0 ? (
             latestUSANews.map((item) => (
               <Link key={item.id} href={`/newsDetails/${item.id}`}>
@@ -184,6 +142,7 @@ export default async function Home() {
                       className="w-32 h-16 object-cover border"
                     />
                   </div>
+
                   <div className="col-span-2">
                     <h3 className="text-sm font-semibold ml-2 line-clamp-4">
                       {item.newsHeading}
@@ -201,21 +160,36 @@ export default async function Home() {
             />
           )}
 
-          {/*  font page first col first section add */}
-          <Suspense fallback={<Loader2 className="mx-auto animate-spin" />}>
+          {/* Advertisement */}
+          <Suspense
+            fallback={
+              <div className="flex justify-center py-4">
+                <Loader2 className="h-5 w-5 animate-spin" />
+              </div>
+            }
+          >
             <ProOneAdvertise />
           </Suspense>
         </div>
+
+        {/* MIDDLE COLUMN */}
         <div className="order-2 md:order-2 md:col-span-1">
-          <div className=" grid grid-cols-1">
+          <div className="grid grid-cols-1">
             <div>
-              {/*  font page second col first section first add */}
-              <Suspense fallback={<Loader2 />}>
+              {/* Advertisement */}
+              <Suspense
+                fallback={
+                  <div className="flex justify-center py-4">
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  </div>
+                }
+              >
                 <PremiumOneAdvertise />
               </Suspense>
             </div>
 
-            {InternationalAll && Object.keys(InternationalAll).length > 0 ? (
+            {/* Main international article */}
+            {InternationalAll && InternationalAll.length > 0 ? (
               <Link
                 href={`/newsDetails/${InternationalAll[0].id}`}
                 className="block"
@@ -226,6 +200,7 @@ export default async function Home() {
                       {InternationalAll[0].newsHeading}
                     </h2>
                   </div>
+
                   <img
                     src={InternationalAll[0].newsPicture}
                     alt="Card image"
@@ -241,8 +216,9 @@ export default async function Home() {
                 href="/"
               />
             )}
+
+            {/* International scrollable list */}
             <div className="bg-primary/55 dark:bg-gray-700 mt-6 rounded-xl border border-primary/55 dark:border-gray-600 shadow-md mx-2 md:mx-0">
-              {/* Header */}
               <div className="flex items-center justify-center py-3 gap-2 border-b border-primary/55 dark:border-gray-600">
                 <Earth className="text-red-600 dark:text-amber-400 w-6 h-6" />
                 <h1 className="font-extrabold text-lg md:text-xl uppercase text-gray-900 dark:text-gray-100 tracking-wide">
@@ -250,7 +226,6 @@ export default async function Home() {
                 </h1>
               </div>
 
-              {/* Scrollable List */}
               <div className="relative h-64 md:h-92 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-transparent px-4 py-3">
                 {InternationalAll && InternationalAll.length > 0 ? (
                   <div className="space-y-3">
@@ -280,6 +255,7 @@ export default async function Home() {
 
                 {/* Gradient & Scroll Hint */}
                 <div className="absolute bottom-0 left-0 w-full h-10 bg-linear-to-t from-amber-100 dark:from-gray-700 to-transparent pointer-events-none" />
+
                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-gray-500 dark:text-gray-300 animate-bounce">
                   <svg
                     className="w-5 h-5"
@@ -299,8 +275,10 @@ export default async function Home() {
             </div>
           </div>
         </div>
+
+        {/* RIGHT / FEATURED COLUMN */}
         <div className="order-1 md:order-3 md:col-span-3">
-          {/* 🔴 FIRST FEATURED NEWS */}
+          {/* FIRST FEATURED NEWS */}
           {lastFeaturedArticle && lastFeaturedArticle.length > 0 ? (
             <div className="mb-6 md:border md:p-3 rounded-xl">
               <Link
@@ -308,7 +286,6 @@ export default async function Home() {
                 className="block"
               >
                 <div className="flex flex-col px-2">
-                  {/* 📝 Heading FIRST */}
                   <h2
                     className="text-xl md:text-4xl font-semibold mb-4 text-center
                          line-clamp-2 p-4"
@@ -316,7 +293,6 @@ export default async function Home() {
                     {lastFeaturedArticle[0].newsHeading}
                   </h2>
 
-                  {/* 🖼️ Big Image */}
                   <div className="w-full h-[220px] md:h-80 border rounded-xl overflow-hidden">
                     <img
                       src={lastFeaturedArticle[0].newsPicture}
@@ -336,13 +312,15 @@ export default async function Home() {
             />
           )}
 
-          {/* 🔽 OTHER NEWS (UNCHANGED STYLE, JUST FIXED) */}
+          {/* OTHER FEATURED NEWS */}
           {lastFeaturedArticle && lastFeaturedArticle.length > 1 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border mt-6 border-t-2">
               {lastFeaturedArticle.slice(1, 7).map((article) => (
-                <Link href={`/newsDetails/${article.id}`} key={article.id}>
+                <Link
+                  href={`/newsDetails/${article.id}`}
+                  key={article.id}
+                >
                   <div className="w-full mx-auto my-1">
-                    {/* Image */}
                     <div className="w-full h-[110px] md:h-[150px] border rounded-xl overflow-hidden">
                       <img
                         src={article.newsPicture}
@@ -351,7 +329,6 @@ export default async function Home() {
                       />
                     </div>
 
-                    {/* Heading */}
                     <div className="pt-2">
                       <h2 className="text-[15px] md:text-[17px] font-semibold leading-snug px-1 line-clamp-3">
                         {article.newsHeading}
@@ -365,59 +342,121 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* ADVERTISEMENT */}
       <div className="flex justify-center items-center pt-4">
-        <DeluxeTwoAdvertise />
+        <Suspense
+          fallback={
+            <div className="flex justify-center py-4">
+              <Loader2 className="h-5 w-5 animate-spin" />
+            </div>
+          }
+        >
+          <DeluxeTwoAdvertise />
+        </Suspense>
       </div>
-      <PoolPopupComponent />
-      <BanglaDistrictNewsSlider />
-      <InternationalLatest />
-      <WarLatest />
-      <NationalLatest />
-      {/*    <Videos /> */}
 
-      <InstagramPosts />
+      <PoolPopupComponent />
+
+      {/* BELOW-FOLD NEWS SECTIONS */}
+      <Suspense fallback={<div className="min-h-24" />}>
+        <BanglaDistrictNewsSlider />
+      </Suspense>
+
+      <Suspense fallback={<div className="min-h-48" />}>
+        <InternationalLatest />
+      </Suspense>
+
+      <Suspense fallback={<div className="min-h-48" />}>
+        <WarLatest />
+      </Suspense>
+
+      <Suspense fallback={<div className="min-h-48" />}>
+        <NationalLatest />
+      </Suspense>
+
+      {/* Videos intentionally remain disabled, as in your original code. */}
+      {/* <Videos /> */}
+
+      <Suspense fallback={<div className="min-h-24" />}>
+        <InstagramPosts />
+      </Suspense>
 
       <div className="my-14">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Left: Sorbosesh / Jonoprio */}
           <div className="mx-4 md:mx-0 py-4">
-            <PoliticalLatest />
+            <Suspense fallback={<div className="min-h-32" />}>
+              <PoliticalLatest />
+            </Suspense>
           </div>
+
           <div className="py-4">
-            <LatestOpinions />
+            <Suspense fallback={<div className="min-h-32" />}>
+              <LatestOpinions />
+            </Suspense>
           </div>
         </div>
       </div>
 
-      {/* Right: Premium Ad */}
+      {/* Premium Advertisement */}
       <div className="py-4">
-        <Suspense fallback={<Loader2 className="animate-spin" />}>
+        <Suspense
+          fallback={
+            <div className="flex justify-center py-4">
+              <Loader2 className="h-5 w-5 animate-spin" />
+            </div>
+          }
+        >
           <PremiarOne />
         </Suspense>
       </div>
+
       <div className="p-2">
-        <SportsNews />
+        <Suspense fallback={<div className="min-h-48" />}>
+          <SportsNews />
+        </Suspense>
       </div>
-      {/*  Science section */}
+
+      {/* Science section */}
       <div className="my-10 py-6">
         <div className="grid grid-cols-3 border-primary my-4">
           <div className="col-span-3 md:col-span-1 p-2 mt-2 flex flex-col justify-between w-full max-w-sm mx-auto md:mx-0">
-            <ScienceNewsHeadPost />
+            <Suspense fallback={<div className="min-h-32" />}>
+              <ScienceNewsHeadPost />
+            </Suspense>
           </div>
 
-          <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2  gap-2 p-2">
-            <ScienceNews />
+          <div className="col-span-3 md:col-span-2 mt-2 grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
+            <Suspense fallback={<div className="min-h-48" />}>
+              <ScienceNews />
+            </Suspense>
           </div>
         </div>
       </div>
-      <PremiumTwoAdvertise />
-      {/* binodonsection */}
-      <div className="mb-4">
-        <div className=" grid grid-cols-1 md:grid-cols-3">
-          <div className="col-span-3 md:col-span-2">
-            <PopupOnViewServer />
-            <Binodon />
+
+      <Suspense
+        fallback={
+          <div className="flex justify-center py-4">
+            <Loader2 className="h-5 w-5 animate-spin" />
           </div>
+        }
+      >
+        <PremiumTwoAdvertise />
+      </Suspense>
+
+      {/* Entertainment section */}
+      <div className="mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          <div className="col-span-3 md:col-span-2">
+            <Suspense fallback={<div className="min-h-24" />}>
+              <PopupOnViewServer />
+            </Suspense>
+
+            <Suspense fallback={<div className="min-h-48" />}>
+              <Binodon />
+            </Suspense>
+          </div>
+
           <div className="col-span-3 md:col-span-1 md:mt-12">
             <Contact />
           </div>

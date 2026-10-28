@@ -9,42 +9,86 @@ const districts = Object.values(NewsCountry);
 const priority = ["moulvibazar", "sylhet"];
 
 async function getLatestPerDistrict() {
-  const results = await Promise.all(
-    districts.map(async (district) => {
-      const article = await prisma.newsArticle.findFirst({
-        where: {
-          newsLocation: district,
-          newsArticleStatus: "ACTIVE",
-        },
-        orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          newsHeading: true,
-          newsDetails: true,
-          newsPicture: true,
-          newsPictureHeading: true,
-          createdAt: true,
-        },
-      });
+  const districts = Object.values(NewsCountry);
 
-      return article ? { ...article, district } : null;
-    })
+  // Query 1: Find the latest article date for each district.
+  const latestDates = await prisma.newsArticle.groupBy({
+    by: ["newsLocation"],
+    where: {
+      newsLocation: {
+        in: districts,
+      },
+      newsArticleStatus: "ACTIVE",
+    },
+    _max: {
+      createdAt: true,
+    },
+  });
+
+  const latestDistrictDates = latestDates.filter(
+    (item) => item.newsLocation && item._max.createdAt,
   );
 
-  return results
-    .filter((item): item is any => item !== null)
-    .sort((a, b) => {
-      // 1️⃣ Priority districts first
-      const aPriority = priority.indexOf(a.district);
-      const bPriority = priority.indexOf(b.district);
+  if (latestDistrictDates.length === 0) {
+    return [];
+  }
 
-      if (aPriority !== -1 && bPriority === -1) return -1;
-      if (aPriority === -1 && bPriority !== -1) return 1;
-      if (aPriority !== -1 && bPriority !== -1) return aPriority - bPriority;
+  // Query 2: Fetch the latest articles for those districts.
+  const articles = await prisma.newsArticle.findMany({
+    where: {
+      newsArticleStatus: "ACTIVE",
+      OR: latestDistrictDates.map((item) => ({
+        newsLocation: item.newsLocation!,
+        createdAt: item._max.createdAt!,
+      })),
+    },
+    select: {
+      id: true,
+      newsLocation: true,
+      newsHeading: true,
+      newsDetails: true,
+      newsPicture: true,
+      newsPictureHeading: true,
+      reporterPublicName: true,
+      createdAt: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-      // 2️⃣ Then sort alphabetically
-      return a.district.localeCompare(b.district);
-    });
+  // Keep only one article per district.
+  const articleByDistrict = new Map<
+    string,
+    (typeof articles)[number]
+  >();
+
+  for (const article of articles) {
+    if (
+      article.newsLocation &&
+      !articleByDistrict.has(article.newsLocation)
+    ) {
+      articleByDistrict.set(article.newsLocation, article);
+    }
+  }
+
+  const priority = ["MOULVIBAZAR", "SYLHET"];
+
+  return Array.from(articleByDistrict.values()).sort((a, b) => {
+    const aLocation = String(a.newsLocation).toUpperCase();
+    const bLocation = String(b.newsLocation).toUpperCase();
+
+    const aPriority = priority.indexOf(aLocation);
+    const bPriority = priority.indexOf(bLocation);
+
+    if (aPriority !== -1 || bPriority !== -1) {
+      if (aPriority === -1) return 1;
+      if (bPriority === -1) return -1;
+      return aPriority - bPriority;
+    }
+
+    return aLocation.localeCompare(bLocation);
+  });
 }
 
 export default async function BanglaDistrictNewsSlider() {
