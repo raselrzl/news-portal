@@ -18,6 +18,7 @@ import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
 
 import NewUserTracker from "@/components/general/NewUserTracker";
 import PoolPopupComponent from "@/components/general/PoolPopupComponent";
+import BanglaNewsReader from "./BanglaNewsReader";
 
 type PageParams = Promise<{ articleId: string }>;
 
@@ -247,6 +248,11 @@ export default async function NewsDetailsPage({ params }: PageProps) {
 
               {/* MAIN NEWS CONTENT */}
               <div className="newsprint-content">
+    {/*             <BanglaNewsReader
+                  heading={data.newsHeading}
+                  details={data.newsDetails}
+                /> */}
+
                 <PrintNews
                   id={data.id}
                   newsDetails={data.newsDetails}
