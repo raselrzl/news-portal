@@ -72,10 +72,10 @@ function getDateInformation(): DateInformation {
     } ${toBanglaNumber(now.getFullYear())}`,
     bangla: `${toBanglaNumber(bd.day - 1)} ${
       bnMonths[bd.month - 1]
-    } ${toBanglaNumber(bd.year + 1)} বঙ্গাব্দ`,
+    } ${toBanglaNumber(bd.year + 1)}`,
     hijri: `${toBanglaNumber(hd)} ${
       hijriMonths[hm - 1]
-    } ${toBanglaNumber(hy)} হিজরি`,
+    } ${toBanglaNumber(hy)}`,
   };
 }
 
@@ -111,17 +111,80 @@ const canvasToBlob = (canvas: HTMLCanvasElement) =>
   );
 
 /* -------------------------------------------------------
+   IMAGE LOADING
+   Images are converted to data URLs BEFORE the card is
+   drawn, so cross-origin (CORS) problems can never leave
+   the header / hero empty.
+------------------------------------------------------- */
+
+async function fetchAsDataUrl(url: string): Promise<string | null> {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      mode: "cors",
+      credentials: "omit",
+    });
+
+    if (!response.ok) return null;
+
+    const blob = await response.blob();
+    if (!blob.type.startsWith("image/")) return null;
+
+    return await new Promise<string | null>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () =>
+        resolve(typeof reader.result === "string" ? reader.result : null);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(blob);
+    });
+  } catch {
+    return null;
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
+async function loadImageAsDataUrl(src: string): Promise<string | null> {
+  if (src.startsWith("data:")) return src;
+
+  const candidates = [src];
+
+  try {
+    const isRemote = new URL(src, window.location.href).origin !== window.location.origin;
+
+    // Same-origin Next.js image proxy: works even when the host has no CORS headers
+    // (the host must be listed in next.config images.remotePatterns).
+    if (isRemote) {
+      candidates.push(`/_next/image?url=${encodeURIComponent(src)}&w=1080&q=85`);
+    }
+  } catch {
+    // ignore malformed URLs
+  }
+
+  for (const candidate of candidates) {
+    const dataUrl = await fetchAsDataUrl(candidate);
+    if (dataUrl) return dataUrl;
+  }
+
+  return null;
+}
+
+/* -------------------------------------------------------
    DESIGN
 ------------------------------------------------------- */
 
 const C = {
-  ink: "#0b1220",
-  inkSoft: "#1b2440",
-  paper: "#fffcf6",
-  gold: "#e0a526",
+  ink: "#0a1020",
+  inkSoft: "#16203d",
+  paper: "#fffdf8",
+  gold: "#e6a928",
+  goldLight: "#f7d27a",
   goldDeep: "#b57a00",
   red: "#d62839",
-  text: "#1f2433",
+  text: "#1c2132",
   muted: "#6b7280",
 };
 
@@ -130,9 +193,7 @@ const CARD_WIDTH = 540;
 const MAX_SCALE = 2;
 const MAX_CANVAS_DIMENSION = 16000;
 const MAX_CANVAS_AREA = 16_000_000;
-
-const FONT_FAMILY =
-  "'Noto Sans Bengali', 'Noto Serif Bengali', 'Hind Siliguri', system-ui, sans-serif";
+const TOAST_ID = "news-image-export";
 
 /* -------------------------------------------------------
    TYPES
@@ -155,6 +216,112 @@ type PrintNewsDetailsClientProps = {
   reporterPublicName: string | null;
 };
 
+type Stage = "idle" | "preparing" | "rendering";
+
+type Prepared = {
+  photo: string | null;
+  logo: string | null;
+  dates: DateInformation;
+};
+
+/* -------------------------------------------------------
+   SMALL DESIGN PIECES
+------------------------------------------------------- */
+
+function Dot({ color, size = 8 }: { color: string; size?: number }) {
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        width: size,
+        height: size,
+        borderRadius: 999,
+        background: color,
+      }}
+    />
+  );
+}
+
+function Ornament() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        padding: "0 22px",
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          height: 2,
+          background: `linear-gradient(to right, transparent, ${C.gold})`,
+        }}
+      />
+      <div
+        style={{
+          width: 9,
+          height: 9,
+          background: C.red,
+          transform: "rotate(45deg)",
+        }}
+      />
+      <div
+        style={{
+          flex: 1,
+          height: 2,
+          background: `linear-gradient(to left, transparent, ${C.gold})`,
+        }}
+      />
+    </div>
+  );
+}
+
+function LogoBadge({ src, size }: { src: string | null; size: number }) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: 999,
+        background: "#ffffff",
+        border: `3px solid ${C.gold}`,
+        boxSizing: "border-box",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        overflow: "hidden",
+      }}
+    >
+      {src ? (
+        <img
+          src={src}
+          alt=""
+          style={{
+            width: "78%",
+            height: "78%",
+            objectFit: "contain",
+            display: "block",
+          }}
+        />
+      ) : (
+        <span
+          style={{
+            color: C.ink,
+            fontSize: size * 0.42,
+            fontWeight: 800,
+            lineHeight: 1,
+          }}
+        >
+          জা
+        </span>
+      )}
+    </div>
+  );
+}
+
 /* -------------------------------------------------------
    COMPONENT
 ------------------------------------------------------- */
@@ -171,10 +338,10 @@ export function PrintNewsDetailsClient({
   reporterPublicName,
 }: PrintNewsDetailsClientProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [stage, setStage] = useState<Stage>("idle");
+  const [prepared, setPrepared] = useState<Prepared | null>(null);
 
-  // The card is only mounted while the image is being generated.
-  const dates = isLoading ? getDateInformation() : null;
+  const isLoading = stage !== "idle";
 
   /* -------------------------------------------------------
      ARTICLE CONTENT
@@ -197,11 +364,39 @@ export function PrintNewsDetailsClient({
   );
 
   /* -------------------------------------------------------
-     GENERATE ONE IMAGE
+     STEP 1: PREPARE IMAGES + DATES
   ------------------------------------------------------- */
 
   useEffect(() => {
-    if (!isLoading) return;
+    if (stage !== "preparing") return;
+
+    let cancelled = false;
+
+    const prepare = async () => {
+      const [photo, logo] = await Promise.all([
+        newsPicture ? loadImageAsDataUrl(newsPicture) : Promise.resolve(null),
+        loadImageAsDataUrl("/logo.png"),
+      ]);
+
+      if (cancelled) return;
+
+      setPrepared({ photo, logo, dates: getDateInformation() });
+      setStage("rendering");
+    };
+
+    void prepare();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [stage, newsPicture]);
+
+  /* -------------------------------------------------------
+     STEP 2: DRAW THE CARD AND DOWNLOAD ONE PNG
+  ------------------------------------------------------- */
+
+  useEffect(() => {
+    if (stage !== "rendering") return;
 
     let cancelled = false;
 
@@ -253,7 +448,11 @@ export function PrintNewsDetailsClient({
         canvas.height = 0;
 
         if (!blob) throw new Error("Image could not be created");
-        if (cancelled) return;
+
+        if (cancelled) {
+          toast.dismiss(TOAST_ID);
+          return;
+        }
 
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -265,14 +464,17 @@ export function PrintNewsDetailsClient({
 
         window.setTimeout(() => URL.revokeObjectURL(url), 10000);
 
-        toast.success("ছবি সফলভাবে ডাউনলোড হয়েছে!");
+        toast.success("ছবি সফলভাবে ডাউনলোড হয়েছে!", { id: TOAST_ID });
       } catch (error) {
         console.error("Image generation error:", error);
-        if (!cancelled) {
-          toast.error("ছবি তৈরি করা যায়নি। আবার চেষ্টা করুন।");
-        }
+        toast.error("ছবি তৈরি করা যায়নি। আবার চেষ্টা করুন।", {
+          id: TOAST_ID,
+        });
       } finally {
-        if (!cancelled) setIsLoading(false);
+        if (!cancelled) {
+          setStage("idle");
+          setPrepared(null);
+        }
       }
     };
 
@@ -281,16 +483,20 @@ export function PrintNewsDetailsClient({
     return () => {
       cancelled = true;
     };
-  }, [isLoading, id]);
+  }, [stage, id]);
 
   const handleDownload = () => {
     if (isLoading) return;
-    setIsLoading(true);
+    toast.loading("ছবি তৈরি হচ্ছে…", { id: TOAST_ID });
+    setStage("preparing");
   };
 
   /* -------------------------------------------------------
      RENDER
   ------------------------------------------------------- */
+
+  const dates = prepared?.dates;
+  const hasPhoto = Boolean(prepared?.photo);
 
   return (
     <>
@@ -317,9 +523,10 @@ export function PrintNewsDetailsClient({
 
       {/* ---------------------------------------------------
          HIDDEN PHONE-SIZED NEWS CARD (single tall image)
+         The font is inherited from your site.
       --------------------------------------------------- */}
 
-      {isLoading && dates && (
+      {stage === "rendering" && prepared && dates && (
         <div
           ref={contentRef}
           aria-hidden="true"
@@ -328,130 +535,216 @@ export function PrintNewsDetailsClient({
             top: 0,
             left: "-10000px",
             width: CARD_WIDTH,
-            padding: 18,
+            padding: 20,
             boxSizing: "border-box",
-            background: `linear-gradient(160deg, ${C.ink} 0%, #2a1550 55%, #4a1233 100%)`,
-            fontFamily: FONT_FAMILY,
+            background: `linear-gradient(160deg, ${C.ink} 0%, #26144d 55%, #4a1233 100%)`,
             color: C.text,
             zIndex: -1,
+            overflow: "hidden",
           }}
         >
+          {/* background glows */}
           <div
             style={{
+              position: "absolute",
+              top: -120,
+              left: -120,
+              width: 380,
+              height: 380,
+              background:
+                "radial-gradient(circle, rgba(230,169,40,0.35), transparent 65%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: -140,
+              right: -140,
+              width: 420,
+              height: 420,
+              background:
+                "radial-gradient(circle, rgba(214,40,57,0.4), transparent 65%)",
+            }}
+          />
+
+          {/* PAPER CARD */}
+          <div
+            style={{
+              position: "relative",
               background: C.paper,
-              borderRadius: 26,
+              borderRadius: 28,
               overflow: "hidden",
+              boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
             }}
           >
-            {/* MASTHEAD */}
+            {/* ================= MASTHEAD ================= */}
             <header
               style={{
-                background: `linear-gradient(120deg, ${C.ink}, ${C.inkSoft})`,
-                padding: "18px 22px 16px",
-                borderBottom: `4px solid ${C.gold}`,
+                position: "relative",
+                padding: "26px 22px 20px",
+                background: `linear-gradient(135deg, ${C.ink} 0%, ${C.inkSoft} 100%)`,
+                textAlign: "center",
+                overflow: "hidden",
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 12,
+                  position: "absolute",
+                  top: -90,
+                  right: -70,
+                  width: 300,
+                  height: 300,
+                  background:
+                    "radial-gradient(circle, rgba(230,169,40,0.38), transparent 62%)",
                 }}
-              >
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: -110,
+                  left: -80,
+                  width: 280,
+                  height: 280,
+                  background:
+                    "radial-gradient(circle, rgba(214,40,57,0.3), transparent 62%)",
+                }}
+              />
+
+              <div style={{ position: "relative" }}>
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 14,
+                  }}
                 >
-                  <img
-                    src="/logo.png"
-                    alt=""
-                    crossOrigin="anonymous"
-                    style={{ width: 52, height: 52, objectFit: "contain" }}
-                  />
-                  <div>
+                  <LogoBadge src={prepared.logo} size={68} />
+
+                  <div style={{ textAlign: "left" }}>
                     <div
                       style={{
-                        color: "#fff",
-                        fontSize: 24,
-                        fontWeight: 900,
-                        lineHeight: 1.5,
+                        color: "#ffffff",
+                        fontSize: 36,
+                        fontWeight: 800,
+                        lineHeight: 1.45,
                       }}
                     >
                       জাগ্রত বার্তা
                     </div>
                     <div
-                      style={{ color: C.gold, fontSize: 11, lineHeight: 1.6 }}
+                      style={{
+                        color: C.goldLight,
+                        fontSize: 11.5,
+                        lineHeight: 1.7,
+                      }}
                     >
                       কারও তাঁবেদারি নয়, সত্যের প্রতি দায়বদ্ধ।
                     </div>
                   </div>
                 </div>
 
+                {/* weekday + time pill */}
                 <div
                   style={{
-                    textAlign: "right",
-                    color: "#cbd5e1",
-                    fontSize: 11,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 10,
+                    marginTop: 16,
+                    padding: "5px 16px",
+                    borderRadius: 999,
+                    background: "rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.22)",
+                    color: "#ffffff",
+                    fontSize: 12,
+                    fontWeight: 700,
                     lineHeight: 1.7,
-                    flexShrink: 0,
                   }}
                 >
-                  <div
-                    style={{ color: "#fff", fontWeight: 700, fontSize: 13 }}
-                  >
-                    {dates.weekday}
-                  </div>
-                  {dates.time}
+                  <Dot color={C.red} size={7} />
+                  <span>{dates.weekday}</span>
+                  <span style={{ color: C.gold }}>|</span>
+                  <span>{dates.time}</span>
                 </div>
-              </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 6,
-                  marginTop: 14,
-                }}
-              >
-                {[
-                  { text: dates.gregorian, bg: C.red },
-                  { text: dates.bangla, bg: "#16a34a" },
-                  { text: dates.hijri, bg: "#2563eb" },
-                ].map((chip) => (
-                  <span
-                    key={chip.text}
-                    style={{
-                      background: chip.bg,
-                      color: "#fff",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      padding: "4px 10px",
-                      borderRadius: 999,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {chip.text}
-                  </span>
-                ))}
+                {/* triple calendar */}
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: 14,
+                    borderRadius: 14,
+                    overflow: "hidden",
+                    background: "rgba(255,255,255,0.07)",
+                    border: "1px solid rgba(255,255,255,0.16)",
+                  }}
+                >
+                  {[
+                    { label: "ইংরেজি", value: dates.gregorian, color: C.red },
+                    { label: "বঙ্গাব্দ", value: dates.bangla, color: "#22c55e" },
+                    { label: "হিজরি", value: dates.hijri, color: "#3b82f6" },
+                  ].map((item, index) => (
+                    <div
+                      key={item.label}
+                      style={{
+                        flex: 1,
+                        padding: "9px 4px 8px",
+                        borderBottom: `3px solid ${item.color}`,
+                        borderLeft:
+                          index > 0
+                            ? "1px solid rgba(255,255,255,0.14)"
+                            : "none",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: C.goldLight,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {item.label}
+                      </div>
+                      <div
+                        style={{
+                          color: "#ffffff",
+                          fontSize: 11.5,
+                          fontWeight: 700,
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {item.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </header>
 
-            {/* HERO: photo + headline (grows with the headline) */}
+            {/* gold rule */}
+            <div
+              style={{
+                height: 5,
+                background: `linear-gradient(to right, ${C.goldDeep}, ${C.gold}, ${C.goldLight}, ${C.gold}, ${C.goldDeep})`,
+              }}
+            />
+
+            {/* ================= HERO ================= */}
             <div
               style={{
                 position: "relative",
-                minHeight: 330,
+                minHeight: hasPhoto ? 400 : 250,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-end",
-                background: `linear-gradient(135deg, ${C.inkSoft}, ${C.ink})`,
+                overflow: "hidden",
+                background: `linear-gradient(135deg, ${C.inkSoft}, #3a1148)`,
               }}
             >
-              {newsPicture && (
+              {prepared.photo ? (
                 <img
-                  src={newsPicture}
+                  src={prepared.photo}
                   alt=""
-                  crossOrigin="anonymous"
                   style={{
                     position: "absolute",
                     top: 0,
@@ -459,11 +752,39 @@ export function PrintNewsDetailsClient({
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center",
+                    objectPosition: "center 30%",
                   }}
                 />
+              ) : (
+                <>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: -60,
+                      right: -40,
+                      width: 260,
+                      height: 260,
+                      background:
+                        "radial-gradient(circle, rgba(230,169,40,0.45), transparent 65%)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 6,
+                      left: 18,
+                      fontSize: 150,
+                      lineHeight: 1,
+                      color: "rgba(255,255,255,0.08)",
+                      fontFamily: "Georgia, serif",
+                    }}
+                  >
+                    “
+                  </div>
+                </>
               )}
 
+              {/* scrim */}
               <div
                 style={{
                   position: "absolute",
@@ -471,84 +792,135 @@ export function PrintNewsDetailsClient({
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: newsPicture
-                    ? "linear-gradient(to top, rgba(11,18,32,0.97) 0%, rgba(11,18,32,0.78) 45%, rgba(11,18,32,0.05) 100%)"
-                    : "transparent",
+                  background: hasPhoto
+                    ? "linear-gradient(to top, rgba(10,16,32,0.97) 0%, rgba(10,16,32,0.8) 42%, rgba(10,16,32,0.08) 100%)"
+                    : "linear-gradient(to top, rgba(10,16,32,0.35), rgba(10,16,32,0))",
                 }}
               />
 
-              <div style={{ position: "relative", padding: "90px 22px 22px" }}>
-                <span
+              <div
+                style={{
+                  position: "relative",
+                  padding: hasPhoto ? "110px 22px 24px" : "50px 22px 24px",
+                }}
+              >
+                <div
                   style={{
-                    display: "inline-block",
-                    background: C.red,
-                    color: "#fff",
-                    fontSize: 11,
-                    fontWeight: 700,
-                    padding: "4px 12px",
-                    borderRadius: 999,
-                    marginBottom: 12,
-                    lineHeight: 1.6,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    marginBottom: 14,
                   }}
                 >
-                  ● সর্বশেষ সংবাদ
-                </span>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 7,
+                      background: C.red,
+                      color: "#ffffff",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: "4px 12px",
+                      borderRadius: 999,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    <Dot color="#ffffff" size={6} />
+                    সর্বশেষ সংবাদ
+                  </span>
+
+                  <span
+                    style={{
+                      background: "rgba(255,255,255,0.18)",
+                      color: "#ffffff",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: "4px 12px",
+                      borderRadius: 999,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    পড়তে {toBanglaNumber(readMinutes)} মিনিট
+                  </span>
+                </div>
 
                 <h1
                   style={{
                     margin: 0,
-                    color: "#fff",
-                    fontSize: 27,
-                    fontWeight: 900,
+                    color: "#ffffff",
+                    fontSize: 28,
+                    fontWeight: 800,
                     lineHeight: 1.55,
                     overflowWrap: "anywhere",
                   }}
                 >
                   {newsHeading}
                 </h1>
+
+                <div
+                  style={{
+                    width: 64,
+                    height: 5,
+                    borderRadius: 999,
+                    marginTop: 14,
+                    background: `linear-gradient(to right, ${C.gold}, ${C.red})`,
+                  }}
+                />
               </div>
             </div>
 
-            {/* PICTURE CAPTION */}
-            {(newsPictureHeading || newsPictureCredit) && (
+            {/* ================= CAPTION ================= */}
+            {hasPhoto && (newsPictureHeading || newsPictureCredit) && (
               <div
                 style={{
                   padding: "9px 22px",
-                  background: "#f3efe4",
-                  borderLeft: `4px solid ${C.gold}`,
+                  background: "#f3eddc",
+                  borderLeft: `5px solid ${C.gold}`,
                   fontSize: 11,
                   lineHeight: 1.8,
-                  color: C.muted,
+                  color: "#5b5f6b",
                   fontStyle: "italic",
                 }}
               >
                 {newsPictureHeading}
                 {newsPictureCredit && (
-                  <span style={{ display: "block", fontWeight: 700 }}>
+                  <span
+                    style={{
+                      display: "block",
+                      fontWeight: 700,
+                      fontStyle: "normal",
+                      color: C.goldDeep,
+                    }}
+                  >
                     ছবি: {newsPictureCredit}
                   </span>
                 )}
               </div>
             )}
 
-            {/* BYLINE */}
+            {/* ================= BYLINE ================= */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: 12,
-                padding: "18px 22px 4px",
+                margin: "18px 22px 6px",
+                padding: "12px 14px",
+                borderRadius: 18,
+                background: "#ffffff",
+                border: "1px solid #eadfc4",
               }}
             >
               <div
                 style={{
-                  width: 42,
-                  height: 42,
+                  width: 44,
+                  height: 44,
                   borderRadius: 999,
                   background: `linear-gradient(135deg, ${C.gold}, ${C.red})`,
-                  color: "#fff",
+                  color: "#ffffff",
                   fontWeight: 800,
-                  fontSize: 19,
+                  fontSize: 20,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -559,36 +931,57 @@ export function PrintNewsDetailsClient({
               </div>
 
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 700, fontSize: 14, color: C.text }}>
-                  {reporter}
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    color: C.goldDeep,
+                    fontWeight: 700,
+                    lineHeight: 1.7,
+                  }}
+                >
+                  প্রতিবেদক
                 </div>
-                <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.7 }}>
-                  প্রকাশ: {published}
+                <div
+                  style={{
+                    fontWeight: 800,
+                    fontSize: 14.5,
+                    color: C.text,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {reporter}
                 </div>
               </div>
 
-              <div
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: C.goldDeep,
-                  background: "#fff3d1",
-                  padding: "4px 10px",
-                  borderRadius: 999,
-                  lineHeight: 1.6,
-                  flexShrink: 0,
-                }}
-              >
-                পড়তে {toBanglaNumber(readMinutes)} মিনিট
+              <div style={{ textAlign: "right", flexShrink: 0 }}>
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    color: C.muted,
+                    lineHeight: 1.7,
+                  }}
+                >
+                  প্রকাশিত
+                </div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: C.text,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {published}
+                </div>
               </div>
             </div>
 
-            {/* FULL ARTICLE */}
+            {/* ================= ARTICLE ================= */}
             <div style={{ padding: "14px 22px 6px" }}>
               <p
                 style={{
                   margin: 0,
-                  fontSize: 16,
+                  fontSize: 16.5,
                   lineHeight: 1.95,
                   color: C.text,
                   textAlign: "justify",
@@ -599,9 +992,9 @@ export function PrintNewsDetailsClient({
                 <span
                   style={{
                     float: "left",
-                    fontSize: 62,
-                    lineHeight: "58px",
-                    fontWeight: 900,
+                    fontSize: 64,
+                    lineHeight: "60px",
+                    fontWeight: 800,
                     color: C.red,
                     margin: "6px 10px 0 0",
                   }}
@@ -613,139 +1006,179 @@ export function PrintNewsDetailsClient({
               <div style={{ clear: "both" }} />
             </div>
 
-            {/* QUOTES */}
+            {/* ================= QUOTES ================= */}
             {quotes.length > 0 && (
-              <section style={{ padding: "14px 22px 6px" }}>
+              <section style={{ paddingTop: 16 }}>
+                <Ornament />
+
                 <div
                   style={{
+                    textAlign: "center",
                     fontSize: 16,
                     fontWeight: 800,
                     color: C.ink,
-                    marginBottom: 12,
+                    margin: "12px 0 14px",
                     lineHeight: 1.6,
                   }}
                 >
                   সংশ্লিষ্ট বক্তব্য
                 </div>
 
-                {quotes.map((quote, index) => (
-                  <blockquote
-                    key={index}
-                    style={{
-                      position: "relative",
-                      margin: "0 0 14px",
-                      padding: "16px 18px 12px 20px",
-                      background: "linear-gradient(135deg, #fff7e0, #fdecec)",
-                      borderRadius: 16,
-                      borderLeft: `6px solid ${C.gold}`,
-                    }}
-                  >
-                    <div
+                <div style={{ padding: "0 22px" }}>
+                  {quotes.map((quote, index) => (
+                    <blockquote
+                      key={index}
                       style={{
-                        position: "absolute",
-                        top: -4,
-                        right: 14,
-                        fontSize: 60,
-                        lineHeight: 1,
-                        color: C.gold,
-                        opacity: 0.45,
-                        fontFamily: "Georgia, serif",
+                        position: "relative",
+                        margin: "0 0 14px",
+                        padding: "18px 18px 12px 20px",
+                        background:
+                          "linear-gradient(135deg, #fff6dc, #fdebec)",
+                        borderRadius: 18,
+                        borderLeft: `6px solid ${C.gold}`,
+                        overflow: "hidden",
                       }}
                     >
-                      ”
-                    </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: -8,
+                          right: 14,
+                          fontSize: 64,
+                          lineHeight: 1,
+                          color: C.gold,
+                          opacity: 0.4,
+                          fontFamily: "Georgia, serif",
+                        }}
+                      >
+                        ”
+                      </div>
 
-                    <p
-                      style={{
-                        margin: 0,
-                        fontSize: 15,
-                        lineHeight: 1.85,
-                        fontStyle: "italic",
-                        color: C.text,
-                        overflowWrap: "anywhere",
-                      }}
-                    >
-                      “{quote.text}”
-                    </p>
+                      <p
+                        style={{
+                          position: "relative",
+                          margin: 0,
+                          fontSize: 15,
+                          lineHeight: 1.85,
+                          fontStyle: "italic",
+                          color: C.text,
+                          overflowWrap: "anywhere",
+                        }}
+                      >
+                        “{quote.text}”
+                      </p>
 
-                    <footer
-                      style={{
-                        marginTop: 8,
-                        textAlign: "right",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: C.goldDeep,
-                      }}
-                    >
-                      — {quote.speakerInfo}
-                    </footer>
-                  </blockquote>
-                ))}
+                      <footer
+                        style={{
+                          position: "relative",
+                          marginTop: 8,
+                          textAlign: "right",
+                          fontSize: 12,
+                          fontWeight: 700,
+                          color: C.goldDeep,
+                        }}
+                      >
+                        — {quote.speakerInfo}
+                      </footer>
+                    </blockquote>
+                  ))}
+                </div>
               </section>
             )}
 
-            {/* FOOTER */}
+            {/* ================= FOOTER ================= */}
             <footer
               style={{
-                marginTop: 18,
-                padding: "20px 22px",
-                background: `linear-gradient(120deg, ${C.ink}, ${C.inkSoft})`,
-                borderTop: `4px solid ${C.gold}`,
+                position: "relative",
+                marginTop: 22,
+                padding: "24px 22px 22px",
+                background: `linear-gradient(135deg, ${C.ink}, ${C.inkSoft})`,
                 textAlign: "center",
+                overflow: "hidden",
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 10,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 5,
+                  background: `linear-gradient(to right, ${C.goldDeep}, ${C.gold}, ${C.goldLight}, ${C.gold}, ${C.goldDeep})`,
                 }}
-              >
-                <img
-                  src="/logo.png"
-                  alt=""
-                  crossOrigin="anonymous"
-                  style={{ width: 30, height: 30, objectFit: "contain" }}
-                />
-                <span
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: -100,
+                  right: -60,
+                  width: 260,
+                  height: 260,
+                  background:
+                    "radial-gradient(circle, rgba(214,40,57,0.35), transparent 65%)",
+                }}
+              />
+
+              <div style={{ position: "relative" }}>
+                <div
                   style={{
-                    color: "#fff",
-                    fontWeight: 900,
-                    fontSize: 18,
-                    lineHeight: 1.6,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 10,
                   }}
                 >
-                  জাগ্রত বার্তা
-                </span>
-              </div>
+                  <LogoBadge src={prepared.logo} size={40} />
+                  <span
+                    style={{
+                      color: "#ffffff",
+                      fontWeight: 800,
+                      fontSize: 22,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    জাগ্রত বার্তা
+                  </span>
+                </div>
 
-              <div
-                style={{
-                  color: C.gold,
-                  fontSize: 12,
-                  marginTop: 4,
-                  lineHeight: 1.7,
-                }}
-              >
-                সত্যের প্রতি দায়বদ্ধ
-              </div>
+                <div
+                  style={{
+                    color: C.goldLight,
+                    fontSize: 12,
+                    marginTop: 2,
+                    lineHeight: 1.8,
+                  }}
+                >
+                  সত্যের প্রতি দায়বদ্ধ
+                </div>
 
-              <div
-                style={{
-                  display: "inline-block",
-                  marginTop: 12,
-                  background: C.gold,
-                  color: C.ink,
-                  fontSize: 12,
-                  fontWeight: 800,
-                  padding: "6px 16px",
-                  borderRadius: 999,
-                  lineHeight: 1.6,
-                  overflowWrap: "anywhere",
-                }}
-              >
-                পুরো খবর: {articleLink}
+                <div
+                  style={{
+                    color: "#cbd5e1",
+                    fontSize: 11.5,
+                    marginTop: 12,
+                    lineHeight: 1.8,
+                  }}
+                >
+                  বিস্তারিত ও আরও খবর পড়তে ভিজিট করুন
+                </div>
+
+                <div
+                  style={{
+                    display: "inline-block",
+                    marginTop: 8,
+                    background: `linear-gradient(to right, ${C.gold}, ${C.goldLight})`,
+                    color: C.ink,
+                    fontSize: 12.5,
+                    fontWeight: 800,
+                    padding: "7px 20px",
+                    borderRadius: 999,
+                    lineHeight: 1.6,
+                    overflowWrap: "anywhere",
+                  }}
+                >
+                  {articleLink}
+                </div>
               </div>
             </footer>
           </div>
