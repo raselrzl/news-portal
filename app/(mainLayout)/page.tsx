@@ -316,10 +316,7 @@ export default async function Home() {
           {lastFeaturedArticle && lastFeaturedArticle.length > 1 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 md:border mt-6 border-t-2">
               {lastFeaturedArticle.slice(1, 7).map((article) => (
-                <Link
-                  href={`/newsDetails/${article.id}`}
-                  key={article.id}
-                >
+                <Link href={`/newsDetails/${article.id}`} key={article.id}>
                   <div className="w-full mx-auto my-1">
                     <div className="w-full h-[110px] md:h-[150px] border rounded-xl overflow-hidden">
                       <img
