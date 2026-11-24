@@ -14,7 +14,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8 text-left">
           {/* Column 1: Editors */}
           <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-            <h2 className="font-bold text-xl md:text-2xl mb-2 text-orange-400">প্রকাশনা ও যোগাযোগ</h2>
+            <h2 className="font-bold text-xl md:text-2xl mb-2 text-orange-400">
+              প্রকাশনা ও যোগাযোগ
+            </h2>
             <h3 className="font-semibold mb-2">
               সম্পাদক এবং প্রকাশকমণ্ডলী <br />
               মো: মোশাররফ হোসেন <br />
@@ -22,14 +24,20 @@ export default function Footer() {
               মো: শাহাব উদ্দিন
             </h3>
             <p className="text-sm mb-2">
-              <a href="mailto:sompadok@jagrotobarta.com" className="hover:underline text-orange-300">
+              <a
+                href="mailto:sompadok@jagrotobarta.com"
+                className="hover:underline text-orange-300"
+              >
                 sompadok@jagrotobarta.com
               </a>
             </p>
             <div className="text-sm space-y-1">
               <p>ঢাকা, বাংলাদেশ</p>
               <p>Managed By: Lisbon, Portugal / Stockholm, Sweden / Cyprus</p>
-              <a href="mailto:info@jagrotobarta.com" className="hover:underline text-orange-300">
+              <a
+                href="mailto:info@jagrotobarta.com"
+                className="hover:underline text-orange-300"
+              >
                 info@jagrotobarta.com
               </a>
             </div>
@@ -37,15 +45,23 @@ export default function Footer() {
 
           {/* Column 2: Ads & Logo */}
           <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col">
-            <h2 className="font-bold text-xl md:text-2xl text-orange-400 mb-2">বিজ্ঞাপন</h2>
+            <h2 className="font-bold text-xl md:text-2xl text-orange-400 mb-2">
+              বিজ্ঞাপন
+            </h2>
             <p className="mb-2">
               বিজ্ঞাপনের জন্য ইমেইল করুন{" "}
-              <a href="mailto:info@jagrotobarta.com" className="hover:underline text-orange-300">
+              <a
+                href="mailto:info@jagrotobarta.com"
+                className="hover:underline text-orange-300"
+              >
                 info@jagrotobarta.com
               </a>
             </p>
             <p className="mb-2">অথবা সরাসরি ফর্ম পূরণ করুন:</p>
-            <a href="/about/advertise#advertiseForm" className="font-semibold hover:underline text-orange-300 mb-4">
+            <a
+              href="/about/advertise#advertiseForm"
+              className="font-semibold hover:underline text-orange-300 mb-4"
+            >
               ফর্ম
             </a>
             <Link href="/">
@@ -55,7 +71,9 @@ export default function Footer() {
 
           {/* Column 3: Social Media */}
           <div className=" p-6 rounded-2xl shadow-lg hover:shadow-xl transition flex flex-col items-center">
-            <p className="mb-2">সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য ফলো করুন:</p>
+            <p className="mb-2">
+              সর্বশেষ আপডেট এবং এক্সক্লুসিভ কন্টেন্টের জন্য ফলো করুন:
+            </p>
             <div className="flex gap-4 mt-2">
               <a
                 href="https://www.facebook.com/share/1DYukWKHKy/"
@@ -84,13 +102,16 @@ export default function Footer() {
         </div>
 
         {/* Country Links */}
-        <div className="mt-10">
+        {/*      <div className="mt-10">
           <CountryListLinks />
-        </div>
+        </div> */}
 
         {/* Bottom Footer */}
         <div className="mt-10 border-t border-gray-700 pt-4 text-center text-sm flex flex-col md:flex-row justify-center gap-3 items-center">
-          <p>&copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব সংরক্ষিত।</p>
+          <p>
+            &copy; {new Date().getFullYear()} জাগ্রত বার্তা। সর্বস্বত্ব
+            সংরক্ষিত।
+          </p>
           <a
             href="https://souveral.com/"
             target="_blank"

@@ -1,36 +1,59 @@
-import React from "react";
+import React, { cache, Suspense } from "react";
+import type { Metadata } from "next";
+import { Clock, Eye, User2 } from "lucide-react";
+import { notFound } from "next/navigation";
+
 import { prisma } from "@/app/utils/db";
-import { EmptyState } from "@/components/general/EmptyState";
+import { incrementArticleView } from "@/app/actions";
+import { trackRoute } from "@/app/utils/routeTracker";
+
+import PrintNews from "@/components/general/printNews";
 import {
   RecentNews,
   ShirShoNewsHeadings,
 } from "@/components/general/homepageArticleList";
-import { Clock, List, Notebook, User2 } from "lucide-react";
-import { notFound } from "next/navigation";
-import PrintNews from "@/components/general/printNews";
-import { trackRoute } from "@/app/utils/routeTracker";
-import { BesicTwoAdvertise } from "@/components/allAdvertisement/BesicTwo";
-import type { Metadata } from "next";
+
 import { StandardTwo } from "@/components/allAdvertisement/StandardTwo";
 import { EnterPrizeTwo } from "@/components/allAdvertisement/EnterprizeTwo";
-import { incrementArticleView } from "@/app/actions";
+
 import NewUserTracker from "@/components/general/NewUserTracker";
 import PoolPopupComponent from "@/components/general/PoolPopupComponent";
 
-async function getNewsArticle(articleId: string) {
-  const newsArticle = await prisma.newsArticle.findUnique({
+type PageParams = Promise<{ articleId: string }>;
+
+type PageProps = {
+  params: PageParams;
+};
+
+/* -------------------------------------------------------
+   ARTICLE QUERY
+------------------------------------------------------- */
+
+const getNewsArticle = cache(async (articleId: string) => {
+  return prisma.newsArticle.findUnique({
     where: {
       id: articleId,
     },
     select: {
       id: true,
       createdAt: true,
-      isFeatured: true,
-      newsCategory: true,
       reporterPublicName: true,
       newsDetails: true,
       newsHeading: true,
       newsPicture: true,
+      newsResource: true,
+      newsPictureHeading: true,
+      newsPictureCredit: true,
+      newsLocation: true,
+
+      newsReporter: {
+        select: {
+          reporterName: true,
+        },
+      },
+
+      viewCount: true,
+
       quotes: {
         select: {
           id: true,
@@ -40,186 +63,272 @@ async function getNewsArticle(articleId: string) {
           articleId: true,
         },
       },
-      newsResource: true,
-      newsPictureHeading: true,
-      newsPictureCredit: true,
-      newsLocation: true,
-      newsReporter: true,
-      newsArticleStatus: true,
-      viewCount: true,
     },
   });
+});
 
-  if (!newsArticle) notFound();
+/* -------------------------------------------------------
+   SEO
+------------------------------------------------------- */
 
-  return newsArticle;
-}
-
-type PageParams = Promise<{ articleId: string }>;
-type PageProps = { params: PageParams };
-
-function toExcerpt(htmlOrText: string | null, max = 240) {
-  const src = htmlOrText ?? "";
-  const text = src
+function toExcerpt(text: string | null, max = 240) {
+  const cleanText = (text ?? "")
     .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
     .replace(/\s+/g, " ")
     .trim();
-  return text.length <= max
-    ? text
-    : text.slice(0, max).replace(/[,.;:!?]?\s+\S*$/, "") + "…";
+
+  if (cleanText.length <= max) return cleanText;
+
+  return cleanText.slice(0, max).replace(/[,.;:!?]?\s+\S*$/, "") + "…";
 }
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { articleId } = await params; // ✅ await params
-  const article = await getNewsArticle(articleId); // your existing fetch
+  const { articleId } = await params;
+  const article = await getNewsArticle(articleId);
+
+  if (!article) {
+    return {
+      title: "খবর পাওয়া যায়নি",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
 
   const title = article.newsHeading ?? "খবর";
-  const description = toExcerpt("বিস্তারিত জানতে লিঙ্কে ক্লিক করুন...");
 
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jagrotobarta.com";
-  const pic = article.newsPicture ?? "/n2.png";
-  const ogImage = pic.startsWith("http") ? pic : `${base}${pic}`;
+  const description =
+    toExcerpt(article.newsDetails) || "জাগ্রত বার্তার সর্বশেষ সংবাদ পড়ুন।";
+
+  const base = (
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jagrotobarta.com"
+  ).replace(/\/$/, "");
+
+  const picture = article.newsPicture || "/n2.png";
+
+  const ogImage = /^https?:\/\//i.test(picture)
+    ? picture
+    : `${base}${picture.startsWith("/") ? "" : "/"}${picture}`;
+
+  const canonical = `/newsDetails/${article.id}`;
 
   return {
     title,
     description,
-    // with metadataBase set in root layout, a relative path is fine:
-    alternates: { canonical: `/newsDetails/${article.id}` },
+
+    alternates: {
+      canonical,
+    },
+
     openGraph: {
       type: "article",
-      url: `/newsDetails/${article.id}`,
+      url: canonical,
       title,
       description,
       siteName: "জাগ্রত বার্তা",
-      images: [{ url: ogImage, alt: title }],
+      publishedTime: article.createdAt.toISOString(),
+      images: [
+        {
+          url: ogImage,
+          alt: title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
 
-type Params = Promise<{ articleId: string }>;
+/* -------------------------------------------------------
+   BACKGROUND TRACKING
+------------------------------------------------------- */
 
-export default async function NewsDetailsPage({ params }: { params: Params }) {
+async function PageBackgroundTasks({ articleId }: { articleId: string }) {
+  await Promise.allSettled([
+    trackRoute("NewsDetailsPage"),
+    incrementArticleView(articleId),
+  ]);
+
+  return null;
+}
+
+/* -------------------------------------------------------
+   SIDEBARS
+------------------------------------------------------- */
+
+function LeftSidebar() {
+  return (
+    <div className="hidden md:block mt-20">
+      <ShirShoNewsHeadings />
+    </div>
+  );
+}
+
+function RightSidebar() {
+  return (
+    <div className="flex flex-col items-center mx-auto">
+      <div className="mt-10 w-full">
+        <RecentNews />
+      </div>
+
+      <div className="block md:hidden mt-8 border-t border-gray-300 p-2 w-full">
+        <ShirShoNewsHeadings />
+      </div>
+
+      <EnterPrizeTwo />
+    </div>
+  );
+}
+
+/* -------------------------------------------------------
+   MAIN PAGE
+------------------------------------------------------- */
+
+export default async function NewsDetailsPage({ params }: PageProps) {
   const { articleId } = await params;
 
-  // Track route
-  await trackRoute("NewsDetailsPage");
-
-  // Increment view count BEFORE fetching
-  await incrementArticleView(articleId);
-
-  // Fetch updated article data
   const data = await getNewsArticle(articleId);
 
   if (!data) {
-    return (
-      <EmptyState
-        title="উফ! এখনো কিছু দেখানোর মতো নেই।"
-        description="এখনো কিছুই যুক্ত হয়নি। চোখ রাখুন!"
-        buttonText="প্রথম পৃষ্ঠায় যেতে ক্লিক করুন"
-        href="/"
-      />
-    );
+    notFound();
   }
 
-  // Format the createdAt date before passing it to the UI
-  const formattedCreatedAt = data.createdAt
-    ? new Date(data.createdAt).toLocaleDateString("bn-BD", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "Date is not available";
+  const formattedCreatedAt = new Intl.DateTimeFormat("bn-BD", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(data.createdAt);
+
+  const reporterName = data.reporterPublicName || "জাগ্রত বার্তা প্রতিবেদক";
 
   return (
-    <div className="grid grid-cols-5 gap-4 my-10">
-      {/* Left Sidebar */}
-      <div className="col-span-5 md:col-span-1">
-        {/*   <BesicTwoAdvertise /> */}
+    <>
+      {/* BACKGROUND TRACKING */}
+      <Suspense fallback={null}>
+        <PageBackgroundTasks articleId={articleId} />
+      </Suspense>
 
-        <div className="hidden md:block mt-30">
-          <ShirShoNewsHeadings />
-        </div>
-      </div>
+      <div className="bg-white text-gray-950 min-h-screen">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-5 max-w-[1500px] mx-auto px-2 md:px-4 py-5 md:py-8">
+          {/* LEFT SIDEBAR */}
+          <aside className="hidden md:block md:col-span-1">
+            <Suspense fallback={null}>
+              <LeftSidebar />
+            </Suspense>
+          </aside>
 
-      {/* Main Content */}
-      <div className="col-span-5 md:col-span-3 px-3">
-        {/* Article Meta Info */}
-        <div className="flex flex-col font-bold mb-1 text-xl">
-          <div className="flex flex-row pl-2 items-center">
-            <User2 className="size-5 mr-1" />
-            <p>{data.reporterPublicName || "জাগ্রত বার্তা প্রতিবেদক"}</p>
-          </div>
-          <div className="flex flex-row  pl-2 items-center">
-            <Clock className="size-5 mr-1" />
-            <p className="font-bold">{formattedCreatedAt}</p>
-          </div>
-        </div>
+          {/* MAIN NEWSPAPER COLUMN */}
+          <main className="col-span-1 md:col-span-3 min-w-0">
+            {/* NEWSPAPER ARTICLE PAPER */}
+            <article className="bg-white">
+              {/* TOP EDITORIAL RULE */}
+              <div className="border-t-[3px] border-black mb-4" />
 
-        {/* News Content using PrintNews component */}
-        <PrintNews
-          id={data.id}
-          newsDetails={data.newsDetails}
-          newsResource={data.newsResource}
-          reporterPublicName={data.reporterPublicName}
-          newsPicture={data.newsPicture}
-          newsLocation={data.newsLocation}
-          newsPictureHeading={data.newsPictureHeading}
-          newsPictureCredit={data.newsPictureCredit}
-          newsHeading={data.newsHeading}
-          createdAt={data.createdAt} // <--- Pass createdAt here
-          quotes={data.quotes ?? []}
-          newsReporter={
-            data.newsReporter?.reporterName ?? "জাগ্রত বার্তা প্রতিবেদক"
-          }
-        />
+              {/* PUBLICATION HEADER */}
+              <div className="flex items-center justify-between gap-2 pb-3 mb-4 text-[11px] md:text-xs text-gray-600">
+                <span className="font-semibold tracking-wide">
+                  জাগ্রত বার্তা
+                </span>
 
-        {/* View Counter */}
-        <p className="text-sm text-gray-600 mb-3">
-          👁‍🗨{data.viewCount ?? 0} বার পড়া হয়েছে
-        </p>
+                <span className="text-right">
+                  প্রকাশিত: {formattedCreatedAt}
+                </span>
+              </div>
 
-        {/* Bottom Banner */}
-        <div className=" w-full mb-6">
-          <StandardTwo />
-          <div>
-            {/* Quotes Section */}
-            {data.quotes && data.quotes.length > 0 && (
-              <div className="mt-6 px-4">
-                <div className="space-y-4">
-                  {data.quotes.map((quote, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col border-l-4 border-primary pl-4 bg-accent-foreground/5 p-4 rounded-3xl min-h-[100px] text-justify"
-                    >
-                      <p className="italic mb-6">"{quote.text}"</p>
-                      <p className="text-right bottom-2 right-4 text-sm text-accent-foreground/60">
-                        — {quote.speakerInfo}
-                      </p>
-                    </div>
-                  ))}
+              {/* MAIN NEWS CONTENT */}
+              <div className="newsprint-content">
+                <PrintNews
+                  id={data.id}
+                  newsDetails={data.newsDetails}
+                  newsResource={data.newsResource}
+                  reporterPublicName={data.reporterPublicName}
+                  newsPicture={data.newsPicture}
+                  newsLocation={data.newsLocation}
+                  newsPictureHeading={data.newsPictureHeading}
+                  newsPictureCredit={data.newsPictureCredit}
+                  newsHeading={data.newsHeading}
+                  createdAt={data.createdAt}
+                  quotes={data.quotes ?? []}
+                  newsReporter={
+                    data.newsReporter?.reporterName ?? "জাগ্রত বার্তা প্রতিবেদক"
+                  }
+                />
+              </div>
+
+              {/* REPORTER SIGNATURE BELOW ARTICLE */}
+              <div className="mt-5 mb-5 border-gray-300 pt-3 flex justify-end">
+                <div className="text-right">
+                  <p className="text-sm md:text-base font-bold text-gray-900">
+                    {reporterName} :
+                  </p>
+
+                  <p className="text-xs text-gray-500 mt-1">জাগ্রত বার্তা</p>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-        <NewUserTracker />
-         <PoolPopupComponent />
-      </div>
 
-      {/* Right Sidebar */}
-      <div className="col-span-5 md:col-span-1">
-        <div className="flex flex-col items-center rounded-2xl mx-auto">
-          <div className="mt-16">
-            <RecentNews />
-          </div>
-          <div className="block md:hidden mt-10 border-t p-2">
-            <ShirShoNewsHeadings />
-          </div>
-          <EnterPrizeTwo />
+              {/* ARTICLE VIEWS */}
+              <div className="flex items-center gap-2 py-2 mb-5 text-xs text-gray-500">
+                <Eye className="size-4" />
+                <span>{data.viewCount ?? 0} বার পড়া হয়েছে</span>
+              </div>
+
+              {/* ADVERTISEMENT */}
+              <div className="w-full mb-6">
+                <StandardTwo />
+              </div>
+
+              {/* QUOTES */}
+              {data.quotes.length > 0 && (
+                <section className="my-6 border-t border-gray-300 pt-5">
+                  <h2 className="text-base font-bold mb-4 border-b border-gray-300 pb-2">
+                    বিশেষ বক্তব্য
+                  </h2>
+
+                  <div className="space-y-4">
+                    {data.quotes.map((quote) => (
+                      <blockquote
+                        key={quote.id}
+                        className="border-l-[3px] border-gray-700 pl-4 py-2"
+                      >
+                        <p className="text-sm md:text-base italic leading-8 text-gray-800 text-justify">
+                          “{quote.text}”
+                        </p>
+
+                        <p className="text-right text-sm font-semibold text-gray-600 mt-3">
+                          — {quote.speakerInfo}
+                        </p>
+                      </blockquote>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </article>
+
+            {/* USER TRACKING */}
+            <NewUserTracker />
+
+            {/* POLL */}
+            {/*    <PoolPopupComponent /> */}
+          </main>
+
+          {/* RIGHT SIDEBAR */}
+          <aside className="col-span-1 md:col-span-1">
+            <Suspense fallback={null}>
+              <RightSidebar />
+            </Suspense>
+          </aside>
         </div>
       </div>
-    </div>
+    </>
   );
 }
