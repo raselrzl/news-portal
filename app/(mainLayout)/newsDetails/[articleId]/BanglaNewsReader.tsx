@@ -1,12 +1,15 @@
+
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Play,
   Pause,
   Square,
   Volume2,
   AlertCircle,
+  RotateCcw,
+  CheckCircle2,
 } from "lucide-react";
 
 type BanglaNewsReaderProps = {
@@ -14,7 +17,16 @@ type BanglaNewsReaderProps = {
   details?: string | null;
 };
 
-type ReaderStatus = "idle" | "playing" | "paused" | "blocked" | "finished";
+type ReaderStatus =
+  | "idle"
+  | "playing"
+  | "paused"
+  | "blocked"
+  | "finished"
+  | "error";
+
+const CHUNK_LIMIT = 180;
+const NEXT_CHUNK_DELAY = 150;
 
 function decodeHtmlEntities(value: string): string {
   if (typeof document === "undefined") return value;
@@ -24,143 +36,293 @@ function decodeHtmlEntities(value: string): string {
   return textarea.value;
 }
 
-/**
- * Extract readable text from plain text, HTML, or serialized rich-text JSON.
- * Traverses all nested JSON values so editor-specific document structures
- * are not dependent on a particular "content" property.
- */
-function extractReadableText(value?: string | null): string {
-  if (!value) return "";
+function normalizeText(value: string): string {
+  return value
+    .replace(/\u00a0/g, " ")
+    .replace(/\u200b/g, "")
+    .replace(/[\t\r]+/g, " ")
+    .replace(/[ ]{2,}/g, " ")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/[ \t]+([।!?.,;:])/g, "$1")
+    .trim();
+}
 
-  const source = value.trim();
+/**
+ * Extract readable content from plain text, HTML and rich-text JSON.
+ * Ignores editor metadata and preserves the complete article content.
+ */
+function extractReadableText(input?: string | null): string {
+  if (!input) return "";
+
+  const source = input.trim();
   if (!source) return "";
 
-  // First try serialized editor JSON.
+  // Handle rich-text JSON.
   try {
     const parsed: unknown = JSON.parse(source);
 
+    const ignoredKeys = new Set([
+      "attrs",
+      "attributes",
+      "marks",
+      "mark",
+      "style",
+      "styles",
+      "id",
+      "type",
+      "level",
+      "align",
+      "textAlign",
+      "href",
+      "url",
+      "src",
+      "target",
+      "rel",
+      "className",
+      "class",
+    ]);
+
+    const blockKeys = new Set([
+      "content",
+      "children",
+      "blocks",
+      "paragraphs",
+      "items",
+      "nodes",
+      "root",
+      "document",
+      "data",
+    ]);
+
     const collect = (node: unknown): string => {
       if (node == null || typeof node === "boolean") return "";
+
       if (typeof node === "string") return node;
       if (typeof node === "number") return String(node);
 
       if (Array.isArray(node)) {
-        return node.map(collect).filter(Boolean).join(" ");
+        return node.map(collect).filter(Boolean).join("\n");
       }
 
-      if (typeof node === "object") {
-        const record = node as Record<string, unknown>;
+      if (typeof node !== "object") return "";
 
-        // Rich-text nodes commonly store their actual text here.
-        if (typeof record.text === "string") {
-          return record.text;
-        }
+      const record = node as Record<string, unknown>;
 
-        // Only traverse likely document-content keys. This avoids reading
-        // editor metadata, marks, IDs, URLs, and formatting attributes.
-        const preferredKeys = [
-          "content",
-          "children",
-          "blocks",
-          "paragraphs",
-          "items",
-          "nodes",
-        ];
-
-        const values = preferredKeys
-          .filter((key) => key in record)
-          .map((key) => collect(record[key]))
-          .filter(Boolean);
-
-        if (values.length) return values.join(" ");
-
-        // Handle simple JSON structures that use other nested keys.
-        return Object.values(record)
-          .map(collect)
-          .filter(Boolean)
-          .join(" ");
+      if (typeof record.text === "string") {
+        return record.text;
       }
 
-      return "";
+      const keys = Object.keys(record);
+
+      const structural = keys.filter((key) =>
+        blockKeys.has(key),
+      );
+
+      const selected = structural.length
+        ? structural
+        : keys.filter((key) => !ignoredKeys.has(key));
+
+      return selected
+        .map((key) => collect(record[key]))
+        .filter(Boolean)
+        .join("\n");
     };
 
-    const jsonText = collect(parsed);
-    if (jsonText.trim()) return normalizeText(jsonText);
+    const result = normalizeText(collect(parsed));
+
+    if (result) return result;
   } catch {
-    // Not JSON; continue with HTML/plain text.
+    // Not JSON. Continue with HTML/plain-text extraction.
   }
 
-  // Convert HTML to visible text. DOMParser handles nested markup and entities.
-  if (typeof window !== "undefined") {
-    const parsedHtml = new DOMParser().parseFromString(source, "text/html");
+  // Handle HTML and preserve paragraph boundaries.
+  if (
+    typeof window !== "undefined" &&
+    /<\/?[a-z][\s\S]*>/i.test(source)
+  ) {
+    const parsed = new DOMParser().parseFromString(
+      source,
+      "text/html",
+    );
 
-    parsedHtml
-      .querySelectorAll("script, style, noscript, iframe, svg")
+    parsed
+      .querySelectorAll(
+        "script, style, noscript, iframe, svg, button",
+      )
       .forEach((element) => element.remove());
 
-    const htmlText = parsedHtml.body.textContent || "";
-    if (htmlText.trim()) return normalizeText(htmlText);
+    const blockTags = new Set([
+      "ADDRESS",
+      "ARTICLE",
+      "BLOCKQUOTE",
+      "DIV",
+      "FIGCAPTION",
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "LI",
+      "OL",
+      "P",
+      "SECTION",
+      "TABLE",
+      "TR",
+      "UL",
+      "BR",
+    ]);
+
+    const walk = (node: Node): string => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent ?? "";
+      }
+
+      if (
+        node.nodeType !== Node.ELEMENT_NODE &&
+        node.nodeType !== Node.DOCUMENT_NODE
+      ) {
+        return "";
+      }
+
+      const element = node as Element;
+
+      const content = Array.from(node.childNodes)
+        .map(walk)
+        .join("");
+
+      return blockTags.has(element.tagName)
+        ? `\n${content}\n`
+        : content;
+    };
+
+    const result = normalizeText(walk(parsed.body));
+
+    if (result) return result;
   }
 
-  return normalizeText(decodeHtmlEntities(source.replace(/<[^>]*>/g, " ")));
+  return normalizeText(
+    decodeHtmlEntities(source.replace(/<[^>]*>/g, " ")),
+  );
 }
 
-function normalizeText(value: string): string {
-  return value
-    .replace(/\u00a0/g, " ")
-    .replace(/[\t\r\n]+/g, " ")
-    .replace(/\s{2,}/g, " ")
-    .replace(/\s+([।!?.,;:])/g, "$1")
-    .trim();
+/**
+ * Splits text without losing any words.
+ */
+function splitLongWord(word: string, limit: number): string[] {
+  const Segmenter = (
+    Intl as unknown as {
+      Segmenter?: new (
+        locale?: string,
+        options?: { granularity: "grapheme" },
+      ) => {
+        segment(input: string): Iterable<{ segment: string }>;
+      };
+    }
+  ).Segmenter;
+
+  const characters = Segmenter
+    ? Array.from(
+        new Segmenter("bn", {
+          granularity: "grapheme",
+        }).segment(word),
+        (part) => part.segment,
+      )
+    : Array.from(word);
+
+  const pieces: string[] = [];
+  let current = "";
+
+  for (const character of characters) {
+    if (
+      current.length + character.length > limit &&
+      current
+    ) {
+      pieces.push(current);
+      current = character;
+    } else {
+      current += character;
+    }
+  }
+
+  if (current) pieces.push(current);
+
+  return pieces;
 }
 
-function splitIntoChunks(text: string, maxLength = 220): string[] {
-  // Smaller chunks are more reliable across browsers and allow long articles
-  // to continue sentence-by-sentence.
-  const sentences = text.match(/[^।!?]+[।!?]?/g) ?? [text];
+/**
+ * Splits the full article into sequential speech chunks.
+ * Does not truncate the article.
+ */
+function splitIntoChunks(
+  text: string,
+  maxLength = CHUNK_LIMIT,
+): string[] {
+  const sentences = text
+    .split(/(?<=[।!?])\s*|\n+/u)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
   const chunks: string[] = [];
   let current = "";
 
-  for (const rawSentence of sentences) {
-    const sentence = rawSentence.trim();
-    if (!sentence) continue;
-
-    if (sentence.length > maxLength) {
-      if (current) {
-        chunks.push(current);
-        current = "";
-      }
-
-      for (let index = 0; index < sentence.length; index += maxLength) {
-        chunks.push(sentence.slice(index, index + maxLength));
-      }
-      continue;
+  const pushCurrent = () => {
+    if (current.trim()) {
+      chunks.push(current.trim());
     }
 
-    const next = current ? `${current} ${sentence}` : sentence;
+    current = "";
+  };
 
-    if (next.length > maxLength && current) {
-      chunks.push(current);
-      current = sentence;
-    } else {
-      current = next;
+  for (const sentence of sentences) {
+    const words = sentence.split(/\s+/).filter(Boolean);
+
+    for (const originalWord of words) {
+      const pieces =
+        originalWord.length > maxLength
+          ? splitLongWord(originalWord, maxLength)
+          : [originalWord];
+
+      for (const word of pieces) {
+        const next = current
+          ? `${current} ${word}`
+          : word;
+
+        if (next.length > maxLength && current) {
+          pushCurrent();
+        }
+
+        current = current
+          ? `${current} ${word}`
+          : word;
+      }
     }
+
+    pushCurrent();
   }
 
-  if (current) chunks.push(current);
+  pushCurrent();
+
   return chunks;
 }
 
 function getBanglaVoice(): SpeechSynthesisVoice | undefined {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+  if (
+    typeof window === "undefined" ||
+    !("speechSynthesis" in window)
+  ) {
     return undefined;
   }
 
   const voices = window.speechSynthesis.getVoices();
 
   return (
-    voices.find((voice) => /^bn-BD$/i.test(voice.lang)) ||
-    voices.find((voice) => /^bn([-_])/i.test(voice.lang))
+    voices.find((voice) => /^bn[-_]BD$/i.test(voice.lang)) ||
+    voices.find((voice) => /^bn[-_]/i.test(voice.lang)) ||
+    voices.find((voice) =>
+      /bangla|bengali/i.test(voice.name),
+    )
   );
 }
 
@@ -173,33 +335,63 @@ export default function BanglaNewsReader({
   const [voiceAvailable, setVoiceAvailable] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [progress, setProgress] = useState({
+    current: 0,
+    total: 0,
+  });
+
   const chunksRef = useRef<string[]>([]);
   const currentChunkRef = useRef(0);
   const stoppedRef = useRef(true);
   const generationRef = useRef(0);
-  const startedRef = useRef(false);
 
-  const fullText = [
-    heading ? `শিরোনাম। ${extractReadableText(heading)}` : "",
-    details ? extractReadableText(details) : "",
-  ]
-    .filter(Boolean)
-    .join("। ");
+  // Browser setTimeout returns a number.
+  const timerRef = useRef<number | null>(null);
 
-  const stopSpeech = useCallback((nextStatus: ReaderStatus = "idle") => {
-    generationRef.current += 1;
-    stoppedRef.current = true;
+  const fullText = useMemo(() => {
+    const titleText = extractReadableText(heading);
+    const bodyText = extractReadableText(details);
 
-    if (
-      typeof window !== "undefined" &&
-      "speechSynthesis" in window
-    ) {
-      window.speechSynthesis.cancel();
+    return [
+      titleText ? `শিরোনাম। ${titleText}` : "",
+      bodyText,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+  }, [heading, details]);
+
+  const clearNextTimer = useCallback(() => {
+    if (timerRef.current !== null) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-
-    currentChunkRef.current = 0;
-    setStatus(nextStatus);
   }, []);
+
+  const stopSpeech = useCallback(
+    (nextStatus: ReaderStatus = "idle") => {
+      generationRef.current += 1;
+      stoppedRef.current = true;
+
+      clearNextTimer();
+
+      if (
+        typeof window !== "undefined" &&
+        "speechSynthesis" in window
+      ) {
+        window.speechSynthesis.cancel();
+      }
+
+      currentChunkRef.current = 0;
+
+      setProgress({
+        current: 0,
+        total: chunksRef.current.length,
+      });
+
+      setStatus(nextStatus);
+    },
+    [clearNextTimer],
+  );
 
   const speakChunk = useCallback(
     (generation: number) => {
@@ -210,31 +402,55 @@ export default function BanglaNewsReader({
         return;
       }
 
-      if (currentChunkRef.current >= chunksRef.current.length) {
+      // All chunks have been read.
+      if (
+        currentChunkRef.current >= chunksRef.current.length
+      ) {
         stoppedRef.current = true;
+
         setStatus("finished");
-        setMessage("সংবাদ পড়া শেষ হয়েছে।");
+
+        setProgress({
+          current: chunksRef.current.length,
+          total: chunksRef.current.length,
+        });
+
+        setMessage("সম্পূর্ণ সংবাদ পড়া শেষ হয়েছে।");
+
         return;
       }
 
-      const chunk = chunksRef.current[currentChunkRef.current];
-      const utterance = new SpeechSynthesisUtterance(chunk);
+      const text = chunksRef.current[currentChunkRef.current];
 
-      // Ask the browser for a Bangla voice. The actual voice depends on
-      // which Bangla voices are installed on the visitor's device.
+      if (!text) {
+        currentChunkRef.current += 1;
+        speakChunk(generation);
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
       utterance.lang = "bn-BD";
       utterance.rate = 0.88;
       utterance.pitch = 1;
       utterance.volume = 1;
 
       const voice = getBanglaVoice();
-      if (voice) utterance.voice = voice;
+
+      if (voice) {
+        utterance.voice = voice;
+      }
 
       utterance.onstart = () => {
-        if (generation === generationRef.current) {
-          setStatus("playing");
-          setMessage("");
-        }
+        if (generation !== generationRef.current) return;
+
+        setStatus("playing");
+        setMessage("");
+
+        setProgress({
+          current: currentChunkRef.current + 1,
+          total: chunksRef.current.length,
+        });
       };
 
       utterance.onend = () => {
@@ -247,80 +463,128 @@ export default function BanglaNewsReader({
 
         currentChunkRef.current += 1;
 
-        // A short gap helps some browsers reliably queue long articles.
-        window.setTimeout(() => speakChunk(generation), 80);
+        setProgress({
+          current: currentChunkRef.current,
+          total: chunksRef.current.length,
+        });
+
+        clearNextTimer();
+
+        timerRef.current = window.setTimeout(() => {
+          timerRef.current = null;
+          speakChunk(generation);
+        }, NEXT_CHUNK_DELAY);
       };
 
       utterance.onerror = (event) => {
         if (generation !== generationRef.current) return;
 
-       if (event.error === "not-allowed") {
-  stoppedRef.current = true;
-  setStatus("blocked");
-  setMessage(
-    "ব্রাউজার স্বয়ংক্রিয় অডিও চালানো বন্ধ করেছে। শুনুন বাটনে চাপ দিয়ে শুরু করুন।"
-  );
-  return;
-}
-
-        if (event.error === "canceled" || event.error === "interrupted") {
+        if (
+          event.error === "canceled" ||
+          event.error === "interrupted"
+        ) {
           return;
         }
 
         stoppedRef.current = true;
-        setStatus("idle");
+        clearNextTimer();
+
+        if (event.error === "not-allowed") {
+          setStatus("blocked");
+
+          setMessage(
+            "ব্রাউজার অডিও চালানোর অনুমতি দেয়নি। আবার শুনুন বাটনে চাপ দিন।",
+          );
+
+          return;
+        }
+
+        setStatus("error");
+
         setMessage(
-          "অডিও চালানো যায়নি। আবার শুনুন বাটনে চাপ দিন।"
+          `অডিও ${currentChunkRef.current + 1} নম্বর অংশে থেমে গেছে। আবার শুনুন বাটনে চাপ দিন।`,
+        );
+
+        console.error(
+          "Bangla speech synthesis error:",
+          event.error,
         );
       };
 
       window.speechSynthesis.speak(utterance);
     },
-    []
+    [clearNextTimer],
   );
 
   const startReading = useCallback(
     (fromBeginning = true) => {
-      if (!supported || !("speechSynthesis" in window)) {
-        setMessage("আপনার ব্রাউজারে টেক্সট-টু-স্পিচ সুবিধা নেই।");
+      if (
+        typeof window === "undefined" ||
+        !("speechSynthesis" in window)
+      ) {
+        setSupported(false);
+        setMessage(
+          "আপনার ব্রাউজারে টেক্সট-টু-স্পিচ সুবিধা নেই।",
+        );
         return;
       }
 
       if (!fullText.trim()) {
-        setMessage("এই সংবাদে পড়ার মতো কোনো লেখা পাওয়া যায়নি।");
+        setMessage(
+          "এই সংবাদে পড়ার মতো কোনো লেখা পাওয়া যায়নি।",
+        );
         return;
       }
 
+      clearNextTimer();
+
+      // Cancel previous playback and invalidate old callbacks.
+      generationRef.current += 1;
+      stoppedRef.current = true;
+
       window.speechSynthesis.cancel();
 
-      if (fromBeginning) {
+      if (fromBeginning || chunksRef.current.length === 0) {
         chunksRef.current = splitIntoChunks(fullText);
         currentChunkRef.current = 0;
       }
 
       if (!chunksRef.current.length) {
-        setMessage("সংবাদের লেখা থেকে অডিও তৈরি করা যায়নি।");
+        setStatus("error");
+        setMessage(
+          "সংবাদের লেখা থেকে অডিও তৈরি করা যায়নি।",
+        );
         return;
       }
 
       stoppedRef.current = false;
+
       const generation = ++generationRef.current;
+
       setStatus("playing");
       setMessage("");
 
-      // Some browsers need a short delay after cancel() before speak().
-      window.setTimeout(() => speakChunk(generation), 120);
+      setProgress({
+        current: currentChunkRef.current + 1,
+        total: chunksRef.current.length,
+      });
+
+      timerRef.current = window.setTimeout(() => {
+        timerRef.current = null;
+        speakChunk(generation);
+      }, 250);
     },
-    [fullText, speakChunk, supported]
+    [clearNextTimer, fullText, speakChunk],
   );
 
-  const pauseReading = () => {
+  const pauseReading = useCallback(() => {
     if (!("speechSynthesis" in window)) return;
+
     window.speechSynthesis.pause();
     setStatus("paused");
-  };
+  }, []);
 
-  const resumeReading = () => {
+  const resumeReading = useCallback(() => {
     if (!("speechSynthesis" in window)) return;
 
     if (window.speechSynthesis.paused) {
@@ -329,33 +593,51 @@ export default function BanglaNewsReader({
       return;
     }
 
-    // If the browser has no queued utterance, continue from current chunk.
+    // Continue from the current chunk if the browser lost its queue.
     stoppedRef.current = false;
-    const generation = ++generationRef.current;
-    setStatus("playing");
-    speakChunk(generation);
-  };
 
-  const stopReading = () => {
+    const generation = ++generationRef.current;
+
+    setStatus("playing");
+    setMessage("");
+
+    speakChunk(generation);
+  }, [speakChunk]);
+
+  const stopReading = useCallback(() => {
     stopSpeech("idle");
     setMessage("অডিও বন্ধ করা হয়েছে।");
-  };
+  }, [stopSpeech]);
 
-  // Attempt autoplay once when the article is ready.
-  // Browsers may block audible autoplay until the visitor interacts.
+  // Prepare the article when the component mounts.
+  // Do not autoplay: browsers commonly block speech without a user gesture.
   useEffect(() => {
-    if (!supported || !fullText.trim() || startedRef.current) return;
+    chunksRef.current = splitIntoChunks(fullText);
 
-    startedRef.current = true;
+    setProgress({
+      current: 0,
+      total: chunksRef.current.length,
+    });
 
-    const timer = window.setTimeout(() => {
-      startReading(true);
-    }, 900);
+    setStatus("idle");
+    setMessage("");
 
-    return () => window.clearTimeout(timer);
-  }, [fullText, startReading, supported]);
+    return () => {
+      generationRef.current += 1;
+      stoppedRef.current = true;
 
-  // Load the available system voices.
+      if (timerRef.current !== null) {
+        window.clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [fullText]);
+
+  // Detect available browser voices.
   useEffect(() => {
     if (!("speechSynthesis" in window)) {
       setSupported(false);
@@ -367,14 +649,17 @@ export default function BanglaNewsReader({
     };
 
     updateVoices();
-    window.speechSynthesis.addEventListener("voiceschanged", updateVoices);
+
+    window.speechSynthesis.addEventListener(
+      "voiceschanged",
+      updateVoices,
+    );
 
     return () => {
       window.speechSynthesis.removeEventListener(
         "voiceschanged",
-        updateVoices
+        updateVoices,
       );
-      window.speechSynthesis.cancel();
     };
   }, []);
 
@@ -385,6 +670,23 @@ export default function BanglaNewsReader({
       </div>
     );
   }
+
+  const isActive =
+    status === "playing" || status === "paused";
+
+  const canStart =
+    status === "idle" ||
+    status === "blocked" ||
+    status === "finished" ||
+    status === "error";
+
+  const percentage =
+    progress.total > 0
+      ? Math.min(
+          100,
+          (progress.current / progress.total) * 100,
+        )
+      : 0;
 
   return (
     <section
@@ -399,30 +701,42 @@ export default function BanglaNewsReader({
             <p className="text-sm font-bold text-gray-900">
               বাংলা সংবাদ শুনুন
             </p>
-            <p className="text-xs text-gray-500">
+
+            <p
+              className="text-xs text-gray-500"
+              aria-live="polite"
+            >
               {status === "playing"
-                ? "সংবাদ পড়া হচ্ছে..."
+                ? `সংবাদ পড়া হচ্ছে — ${progress.current}/${progress.total} অংশ`
                 : status === "paused"
                   ? "সংবাদ সাময়িকভাবে বন্ধ আছে"
                   : status === "finished"
-                    ? "সংবাদ পড়া শেষ"
-                    : voiceAvailable
-                      ? "বাংলা ভয়েস পাওয়া গেছে"
-                      : "ডিভাইসের উপলভ্য ভয়েস ব্যবহার করা হবে"}
+                    ? "সম্পূর্ণ সংবাদ পড়া শেষ হয়েছে"
+                    : status === "error"
+                      ? "অডিও পড়তে সমস্যা হয়েছে"
+                      : voiceAvailable
+                        ? "বাংলা ভয়েস পাওয়া গেছে"
+                        : "ডিভাইসের উপলভ্য ভয়েস ব্যবহার করা হবে"}
             </p>
           </div>
         </div>
 
-        {(status === "idle" ||
-          status === "blocked" ||
-          status === "finished") && (
+        {canStart && (
           <button
             type="button"
             onClick={() => startReading(true)}
-            className="inline-flex items-center gap-2 bg-sky-800 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-900"
+            disabled={!fullText.trim()}
+            className="inline-flex items-center gap-2 bg-sky-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-900 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <Play className="size-4" />
-            আবার শুনুন
+            {status === "finished" || status === "error" ? (
+              <RotateCcw className="size-4" />
+            ) : (
+              <Play className="size-4" />
+            )}
+
+            {status === "finished" || status === "error"
+              ? "আবার শুনুন"
+              : "শুনুন"}
           </button>
         )}
 
@@ -430,7 +744,7 @@ export default function BanglaNewsReader({
           <button
             type="button"
             onClick={pauseReading}
-            className="inline-flex items-center gap-2 bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+            className="inline-flex items-center gap-2 bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-700"
           >
             <Pause className="size-4" />
             বিরতি
@@ -441,24 +755,57 @@ export default function BanglaNewsReader({
           <button
             type="button"
             onClick={resumeReading}
-            className="inline-flex items-center gap-2 bg-sky-800 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-900"
+            className="inline-flex items-center gap-2 bg-sky-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-900"
           >
             <Play className="size-4" />
             চালিয়ে যান
           </button>
         )}
 
-        {(status === "playing" || status === "paused") && (
+        {isActive && (
           <button
             type="button"
             onClick={stopReading}
-            className="inline-flex items-center gap-2 border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+            className="inline-flex items-center gap-2 border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
           >
             <Square className="size-4" />
             বন্ধ
           </button>
         )}
       </div>
+
+      {progress.total > 0 && (
+        <div className="mt-3">
+          <div
+            className="h-1.5 w-full overflow-hidden bg-gray-200"
+            role="progressbar"
+            aria-label="সংবাদ পড়ার অগ্রগতি"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(percentage)}
+          >
+            <div
+              className="h-full bg-sky-700 transition-all duration-300"
+              style={{ width: `${percentage}%` }}
+            />
+          </div>
+
+          <div className="mt-1 flex justify-between text-[11px] text-gray-500">
+            <span>
+              {progress.current} / {progress.total} অংশ
+            </span>
+
+            <span>{Math.round(percentage)}%</span>
+          </div>
+        </div>
+      )}
+
+      {status === "finished" && (
+        <p className="mt-3 flex items-center gap-2 text-xs font-medium text-green-700">
+          <CheckCircle2 className="size-4" />
+          সম্পূর্ণ সংবাদ শোনা শেষ হয়েছে।
+        </p>
+      )}
 
       {message && (
         <p

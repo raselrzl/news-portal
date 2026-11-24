@@ -248,7 +248,7 @@ export default async function NewsDetailsPage({ params }: PageProps) {
 
               {/* MAIN NEWS CONTENT */}
               <div className="newsprint-content">
-    {/*             <BanglaNewsReader
+           {/*      <BanglaNewsReader
                   heading={data.newsHeading}
                   details={data.newsDetails}
                 /> */}
