@@ -15,26 +15,58 @@ import Calendar from "date-bengali-revised";
 ------------------------------------------------------- */
 
 const bnMonths = [
-  "বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ",
-  "ভাদ্র", "আশ্বিন", "কার্তিক", "অগ্রহায়ণ",
-  "পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র",
+  "বৈশাখ",
+  "জ্যৈষ্ঠ",
+  "আষাঢ়",
+  "শ্রাবণ",
+  "ভাদ্র",
+  "আশ্বিন",
+  "কার্তিক",
+  "অগ্রহায়ণ",
+  "পৌষ",
+  "মাঘ",
+  "ফাল্গুন",
+  "চৈত্র",
 ];
 
 const hijriMonths = [
-  "মুহররম", "সফর", "রবিউল আউয়াল", "রবিউস সানি",
-  "জমাদিউল আউয়াল", "জমাদিউস সানি", "রজব", "শাবান",
-  "রমজান", "শাওয়াল", "জিলক্বদ", "জিলহজ",
+  "মুহররম",
+  "সফর",
+  "রবিউল আউয়াল",
+  "রবিউস সানি",
+  "জমাদিউল আউয়াল",
+  "জমাদিউস সানি",
+  "রজব",
+  "শাবান",
+  "রমজান",
+  "শাওয়াল",
+  "জিলক্বদ",
+  "জিলহজ",
 ];
 
 const gregMonthsBn = [
-  "জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল",
-  "মে", "জুন", "জুলাই", "আগস্ট",
-  "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর",
+  "জানুয়ারি",
+  "ফেব্রুয়ারি",
+  "মার্চ",
+  "এপ্রিল",
+  "মে",
+  "জুন",
+  "জুলাই",
+  "আগস্ট",
+  "সেপ্টেম্বর",
+  "অক্টোবর",
+  "নভেম্বর",
+  "ডিসেম্বর",
 ];
 
 const bnWeekdays = [
-  "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার",
-  "বৃহস্পতিবার", "শুক্রবার", "শনিবার",
+  "রবিবার",
+  "সোমবার",
+  "মঙ্গলবার",
+  "বুধবার",
+  "বৃহস্পতিবার",
+  "শুক্রবার",
+  "শনিবার",
 ];
 
 const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -57,7 +89,7 @@ function getDateInformation(): DateInformation {
   const { hy, hm, hd } = toHijri(
     now.getFullYear(),
     now.getMonth() + 1,
-    now.getDate()
+    now.getDate(),
   );
 
   const hours = now.getHours();
@@ -65,7 +97,7 @@ function getDateInformation(): DateInformation {
   return {
     weekday: bnWeekdays[now.getDay()],
     time: `${toBanglaNumber(hours % 12 || 12)}:${toBanglaNumber(
-      String(now.getMinutes()).padStart(2, "0")
+      String(now.getMinutes()).padStart(2, "0"),
     )} ${hours >= 12 ? "পিএম" : "এএম"}`,
     gregorian: `${toBanglaNumber(now.getDate())} ${
       gregMonthsBn[now.getMonth()]
@@ -73,9 +105,7 @@ function getDateInformation(): DateInformation {
     bangla: `${toBanglaNumber(bd.day - 1)} ${
       bnMonths[bd.month - 1]
     } ${toBanglaNumber(bd.year + 1)}`,
-    hijri: `${toBanglaNumber(hd)} ${
-      hijriMonths[hm - 1]
-    } ${toBanglaNumber(hy)}`,
+    hijri: `${toBanglaNumber(hd)} ${hijriMonths[hm - 1]} ${toBanglaNumber(hy)}`,
   };
 }
 
@@ -107,7 +137,7 @@ const publishedFormatter = new Intl.DateTimeFormat("bn-BD", {
 
 const canvasToBlob = (canvas: HTMLCanvasElement) =>
   new Promise<Blob | null>((resolve) =>
-    canvas.toBlob((blob) => resolve(blob), "image/png")
+    canvas.toBlob((blob) => resolve(blob), "image/png"),
   );
 
 /* -------------------------------------------------------
@@ -153,12 +183,15 @@ async function loadImageAsDataUrl(src: string): Promise<string | null> {
   const candidates = [src];
 
   try {
-    const isRemote = new URL(src, window.location.href).origin !== window.location.origin;
+    const isRemote =
+      new URL(src, window.location.href).origin !== window.location.origin;
 
     // Same-origin Next.js image proxy: works even when the host has no CORS headers
     // (the host must be listed in next.config images.remotePatterns).
     if (isRemote) {
-      candidates.push(`/_next/image?url=${encodeURIComponent(src)}&w=1080&q=85`);
+      candidates.push(
+        `/_next/image?url=${encodeURIComponent(src)}&w=1080&q=85`,
+      );
     }
   } catch {
     // ignore malformed URLs
@@ -189,7 +222,7 @@ const C = {
 };
 
 // One phone-width image. Exported at up to 2x => 1080px wide.
-const CARD_WIDTH = 540;
+const CARD_WIDTH = 570;
 const MAX_SCALE = 2;
 const MAX_CANVAS_DIMENSION = 16000;
 const MAX_CANVAS_AREA = 16_000_000;
@@ -249,7 +282,7 @@ function Ornament() {
         display: "flex",
         alignItems: "center",
         gap: 10,
-        padding: "0 22px",
+        padding: "0 18px",
       }}
     >
       <div
@@ -360,7 +393,7 @@ export function PrintNewsDetailsClient({
   const articleLink = `jagrotobarta.com${id ? `/newsDetails/${id}` : ""}`;
   const readMinutes = Math.max(
     1,
-    Math.ceil(fullText.split(/\s+/).filter(Boolean).length / 180)
+    Math.ceil(fullText.split(/\s+/).filter(Boolean).length / 180),
   );
 
   /* -------------------------------------------------------
@@ -411,13 +444,13 @@ export function PrintNewsDetailsClient({
           Array.from(element.querySelectorAll("img")).map((img) =>
             img.decode
               ? img.decode().catch(() => undefined)
-              : Promise.resolve(undefined)
-          )
+              : Promise.resolve(undefined),
+          ),
         );
 
         // Let the browser finish layout before measuring.
         await new Promise<void>((resolve) =>
-          requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
         );
 
         const height = Math.max(element.scrollHeight, 1);
@@ -428,8 +461,8 @@ export function PrintNewsDetailsClient({
           Math.min(
             MAX_SCALE,
             MAX_CANVAS_DIMENSION / height,
-            Math.sqrt(MAX_CANVAS_AREA / (CARD_WIDTH * height))
-          )
+            Math.sqrt(MAX_CANVAS_AREA / (CARD_WIDTH * height)),
+          ),
         );
 
         const canvas = await html2canvas(element, {
@@ -513,11 +546,7 @@ export function PrintNewsDetailsClient({
         {isLoading ? (
           <Loader2 className="size-5 animate-spin text-sky-700" />
         ) : (
-          <img
-            src="/printtt.png"
-            alt=""
-            className="size-full object-contain"
-          />
+          <img src="/printtt.png" alt="" className="size-full object-contain" />
         )}
       </Button>
 
@@ -535,9 +564,9 @@ export function PrintNewsDetailsClient({
             top: 0,
             left: "-10000px",
             width: CARD_WIDTH,
-            padding: 20,
+            padding: 3,
             boxSizing: "border-box",
-            background: `linear-gradient(160deg, ${C.ink} 0%, #26144d 55%, #4a1233 100%)`,
+            background: `linear-gradient(135deg, ${C.goldDeep} 0%, ${C.goldLight} 22%, #d62839 52%, #26144d 76%, ${C.gold} 100%)`,
             color: C.text,
             zIndex: -1,
             overflow: "hidden",
@@ -572,16 +601,16 @@ export function PrintNewsDetailsClient({
             style={{
               position: "relative",
               background: C.paper,
-              borderRadius: 28,
+              borderRadius: 0,
               overflow: "hidden",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
+              boxShadow: "none",
             }}
           >
             {/* ================= MASTHEAD ================= */}
             <header
               style={{
                 position: "relative",
-                padding: "26px 22px 20px",
+                padding: "1px 10px 2px",
                 background: `linear-gradient(135deg, ${C.ink} 0%, ${C.inkSoft} 100%)`,
                 textAlign: "center",
                 overflow: "hidden",
@@ -611,36 +640,51 @@ export function PrintNewsDetailsClient({
               />
 
               <div style={{ position: "relative" }}>
+                {/* LARGE PUBLICATION LOGO */}
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
+                    flexDirection: "column",
                     alignItems: "center",
-                    gap: 14,
+                    justifyContent: "center",
+                    gap: 0,
                   }}
                 >
-                  <LogoBadge src={prepared.logo} size={68} />
-
-                  <div style={{ textAlign: "left" }}>
+                  {prepared.logo ? (
+                    <img
+                      src={prepared.logo}
+                      alt="জাগ্রত বার্তা"
+                      style={{
+                        display: "block",
+                        width: 190,
+                        height: 86,
+                        maxWidth: "100%",
+                        objectFit: "contain",
+                        objectPosition: "center",
+                      }}
+                    />
+                  ) : (
                     <div
                       style={{
                         color: "#ffffff",
-                        fontSize: 36,
-                        fontWeight: 800,
-                        lineHeight: 1.45,
+                        fontSize: 48,
+                        fontWeight: 900,
+                        lineHeight: 1.2,
                       }}
                     >
                       জাগ্রত বার্তা
                     </div>
-                    <div
-                      style={{
-                        color: C.goldLight,
-                        fontSize: 11.5,
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      কারও তাঁবেদারি নয়, সত্যের প্রতি দায়বদ্ধ।
-                    </div>
+                  )}
+                  <div
+                    style={{
+                      color: C.goldLight,
+                      fontSize: 10,
+                      fontWeight: 600,
+                      lineHeight: 1.2,
+                      textAlign: "center",
+                    }}
+                  >
+                    কারও তাঁবেদারি নয়, সত্যের প্রতি দায়বদ্ধ।
                   </div>
                 </div>
 
@@ -650,15 +694,15 @@ export function PrintNewsDetailsClient({
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 10,
-                    marginTop: 16,
-                    padding: "5px 16px",
+                    marginTop: 0,
+                    padding: "0px 8px",
                     borderRadius: 999,
                     background: "rgba(255,255,255,0.1)",
                     border: "1px solid rgba(255,255,255,0.22)",
                     color: "#ffffff",
-                    fontSize: 12,
+                    fontSize: 10.5,
                     fontWeight: 700,
-                    lineHeight: 1.7,
+                    lineHeight: 1.45,
                   }}
                 >
                   <Dot color={C.red} size={7} />
@@ -671,8 +715,8 @@ export function PrintNewsDetailsClient({
                 <div
                   style={{
                     display: "flex",
-                    marginTop: 14,
-                    borderRadius: 14,
+                    marginTop: 0,
+                    borderRadius: 6,
                     overflow: "hidden",
                     background: "rgba(255,255,255,0.07)",
                     border: "1px solid rgba(255,255,255,0.16)",
@@ -680,15 +724,19 @@ export function PrintNewsDetailsClient({
                 >
                   {[
                     { label: "ইংরেজি", value: dates.gregorian, color: C.red },
-                    { label: "বঙ্গাব্দ", value: dates.bangla, color: "#22c55e" },
+                    {
+                      label: "বঙ্গাব্দ",
+                      value: dates.bangla,
+                      color: "#22c55e",
+                    },
                     { label: "হিজরি", value: dates.hijri, color: "#3b82f6" },
                   ].map((item, index) => (
                     <div
                       key={item.label}
                       style={{
                         flex: 1,
-                        padding: "9px 4px 8px",
-                        borderBottom: `3px solid ${item.color}`,
+                        padding: "1px 3px 0px",
+                        borderBottom: `2px solid ${item.color}`,
                         borderLeft:
                           index > 0
                             ? "1px solid rgba(255,255,255,0.14)"
@@ -698,9 +746,9 @@ export function PrintNewsDetailsClient({
                       <div
                         style={{
                           color: C.goldLight,
-                          fontSize: 10,
+                          fontSize: 9,
                           fontWeight: 700,
-                          lineHeight: 1.7,
+                          lineHeight: 1.4,
                         }}
                       >
                         {item.label}
@@ -708,9 +756,9 @@ export function PrintNewsDetailsClient({
                       <div
                         style={{
                           color: "#ffffff",
-                          fontSize: 11.5,
+                          fontSize: 10,
                           fontWeight: 700,
-                          lineHeight: 1.6,
+                          lineHeight: 1.4,
                         }}
                       >
                         {item.value}
@@ -724,7 +772,7 @@ export function PrintNewsDetailsClient({
             {/* gold rule */}
             <div
               style={{
-                height: 5,
+                height: 3,
                 background: `linear-gradient(to right, ${C.goldDeep}, ${C.gold}, ${C.goldLight}, ${C.gold}, ${C.goldDeep})`,
               }}
             />
@@ -733,7 +781,7 @@ export function PrintNewsDetailsClient({
             <div
               style={{
                 position: "relative",
-                minHeight: hasPhoto ? 400 : 250,
+                minHeight: hasPhoto ? 350 : 220,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-end",
@@ -801,15 +849,15 @@ export function PrintNewsDetailsClient({
               <div
                 style={{
                   position: "relative",
-                  padding: hasPhoto ? "110px 22px 24px" : "50px 22px 24px",
+                  padding: hasPhoto ? "82px 18px 18px" : "38px 18px 18px",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 8,
-                    marginBottom: 14,
+                    gap: 6,
+                    marginBottom: 9,
                   }}
                 >
                   <span
@@ -819,9 +867,9 @@ export function PrintNewsDetailsClient({
                       gap: 7,
                       background: C.red,
                       color: "#ffffff",
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight: 700,
-                      padding: "4px 12px",
+                      padding: "3px 9px",
                       borderRadius: 999,
                       lineHeight: 1.6,
                     }}
@@ -834,9 +882,9 @@ export function PrintNewsDetailsClient({
                     style={{
                       background: "rgba(255,255,255,0.18)",
                       color: "#ffffff",
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight: 700,
-                      padding: "4px 12px",
+                      padding: "3px 9px",
                       borderRadius: 999,
                       lineHeight: 1.6,
                     }}
@@ -849,9 +897,9 @@ export function PrintNewsDetailsClient({
                   style={{
                     margin: 0,
                     color: "#ffffff",
-                    fontSize: 28,
+                    fontSize: 19,
                     fontWeight: 800,
-                    lineHeight: 1.55,
+                    lineHeight: 1.4,
                     overflowWrap: "anywhere",
                   }}
                 >
@@ -860,10 +908,10 @@ export function PrintNewsDetailsClient({
 
                 <div
                   style={{
-                    width: 64,
-                    height: 5,
+                    width: 52,
+                    height: 4,
                     borderRadius: 999,
-                    marginTop: 14,
+                    marginTop: 9,
                     background: `linear-gradient(to right, ${C.gold}, ${C.red})`,
                   }}
                 />
@@ -874,11 +922,11 @@ export function PrintNewsDetailsClient({
             {hasPhoto && (newsPictureHeading || newsPictureCredit) && (
               <div
                 style={{
-                  padding: "9px 22px",
+                  padding: "7px 18px",
                   background: "#f3eddc",
                   borderLeft: `5px solid ${C.gold}`,
-                  fontSize: 11,
-                  lineHeight: 1.8,
+                  fontSize: 10,
+                  lineHeight: 1.6,
                   color: "#5b5f6b",
                   fontStyle: "italic",
                 }}
@@ -904,23 +952,23 @@ export function PrintNewsDetailsClient({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 12,
-                margin: "18px 22px 6px",
-                padding: "12px 14px",
-                borderRadius: 18,
+                gap: 7,
+                margin: "9px 16px 3px",
+                padding: "6px 9px",
+                borderRadius: 10,
                 background: "#ffffff",
                 border: "1px solid #eadfc4",
               }}
             >
               <div
                 style={{
-                  width: 44,
-                  height: 44,
+                  width: 30,
+                  height: 30,
                   borderRadius: 999,
                   background: `linear-gradient(135deg, ${C.gold}, ${C.red})`,
                   color: "#ffffff",
                   fontWeight: 800,
-                  fontSize: 20,
+                  fontSize: 15,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -933,10 +981,10 @@ export function PrintNewsDetailsClient({
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div
                   style={{
-                    fontSize: 10.5,
+                    fontSize: 9.5,
                     color: C.goldDeep,
                     fontWeight: 700,
-                    lineHeight: 1.7,
+                    lineHeight: 1.35,
                   }}
                 >
                   প্রতিবেদক
@@ -944,9 +992,9 @@ export function PrintNewsDetailsClient({
                 <div
                   style={{
                     fontWeight: 800,
-                    fontSize: 14.5,
+                    fontSize: 12,
                     color: C.text,
-                    lineHeight: 1.6,
+                    lineHeight: 1.4,
                   }}
                 >
                   {reporter}
@@ -956,19 +1004,19 @@ export function PrintNewsDetailsClient({
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 <div
                   style={{
-                    fontSize: 10.5,
+                    fontSize: 9.5,
                     color: C.muted,
-                    lineHeight: 1.7,
+                    lineHeight: 1.35,
                   }}
                 >
                   প্রকাশিত
                 </div>
                 <div
                   style={{
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
                     color: C.text,
-                    lineHeight: 1.6,
+                    lineHeight: 1.4,
                   }}
                 >
                   {published}
@@ -976,48 +1024,61 @@ export function PrintNewsDetailsClient({
               </div>
             </div>
 
-            {/* ================= ARTICLE ================= */}
-            <div style={{ padding: "14px 22px 6px" }}>
-              <p
+            {/* ================= ARTICLE – TWO NEWSPAPER COLUMNS ================= */}
+            <div
+              style={{
+                padding: "13px 18px 8px",
+              }}
+            >
+              <div
                 style={{
-                  margin: 0,
-                  fontSize: 16.5,
-                  lineHeight: 1.95,
-                  color: C.text,
-                  textAlign: "justify",
-                  whiteSpace: "pre-wrap",
-                  overflowWrap: "anywhere",
+                  columnCount: 2,
+                  columnGap: 16,
+                  columnRule: "1px solid #eadfc4",
+                  columnFill: "balance",
                 }}
               >
-                <span
+                <p
                   style={{
-                    float: "left",
-                    fontSize: 64,
-                    lineHeight: "60px",
-                    fontWeight: 800,
-                    color: C.red,
-                    margin: "6px 10px 0 0",
+                    margin: 0,
+                    fontSize: 12.5,
+                    lineHeight: 1.8,
+                    color: C.text,
+                    textAlign: "justify",
+                    whiteSpace: "pre-wrap",
+                    overflowWrap: "anywhere",
+                    wordBreak: "normal",
                   }}
                 >
-                  {dropCap}
-                </span>
-                {restOfBody}
-              </p>
-              <div style={{ clear: "both" }} />
+                  <span
+                    style={{
+                      float: "left",
+                      fontSize: 52,
+                      lineHeight: "48px",
+                      fontWeight: 800,
+                      color: C.red,
+                      margin: "5px 7px 0 0",
+                    }}
+                  >
+                    {dropCap}
+                  </span>
+                  {restOfBody}
+                </p>
+              </div>
             </div>
 
             {/* ================= QUOTES ================= */}
             {quotes.length > 0 && (
-              <section style={{ paddingTop: 16 }}>
+              <section style={{ paddingTop: 11 }}>
                 <Ornament />
 
                 <div
                   style={{
                     textAlign: "center",
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: 800,
                     color: C.ink,
-                    margin: "12px 0 14px",
+                    margin: "8px 0 10px",
                     lineHeight: 1.6,
                   }}
                 >
@@ -1032,10 +1093,9 @@ export function PrintNewsDetailsClient({
                         position: "relative",
                         margin: "0 0 14px",
                         padding: "18px 18px 12px 20px",
-                        background:
-                          "linear-gradient(135deg, #fff6dc, #fdebec)",
-                        borderRadius: 18,
-                        borderLeft: `6px solid ${C.gold}`,
+                        background: "linear-gradient(135deg, #fff6dc, #fdebec)",
+                        borderRadius: 12,
+                        borderLeft: `4px solid ${C.gold}`,
                         overflow: "hidden",
                       }}
                     >
@@ -1058,8 +1118,8 @@ export function PrintNewsDetailsClient({
                         style={{
                           position: "relative",
                           margin: 0,
-                          fontSize: 15,
-                          lineHeight: 1.85,
+                          fontSize: 13,
+                          lineHeight: 1.7,
                           fontStyle: "italic",
                           color: C.text,
                           overflowWrap: "anywhere",
@@ -1071,9 +1131,9 @@ export function PrintNewsDetailsClient({
                       <footer
                         style={{
                           position: "relative",
-                          marginTop: 8,
+                          marginTop: 5,
                           textAlign: "right",
-                          fontSize: 12,
+                          fontSize: 10.5,
                           fontWeight: 700,
                           color: C.goldDeep,
                         }}
@@ -1090,8 +1150,8 @@ export function PrintNewsDetailsClient({
             <footer
               style={{
                 position: "relative",
-                marginTop: 22,
-                padding: "24px 22px 22px",
+                marginTop: 14,
+                padding: "15px 18px 13px",
                 background: `linear-gradient(135deg, ${C.ink}, ${C.inkSoft})`,
                 textAlign: "center",
                 overflow: "hidden",
@@ -1103,7 +1163,7 @@ export function PrintNewsDetailsClient({
                   top: 0,
                   left: 0,
                   right: 0,
-                  height: 5,
+                  height: 3,
                   background: `linear-gradient(to right, ${C.goldDeep}, ${C.gold}, ${C.goldLight}, ${C.gold}, ${C.goldDeep})`,
                 }}
               />
@@ -1112,8 +1172,8 @@ export function PrintNewsDetailsClient({
                   position: "absolute",
                   bottom: -100,
                   right: -60,
-                  width: 260,
-                  height: 260,
+                  width: 200,
+                  height: 200,
                   background:
                     "radial-gradient(circle, rgba(214,40,57,0.35), transparent 65%)",
                 }}
@@ -1125,16 +1185,16 @@ export function PrintNewsDetailsClient({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: 10,
+                    gap: 8,
                   }}
                 >
-                  <LogoBadge src={prepared.logo} size={40} />
+                  <LogoBadge src={prepared.logo} size={34} />
                   <span
                     style={{
                       color: "#ffffff",
                       fontWeight: 800,
-                      fontSize: 22,
-                      lineHeight: 1.6,
+                      fontSize: 18,
+                      lineHeight: 1.4,
                     }}
                   >
                     জাগ্রত বার্তা
@@ -1144,9 +1204,9 @@ export function PrintNewsDetailsClient({
                 <div
                   style={{
                     color: C.goldLight,
-                    fontSize: 12,
-                    marginTop: 2,
-                    lineHeight: 1.8,
+                    fontSize: 10,
+                    marginTop: 1,
+                    lineHeight: 1.5,
                   }}
                 >
                   সত্যের প্রতি দায়বদ্ধ
@@ -1155,9 +1215,9 @@ export function PrintNewsDetailsClient({
                 <div
                   style={{
                     color: "#cbd5e1",
-                    fontSize: 11.5,
-                    marginTop: 12,
-                    lineHeight: 1.8,
+                    fontSize: 10,
+                    marginTop: 7,
+                    lineHeight: 1.5,
                   }}
                 >
                   বিস্তারিত ও আরও খবর পড়তে ভিজিট করুন
@@ -1166,12 +1226,12 @@ export function PrintNewsDetailsClient({
                 <div
                   style={{
                     display: "inline-block",
-                    marginTop: 8,
+                    marginTop: 5,
                     background: `linear-gradient(to right, ${C.gold}, ${C.goldLight})`,
                     color: C.ink,
-                    fontSize: 12.5,
+                    fontSize: 11,
                     fontWeight: 800,
-                    padding: "7px 20px",
+                    padding: "5px 15px",
                     borderRadius: 999,
                     lineHeight: 1.6,
                     overflowWrap: "anywhere",
