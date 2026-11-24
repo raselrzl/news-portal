@@ -35,12 +35,12 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           <div className="flex flex-wrap justify-end gap-0.5">
             <TodayDate
               calendar="gregorian"
-              className="bg-blue-100 text-blue-800 px-2 py-0.5 text-[10px]  md:text-sm rounded-full shadow-sm"
+              className="bg-blue-100 text-blue-800 px-2 py-0.5 text-[9px]  md:text-sm rounded-full shadow-sm"
             />
-            <RealBanglaDate className="bg-green-100 text-green-800 px-2 py-0.5 text-[10px] md:text-sm rounded-full shadow-sm" />
+            <RealBanglaDate className="bg-green-100 text-green-800 px-2 py-0.5 text-[9px] md:text-sm rounded-full shadow-sm" />
             <TodayDate
               calendar="hijri"
-              className="bg-yellow-100 text-yellow-800 px-2 py-0.5 text-[10px] md:text-sm rounded-full shadow-sm"
+              className="bg-yellow-100 text-yellow-800 px-2 py-0.5 text-[9px] md:text-sm rounded-full shadow-sm"
             />
           </div>
         </div>

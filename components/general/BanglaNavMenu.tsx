@@ -68,7 +68,7 @@ export default function BanglaNavMenu() {
   };
 
   return (
-    <div className="flex items-center gap-1 border-l-8 border-b border-r-8 border-primary light:bg-primary-foreground">
+    <div className="flex items-center gap-1 border-l-8 border-b border-r-8 border-primary light:bg-primary-foreground py-1">
       {canScrollLeft && (
         <ArrowLeft
           className="text-primary dark:text-white cursor-pointer"
