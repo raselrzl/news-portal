@@ -40,7 +40,7 @@ export default async function LiveUpdate() {
 
   return (
     <div className="py-3 rounded-md mx-auto max-w-[720px]">
-      <h1 className="uppercase font-bold text-white text-xl py-2 bg-red-600 max-w-[720px] ml-2 pl-4 md:mx-0">
+      <h1 className="uppercase font-bold text-white text-xl py-2 bg-red-800 max-w-[720px] ml-2 pl-4 md:mx-0">
         ব্রেকিং নিউজ
       </h1>
 
